@@ -107,8 +107,7 @@
 
   qt = {
     enable = true;
-    platformTheme = "gnome";
-    style = "adwaita-dark";
+    platformTheme = "qt5ct";
   };
 
   #### USERS ####
