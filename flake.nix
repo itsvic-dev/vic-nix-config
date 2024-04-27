@@ -25,16 +25,22 @@
       nixosConfigurations = {
         "e6nix" = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          overlays = [
-            hyprland.overlays.default
-            kmonad.overlays.default
-          ];
-
           specialArgs = {
             inherit inputs;
           };
 
           modules = [
+            # define overlays
+            (
+              { ... }:
+              {
+                nixpkgs.overlays = [
+                  hyprland.overlays.default
+                  kmonad.overlays.default
+                ];
+              }
+            )
+
             kmonad.nixosModules.default
             hyprland.nixosModules.default
             ./cachix.nix

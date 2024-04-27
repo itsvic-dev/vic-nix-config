@@ -202,7 +202,7 @@
   };
   programs.gnupg.agent = {
     enable = true;
-    pinentryFlavor = "gtk2";
+    pinentryPackage = pkgs.pinentry-qt;
   };
   programs.hyprland.enable = true;
   programs.neovim = {
