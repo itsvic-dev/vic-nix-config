@@ -83,10 +83,6 @@
   # Configure console keymap
   console.keyMap = "pl2";
 
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-  services.printing.drivers = [ pkgs.hplip ];
-
   # Enable sound with pipewire.
   sound.enable = true;
   hardware.pulseaudio.enable = false;
@@ -104,9 +100,6 @@
     #media-session.enable = true;
   };
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  services.xserver.libinput.enable = true;
-
   hardware.bluetooth.enable = true;
 
   users.groups = {
@@ -115,16 +108,6 @@
 
   qt.platformTheme = "qt5ct";
   qt.enable = true;
-
-  services.udisks2.enable = true;
-  services.gvfs.enable = true;
-
-  programs.nix-ld.enable = true;
-
-  programs.direnv = {
-    enable = true;
-    nix-direnv.enable = true;
-  };
 
   #### USERS ####
   users.users.vic = {
@@ -158,7 +141,6 @@
       sqlite
       pciutils
       ventoy
-      gnomeExtensions.appindicator
       gnumake
       yarn
       scrcpy
@@ -174,7 +156,6 @@
       conda
       gdb
       jq
-      flatpak-builder
       qemu
       mangohud
       pipx
@@ -214,6 +195,11 @@
   };
 
   #### PROGRAMS ####
+  programs.adb.enable = true;
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  };
   programs.gnupg.agent = {
     enable = true;
     pinentryFlavor = "gtk2";
@@ -223,16 +209,66 @@
     enable = true;
     defaultEditor = true;
   };
+  programs.nh = {
+    enable = true;
+    clean.enable = true;
+    flake = "/home/vic/vic-nix-config";
+  };
+  programs.nix-ld.enable = true;
   programs.steam.enable = true;
   programs.wireshark.enable = true;
   programs.wireshark.package = pkgs.wireshark;
+  programs.zsh = {
+    enable = true;
+    interactiveShellInit = ''
+      source ${pkgs.grml-zsh-config}/etc/zsh/zshrc
+    '';
+    promptInit = "";
+  };
 
   #### SERVICES ####
   services.flatpak.enable = true;
+  services.gvfs.enable = true;
+  services.kmonad = {
+    enable = true;
+    keyboards = {
+      thor300tkl = {
+        device = "/dev/input/by-id/usb-SINO_WEALTH_Mechanical_Keyboard-if01-event-kbd";
+        defcfg.enable = true;
+        defcfg.fallthrough = true;
+        config = ''
+          (defsrc
+            q  w  e  r  t  y  u  i  o  p
+            a  s  d  f  g  h  j  k  l  ;
+            z  x  c  v  b  n  m
+          )
+
+          (deflayer colemak
+            q  w  f  p  g  j  l  u  y  ;
+            a  r  s  t  d  h  n  e  i  o
+            z  x  c  v  b  k  m
+          )
+        '';
+      };
+    };
+  };
+  services.mysql = {
+    enable = true;
+    package = pkgs.mariadb;
+  };
   services.pcscd.enable = true;
+  services.printing = {
+    enable = true;
+    drivers = [ pkgs.hplip ];
+  };
+  services.redis.servers."" = {
+    enable = true;
+  };
+  services.udisks2.enable = true;
   services.xserver = {
     enable = true;
     displayManager.sddm.enable = true;
+    libinput.enable = true;
   };
 
   nix.settings.experimental-features = [
@@ -286,49 +322,6 @@
     # libusb interface: obsolete (we use hidraw for everything now)
     #SUBSYSTEM=="usb", ATTRS{idVendor}=="054c", ATTRS{idProduct}=="03d5", MODE="0666"
   '';
-
-  services.kmonad = {
-    enable = true;
-    package = kmonad.packages."${pkgs.system}".kmonad;
-    keyboards = {
-      thor300tkl = {
-        device = "/dev/input/by-id/usb-SINO_WEALTH_Mechanical_Keyboard-if01-event-kbd";
-        defcfg.enable = true;
-        defcfg.fallthrough = true;
-        config = ''
-          (defsrc
-            q  w  e  r  t  y  u  i  o  p
-            a  s  d  f  g  h  j  k  l  ;
-            z  x  c  v  b  n  m
-          )
-
-          (deflayer colemak
-            q  w  f  p  g  j  l  u  y  ;
-            a  r  s  t  d  h  n  e  i  o
-            z  x  c  v  b  k  m
-          )
-        '';
-      };
-    };
-  };
-
-  services.mysql = {
-    enable = true;
-    package = pkgs.mariadb;
-  };
-
-  services.redis.servers."" = {
-    enable = true;
-  };
-
-  programs.zsh = {
-    enable = true;
-    interactiveShellInit = ''
-      source ${pkgs.grml-zsh-config}/etc/zsh/zshrc
-    '';
-    promptInit = "";
-  };
-  programs.adb.enable = true;
 
   fonts.packages = with pkgs; [
     noto-fonts

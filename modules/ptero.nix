@@ -1,11 +1,17 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 let
   app = "pterodactyl";
   domain = "panel.local";
   dataDir = "/var/www/pterodactyl/public";
   user = config.services.nginx.user;
   myPhp = pkgs.php.withExtensions ({ enabled, all }: enabled ++ [ all.bz2 ]);
-in {
+in
+{
   networking.hosts."127.0.0.1" = [ domain ];
   services.phpfpm.pools.${app} = {
     inherit user;
@@ -30,7 +36,7 @@ in {
       root = dataDir;
       extraConfig = ''
         index = index.html index.htm index.php;
-	client_max_body_size 100m;
+        client_max_body_size 100m;
         client_body_timeout 120s;
       '';
       locations."/" = {
@@ -41,8 +47,8 @@ in {
       locations."~ \\.php$" = {
         extraConfig = ''
           fastcgi_pass unix:${config.services.phpfpm.pools.${app}.socket};
-	  fastcgi_split_path_info ^(.+\.php)(/.+)$;
-	  fastcgi_index index.php;
+          fastcgi_split_path_info ^(.+\.php)(/.+)$;
+          fastcgi_index index.php;
           include ${pkgs.nginx}/conf/fastcgi_params;
           fastcgi_param PHP_VALUE "upload_max_filesize = 100M \n post_max_size=100M";
           fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
@@ -53,7 +59,7 @@ in {
           fastcgi_connect_timeout 300;
           fastcgi_send_timeout 300;
           fastcgi_read_timeout 300;
-	'';
+        '';
       };
     };
   };

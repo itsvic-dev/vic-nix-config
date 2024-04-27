@@ -25,11 +25,15 @@
       nixosConfigurations = {
         "e6nix" = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          overlays = [ hyprland.overlays.default ];
+          overlays = [
+            hyprland.overlays.default
+            kmonad.overlays.default
+          ];
 
           specialArgs = {
             inherit inputs;
           };
+
           modules = [
             kmonad.nixosModules.default
             hyprland.nixosModules.default
