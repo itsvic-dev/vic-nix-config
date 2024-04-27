@@ -14,7 +14,6 @@
   boot.loader.grub = {
     efiSupport = true;
     device = "nodev";
-    useOSProber = true;
     theme = pkgs.stdenv.mkDerivation {
       pname = "catppuccin-mocha-grub-theme";
       version = "0.0.40";
