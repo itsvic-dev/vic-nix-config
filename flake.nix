@@ -31,17 +31,6 @@
           };
 
           modules = [
-            # define overlays
-            (
-              { ... }:
-              {
-                nixpkgs.overlays = [
-                  hyprland.overlays.default
-                  kmonad.overlays.default
-                ];
-              }
-            )
-
             kmonad.nixosModules.default
             hyprland.nixosModules.default
             ./cachix.nix
