@@ -13,6 +13,11 @@
       url = "github:kmonad/kmonad?dir=nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -20,30 +25,45 @@
       nixpkgs,
       hyprland,
       kmonad,
+      home-manager,
       ...
     }:
-    {
-      nixosConfigurations = {
-        "e6nix" = nixpkgs.lib.nixosSystem {
+    let
+      common = [
+        kmonad.nixosModules.default
+        hyprland.nixosModules.default
+        home-manager.nixosModules.home-manager
+        ./cachix.nix
+
+        {
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+            users.vic = import ./home;
+          };
+        }
+      ];
+
+      defineAMD64System =
+        hostname: modules:
+        nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = {
             inherit inputs;
           };
 
-          modules = [
-            kmonad.nixosModules.default
-            hyprland.nixosModules.default
-            ./cachix.nix
-
-            ./configuration.nix
-
-            ./hw/base.nix
-            ./hw/nvidia.nix
-
-            ./modules/hddbackup.nix
-            ./modules/ptero.nix
-          ];
+          modules = common ++ modules ++ [ ./machines/${hostname}.nix ];
         };
+    in
+    {
+      nixosConfigurations = {
+        "e6nix" = defineAMD64System "e6nix" [
+          ./hw/15imh05.nix
+          ./hw/nvidia.nix
+
+          ./modules/hddbackup.nix
+          ./modules/ptero.nix
+        ];
       };
     };
 }

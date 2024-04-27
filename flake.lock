@@ -1,5 +1,25 @@
 {
   "nodes": {
+    "home-manager": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1714203603,
+        "narHash": "sha256-eT7DENhYy7EPLOqHI9zkIMD9RvMCXcqh6gGqOK5BWYQ=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "c1609d584a6b5e9e6a02010f51bd368cb4782f8e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
     "hyprcursor": {
       "inputs": {
         "hyprlang": [
@@ -171,6 +191,7 @@
     },
     "root": {
       "inputs": {
+        "home-manager": "home-manager",
         "hyprland": "hyprland",
         "kmonad": "kmonad",
         "nixpkgs": "nixpkgs"
