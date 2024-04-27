@@ -267,6 +267,7 @@
     "nix-command"
     "flakes"
   ];
+  nix.settings.trusted-users = [ "@wheel" ];
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
