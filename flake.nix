@@ -40,6 +40,9 @@
             useGlobalPkgs = true;
             useUserPackages = true;
             users.vic = import ./home;
+            extraSpecialArgs = {
+              inherit inputs;
+            };
           };
         }
       ];

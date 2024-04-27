@@ -164,20 +164,11 @@
       yt-dlp
       zoxide
       fzf
-      nix-output-monitor
 
       # hi hyprland
-      wofi
-      waybar
-      hyprpaper
-      grimblast
-      polkit_gnome
       blueman
-      mako
       pavucontrol
-      kitty
       nomacs
-      pcmanfm-qt
       mpv
       ffmpeg
 
