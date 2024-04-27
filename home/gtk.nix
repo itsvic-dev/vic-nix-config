@@ -13,7 +13,13 @@
     };
     theme = {
       package = pkgs.gnome.gnome-themes-extra;
-      name = "Adwaita-Dark";
+      name = "Adwaita-dark";
+    };
+  };
+
+  dconf.settings = {
+    "org/gnome/desktop/interface" = {
+      color-scheme = "prefer-dark";
     };
   };
 }

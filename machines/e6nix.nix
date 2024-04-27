@@ -105,8 +105,11 @@
     uinput = { };
   };
 
-  qt.platformTheme = "qt5ct";
-  qt.enable = true;
+  qt = {
+    enable = true;
+    platformTheme = "gnome";
+    style = "adwaita-dark";
+  };
 
   #### USERS ####
   users.users.vic = {
