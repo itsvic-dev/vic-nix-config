@@ -156,8 +156,6 @@
       prismlauncher
       htop
       yt-dlp
-      zoxide
-      fzf
 
       # hi hyprland
       blueman
