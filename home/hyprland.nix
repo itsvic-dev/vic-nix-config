@@ -136,7 +136,7 @@
         "${pkgs.mako}/bin/mako"
         "${pkgs.waybar}/bin/waybar"
         "${pkgs.aria2}/bin/aria2c --enable-rpc"
-        "${pkgs.fcitx5} --replace -d"
+        "${pkgs.fcitx5}/bin/fcitx5 --replace -d"
         "${pkgs.hyprpaper}/bin/hyprpaper"
       ];
 
