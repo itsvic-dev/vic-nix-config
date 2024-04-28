@@ -5,7 +5,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     hyprland = {
-      url = "github:hyprwm/Hyprland/v0.39.1";
+      url = "github:hyprwm/Hyprland";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -31,8 +31,8 @@
     let
       common = [
         kmonad.nixosModules.default
-        hyprland.nixosModules.default
         home-manager.nixosModules.home-manager
+        ./modules/hyprland.nix
         ./cachix.nix
       ];
 
