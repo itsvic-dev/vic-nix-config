@@ -1,6 +1,12 @@
 { config, pkgs, ... }:
 {
-  home.packages = with pkgs; [ nix-output-monitor ];
+  home.packages = with pkgs; [
+    blueman
+    git
+    nix-output-monitor
+    telegram-desktop
+    vesktop
+  ];
 
   imports = [
     ./hyprland.nix

@@ -66,16 +66,7 @@
         };
     in
     {
-      nixosConfigurations = {
-        "e6nix" = defineAMD64System "e6nix" [
-          ./hw/15imh05.nix
-          ./hw/nvidia.nix
-
-          ./modules/hddbackup.nix
-          ./modules/ptero.nix
-        ];
-      };
-
+      nixosConfigurations = import ./system inputs;
       homeConfigurations = {
         "vic@e6nix" = defineAMD64Home "vic" [ ./home ];
       };

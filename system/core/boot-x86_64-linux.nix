@@ -2,7 +2,7 @@
 {
   boot = {
     loader = {
-      canTouchEfiVariables = true;
+      efi.canTouchEfiVariables = true;
       grub = {
         efiSupport = true;
         device = "nodev";

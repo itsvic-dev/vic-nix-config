@@ -9,15 +9,19 @@ let
   common = [
     ./core
 
+    ./misc
+    ./programs
+    ./services
+
     kmonad.nixosModules.default
     hyprland.nixosModules.default
   ];
 
-  # Defines an x86_64-linux system with a given hostname and module set.
-  defineAMD64System =
-    hostname: modules:
+  # Defines a system with a given hostname and module set.
+  defineSystem =
+    system: hostname: modules:
     nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
+      inherit system;
       specialArgs = {
         inherit inputs;
       };
@@ -26,6 +30,7 @@ let
         common
         ++ modules
         ++ [
+          ./core/boot-${system}.nix
           ./machines/${hostname}.nix
           {
             # define the machine's hostname
@@ -35,5 +40,5 @@ let
     };
 in
 {
-  "e6nix" = defineAMD64System "e6nix" [ ];
+  "e6nix" = defineSystem "x86_64-linux" "e6nix" [ ];
 }
