@@ -28,47 +28,8 @@
       home-manager,
       ...
     }:
-    let
-      common = [
-        kmonad.nixosModules.default
-        hyprland.nixosModules.default
-        home-manager.nixosModules.home-manager
-        ./cachix.nix
-      ];
-
-      inherit (home-manager.lib) homeManagerConfiguration;
-
-      defineAMD64System =
-        hostname: modules:
-        nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = {
-            inherit inputs;
-          };
-
-          modules = common ++ modules ++ [ ./machines/${hostname}.nix ];
-        };
-
-      defineAMD64Home =
-        username: modules:
-        homeManagerConfiguration {
-          pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
-          modules = modules ++ [
-            {
-              home.username = username;
-              home.homeDirectory = "/home/${username}";
-              home.stateVersion = "23.11";
-            }
-          ];
-          extraSpecialArgs = {
-            inherit inputs;
-          };
-        };
-    in
     {
       nixosConfigurations = import ./system inputs;
-      homeConfigurations = {
-        "vic@e6nix" = defineAMD64Home "vic" [ ./home ];
-      };
+      homeConfigurations = import ./home inputs;
     };
 }

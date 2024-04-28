@@ -14,17 +14,14 @@ let
     imports;
 
   # Common modules for all systems.
-  common =
-    [
-      ./core
-      kmonad.nixosModules.default
-      hyprland.nixosModules.default
-    ]
-    ++ nixpkgs.lib.lists.flatten [
-      (importAllFromFolder ./misc)
-      (importAllFromFolder ./programs)
-      (importAllFromFolder ./services)
-    ];
+  common = nixpkgs.lib.lists.flatten [
+    ./core
+    kmonad.nixosModules.default
+    hyprland.nixosModules.default
+    (importAllFromFolder ./misc)
+    (importAllFromFolder ./programs)
+    (importAllFromFolder ./services)
+  ];
 
   # Defines a system with a given hostname and module set.
   defineSystem =
