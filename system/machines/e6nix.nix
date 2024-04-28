@@ -6,17 +6,13 @@
 }:
 {
   boot.extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
-
   networking.firewall.allowedTCPPorts = [
     3000 # Nuxt dev services
     8443 # demo panel wings
   ];
 
   # hw scan
-  imports = [
-    ./laptop.nix
-    (modulesPath + "/installer/scan/not-detected.nix")
-  ];
+  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
   boot.initrd.availableKernelModules = [
     "xhci_pci"

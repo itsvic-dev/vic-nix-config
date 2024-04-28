@@ -1,10 +1,11 @@
 # System
 
-| Name          | Description                              |
-| ------------- | ---------------------------------------- |
-| `default.nix` | Machine definitions                      |
-| core          | Core configuration (boot, users, ...)    |
-| machines      | Machine-specific configuration           |
-| misc          | Miscellaneous configuration (fonts, ...) |
-| programs      | Program settings                         |
-| services      | Service settings                         |
+| Name                   | Description                              |
+| ---------------------- | ---------------------------------------- |
+| `default.nix`          | Machine definitions                      |
+| core                   | Core configuration (boot, users, ...)    |
+| hardware               | Common hardware configurations           |
+| machines               | Machine-specific configuration           |
+| misc (auto-loaded)     | Miscellaneous configuration (fonts, ...) |
+| programs (auto-loaded) | Program settings                         |
+| services (auto-loaded) | Service settings                         |
