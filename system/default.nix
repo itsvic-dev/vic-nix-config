@@ -5,17 +5,26 @@ inputs@{
   ...
 }:
 let
+  importAllFromFolder =
+    folder:
+    let
+      toImport = name: value: folder + ("/" + name);
+      imports = nixpkgs.lib.mapAttrsToList toImport (builtins.readDir folder);
+    in
+    imports;
+
   # Common modules for all systems.
-  common = [
-    ./core
-
-    ./misc
-    ./programs
-    ./services
-
-    kmonad.nixosModules.default
-    hyprland.nixosModules.default
-  ];
+  common =
+    [
+      ./core
+      kmonad.nixosModules.default
+      hyprland.nixosModules.default
+    ]
+    ++ nixpkgs.lib.lists.flatten [
+      (importAllFromFolder ./misc)
+      (importAllFromFolder ./programs)
+      (importAllFromFolder ./services)
+    ];
 
   # Defines a system with a given hostname and module set.
   defineSystem =
