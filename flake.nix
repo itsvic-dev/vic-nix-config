@@ -34,18 +34,9 @@
         hyprland.nixosModules.default
         home-manager.nixosModules.home-manager
         ./cachix.nix
-
-        {
-          home-manager = {
-            useGlobalPkgs = true;
-            useUserPackages = true;
-            users.vic = import ./home;
-            extraSpecialArgs = {
-              inherit inputs;
-            };
-          };
-        }
       ];
+
+      inherit (home-manager.lib) homeManagerConfiguration;
 
       defineAMD64System =
         hostname: modules:
@@ -57,6 +48,22 @@
 
           modules = common ++ modules ++ [ ./machines/${hostname}.nix ];
         };
+
+      defineAMD64Home =
+        username: modules:
+        homeManagerConfiguration {
+          pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
+          modules = modules ++ [
+            {
+              home.username = username;
+              home.homeDirectory = "/home/${username}";
+              home.stateVersion = "23.11";
+            }
+          ];
+          extraSpecialArgs = {
+            inherit inputs;
+          };
+        };
     in
     {
       nixosConfigurations = {
@@ -67,6 +74,10 @@
           ./modules/hddbackup.nix
           ./modules/ptero.nix
         ];
+      };
+
+      homeConfigurations = {
+        "vic@e6nix" = defineAMD64Home "vic" [ ./home ];
       };
     };
 }
