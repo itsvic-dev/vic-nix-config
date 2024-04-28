@@ -1,3 +1,4 @@
+{ pkgs, ... }:
 {
   users.groups = {
     uinput = { };
@@ -13,5 +14,6 @@
       "video"
       "render"
     ];
+	shell = pkgs.zsh;
   };
 }

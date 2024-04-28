@@ -1,9 +1,4 @@
-{
-  config,
-  pkgs,
-  inputs,
-  ...
-}:
+{ pkgs, inputs, ... }:
 {
   home.packages = [
     pkgs.kitty
@@ -28,7 +23,7 @@
 
   wayland.windowManager.hyprland = {
     enable = true;
-    package = inputs.hyprland.packages."${pkgs.system}".hyprland;
+    package = pkgs.callPackage ../../packages/hyprland.nix { inherit inputs; };
 
     settings = {
       general = {

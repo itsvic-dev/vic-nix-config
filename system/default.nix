@@ -17,7 +17,6 @@ let
   common = nixpkgs.lib.lists.flatten [
     ./core
     kmonad.nixosModules.default
-    hyprland.nixosModules.default
     (importAllFromFolder ./misc)
     (importAllFromFolder ./programs)
     (importAllFromFolder ./services)
