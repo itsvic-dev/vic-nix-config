@@ -9,7 +9,7 @@
       nr() {
         PKG=$1
         shift
-        exec nix run nixpkgs\#$PKG -- "$@"
+        nix run nixpkgs\#$PKG -- "$@"
       }
 
       bp-upload() {
