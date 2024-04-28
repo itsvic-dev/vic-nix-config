@@ -4,6 +4,7 @@
     blueman
     git
     nix-output-monitor
+    pavucontrol
     telegram-desktop
     vesktop
   ];

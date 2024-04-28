@@ -49,5 +49,8 @@ let
     };
 in
 {
-  "e6nix" = defineSystem "x86_64-linux" "e6nix" [ ./hardware/laptop.nix ];
+  "e6nix" = defineSystem "x86_64-linux" "e6nix" [
+    ./hardware/laptop.nix
+    ./hardware/nvidia.nix
+  ];
 }

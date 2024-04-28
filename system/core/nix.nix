@@ -9,4 +9,6 @@
       "@wheel"
     ];
   };
+
+  nixpkgs.config.allowUnfree = true;
 }
