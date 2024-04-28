@@ -7,5 +7,6 @@
     ./hyprland.nix
     ./gtk.nix
     ./ime.nix
+    ./zsh.nix
   ];
 }

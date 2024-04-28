@@ -202,13 +202,7 @@
   programs.steam.enable = true;
   programs.wireshark.enable = true;
   programs.wireshark.package = pkgs.wireshark;
-  programs.zsh = {
-    enable = true;
-    interactiveShellInit = ''
-      source ${pkgs.grml-zsh-config}/etc/zsh/zshrc
-    '';
-    promptInit = "";
-  };
+  programs.zsh.enable = true;
 
   #### SERVICES ####
   services.flatpak.enable = true;
