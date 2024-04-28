@@ -203,7 +203,6 @@
   programs.zsh.enable = true;
 
   #### SERVICES ####
-  services.flatpak.enable = true;
   services.gvfs.enable = true;
   services.kmonad = {
     enable = true;
