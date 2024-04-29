@@ -7,7 +7,8 @@
     pavucontrol
     telegram-desktop
     vesktop
-	vscode
+    vscode
+    clang-tools
   ];
 
   nixpkgs.config.allowUnfree = true;
