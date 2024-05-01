@@ -9,6 +9,7 @@
     vesktop
     vscode
     clang-tools
+    gimp
   ];
 
   nixpkgs.config.allowUnfree = true;
