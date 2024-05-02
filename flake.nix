@@ -30,6 +30,5 @@
     }:
     {
       nixosConfigurations = import ./system inputs;
-      homeConfigurations = import ./home inputs;
     };
 }

@@ -2,6 +2,7 @@ inputs@{
   nixpkgs,
   kmonad,
   hyprland,
+  home-manager,
   ...
 }:
 let
@@ -17,6 +18,7 @@ let
   common = nixpkgs.lib.lists.flatten [
     ./core
     kmonad.nixosModules.default
+    home-manager.nixosModules.default
     (importAllFromFolder ./misc)
     (importAllFromFolder ./programs)
     (importAllFromFolder ./services)
@@ -37,6 +39,7 @@ let
         ++ [
           ./core/boot-${system}.nix
           ./machines/${hostname}.nix
+          ../home
           {
             # define the machine's hostname
             networking.hostName = hostname;
