@@ -14,6 +14,6 @@
       "video"
       "render"
     ];
-	shell = pkgs.zsh;
+    shell = pkgs.zsh;
   };
 }
