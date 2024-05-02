@@ -10,6 +10,7 @@
     vscode
     clang-tools
     gimp
+    fastfetch
   ];
 
   nixpkgs.config.allowUnfree = true;
