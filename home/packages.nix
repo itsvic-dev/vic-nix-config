@@ -11,6 +11,8 @@
     clang-tools
     gimp
     fastfetch
+    mpv
+    gnome.file-roller
   ];
 
   nixpkgs.config.allowUnfree = true;
