@@ -2,7 +2,7 @@
   description = "vic's NixOS flake";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs";
 
     hyprland = {
       url = "github:hyprwm/Hyprland";
