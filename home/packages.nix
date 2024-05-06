@@ -13,6 +13,9 @@
     fastfetch
     mpv
     gnome.file-roller
+    httpie
+    wget
+    p7zip
   ];
 
   nixpkgs.config.allowUnfree = true;
