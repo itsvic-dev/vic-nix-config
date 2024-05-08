@@ -16,7 +16,6 @@
     httpie
     wget
     p7zip
-    thunderbird
   ];
 
   nixpkgs.config.allowUnfree = true;
