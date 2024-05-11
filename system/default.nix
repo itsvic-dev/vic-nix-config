@@ -51,5 +51,6 @@ in
     ./hardware/intel.nix
     ./hardware/laptop.nix
     ./hardware/nvidia.nix
+    ./noDefaults/services/ptero.nix
   ];
 }

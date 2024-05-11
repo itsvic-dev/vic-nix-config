@@ -13,6 +13,7 @@ let
 in
 {
   networking.hosts."127.0.0.1" = [ domain ];
+
   services.phpfpm.pools.${app} = {
     inherit user;
     settings = {
@@ -30,6 +31,10 @@ in
     phpEnv."PATH" = lib.makeBinPath [ myPhp ];
     phpPackage = myPhp;
   };
+
+  services.mysql.enable = true;
+  services.redis.servers."".enable = true;
+
   services.nginx = {
     enable = true;
     virtualHosts.${domain} = {
