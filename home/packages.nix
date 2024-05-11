@@ -15,6 +15,8 @@
     wget
     p7zip
     thunderbird
+    nodejs
+    corepack
   ];
 
   nixpkgs.config.allowUnfree = true;
