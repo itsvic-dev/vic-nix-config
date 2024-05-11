@@ -1,7 +1,6 @@
 inputs@{
   nixpkgs,
   kmonad,
-  hyprland,
   home-manager,
   ...
 }:

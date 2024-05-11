@@ -15,9 +15,5 @@
     };
   };
 
-  outputs =
-    inputs@{ ... }:
-    {
-      nixosConfigurations = import ./system inputs;
-    };
+  outputs = inputs: { nixosConfigurations = import ./system inputs; };
 }
