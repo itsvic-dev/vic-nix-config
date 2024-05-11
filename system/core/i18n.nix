@@ -1,5 +1,5 @@
 {
   time.timeZone = "Europe/Warsaw";
-  i18n.defaultLocale = "ja_JP.UTF-8";
+  i18n.defaultLocale = "en_US.UTF-8";
   console.keyMap = "pl2";
 }
