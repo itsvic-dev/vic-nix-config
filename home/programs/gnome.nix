@@ -3,8 +3,8 @@
   programs.gnome-shell = {
     enable = true;
     extensions = with pkgs.gnomeExtensions; [
-      pop-shell
-      appindicator
+      { package = pop-shell; }
+      { package = appindicator; }
     ];
   };
 }
