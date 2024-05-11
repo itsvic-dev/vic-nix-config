@@ -32,7 +32,10 @@ in
     phpPackage = myPhp;
   };
 
-  services.mysql.enable = true;
+  services.mysql = {
+    enable = true;
+    package = pkgs.mariadb;
+  };
   services.redis.servers."".enable = true;
 
   services.nginx = {
