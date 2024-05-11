@@ -4,11 +4,6 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    hyprland = {
-      url = "github:hyprwm/Hyprland";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     kmonad = {
       url = "github:kmonad/kmonad?dir=nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -21,13 +16,7 @@
   };
 
   outputs =
-    inputs@{
-      nixpkgs,
-      hyprland,
-      kmonad,
-      home-manager,
-      ...
-    }:
+    inputs@{ ... }:
     {
       nixosConfigurations = import ./system inputs;
     };
