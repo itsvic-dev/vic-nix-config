@@ -3,7 +3,7 @@
   environment.systemPackages = with pkgs; [ adwaita-qt ];
 
   qt = {
-    enable = true;
+    enable = false; # using kde for config now
     platformTheme = "qt5ct";
   };
 }
