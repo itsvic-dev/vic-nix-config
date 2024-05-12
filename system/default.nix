@@ -18,7 +18,6 @@ let
   common = nixpkgs.lib.lists.flatten [
     ./core
     ./hardware/shared.nix
-    ../cachix.nix
     kmonad.nixosModules.default
     home-manager.nixosModules.default
     stylix.nixosModules.stylix
