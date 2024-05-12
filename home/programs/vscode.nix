@@ -1,5 +1,6 @@
 { pkgs, ... }:
 {
+  stylix.targets.vscode.enable = false;  # the stylix theme for vscode sucks balls
   programs.vscode = {
     enable = true;
     extensions = with pkgs.vscode-extensions; [
