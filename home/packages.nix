@@ -16,6 +16,7 @@
     thunderbird
     nodejs
     corepack
+    blender
   ];
 
   nixpkgs.config.allowUnfree = true;

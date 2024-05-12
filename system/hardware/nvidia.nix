@@ -24,7 +24,8 @@
       hardware.opengl.setLdLibraryPath = true;
       environment.sessionVariables.WLR_NO_HARDWARE_CURSORS = "1";
 
-      virtualisation.docker.enableNvidia = lib.mkForce true;
+      virtualisation.docker.enableNvidia = true;
+      nixpkgs.config.cudaSupport = true;
     };
   };
 }
