@@ -2,6 +2,7 @@ inputs@{
   nixpkgs,
   kmonad,
   home-manager,
+  stylix,
   ...
 }:
 let
@@ -18,6 +19,7 @@ let
     ./core
     kmonad.nixosModules.default
     home-manager.nixosModules.default
+    stylix.nixosModules.stylix
     (importAllFromFolder ./misc)
     (importAllFromFolder ./programs)
     (importAllFromFolder ./services)

@@ -6,7 +6,6 @@
     pavucontrol
     telegram-desktop
     vesktop
-    vscode
     clang-tools
     gimp
     fastfetch
