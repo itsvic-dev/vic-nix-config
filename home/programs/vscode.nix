@@ -8,6 +8,10 @@
       brettm12345.nixfmt-vscode
       ms-python.python
       llvm-vs-code-extensions.vscode-clangd
+      vue.volar
+      dbaeumer.vscode-eslint
+      bradlc.vscode-tailwindcss
+      esbenp.prettier-vscode
     ];
   };
 }

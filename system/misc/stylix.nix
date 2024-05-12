@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   stylix = {
-    image = ../wallpaper.jpg;
+    image = ../wallpaper.png;
     polarity = "dark";
     cursor = {
       package = pkgs.gnome.adwaita-icon-theme;

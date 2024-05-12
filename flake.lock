@@ -248,15 +248,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1715427559,
-        "narHash": "sha256-DSO2AwjD4pnKhr851pqve1ie9IfJ+MrAkyN3xPb0fl0=",
-        "owner": "danth",
+        "lastModified": 1715511027,
+        "narHash": "sha256-FpZCndf4vzfdBHG+D5UHj8kc7OAaaFTD87fpbg+A5zo=",
+        "owner": "itsvic-dev",
         "repo": "stylix",
-        "rev": "f83376bfdc375e54196e953665997ede027eae86",
+        "rev": "9c049e81a40b758ac86335fde492aec00037ab4b",
         "type": "github"
       },
       "original": {
-        "owner": "danth",
+        "owner": "itsvic-dev",
+        "ref": "vic/vesktop-init",
         "repo": "stylix",
         "type": "github"
       }
