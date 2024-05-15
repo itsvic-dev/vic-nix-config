@@ -5,7 +5,7 @@
     nix-output-monitor
     pavucontrol
     telegram-desktop
-    vesktop
+    (vesktop.override { withSystemVencord = false; })
     clang-tools
     gimp
     fastfetch
