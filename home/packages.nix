@@ -18,6 +18,7 @@
     corepack
     blender
     gcc
+    foliate
   ];
 
   nixpkgs.config.allowUnfree = true;
