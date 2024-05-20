@@ -17,6 +17,7 @@
     nodejs
     corepack
     blender
+    gcc
   ];
 
   nixpkgs.config.allowUnfree = true;
