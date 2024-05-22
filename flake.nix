@@ -15,7 +15,7 @@
     };
 
     stylix = {
-      url = "github:itsvic-dev/stylix/vic/vesktop-init";
+      url = "github:danth/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
