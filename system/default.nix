@@ -59,4 +59,6 @@ in
     ./extras/ptero.nix
     ./extras/wings
   ];
+
+  "tastypi" = defineSystem "aarch64-linux" "tastypi" [ ];
 }
