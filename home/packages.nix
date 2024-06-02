@@ -19,6 +19,8 @@
     blender
     gcc
     foliate
+    qbittorrent
+    wineWowPackages.stable
   ];
 
   nixpkgs.config.allowUnfree = true;
