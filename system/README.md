@@ -3,6 +3,7 @@
 | Name                   | Description                                                |
 | ---------------------- | ---------------------------------------------------------- |
 | `default.nix`          | Machine definitions                                        |
+| `options.nix`          | My custom configuration schema                             |
 | core                   | Core configuration (boot, users, ...)                      |
 | extras                 | Extra configuration that's **not** meant to be auto-loaded |
 | hardware (auto-loaded) | Common hardware configurations                             |
