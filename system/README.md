@@ -5,7 +5,7 @@
 | `default.nix`          | Machine definitions                                        |
 | core                   | Core configuration (boot, users, ...)                      |
 | extras                 | Extra configuration that's **not** meant to be auto-loaded |
-| hardware               | Common hardware configurations                             |
+| hardware (auto-loaded) | Common hardware configurations                             |
 | machines               | Machine-specific configuration                             |
 | misc (auto-loaded)     | Miscellaneous configuration (fonts, ...)                   |
 | programs (auto-loaded) | Program settings                                           |

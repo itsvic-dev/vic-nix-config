@@ -17,45 +17,37 @@ let
   # Common modules for all systems.
   common = nixpkgs.lib.lists.flatten [
     ./core
-    ./hardware/shared.nix
+    ./options.nix
     ../cachix.nix
+    ../home
     kmonad.nixosModules.default
     home-manager.nixosModules.default
     stylix.nixosModules.stylix
     (importAllFromFolder ./misc)
     (importAllFromFolder ./programs)
     (importAllFromFolder ./services)
+    (importAllFromFolder ./hardware)
   ];
 
-  # Defines a system with a given hostname and module set.
+  # Defines a system with a given architecture and hostname.
   defineSystem =
-    system: hostname: modules:
+    system: hostname:
     nixpkgs.lib.nixosSystem {
       inherit system;
       specialArgs = {
         inherit inputs;
       };
 
-      modules =
-        common
-        ++ modules
-        ++ [
-          ./core/boot-${system}.nix
-          ./machines/${hostname}.nix
-          ../home
-          {
-            # define the machine's hostname
-            networking.hostName = hostname;
-          }
-        ];
+      modules = common ++ [
+        ./core/boot-${system}.nix
+        ./machines/${hostname}.nix
+        {
+          # define the machine's hostname
+          networking.hostName = hostname;
+        }
+      ];
     };
 in
 {
-  "e6nix" = defineSystem "x86_64-linux" "e6nix" [
-    ./hardware/intel.nix
-    ./hardware/laptop.nix
-    ./hardware/nvidia.nix
-    ./extras/ptero.nix
-    ./extras/wings
-  ];
+  "e6nix" = defineSystem "x86_64-linux" "e6nix";
 }

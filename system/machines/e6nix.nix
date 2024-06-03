@@ -5,6 +5,24 @@
   ...
 }:
 {
+  imports = [
+    ../extras/ptero.nix
+    ../extras/wings
+  ];
+
+  vic-nix = {
+    desktop = {
+      enable = true;
+      forGaming = true;
+      forDev = true;
+    };
+    hardware = {
+      intel = true;
+      nvidia = true;
+      bluetooth = true;
+    };
+  };
+
   boot.extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
   networking.firewall.allowedTCPPorts = [
     3000 # Nuxt dev services

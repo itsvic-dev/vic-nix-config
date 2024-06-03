@@ -1,7 +1,17 @@
-{ pkgs, ... }:
 {
-  programs.gnupg.agent = {
-    enable = true;
-    pinentryPackage = pkgs.pinentry-qt;
+  lib,
+  config,
+  pkgs,
+  ...
+}:
+let
+  cfg = config.vic-nix.desktop;
+in
+{
+  config = lib.mkIf cfg.enable {
+    programs.gnupg.agent = {
+      enable = true;
+      pinentryPackage = pkgs.pinentry-qt;
+    };
   };
 }
