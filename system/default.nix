@@ -55,7 +55,6 @@ in
     ./hardware/intel.nix
     ./hardware/laptop.nix
     ./hardware/nvidia.nix
-    ./extras/hddbackup.nix
     ./extras/ptero.nix
     ./extras/wings
   ];
