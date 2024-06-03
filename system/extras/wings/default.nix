@@ -8,11 +8,19 @@ let
   };
 in
 {
-  systemd.services."demo-wings" = {
+  systemd.services."wings-demo" = {
     wantedBy = [ "network-online.target" ];
     serviceConfig = {
       # ugh, wings expects to be able to write to the config. we can't do this declaratively
       ExecStart = "${wingsBinary} --config /etc/pterodactyl/demo-config.yml";
+      Restart = "always";
+    };
+  };
+
+  systemd.services."wings-develop" = {
+    wantedBy = [ "network-online.target" ];
+    serviceConfig = {
+      ExecStart = "${wingsBinary} --config /etc/pterodactyl/config.yml";
       Restart = "always";
     };
   };
