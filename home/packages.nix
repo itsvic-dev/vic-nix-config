@@ -1,27 +1,41 @@
-{ pkgs, ... }:
 {
-  home.packages = with pkgs; [
-    git
-    nix-output-monitor
-    pavucontrol
-    telegram-desktop
-    (vesktop.override { withSystemVencord = false; })
-    clang-tools
-    gimp
-    fastfetch
-    mpv
-    httpie
-    wget
-    p7zip
-    thunderbird
-    nodejs
-    corepack
-    blender
-    gcc
-    foliate
-    qbittorrent
-    wineWowPackages.stable
-  ];
+  lib,
+  nixosConfig,
+  pkgs,
+  ...
+}:
+let
+  cfg = nixosConfig.vic-nix;
+in
+{
+  home.packages =
+    with pkgs;
+    lib.mkMerge [
+      [
+        git
+        nix-output-monitor
+        clang-tools
+        fastfetch
+        httpie
+        wget
+        p7zip
+        nodejs
+        corepack
+        gcc
+      ]
+      (lib.mkIf cfg.desktop.enable [
+        pavucontrol
+        telegram-desktop
+        (vesktop.override { withSystemVencord = false; })
+        thunderbird
+        blender
+        gimp
+        mpv
+        foliate
+        qbittorrent
+      ])
+      (lib.mkIf (cfg.desktop.enable && cfg.desktop.forGaming) [ wineWowPackages.stable ])
+    ];
 
   nixpkgs.config.allowUnfree = true;
 }
