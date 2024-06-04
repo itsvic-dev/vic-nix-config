@@ -50,6 +50,5 @@
   };
   swapDevices = [ { device = "/dev/disk/by-uuid/9bd7b992-65cc-4925-a7c6-50aa57509950"; } ];
 
-  powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
-  programs.steam.gamescopeSession.enable = true;
+  powerManagement.cpuFreqGovernor = "powersave";
 }
