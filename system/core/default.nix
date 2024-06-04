@@ -11,7 +11,7 @@
   networking.networkmanager.enable = true;
 
   sops = {
-    defaultSopsFile = ../secrets/global.yaml;
+    defaultSopsFile = ../../secrets/global.yaml;
     age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
   };
 
