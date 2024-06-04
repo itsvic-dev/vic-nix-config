@@ -1,0 +1,22 @@
+keys:
+  - &admin_vic age1fyvl0aynevv74jvtdxklhzyx3yqj54h5kr93sqlsxc4yqp2gzd6qlqwwu5
+  - &machine_e6nix age1sv5tdk96v826vx5gnkrx3m7rzypw4hjf6vtrhxy62l6kprs8zd9qyvdrvd
+
+creation_rules:
+  - path_regex: secrets/global.yaml
+    key_groups:
+      - age:
+          - *admin_vic
+          - *machine_e6nix
+
+  - path_regex: secrets/e6nix.yaml
+      key_groups:
+        - age:
+            - *admin_vic
+            - *machine_e6nix
+
+  - path_regex: secrets/tastypi.yaml
+      key_groups:
+        - age:
+            - *admin_vic
+            # - *machine_tastypi

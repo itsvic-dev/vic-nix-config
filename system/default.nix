@@ -3,6 +3,7 @@ inputs@{
   kmonad,
   home-manager,
   stylix,
+  sops-nix,
   ...
 }:
 let
@@ -23,6 +24,7 @@ let
     kmonad.nixosModules.default
     home-manager.nixosModules.default
     stylix.nixosModules.stylix
+    sops-nix.nixosModules.sops
     (importAllFromFolder ./misc)
     (importAllFromFolder ./programs)
     (importAllFromFolder ./services)

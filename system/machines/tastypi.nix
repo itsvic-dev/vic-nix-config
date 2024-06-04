@@ -2,16 +2,28 @@
   config,
   lib,
   pkgs,
-  modulesPath,
   ...
 }:
-
 {
-  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
-
   vic-nix = {
-    desktop.enable = true;
     hardware.bluetooth = true;
+  };
+
+  sops.secrets.akos-ipv6-pk = { };
+  networking.wireguard.interfaces = {
+    akos-ipv6 = {
+      ips = [ "2a0e:97c0:7c5::2/48" ];
+      listenPort = 51820;
+      privateKeyFile = config.sops.secrets.akos-ipv6-pk.path;
+      peers = [
+        {
+          publicKey = "z0FLHeJGlkRlp+e5WXJuQz2O3xSCJs74s++4dWDlZ1s=";
+          allowedIPs = [ "::/0" ];
+          endpoint = "45.136.137.31:999";
+          persistentKeepalive = 25;
+        }
+      ];
+    };
   };
 
   boot.initrd.kernelModules = [ ];
@@ -30,7 +42,4 @@
   };
   swapDevices = [ ];
   networking.useDHCP = lib.mkDefault true;
-
-  # needed by... vscode extensions??? wtf?
-  # nixpkgs.config.allowUnsupportedSystem = true;
 }

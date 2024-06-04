@@ -19,7 +19,26 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
+
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs: { nixosConfigurations = import ./system inputs; };
+  outputs = inputs: {
+    nixosConfigurations = import ./system inputs;
+    devShells.x86_64-linux.default =
+      let
+        pkgs = import (inputs.nixpkgs) { system = "x86_64-linux"; };
+      in
+      with pkgs;
+      mkShell {
+        buildInputs = [
+          sops
+          age
+          deploy-rs
+        ];
+      };
+  };
 }

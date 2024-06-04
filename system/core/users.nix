@@ -1,10 +1,14 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
+  sops.secrets.vic-password.neededForUsers = true;
+
   users.groups = {
     uinput = { };
   };
+
   users.users.vic = {
     isNormalUser = true;
+    hashedPasswordFile = sops.secrets.vic-password.path;
     extraGroups = [
       "wheel"
       "uinput"
@@ -16,4 +20,6 @@
     ];
     shell = pkgs.zsh;
   };
+
+  users.mutableUsers = false;
 }
