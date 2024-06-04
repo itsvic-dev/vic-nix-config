@@ -52,23 +52,6 @@
   };
   swapDevices = [ { device = "/dev/disk/by-uuid/9bd7b992-65cc-4925-a7c6-50aa57509950"; } ];
 
-  nix.buildMachines = [
-    {
-      hostName = "192.168.0.31";
-      system = "aarch64-linux";
-      protocol = "ssh-ng";
-      maxJobs = 4;
-      speedFactor = 1;
-      supportedFeatures = [
-        "nixos-test"
-        "benchmark"
-        "big-parallel"
-        "kvm"
-      ];
-      mandatoryFeatures = [ ];
-    }
-  ];
-  nix.distributedBuilds = true;
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
   nix.settings.extra-platforms = config.boot.binfmt.emulatedSystems;
 

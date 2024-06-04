@@ -11,7 +11,7 @@ in
   config = lib.mkIf cfg.enable {
     programs.chromium = {
       enable = true;
-      package = pkgs.chromium.override { enableWideVine = true; };
+      package = pkgs.chromium.override { enableWideVine = pkgs.system == "x86_64-linux"; };
       extensions = [
         { id = "nngceckbapebfimnlniiiahkandclblb"; } # Bitwarden
         { id = "eimadpbcbfnmbkopoojfekhnkhdbieeh"; } # Dark Reader
