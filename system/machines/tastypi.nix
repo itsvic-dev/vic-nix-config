@@ -9,7 +9,8 @@
     hardware.bluetooth = true;
   };
 
-  sops.secrets.akos-ipv6-pk = { };
+  sops.secrets.akos-ipv6-pk.sopsFile = ../../secrets/tastypi.yaml;
+
   networking.wireguard.interfaces = {
     akos-ipv6 = {
       ips = [ "2a0e:97c0:7c5::2/48" ];
