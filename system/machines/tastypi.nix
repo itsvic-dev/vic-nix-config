@@ -6,6 +6,9 @@
 }:
 {
   vic-nix = {
+    server = {
+      enable = true;
+    };
     hardware.bluetooth = true;
   };
 

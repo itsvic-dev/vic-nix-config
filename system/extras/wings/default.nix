@@ -16,6 +16,7 @@ in
       Restart = "always";
     };
   };
+  networking.firewall.allowedTCPPorts = [ 8443 ];
 
   systemd.services."wings-develop" = {
     wantedBy = [ "network-online.target" ];

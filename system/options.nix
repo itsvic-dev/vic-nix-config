@@ -11,7 +11,7 @@ with lib;
       };
 
       desktop = {
-        enable = mkEnableOption "desktop mode";
+        enable = mkEnableOption "the desktop role";
 
         forGaming = mkOption {
           type = types.bool;
@@ -24,6 +24,10 @@ with lib;
           default = false;
           description = "Whether the machine will be used as a development workspace.";
         };
+      };
+
+      server = {
+        enable = mkEnableOption "the server role";
       };
     };
   };

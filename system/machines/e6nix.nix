@@ -22,12 +22,10 @@
       bluetooth = true;
     };
   };
-  services.openssh.enable = true;
 
   boot.extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
   networking.firewall.allowedTCPPorts = [
-    3000 # Nuxt dev services
-    8443 # demo panel wings
+    3000 # nuxt dev projects
   ];
 
   boot.initrd.availableKernelModules = [
@@ -51,9 +49,6 @@
     fsType = "vfat";
   };
   swapDevices = [ { device = "/dev/disk/by-uuid/9bd7b992-65cc-4925-a7c6-50aa57509950"; } ];
-
-  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
-  nix.settings.extra-platforms = config.boot.binfmt.emulatedSystems;
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   programs.steam.gamescopeSession.enable = true;

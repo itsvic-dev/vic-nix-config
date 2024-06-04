@@ -13,15 +13,13 @@ in
     lib.mkMerge [
       [
         git
+        p7zip
+
         nix-output-monitor
-        clang-tools
         fastfetch
+
         httpie
         wget
-        p7zip
-        nodejs
-        corepack
-        gcc
       ]
       (lib.mkIf cfg.desktop.enable [
         pavucontrol
@@ -35,6 +33,12 @@ in
         qbittorrent
       ])
       (lib.mkIf (cfg.desktop.enable && cfg.desktop.forGaming) [ wineWowPackages.stable ])
+      (lib.mkIf (cfg.desktop.enable && cfg.desktop.forDev) [
+        nodejs
+        corepack
+        gcc
+        clang-tools
+      ])
     ];
 
   nixpkgs.config.allowUnfree = true;
