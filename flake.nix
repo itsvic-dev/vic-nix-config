@@ -24,21 +24,46 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    deploy-rs = {
+      url = "github:serokell/deploy-rs";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs: {
-    nixosConfigurations = import ./system inputs;
-    devShells.x86_64-linux.default =
-      let
-        pkgs = import (inputs.nixpkgs) { system = "x86_64-linux"; };
-      in
-      with pkgs;
-      mkShell {
-        buildInputs = [
-          sops
-          age
-          deploy-rs
-        ];
+  outputs =
+    inputs@{
+      self,
+      nixpkgs,
+      deploy-rs,
+      ...
+    }:
+    {
+      nixosConfigurations = import ./system inputs;
+
+      devShells.x86_64-linux.default =
+        let
+          pkgs = import nixpkgs { system = "x86_64-linux"; };
+        in
+        with pkgs;
+        mkShell {
+          buildInputs = [
+            sops
+            age
+            deploy-rs.packages.x86_64-linux.default
+          ];
+        };
+
+      deploy.nodes = {
+        tastypi = {
+          hostname = "tastypi";
+          profiles.system = {
+            user = "root";
+            path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.tastypi;
+          };
+        };
       };
-  };
+
+      checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
+    };
 }
