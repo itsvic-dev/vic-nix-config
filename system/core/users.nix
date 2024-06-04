@@ -8,7 +8,7 @@
 
   users.users.vic = {
     isNormalUser = true;
-    hashedPasswordFile = sops.secrets.vic-password.path;
+    hashedPasswordFile = config.sops.secrets.vic-password.path;
     extraGroups = [
       "wheel"
       "uinput"
