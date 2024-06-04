@@ -22,6 +22,7 @@
       bluetooth = true;
     };
   };
+  services.openssh.enable = true;
 
   boot.extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
   networking.firewall.allowedTCPPorts = [
