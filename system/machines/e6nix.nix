@@ -25,6 +25,8 @@
     openFirewall = false;
   };
 
+  services.ollama.enable = true;
+
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
   nix.settings.extra-platforms = config.boot.binfmt.emulatedSystems;
   nix.buildMachines = [
