@@ -17,7 +17,7 @@
     port = 8443;
   };
 
-  sops.secrets.cf-creds.path = ../../secrets/tastypi.yaml;
+  sops.secrets.cf-creds.sopsFile = ../../secrets/tastypi.yaml;
   security.acme = {
     acceptTerms = true;
     defaults = {
