@@ -29,6 +29,10 @@ with lib;
       server = {
         enable = mkEnableOption "the server role";
       };
+
+      modules = {
+        libvirt = mkEnableOption "the libvirt module";
+      };
     };
   };
 }

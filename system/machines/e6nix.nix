@@ -18,6 +18,9 @@
       nvidia = true;
       bluetooth = true;
     };
+    modules = {
+      libvirt = true;
+    };
   };
 
   services.wings = {

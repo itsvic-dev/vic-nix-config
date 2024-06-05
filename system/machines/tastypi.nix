@@ -9,6 +9,9 @@
     server = {
       enable = true;
     };
+    modules = {
+      libvirt = true;
+    };
     hardware.bluetooth = true;
   };
 
