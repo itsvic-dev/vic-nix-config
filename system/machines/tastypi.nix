@@ -48,6 +48,12 @@
     device = "/dev/nvme0n1p1";
     fsType = "vfat";
   };
+
+  fileSystems."/boot/firmware" = {
+    device = "/dev/mmcblk0p1";
+    fsType = "vfat";
+  };
+
   swapDevices = [ ];
   networking.useDHCP = lib.mkDefault true;
 
