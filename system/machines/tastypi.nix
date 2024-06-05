@@ -12,6 +12,25 @@
     hardware.bluetooth = true;
   };
 
+  services.wings = {
+    enable = true;
+    port = 8443;
+  };
+
+  sops.secrets.cf-creds.path = ../../secrets/tastypi.yaml;
+  security.acme = {
+    acceptTerms = true;
+    defaults = {
+      email = "contact@itsvic.dev";
+      dnsProvider = "cloudflare";
+      environmentFile = config.sops.secrets.cf-creds.path;
+    };
+    certs."wings.itsvic.dev".postRun = ''
+      systemctl restart wings
+    '';
+  };
+  systemd.services.wings.requires = [ "acme-finished-wings.itsvic.dev.target" ];
+
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ ];
   boot.kernelPackages = pkgs.linuxPackages_rpi4;

@@ -5,10 +5,25 @@
   ...
 }:
 {
-  imports = [
-    ../extras/ptero.nix
-    ../extras/wings
-  ];
+  imports = [ ../extras/ptero.nix ];
+
+  vic-nix = {
+    desktop = {
+      enable = true;
+      forGaming = true;
+      forDev = true;
+    };
+    hardware = {
+      intel = true;
+      nvidia = true;
+      bluetooth = true;
+    };
+  };
+
+  services.wings = {
+    enable = true;
+    openFirewall = false;
+  };
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
   nix.settings.extra-platforms = config.boot.binfmt.emulatedSystems;
@@ -33,19 +48,6 @@
   nix.extraOptions = ''
     builders-use-substitutes = true
   '';
-
-  vic-nix = {
-    desktop = {
-      enable = true;
-      forGaming = true;
-      forDev = true;
-    };
-    hardware = {
-      intel = true;
-      nvidia = true;
-      bluetooth = true;
-    };
-  };
 
   boot.extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
   networking.firewall.allowedTCPPorts = [
