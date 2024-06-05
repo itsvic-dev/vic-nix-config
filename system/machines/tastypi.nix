@@ -54,7 +54,12 @@
     fsType = "vfat";
   };
 
-  swapDevices = [ ];
+  swapDevices = [
+    {
+      device = "/swapfile";
+      size = 16 * 1024;
+    }
+  ];
   networking.useDHCP = lib.mkDefault true;
 
   powerManagement.cpuFreqGovernor = "ondemand";
