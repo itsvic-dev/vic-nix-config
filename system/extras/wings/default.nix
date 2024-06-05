@@ -8,6 +8,12 @@ let
   };
 in
 {
+  users.users.pterodactyl = {
+    isSystemUser = true;
+    group = "pterodactyl";
+  };
+  users.groups.pterodactyl = { };
+
   systemd.services."wings-demo" = {
     wantedBy = [ "network-online.target" ];
     serviceConfig = {
