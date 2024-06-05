@@ -34,12 +34,38 @@
       devShells.x86_64-linux.default =
         let
           pkgs = import nixpkgs { system = "x86_64-linux"; };
+
+          deployOn = pkgs.writeShellApplication {
+            name = "deploy";
+            runtimeInputs = with pkgs; [
+              nix-output-monitor
+              nix
+              openssh
+            ];
+            text = ''
+              set -e
+              HOST="$2"
+              OPERATION="$1"
+
+              # build the system configuration
+              nom build -o /tmp/vic-nix-rebuild .\#nixosConfigurations."$HOST".config.system.build.toplevel
+
+              # copy it to the target host
+              DERIVATION="$(readlink /tmp/vic-nix-rebuild)"
+              nix-copy-closure --to "$HOST" "$DERIVATION"
+              rm /tmp/vic-nix-rebuild
+
+              # and finally, deploy it on the host
+              ssh "$HOST" -- sudo "$DERIVATION"/bin/switch-to-configuration "$OPERATION"
+            '';
+          };
         in
         with pkgs;
         mkShell {
           buildInputs = [
             sops
             age
+            deployOn
           ];
         };
     };

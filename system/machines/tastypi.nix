@@ -12,7 +12,7 @@
     modules = {
       libvirt = true;
     };
-    hardware.bluetooth = true;
+    hardware.bluetooth = false;
   };
 
   services.wings = {
