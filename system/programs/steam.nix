@@ -3,5 +3,5 @@ let
   cfg = config.vic-nix.desktop;
 in
 {
-  config = lib.mkIf cfg.enable { programs.steam.enable = cfg.forGaming; };
+  config = lib.mkIf (cfg.enable && cfg.forGaming) { programs.steam.enable = true; };
 }

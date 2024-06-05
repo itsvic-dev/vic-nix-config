@@ -5,6 +5,7 @@
     ./i18n.nix
     ./users.nix
     ./nix.nix
+    ./bootloader.nix
   ];
 
   boot.tmp.useTmpfs = true;

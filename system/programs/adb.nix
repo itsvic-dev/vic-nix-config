@@ -1,1 +1,4 @@
-{ programs.adb.enable = true; }
+{ config, ... }:
+{
+  programs.adb.enable = config.vic-nix.desktop.enable;
+}
