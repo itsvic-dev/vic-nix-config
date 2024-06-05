@@ -50,7 +50,7 @@
           buildInputs = [
             sops
             age
-            deploy-rs.packages.x86_64-linux.default
+            pkgs.deploy-rs
           ];
         };
 
