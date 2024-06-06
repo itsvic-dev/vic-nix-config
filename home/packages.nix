@@ -38,6 +38,7 @@ in
         corepack
         gcc
         clang-tools
+        python3
       ]
     );
 
