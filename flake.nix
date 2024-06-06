@@ -24,6 +24,11 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    vncpy = {
+      url = "github:itsvic-dev/vncpy";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
