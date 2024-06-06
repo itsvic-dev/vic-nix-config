@@ -53,7 +53,7 @@
               OPERATION="$1"
 
               # build the system configuration
-              nom build -o /tmp/vic-nix-rebuild .\#nixosConfigurations."$HOST".config.system.build.toplevel
+              nom build -j0 -o /tmp/vic-nix-rebuild .\#nixosConfigurations."$HOST".config.system.build.toplevel
 
               # copy it to the target host
               DERIVATION="$(readlink /tmp/vic-nix-rebuild)"

@@ -341,11 +341,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1717699706,
-        "narHash": "sha256-uK3qpyJd38Z9eLIa+83lUBtVc/vsUV/wYoymxqNyuJI=",
+        "lastModified": 1717703579,
+        "narHash": "sha256-Z6/HqjgrRz+HxRJy+N4NhBebArhGl7C3UQXzTFRC5n0=",
         "owner": "itsvic-dev",
         "repo": "vncpy",
-        "rev": "f2c847f862d84c1692f269aa312a700687575a9b",
+        "rev": "e025e16a21f821e94ed44d2a77e3923fa98026e7",
         "type": "github"
       },
       "original": {
