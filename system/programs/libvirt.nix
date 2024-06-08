@@ -1,9 +1,9 @@
 { config, lib, ... }:
 let
-  cfg = config.vic-nix.software;
+  cfg = config.vic-nix;
 in
 {
-  config = lib.mkIf cfg.libvirt {
+  config = lib.mkIf cfg.software.libvirt {
     virtualisation.libvirtd.enable = true;
     virtualisation.spiceUSBRedirection.enable = true;
     programs.virt-manager.enable = cfg.desktop.enable;
