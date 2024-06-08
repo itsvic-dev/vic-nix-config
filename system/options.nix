@@ -10,6 +10,11 @@ with lib;
         bluetooth = mkEnableOption "Bluetooth";
       };
 
+      software = {
+        timidity = mkEnableOption "timidity";
+        libvirt = mkEnableOption "the libvirt module";
+      };
+
       desktop = {
         enable = mkEnableOption "the desktop role";
 
@@ -28,10 +33,6 @@ with lib;
 
       server = {
         enable = mkEnableOption "the server role";
-      };
-
-      modules = {
-        libvirt = mkEnableOption "the libvirt module";
       };
     };
   };

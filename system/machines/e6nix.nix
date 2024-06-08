@@ -18,8 +18,9 @@
       nvidia = true;
       bluetooth = true;
     };
-    modules = {
+    software = {
       libvirt = true;
+      timidity = true;
     };
   };
 

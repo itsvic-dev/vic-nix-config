@@ -9,7 +9,7 @@
     server = {
       enable = true;
     };
-    modules = {
+    software = {
       libvirt = true;
     };
     hardware.bluetooth = true;
