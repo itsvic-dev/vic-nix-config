@@ -9,18 +9,20 @@
   ];
 
   boot.tmp.useTmpfs = true;
+  networking.nameservers = [
+    # IPv4
+    "1.1.1.1"
+    "1.0.0.1"
+
+    # IPv6
+    "2606:4700:4700::1111"
+    "2606:4700:4700::1001"
+  ];
   networking.networkmanager = {
     enable = true;
-    insertNameservers = [
-      # IPv4
-      "1.1.1.1"
-      "1.0.0.1"
-
-      # IPv6
-      "2606:4700:4700::1111"
-      "2606:4700:4700::1001"
-    ];
+    dns = "systemd-resolved";
   };
+  services.resolved.enable = true;
 
   sops = {
     defaultSopsFile = ../../secrets/global.yaml;
