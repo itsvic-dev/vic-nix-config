@@ -29,6 +29,11 @@
       url = "github:itsvic-dev/vncpy";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    bob-website = {
+      url = "github:bob-discord-bot/website";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =

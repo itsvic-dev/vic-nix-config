@@ -19,15 +19,6 @@
     enable = true;
     port = 8443;
   };
-
-  services.vncpy = {
-    enable = true;
-    image = pkgs.fetchurl {
-      url = "https://static1.e621.net/data/sample/fa/f2/faf2cbcd6aa88473391af7b145a79690.jpg";
-      hash = "sha256-80c4ycrJIkdb18BeklOopwunWmFTAGSeEcW6GJegNkU=";
-    };
-  };
-
   sops.secrets.cf-creds.sopsFile = ../../secrets/tastypi.yaml;
   security.acme = {
     acceptTerms = true;
@@ -41,6 +32,24 @@
     '';
   };
   systemd.services.wings.requires = [ "acme-finished-wings.itsvic.dev.target" ];
+
+  services.nginx.enable = true;
+  services.bob-website = {
+    enable = true;
+    domain = "bob.itsvic.dev";
+  };
+  networking.firewall.allowedTCPPorts = [
+    80
+    443
+  ];
+
+  services.vncpy = {
+    enable = true;
+    image = pkgs.fetchurl {
+      url = "https://static1.e621.net/data/sample/fa/f2/faf2cbcd6aa88473391af7b145a79690.jpg";
+      hash = "sha256-80c4ycrJIkdb18BeklOopwunWmFTAGSeEcW6GJegNkU=";
+    };
+  };
 
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ ];

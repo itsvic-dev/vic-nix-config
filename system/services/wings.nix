@@ -6,7 +6,6 @@
 }:
 with lib;
 let
-  # note: assuming amd646
   wingsBinarySource =
     ({
       "x86_64-linux" = {
