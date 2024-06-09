@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
   imports = [
     ./appimage.nix
@@ -22,7 +22,10 @@
     enable = true;
     dns = "systemd-resolved";
   };
-  services.resolved.enable = true;
+  services.resolved = {
+    enable = true;
+    fallbackDns = config.networking.nameservers;
+  };
 
   sops = {
     defaultSopsFile = ../../secrets/global.yaml;
