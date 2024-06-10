@@ -1,8 +1,6 @@
-{ pkgs, config, ... }:
+{ pkgs, ... }:
 {
   stylix = {
-    # stylix makes sense only on desktop role devices
-    enable = config.vic-nix.desktop.enable;
     image = ../wallpaper.jpg;
     polarity = "dark";
     cursor = {
