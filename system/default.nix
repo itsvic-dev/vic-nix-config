@@ -42,7 +42,7 @@ let
 
       modules = common ++ [
         ./core/boot-${system}.nix
-        ./machines/${hostname}.nix
+        ./machines/${hostname}
         {
           # define the machine's hostname
           networking.hostName = hostname;
