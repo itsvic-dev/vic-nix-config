@@ -20,6 +20,11 @@
   ];
   networking.networkmanager = {
     enable = true;
+    dns = "systemd-resolved";
+  };
+  services.resolved = {
+    enable = true;
+    fallbackDns = config.networking.nameservers;
   };
 
   sops = {
