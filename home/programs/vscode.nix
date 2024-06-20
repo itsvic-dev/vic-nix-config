@@ -31,7 +31,6 @@ in
 
         # Node.js/Web
         dbaeumer.vscode-eslint
-        vunguyentuan.vscode-postcss
         esbenp.prettier-vscode
         vue.volar
         bradlc.vscode-tailwindcss
