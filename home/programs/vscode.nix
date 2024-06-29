@@ -54,6 +54,8 @@ in
           "git.enableSmartCommit" = true;
 
           "php.validate.executablePath" = "${pkgs.php}/bin/php";
+          "mesonbuild.downloadLanguageServer" = false;
+          "mesonbuild.languageServerPath" = "${pkgs.mesonlsp}/bin/mesonlsp";
         };
     };
   };
