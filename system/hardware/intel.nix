@@ -9,7 +9,7 @@ let
 in
 {
   config = lib.mkIf cfg.intel {
-    hardware.opengl.extraPackages = [ pkgs.intel-compute-runtime ];
+    hardware.graphics.extraPackages = [ pkgs.intel-compute-runtime ];
     hardware.cpu.intel.updateMicrocode = true;
   };
 }
