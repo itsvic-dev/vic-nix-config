@@ -18,7 +18,12 @@ in
           "nvidia"
           "intel"
         ];
-        hardware.opengl.enable = true;
+
+        hardware.graphics = {
+          enable = true;
+          enable32Bit = pkgs.system == "x86_64-linux";
+        };
+
         hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
         hardware.nvidia.modesetting.enable = true;
         hardware.nvidia.prime = {
@@ -26,8 +31,6 @@ in
           nvidiaBusId = "PCI:1:0:0";
           intelBusId = "PCI:0:2:0";
         };
-        hardware.opengl.setLdLibraryPath = true;
-        hardware.opengl.driSupport32Bit = pkgs.system == "x86_64-linux";
 
         virtualisation.docker.enableNvidia = true;
         nixpkgs.config.cudaSupport = true;
