@@ -1,4 +1,9 @@
-{ config, ... }:
+{ config, lib, ... }:
 {
-  hardware.bluetooth.enable = config.vic-nix.hardware.bluetooth;
+  config = lib.mkIf config.vic-nix.hardware.bluetooth {
+    hardware.bluetooth = {
+      enable = true;
+      settings.General.Experimental = true;
+    };
+  };
 }
