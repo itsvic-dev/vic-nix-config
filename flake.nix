@@ -66,6 +66,9 @@
               rm /tmp/vic-nix-rebuild
 
               # and finally, deploy it on the host
+              if [[ "$OPERATION" == "switch" ]] || [[ "$OPERATION" == "boot" ]]; then
+                ssh "$HOST" -- sudo nix-env -p /nix/var/nix/profiles/system --set "$DERIVATION"
+              fi
               ssh "$HOST" -- sudo "$DERIVATION"/bin/switch-to-configuration "$OPERATION"
             '';
           };
