@@ -38,40 +38,12 @@
 
   outputs =
     inputs@{ nixpkgs, ... }:
-    {
-      nixosConfigurations = import ./system inputs;
-
-      devShells.x86_64-linux.default =
+    let
+      defineShell =
+        system:
         let
-          pkgs = import nixpkgs { system = "x86_64-linux"; };
-
-          deployOn = pkgs.writeShellApplication {
-            name = "deploy";
-            runtimeInputs = with pkgs; [
-              nix-output-monitor
-              nix
-              openssh
-            ];
-            text = ''
-              set -e
-              HOST="$2"
-              OPERATION="$1"
-
-              # build the system configuration
-              nom build -o /tmp/vic-nix-rebuild .\#nixosConfigurations."$HOST".config.system.build.toplevel
-
-              # copy it to the target host
-              DERIVATION="$(readlink /tmp/vic-nix-rebuild)"
-              nix-copy-closure --to "$HOST" "$DERIVATION"
-              rm /tmp/vic-nix-rebuild
-
-              # and finally, deploy it on the host
-              if [[ "$OPERATION" == "switch" ]] || [[ "$OPERATION" == "boot" ]]; then
-                ssh "$HOST" -- sudo nix-env -p /nix/var/nix/profiles/system --set "$DERIVATION"
-              fi
-              ssh "$HOST" -- sudo "$DERIVATION"/bin/switch-to-configuration "$OPERATION"
-            '';
-          };
+          pkgs = import nixpkgs { inherit system; };
+          deployOn = pkgs.callPackage ./misc/deploy.nix { };
         in
         with pkgs;
         mkShell {
@@ -81,5 +53,13 @@
             deployOn
           ];
         };
+    in
+    {
+      nixosConfigurations = import ./system inputs;
+
+      devShells = {
+        x86_64-linux.default = defineShell "x86_64-linux";
+        aarch64-linux.default = defineShell "aarch64-linux";
+      };
     };
 }
