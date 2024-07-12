@@ -28,7 +28,6 @@ in
         thunderbird
         blender
         gimp
-        mpv
         foliate
         qbittorrent
         obs-studio
