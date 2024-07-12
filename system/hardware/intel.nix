@@ -9,7 +9,13 @@ let
 in
 {
   config = lib.mkIf cfg.intel {
-    hardware.graphics.extraPackages = [ pkgs.intel-compute-runtime ];
-    hardware.cpu.intel.updateMicrocode = true;
+    hardware = {
+      cpu.intel.updateMicrocode = true;
+      graphics.extraPackages = with pkgs; [
+        intel-compute-runtime
+        intel-media-driver
+      ];
+    };
+    environment.sessionVariables.LIBVA_DRIVER_NAME = "iHD";
   };
 }

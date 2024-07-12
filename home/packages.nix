@@ -31,6 +31,7 @@ in
         mpv
         foliate
         qbittorrent
+        obs-studio
       ]
       ++ lib.optionals cfg.desktop.forGaming [ wineWowPackages.stable ]
       ++ lib.optionals cfg.desktop.forDev [

@@ -1,1 +1,9 @@
-{ hardware.enableAllFirmware = true; }
+{ pkgs, ... }:
+{
+  hardware.enableAllFirmware = true;
+
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = pkgs.system == "x86_64-linux";
+  };
+}
