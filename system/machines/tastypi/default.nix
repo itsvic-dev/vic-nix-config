@@ -58,6 +58,8 @@
     };
   };
 
+  services.openssh.ports = [ 62122 ];
+
   networking.firewall.allowedTCPPorts = [
     80
     443
