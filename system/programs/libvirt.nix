@@ -4,7 +4,11 @@ let
 in
 {
   config = lib.mkIf cfg.software.libvirt {
-    virtualisation.libvirtd.enable = true;
+    virtualisation.libvirtd = {
+      enable = true;
+      qemu.swtpm.enable = true;
+    };
+
     virtualisation.spiceUSBRedirection.enable = true;
     programs.virt-manager.enable = cfg.desktop.enable;
 
