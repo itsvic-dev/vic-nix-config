@@ -56,6 +56,7 @@ in
           "php.validate.executablePath" = "${pkgs.php}/bin/php";
           "mesonbuild.downloadLanguageServer" = false;
           "mesonbuild.languageServerPath" = "${pkgs.mesonlsp}/bin/mesonlsp";
+          "cmake.cmakePath" = "${pkgs.cmake}/bin/cmake";
         };
     };
   };
