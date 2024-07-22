@@ -26,10 +26,10 @@ in
 
             case "$PAM_TYPE" in
               open_session)
-                CONTENT="User \`$PAM_USER\` logged into \`$HOSTNAME\` from address \`$PAM_RHOST\`."
+                CONTENT="➡️ \`$HOSTNAME\`: \`$PAM_USER\` logged in (\`$PAM_RHOST\`)"
                 ;;
               close_session)
-                CONTENT="User \`$PAM_USER\` signed out of \`$HOSTNAME\` from address \`$PAM_RHOST\`."
+                CONTENT="⬅️ \`$HOSTNAME\`: \`$PAM_USER\` logged out (\`$PAM_RHOST\`)"
                 ;;
             esac
 
