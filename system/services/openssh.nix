@@ -14,7 +14,9 @@ in
       settings.PasswordAuthentication = false;
     };
 
-    security.pam.services.sshd-webhook.text =
+    sops.secrets.pamWebhook = { };
+
+    security.pam.services.sshd.rules.session.vic-webhook =
       let
         webhookTrigger =
           with pkgs;
@@ -39,8 +41,11 @@ in
             fi
           '';
       in
-      ''
-        session optional pam_exec.so ${webhookTrigger}
-      '';
+      {
+        control = "optional";
+        modulePath = "pam_exec.so";
+        args = [ (toString webhookTrigger) ];
+        order = 999999;
+      };
   };
 }
