@@ -37,7 +37,7 @@ in
               JSON_DATA="$(
                 ${pkgs.jq}/bin/jq -n --arg content "$CONTENT" "$JSON_TEMPLATE"
               )"
-              ${pkgs.curl}/bin/curl -X POST "$(cat ${config.sops.secrets.pamWebhook.path})" -H "Content-Type: application/json" --data "$JSON_DATA"
+              ${pkgs.curl}/bin/curl -X POST "$(cat ${config.sops.secrets.pamWebhook.path})" -H "Content-Type: application/json" --data "$JSON_DATA" & disown
             fi
           '';
       in
