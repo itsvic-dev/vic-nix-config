@@ -9,6 +9,7 @@
     ./networking.nix
     ./wings.nix
     ./hardware.nix
+    ./plausible.nix
   ];
 
   vic-nix = {
