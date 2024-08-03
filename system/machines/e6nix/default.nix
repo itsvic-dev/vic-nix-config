@@ -33,8 +33,6 @@
     openFirewall = false;
   };
 
-  services.ollama.enable = true;
-
   networking.firewall.allowedTCPPorts = [
     3000 # nuxt dev projects
   ];
