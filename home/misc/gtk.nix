@@ -11,11 +11,13 @@ in
   config = lib.mkIf cfg.enable {
     gtk = {
       enable = true;
+
       cursorTheme = {
-        package = pkgs.gnome.adwaita-icon-theme;
+        package = pkgs.adwaita-icon-theme;
         name = "Adwaita";
         size = 24;
       };
+
       iconTheme = {
         package = pkgs.papirus-icon-theme;
         name = "Papirus-Dark";
