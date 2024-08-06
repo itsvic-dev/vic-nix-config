@@ -1,10 +1,8 @@
 inputs@{
   nixpkgs,
-  kmonad,
   home-manager,
   stylix,
   sops-nix,
-  impermanence,
   disko,
   ...
 }:
@@ -23,7 +21,6 @@ let
     ./options.nix
     ../cachix.nix
     ../home
-    kmonad.nixosModules.default
     home-manager.nixosModules.default
     stylix.nixosModules.stylix
     sops-nix.nixosModules.sops

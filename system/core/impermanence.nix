@@ -8,17 +8,6 @@
   imports = [ inputs.impermanence.nixosModules.impermanence ];
 
   config = lib.mkIf config.vic-nix.tmpfsAsRoot {
-    # automatically set up tmpfs on root
-    fileSystems."/" = {
-      device = "none";
-      fsType = "tmpfs";
-      options = [
-        "defaults"
-        "size=25%"
-        "mode=755"
-      ];
-    };
-
     environment.persistence."/persist" = {
       hideMounts = true;
       directories = [

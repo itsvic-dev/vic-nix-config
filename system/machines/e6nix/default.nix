@@ -6,15 +6,16 @@
 }:
 {
   imports = [
-    ./ptero.nix
-    ./remote-builders.nix
+    #./ptero.nix
+    #./remote-builders.nix
     ./hardware.nix
     ./disks.nix
   ];
 
   vic-nix = {
+    tmpfsAsRoot = true;
     desktop = {
-      enable = true;
+      enable = true; 
       forGaming = true;
       forDev = true;
     };
@@ -24,13 +25,13 @@
       bluetooth = true;
     };
     software = {
-      libvirt = true;
-      timidity = true;
+      libvirt = false;
+      timidity = false;
     };
   };
 
   services.wings = {
-    enable = true;
+    enable = false;
     openFirewall = false;
   };
 

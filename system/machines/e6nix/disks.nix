@@ -49,7 +49,7 @@
           };
 
           data = {
-            size = "100%";
+            size = "100%FREE";
             content = {
               type = "btrfs";
               extraArgs = [ "-f" ];
@@ -75,7 +75,6 @@
                   mountpoint = "/nix";
                 };
               };
-              mountpoint = "/partition-data";
             };
           };
         };
@@ -91,4 +90,6 @@
       ];
     };
   };
+
+  fileSystems."/persist".neededForBoot = true;
 }
