@@ -7,6 +7,7 @@
     ./nix.nix
     ./bootloader.nix
     ./impermanence.nix
+    ./plymouth.nix
   ];
 
   boot.tmp.useTmpfs = true;
