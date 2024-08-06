@@ -18,6 +18,11 @@
       url = "github:nix-community/impermanence";
     };
 
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     stylix = {
       url = "github:danth/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -41,7 +46,7 @@
   };
 
   outputs =
-    inputs@{ nixpkgs, ... }:
+    inputs@{ nixpkgs, disko, ... }:
     let
       defineShell =
         system:
@@ -55,6 +60,7 @@
             sops
             age
             deployOn
+            disko.packages.${system}.disko
           ];
         };
     in

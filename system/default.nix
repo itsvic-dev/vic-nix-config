@@ -5,6 +5,7 @@ inputs@{
   stylix,
   sops-nix,
   impermanence,
+  disko,
   ...
 }:
 let
@@ -26,6 +27,7 @@ let
     home-manager.nixosModules.default
     stylix.nixosModules.stylix
     sops-nix.nixosModules.sops
+    disko.nixosModules.disko
     (importAllFromFolder ./misc)
     (importAllFromFolder ./programs)
     (importAllFromFolder ./services)

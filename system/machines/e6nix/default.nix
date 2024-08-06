@@ -9,6 +9,7 @@
     ./ptero.nix
     ./remote-builders.nix
     ./hardware.nix
+    ./disks.nix
   ];
 
   vic-nix = {
