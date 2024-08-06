@@ -6,6 +6,7 @@
     ./users.nix
     ./nix.nix
     ./bootloader.nix
+    ./impermanence.nix
   ];
 
   boot.tmp.useTmpfs = true;
@@ -29,7 +30,14 @@
 
   sops = {
     defaultSopsFile = ../../secrets/global.yaml;
-    age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+    age.sshKeyPaths = [
+      (
+        if config.vic-nix.tmpfsAsRoot then
+          "/persist/etc/ssh/ssh_host_ed25519_key"
+        else
+          "/etc/ssh/ssh_host_ed25519_key"
+      )
+    ];
   };
 
   # don't change this

@@ -5,9 +5,9 @@
   ...
 }:
 {
-  config = lib.mkIf config.vic-nix.tmpfsAsRoot {
-    imports = [ inputs.impermanence.nixosModules.impermanence ];
+  imports = [ inputs.impermanence.nixosModules.impermanence ];
 
+  config = lib.mkIf config.vic-nix.tmpfsAsRoot {
     # automatically set up tmpfs on root
     fileSystems."/" = {
       device = "none";
@@ -27,7 +27,7 @@
         "/var/lib/systemd/coredump"
         "/etc/NetworkManager/system-connections"
         "/etc/ssh"
-      ] ++ lib.mkIf config.vic-nix.hardware.bluetooth [ "/var/lib/bluetooth" ];
+      ] ++ lib.optionals config.vic-nix.hardware.bluetooth [ "/var/lib/bluetooth" ];
 
       files = [ "/etc/machine-id" ];
     };
