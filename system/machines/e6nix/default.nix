@@ -14,16 +14,20 @@
 
   vic-nix = {
     tmpfsAsRoot = true;
+    secureBoot = true;
+
     desktop = {
-      enable = true; 
+      enable = true;
       forGaming = true;
       forDev = true;
     };
+
     hardware = {
       intel = true;
       nvidia = true;
       bluetooth = true;
     };
+
     software = {
       libvirt = false;
       timidity = false;

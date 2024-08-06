@@ -10,6 +10,8 @@ with lib;
         description = "Whether the machine uses a tmpfs-as-root partition style.";
       };
 
+      secureBoot = mkEnableOption "UEFI Secure Boot";
+
       hardware = {
         intel = mkEnableOption "Intel hardware support";
         nvidia = mkEnableOption "Nvidia hardware support";
