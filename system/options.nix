@@ -4,10 +4,22 @@ with lib;
   # Configuation schema
   options = {
     vic-nix = {
+      tmpfsAsRoot = mkOption {
+        type = types.bool;
+        default = false;
+        description = "Whether the machine uses a tmpfs-as-root partition style.";
+      };
+
       hardware = {
         intel = mkEnableOption "Intel hardware support";
         nvidia = mkEnableOption "Nvidia hardware support";
         bluetooth = mkEnableOption "Bluetooth";
+
+        hasEFI = mkOption {
+          type = types.bool;
+          default = true;
+          description = "Whether the machine has UEFI firmware. This is usually true.";
+        };
       };
 
       software = {

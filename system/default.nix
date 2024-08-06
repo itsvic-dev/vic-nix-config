@@ -4,6 +4,7 @@ inputs@{
   home-manager,
   stylix,
   sops-nix,
+  impermanence,
   ...
 }:
 let
@@ -53,4 +54,5 @@ in
 {
   "e6nix" = defineSystem "x86_64-linux" "e6nix";
   "tastypi" = defineSystem "aarch64-linux" "tastypi";
+  "aio-testing" = defineSystem "x86_64-linux" "aio-testing";
 }
