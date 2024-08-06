@@ -20,6 +20,7 @@
         ]
         ++ lib.optionals config.vic-nix.hardware.bluetooth [ "/var/lib/bluetooth" ]
         ++ lib.optionals config.vic-nix.secureBoot [ "/etc/secureboot" ] # sbctl keys
+        ++ lib.optionals config.services.accounts-daemon.enable [ "/var/lib/AccountsService" ] # pfp and last session data
       ;
 
       files = [ "/etc/machine-id" ];
