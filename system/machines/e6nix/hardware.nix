@@ -8,6 +8,7 @@
     "usbhid"
     "usb_storage"
     "sd_mod"
+    "i915"
   ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
