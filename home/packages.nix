@@ -13,11 +13,8 @@ in
     [
       git
       p7zip
-
       nix-output-monitor
       fastfetch
-
-      httpie
       wget
     ]
     ++ lib.optionals cfg.desktop.enable (
@@ -26,9 +23,7 @@ in
         telegram-desktop
         (vesktop.override { withSystemVencord = false; })
         thunderbird
-        blender
         gimp
-        foliate
         qbittorrent
         obs-studio
       ]
@@ -39,6 +34,7 @@ in
         gcc
         clang-tools
         python3
+        httpie
       ]
     );
 
