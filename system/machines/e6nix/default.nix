@@ -35,6 +35,7 @@
   };
 
   programs.kdeconnect.enable = true;
+  virtualisation.docker.enable = true;
 
   services.wings = {
     enable = false;
