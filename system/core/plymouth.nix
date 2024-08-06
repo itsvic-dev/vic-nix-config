@@ -1,6 +1,6 @@
 { config, lib, ... }:
 {
-  config = lib.mnIf config.vic-nix.desktop.enable {
+  config = lib.mkIf config.vic-nix.desktop.enable {
     boot = {
       plymouth.enable = true;
 
