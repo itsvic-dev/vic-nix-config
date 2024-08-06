@@ -34,6 +34,8 @@
     };
   };
 
+  programs.kdeconnect.enable = true;
+
   services.wings = {
     enable = false;
     openFirewall = false;
