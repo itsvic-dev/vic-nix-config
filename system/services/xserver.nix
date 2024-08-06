@@ -9,17 +9,21 @@ let
 in
 {
   config = lib.mkIf cfg.enable {
-    services.xserver = {
-      enable = true;
-      displayManager.gdm.enable = true;
-      desktopManager.gnome.enable = true;
+    services = {
+      xserver.enable = true;
+      displayManager.sddm = {
+        enable = true;
+        wayland.enable = true;
+        theme = "breeze";
+      };
+      desktopManager.plasma6.enable = true;
+      libinput.enable = true;
+
+      # needed for some file management stuff
+      gvfs.enable = true;
     };
-    services.libinput.enable = true;
 
-    # needed for some file management stuff, gnome prob enables it already but still
-    services.gvfs.enable = true;
-
-    # for some reason, there is no default for this on NixOS.
+    # makes gstreamer work properly
     environment.sessionVariables.GST_PLUGIN_SYSTEM_PATH_1_0 =
       lib.makeSearchPathOutput "lib" "lib/gstreamer-1.0"
         [

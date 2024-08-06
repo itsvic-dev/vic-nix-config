@@ -28,7 +28,7 @@ in
         };
       };
 
-      virtualisation.docker.enableNvidia = true;
+      hardware.nvidia-container-toolkit.enable = config.virtualisation.docker.enable;
       nixpkgs.config.cudaSupport = true;
     };
   };
