@@ -37,6 +37,8 @@
   programs.kdeconnect.enable = true;
   virtualisation.docker.enable = true;
 
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+
   services.wings = {
     enable = false;
     openFirewall = false;
