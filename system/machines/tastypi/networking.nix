@@ -25,6 +25,16 @@
       listenPort = 51821;
       privateKeyFile = config.sops.secrets.testlab-pk.path;
 
+      postSetup = ''
+        ${pkgs.iptables}/bin/ip6tables -A FORWARD -i testlab -o akos-ipv6 -j ACCEPT
+        ${pkgs.iptables}/bin/ip6tables -A FORWARD -i akos-ipv6 -o testlab -j ACCEPT
+      '';
+
+      postShutdown = ''
+        ${pkgs.iptables}/bin/ip6tables -D FORWARD -i testlab -o akos-ipv6 -j ACCEPT
+        ${pkgs.iptables}/bin/ip6tables -D FORWARD -i akos-ipv6 -o testlab -j ACCEPT
+      '';
+
       peers = [
         {
           publicKey = "s+g8KhlC/hL/E51v1Sn++Ggm0qiHuQ/NIRZb3s2ZnBo=";
@@ -37,6 +47,7 @@
   boot.kernel.sysctl = {
     # If you want to use it for ipv6
     "net.ipv6.conf.all.forwarding" = true;
+    "net.ipv6.conf.default.forwarding" = true;
   };
 
   networking.firewall.allowedUDPPorts = [ 51821 ];
