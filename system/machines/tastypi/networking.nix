@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 {
   sops.secrets = {
     akos-ipv6-pk.sopsFile = ../../../secrets/tastypi.yaml;
