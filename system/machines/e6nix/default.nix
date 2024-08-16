@@ -29,7 +29,7 @@
     };
 
     software = {
-      libvirt = false;
+      libvirt = true;
       timidity = false;
     };
   };
