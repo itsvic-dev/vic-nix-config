@@ -1,6 +1,9 @@
 { config, ... }:
 {
-  sops.secrets.akos-ipv6-pk.sopsFile = ../../../secrets/tastypi.yaml;
+  sops.secrets = {
+    akos-ipv6-pk.sopsFile = ../../../secrets/tastypi.yaml;
+    testlab-pk.sopsFile = ../../../secrets/tastypi.yaml;
+  };
 
   networking.wireguard.interfaces = {
     akos-ipv6 = {
@@ -16,7 +19,27 @@
         }
       ];
     };
+
+    testlab = {
+      ips = [ "2a0e:97c0:7c5:e621::1/64" ];
+      listenPort = 51821;
+      privateKeyFile = config.sops.secrets.testlab-pk.path;
+
+      peers = [
+        {
+          publicKey = "s+g8KhlC/hL/E51v1Sn++Ggm0qiHuQ/NIRZb3s2ZnBo=";
+          allowedIPs = [ "2a0e:97c0:7c5:e621::/64" ];
+        }
+      ];
+    };
   };
+
+  boot.kernel.sysctl = {
+    # If you want to use it for ipv6
+    "net.ipv6.conf.all.forwarding" = true;
+  };
+
+  networking.firewall.allowedUDPPorts = [ 51821 ];
 
   environment.etc."gai.conf".text = ''
     label  ::1/128       0
