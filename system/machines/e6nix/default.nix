@@ -7,7 +7,7 @@
 {
   imports = [
     #./ptero.nix
-    #./remote-builders.nix
+    ./remote-builders.nix
     ./hardware.nix
     ./disks.nix
   ];
