@@ -32,6 +32,10 @@ with lib;
       desktop = {
         enable = mkEnableOption "the desktop role";
 
+        plymouth = (mkEnableOption "Plymouth") // {
+          default = true;
+        };
+
         forGaming = mkOption {
           type = types.bool;
           default = false;

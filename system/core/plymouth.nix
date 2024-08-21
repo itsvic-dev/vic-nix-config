@@ -1,6 +1,9 @@
 { config, lib, ... }:
+let
+  cfg = config.vic-nix.desktop;
+in
 {
-  config = lib.mkIf config.vic-nix.desktop.enable {
+  config = lib.mkIf (cfg.enable && cfg.plymouth) {
     boot = {
       plymouth.enable = true;
       initrd.systemd.enable = true;

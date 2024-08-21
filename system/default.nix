@@ -53,4 +53,6 @@ in
 {
   "e6nix" = defineSystem "x86_64-linux" "e6nix";
   "tastypi" = defineSystem "aarch64-linux" "tastypi";
+
+  "x64iso" = defineSystem "x86_64-linux" "vic-nix-iso";
 }
