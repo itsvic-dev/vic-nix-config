@@ -18,11 +18,10 @@
     };
     software = {
       libvirt = true;
+      docker = true;
     };
     hardware.bluetooth = true;
   };
-
-  virtualisation.docker.enable = true;
 
   services.nginx = {
     enable = true;

@@ -27,6 +27,7 @@ with lib;
       software = {
         timidity = mkEnableOption "timidity";
         libvirt = mkEnableOption "the libvirt module";
+        docker = mkEnableOption "Docker";
       };
 
       desktop = {

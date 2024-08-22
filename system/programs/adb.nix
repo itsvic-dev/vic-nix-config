@@ -1,4 +1,7 @@
-{ config, ... }:
+{ config, lib, ... }:
 {
-  programs.adb.enable = config.vic-nix.desktop.enable;
+  config = lib.mkIf config.vic-nix.desktop.enable {
+    programs.adb.enable = true;
+    users.users.vic.extraGroups = [ "adbusers" ];
+  };
 }
