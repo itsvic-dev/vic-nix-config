@@ -6,5 +6,6 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+    jack.enable = true; # needed by some audio workstation apps
   };
 }
