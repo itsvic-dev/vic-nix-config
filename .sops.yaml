@@ -2,6 +2,7 @@ keys:
   - &admin_vic age1fyvl0aynevv74jvtdxklhzyx3yqj54h5kr93sqlsxc4yqp2gzd6qlqwwu5
   - &machine_e6nix age1sv5tdk96v826vx5gnkrx3m7rzypw4hjf6vtrhxy62l6kprs8zd9qyvdrvd
   - &machine_tastypi age10xf6lqcxjr0xmepfsymvyeppu3m922zrtf2x63aqkwgvqwjj7ymqs404cm
+  - &machine_it_vps age108c25algyks6pa5z9asa7dzxfs4j23qwwhzfygvlty9lkverecyqpmj27g
 
 creation_rules:
   - path_regex: secrets/global.yaml
@@ -22,3 +23,9 @@ creation_rules:
       - age:
           - *admin_vic
           - *machine_tastypi
+
+  - path_regex: secrets/it-vps.yaml
+    key_groups:
+      - age:
+          - *admin_vic
+          - *machine_it_vps

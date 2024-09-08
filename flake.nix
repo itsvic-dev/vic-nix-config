@@ -39,6 +39,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    bob = {
+      url = "github:bob-discord-bot/bob/3.0.1";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     bob-website = {
       url = "github:bob-discord-bot/website";
       inputs.nixpkgs.follows = "nixpkgs";
