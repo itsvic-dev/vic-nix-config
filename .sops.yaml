@@ -11,6 +11,7 @@ creation_rules:
           - *admin_vic
           - *machine_e6nix
           - *machine_tastypi
+          - *machine_it_vps
 
   - path_regex: secrets/e6nix.yaml
     key_groups:

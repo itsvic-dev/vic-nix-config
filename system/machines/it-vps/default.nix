@@ -61,4 +61,18 @@ in
       WorkingDirectory = "/home/vic/vyltrix/bot";
     };
   };
+
+  services.nginx = {
+    enable = true;
+    recommendedGzipSettings = true;
+    recommendedOptimisation = true;
+    recommendedProxySettings = true;
+    recommendedTlsSettings = true;
+    additionalModules = with pkgs.nginxModules; [ fancyindex ];
+    commonHttpConfig = ''
+      log_format realip_cf '$http_cf_connecting_ip $http_x_forwarded_for - $remote_user [$time_local] '
+                    '"$request" $status $body_bytes_sent '
+                    '"$http_referer" "$http_user_agent"';
+    '';
+  };
 }
