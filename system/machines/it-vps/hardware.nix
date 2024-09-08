@@ -33,5 +33,5 @@
 
   fileSystems."/mnt/hdd".device = "/dev/disk/by-uuid/c62aa149-e7f2-4186-8b06-476eef523124";
 
-  swapDevices = [ { device = "/dev/disk/by-uuid/c0de789d-a3de-42da-a389-a3e9bdec61e9"; } ];
+  # swapDevices = [ { device = "/dev/disk/by-uuid/c0de789d-a3de-42da-a389-a3e9bdec61e9"; } ];
 }

@@ -10,6 +10,7 @@ let
 in
 {
   imports = [
+    ./hardware.nix
     ./ptero.nix
     ./transmission.nix
     ./staticnetwork.nix
