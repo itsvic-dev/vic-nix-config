@@ -74,5 +74,12 @@ in
                     '"$request" $status $body_bytes_sent '
                     '"$http_referer" "$http_user_agent"';
     '';
+
+    virtualHosts."birdie.itsvic.dev" = {
+      enableACME = true;
+      forceSSL = true;
+      proxyPass = "http://127.0.0.1:4000";
+      proxyWebsockets = true;
+    };
   };
 }
