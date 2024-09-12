@@ -47,6 +47,7 @@ in
           "editor.formatOnSave" = true;
 
           "[vue]" = prettier;
+          "[javascript]" = prettier;
           "[typescript]" = prettier;
           "[typescriptreact]" = prettier;
 
