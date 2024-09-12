@@ -78,8 +78,10 @@ in
     virtualHosts."birdie.itsvic.dev" = {
       enableACME = true;
       forceSSL = true;
-      proxyPass = "http://127.0.0.1:4000";
-      proxyWebsockets = true;
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:4000";
+        proxyWebsockets = true;
+      };
     };
   };
 }
