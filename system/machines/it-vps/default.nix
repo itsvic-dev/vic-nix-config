@@ -29,6 +29,11 @@ in
   services.qemuGuest.enable = true;
   services.netdata.enable = true;
 
+  security.acme = {
+    acceptTerms = true;
+    defaults.email = "contact@itsvic.dev";
+  };
+
   systemd.services."comms-tickets" = {
     wants = [ "network-online.target" ];
     wantedBy = [ "multi-user.target" ];
