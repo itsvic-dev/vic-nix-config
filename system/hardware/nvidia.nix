@@ -20,6 +20,7 @@ in
 
       hardware.nvidia = {
         package = config.boot.kernelPackages.nvidiaPackages.stable;
+        open = true; # might cause issues idk, haven't used open drivers in a while
         modesetting.enable = true;
         prime = {
           sync.enable = true;
