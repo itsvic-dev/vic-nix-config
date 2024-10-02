@@ -21,19 +21,35 @@
     };
 
     vic-wg = {
-      ips = [ "10.200.200.1/32" ];
+      ips = [ "10.200.200.1/24" ];
       listenPort = 51820;
       privateKeyFile = config.sops.secrets.vic-wg-pk.path;
+
+      postSetup = ''
+        ${pkgs.iptables}/bin/iptables -t nat -A POSTROUTING -s 10.200.200.0/24 -o end0 -j MASQUERADE
+      '';
+
+      postShutdown = ''
+        ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -s 10.200.200.0/24 -o end0 -j MASQUERADE
+      '';
+
       peers = [
         {
           publicKey = "Z2M4NeR3ulHlsSOOyubhKui2qsWd14wgWR9lTTWVg2E=";
-          allowedIPs = [ "10.200.200.2/32" ];
+          allowedIPs = [ "10.200.200.2/24" ];
         }
       ];
     };
   };
 
-  networking.firewall.allowedUDPPorts = [ config.networking.wireguard.interfaces.vic-wg.listenPort ];
+  networking = {
+    firewall.allowedUDPPorts = [ config.networking.wireguard.interfaces.vic-wg.listenPort ];
+    nat = {
+      enable = true;
+      externalInterface = "end0";
+      internalInterfaces = [ "vic-wg" ];
+    };
+  };
 
   environment.etc."gai.conf".text = ''
     label  ::1/128       0
