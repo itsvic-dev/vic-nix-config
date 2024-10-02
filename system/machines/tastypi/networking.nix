@@ -2,12 +2,13 @@
 {
   sops.secrets = {
     akos-ipv6-pk.sopsFile = ../../../secrets/tastypi.yaml;
+    vic-wg-pk.sopsFile = ../../../secrets/tastypi.yaml;
   };
 
   networking.wireguard.interfaces = {
     akos-ipv6 = {
       ips = [ "2a0e:97c0:7c5::2/48" ];
-      listenPort = 51820;
+      listenPort = 51821;
       privateKeyFile = config.sops.secrets.akos-ipv6-pk.path;
       peers = [
         {
@@ -18,7 +19,21 @@
         }
       ];
     };
+
+    vic-wg = {
+      ips = [ "10.200.200.1/32" ];
+      listenPort = 51820;
+      privateKeyFile = config.sops.secrets.vic-wg-pk.path;
+      peers = [
+        {
+          publicKey = "Z2M4NeR3ulHlsSOOyubhKui2qsWd14wgWR9lTTWVg2E=";
+          allowedIPs = [ "10.200.200.2/32" ];
+        }
+      ];
+    };
   };
+
+  networking.firewall.allowedUDPPorts = [ config.networking.wireguard.interfaces.vic-wg.listenPort ];
 
   environment.etc."gai.conf".text = ''
     label  ::1/128       0
