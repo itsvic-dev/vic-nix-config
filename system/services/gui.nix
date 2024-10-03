@@ -28,12 +28,10 @@ in
               pkgs.gst_all_1.gst-plugins-ugly
             ];
       }
-      (
-        lib.mkIf cfg.environment == "gnome" {
-          services.displayManager.gdm.enable = true;
-          services.desktopManager.gnome.enable = true;
-        }
-      )
+      (lib.mkIf (cfg.environment == "gnome") {
+        services.displayManager.gdm.enable = true;
+        services.desktopManager.gnome.enable = true;
+      })
     ]
   );
 }
