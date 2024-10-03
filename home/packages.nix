@@ -26,6 +26,7 @@ in
         gimp
         qbittorrent
         obs-studio
+        mission-center
       ]
       ++ lib.optionals cfg.desktop.forGaming [ wineWowPackages.stable ]
       ++ lib.optionals cfg.desktop.forDev [
