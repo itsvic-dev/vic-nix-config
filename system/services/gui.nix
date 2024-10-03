@@ -33,6 +33,13 @@ in
           displayManager.gdm.enable = true;
           desktopManager.gnome.enable = true;
         };
+
+        environment.gnome.excludePackages = with pkgs; [
+          epiphany
+          geary
+          totem # Videos
+          gnome-music
+        ];
       })
     ]
   );
