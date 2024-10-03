@@ -11,7 +11,6 @@ in
   config = lib.mkIf cfg.enable {
     programs.gnupg.agent = {
       enable = true;
-      pinentryPackage = pkgs.pinentry-qt;
     };
   };
 }
