@@ -8,13 +8,10 @@ let
   cfg = nixosConfig.vic-nix.desktop;
 in
 {
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf (cfg.enable && cfg.environment == "gnome") {
     programs.gnome-shell = {
-      enable = false;
-      extensions = with pkgs.gnomeExtensions; [
-        { package = pop-shell; }
-        { package = appindicator; }
-      ];
+      enable = true;
+      extensions = with pkgs.gnomeExtensions; [ { package = appindicator; } ];
     };
   };
 }

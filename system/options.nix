@@ -33,6 +33,12 @@ with lib;
       desktop = {
         enable = mkEnableOption "the desktop role";
 
+        environment = mkOption {
+          type = types.enum [ "gnome" ];
+          default = "gnome";
+          description = "The desktop environment to use.";
+        };
+
         forGaming = mkOption {
           type = types.bool;
           default = false;
