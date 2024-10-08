@@ -2,6 +2,7 @@
   description = "vic's NixOS flake";
 
   inputs = {
+    # --- CORE STUFF ---
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     home-manager = {
@@ -34,16 +35,26 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    kmonad = {
+      url = "github:kmonad/kmonad?dir=nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # --- MACHINE-SPECIFIC SOFTWARE ---
+
+    # tastypi
     vncpy = {
       url = "github:itsvic-dev/vncpy";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # it-vps
     bob = {
       url = "github:bob-discord-bot/bob/3.0.1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # tastypi
     bob-website = {
       url = "github:bob-discord-bot/website";
       inputs.nixpkgs.follows = "nixpkgs";

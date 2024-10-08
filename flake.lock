@@ -416,6 +416,28 @@
         "type": "github"
       }
     },
+    "kmonad": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "dir": "nix",
+        "lastModified": 1727508868,
+        "narHash": "sha256-xDusTr1VDucbL1tW04dqGM7pFmf69GxE0QrxQMlnVYM=",
+        "owner": "kmonad",
+        "repo": "kmonad",
+        "rev": "b3eb93c86abc66c7e7420585c3fe7e410208b2e8",
+        "type": "github"
+      },
+      "original": {
+        "dir": "nix",
+        "owner": "kmonad",
+        "repo": "kmonad",
+        "type": "github"
+      }
+    },
     "lanzaboote": {
       "inputs": {
         "crane": "crane",
@@ -525,6 +547,7 @@
         "disko": "disko",
         "home-manager": "home-manager",
         "impermanence": "impermanence",
+        "kmonad": "kmonad",
         "lanzaboote": "lanzaboote",
         "nixpkgs": "nixpkgs",
         "sops-nix": "sops-nix",
