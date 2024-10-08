@@ -4,6 +4,8 @@ let
 in
 {
   config = lib.mkIf cfg.enable {
+    users.groups.uinput = { };
+
     services.kmonad = {
       enable = true;
       keyboards = {
