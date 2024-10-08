@@ -4,8 +4,6 @@ let
 in
 {
   config = lib.mkIf cfg.enable {
-    users.groups.uinput = { };
-
     services.kmonad = {
       enable = true;
       keyboards = {
@@ -28,10 +26,5 @@ in
         };
       };
     };
-
-    services.udev.extraRules = ''
-      # KMonad user access to /dev/uinput
-      KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"
-    '';
   };
 }
