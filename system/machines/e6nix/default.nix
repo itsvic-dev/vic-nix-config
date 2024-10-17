@@ -1,7 +1,7 @@
 {
   config,
-  modulesPath,
   lib,
+  pkgs,
   ...
 }:
 {
@@ -35,16 +35,5 @@
     };
   };
 
-  programs.kdeconnect.enable = true;
-
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
-
-  services.wings = {
-    enable = false;
-    openFirewall = false;
-  };
-
-  networking.firewall.allowedTCPPorts = [
-    3000 # nuxt dev projects
-  ];
 }

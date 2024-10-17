@@ -11,7 +11,10 @@ in
   config = lib.mkIf (cfg.enable && cfg.environment == "gnome") {
     programs.gnome-shell = {
       enable = true;
-      extensions = with pkgs.gnomeExtensions; [ { package = appindicator; } ];
+      extensions = with pkgs.gnomeExtensions; [
+        { package = appindicator; }
+        { package = gsconnect; }
+      ];
     };
   };
 }
