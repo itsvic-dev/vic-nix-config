@@ -481,6 +481,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-gimp-master": {
+      "locked": {
+        "lastModified": 1724401159,
+        "narHash": "sha256-OrkqfogOexg7Fqk340oOr4P6mixVj1ILnuAI/AhHvTs=",
+        "owner": "jtojnar",
+        "repo": "nixpkgs",
+        "rev": "1e5a160acf3990c33347a0517f12ad8596bd7cfe",
+        "type": "github"
+      },
+      "original": {
+        "owner": "jtojnar",
+        "ref": "gimp-meson",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs-stable": {
       "locked": {
         "lastModified": 1710695816,
@@ -550,6 +566,7 @@
         "kmonad": "kmonad",
         "lanzaboote": "lanzaboote",
         "nixpkgs": "nixpkgs",
+        "nixpkgs-gimp-master": "nixpkgs-gimp-master",
         "sops-nix": "sops-nix",
         "stylix": "stylix",
         "vncpy": "vncpy"

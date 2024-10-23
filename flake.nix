@@ -40,6 +40,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # --- EXTRA SOFTWARE ---
+    nixpkgs-gimp-master.url = "github:jtojnar/nixpkgs/gimp-meson";
+
     # --- MACHINE-SPECIFIC SOFTWARE ---
 
     # tastypi

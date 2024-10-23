@@ -2,6 +2,7 @@
   lib,
   nixosConfig,
   pkgs,
+  inputs,
   ...
 }:
 let
@@ -23,7 +24,7 @@ in
         telegram-desktop
         (vesktop.override { withSystemVencord = false; })
         thunderbird
-        gimp
+        (inputs.nixpkgs-gimp-master.legacyPackages.${pkgs.system}.gimp)
         qbittorrent
         obs-studio
         mission-center
