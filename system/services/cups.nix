@@ -1,7 +1,7 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 {
   services.printing = {
-    enable = true;
+    enable = config.vic-nix.desktop.enable;
     drivers = [ pkgs.hplip ];
   };
 }

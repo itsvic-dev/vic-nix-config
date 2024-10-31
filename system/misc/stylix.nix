@@ -1,7 +1,7 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 {
   stylix = {
-    enable = true;
+    enable = config.vic-nix.desktop.enable;
     image = ../wallpaper.jpg;
     polarity = "dark";
     cursor = {
