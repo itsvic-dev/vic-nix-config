@@ -23,7 +23,7 @@ writeShellApplication {
 
     # copy it to the target host
     DERIVATION="$(readlink /tmp/vic-nix-rebuild)"
-    nix-copy-closure --to "$HOST" "$DERIVATION"
+    nix-copy-closure -s --to "$HOST" "$DERIVATION"
     rm /tmp/vic-nix-rebuild
 
     # and finally, deploy it on the host
