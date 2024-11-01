@@ -8,12 +8,12 @@
   config = lib.mkIf config.vic-nix.desktop.enable {
     fonts = {
       packages = with pkgs; [
+        cantarell-fonts
         noto-fonts
         noto-fonts-cjk
         noto-fonts-emoji
         inter
         jetbrains-mono
-        (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
       ];
       fontconfig = {
         defaultFonts = {
@@ -23,7 +23,8 @@
             "Noto Color Emoji"
           ];
           sansSerif = [
-            "Inter"
+            "Cantarell"
+            "Inter Variable"
             "Noto Sans"
             "Noto Sans CJK JP"
             "Noto Color Emoji"

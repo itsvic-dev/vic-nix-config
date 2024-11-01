@@ -12,8 +12,8 @@
 
     fonts = {
       sansSerif = {
-        package = pkgs.inter;
-        name = "Inter";
+        package = pkgs.cantarell-fonts;
+        name = "Cantarell";
       };
 
       serif = {
