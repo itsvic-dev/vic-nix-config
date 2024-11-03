@@ -10,7 +10,7 @@
       packages = with pkgs; [
         cantarell-fonts
         noto-fonts
-        noto-fonts-cjk
+        noto-fonts-cjk-sans
         noto-fonts-emoji
         inter
         jetbrains-mono
@@ -19,7 +19,7 @@
         defaultFonts = {
           serif = [
             "Noto Serif"
-            "Noto Serif CJK JP"
+            "Noto Sans CJK JP"
             "Noto Color Emoji"
           ];
           sansSerif = [

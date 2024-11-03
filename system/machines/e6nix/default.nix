@@ -35,6 +35,8 @@
     };
   };
 
+  home-manager.users.vic.home.packages = with pkgs; [ cider-2 ];
+
   programs.kdeconnect = {
     enable = true;
     package = pkgs.gnomeExtensions.gsconnect;
