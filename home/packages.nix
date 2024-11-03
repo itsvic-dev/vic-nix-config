@@ -15,7 +15,6 @@ in
       git
       p7zip
       nix-output-monitor
-      fastfetch
       wget
     ]
     ++ lib.optionals cfg.desktop.enable (
