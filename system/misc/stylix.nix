@@ -31,5 +31,10 @@
         terminal = 10;
       };
     };
+
+    # system-wide target settings
+    targets = {
+      chromium.enable = false;
+    };
   };
 }

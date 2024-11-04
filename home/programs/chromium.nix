@@ -9,8 +9,6 @@ let
 in
 {
   config = lib.mkIf cfg.enable {
-    # stylix theme for chromium is barely a theme and it sucks and clashes with the GTK theme
-    stylix.targets.chromium.enable = false;
     programs.chromium = {
       enable = true;
       package = if pkgs.system == "x86_64-linux" then pkgs.google-chrome else pkgs.chromium;
