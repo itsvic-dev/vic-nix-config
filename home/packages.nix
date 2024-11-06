@@ -13,7 +13,7 @@ in
     with pkgs;
     [
       git
-      p7zip
+      _7zz
       nix-output-monitor
       wget
     ]
