@@ -41,15 +41,20 @@ in
           prettier = {
             "editor.defaultFormatter" = "esbenp.prettier-vscode";
           };
+
+          things = map (n: "[${n}]") [
+            "vue"
+            "javascript"
+            "typescript"
+            "typescriptreact"
+            "css"
+          ];
+
+          fullPrettierSetup = lib.genAttrs things (_: prettier);
         in
         {
           "editor.tabSize" = 2;
           "editor.formatOnSave" = true;
-
-          "[vue]" = prettier;
-          "[javascript]" = prettier;
-          "[typescript]" = prettier;
-          "[typescriptreact]" = prettier;
 
           "git.confirmSync" = false;
           "git.enableSmartCommit" = true;
@@ -58,7 +63,8 @@ in
           "mesonbuild.downloadLanguageServer" = false;
           "mesonbuild.languageServerPath" = "${pkgs.mesonlsp}/bin/mesonlsp";
           "cmake.cmakePath" = "${pkgs.cmake}/bin/cmake";
-        };
+        }
+        // fullPrettierSetup;
     };
   };
 }
