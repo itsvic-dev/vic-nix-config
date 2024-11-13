@@ -31,7 +31,14 @@ in
       (lib.mkIf (cfg.environment == "gnome") {
         services.xserver = {
           displayManager.gdm.enable = true;
-          desktopManager.gnome.enable = true;
+          desktopManager.gnome = {
+            enable = true;
+            extraGSettingsOverridePackages = [ pkgs.mutter ];
+            extraGSettingsOverrides = ''
+              [org.gnome.mutter]
+              experimental-features=['scale-monitor-framebuffer']
+            '';
+          };
         };
 
         environment.gnome.excludePackages = with pkgs; [
