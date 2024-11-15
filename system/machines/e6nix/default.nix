@@ -24,7 +24,7 @@
 
     hardware = {
       intel = true;
-      nvidia = false; # broken, using nouveau instead
+      nvidia = true;
       bluetooth = true;
     };
 

@@ -9,15 +9,6 @@ let
 in
 {
   config = lib.mkIf cfg.nvidia {
-    warnings = [
-      ''
-        You have enabled the Nvidia module specialisation.
-        The last time I enabled this, opencv failed to build.
-        This may have been fixed in the future, but will require a nixpkgs bump.
-        If you do not need it, please disable this and use nouveau instead.
-      ''
-    ];
-
     specialisation.nvidia.configuration = {
       # tell nh what spec this is
       environment.etc."specialisation".text = "nvidia";
