@@ -30,8 +30,8 @@
 
     software = {
       libvirt = true;
-      timidity = false;
       docker = true;
+      via = true;
     };
   };
 
@@ -43,9 +43,4 @@
   };
 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
-
-  # udev rule to allow read/write access to Keychron HID devices
-  services.udev.extraRules = ''
-    KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="3434", MODE="0660", GROUP="users", TAG+="uaccess", TAG+="udev-acl"
-  '';
 }
