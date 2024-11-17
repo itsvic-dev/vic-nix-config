@@ -32,10 +32,10 @@
       libvirt = true;
       docker = true;
       via = true;
+
+      extraPackages = with pkgs; [ cider-2 ];
     };
   };
-
-  home-manager.users.vic.home.packages = with pkgs; [ cider-2 ];
 
   programs.kdeconnect = {
     enable = true;

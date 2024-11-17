@@ -37,7 +37,8 @@ in
         python3
         httpie
       ]
-    );
+    )
+    ++ cfg.software.extraPackages;
 
   nixpkgs.config.allowUnfree = true;
 }
