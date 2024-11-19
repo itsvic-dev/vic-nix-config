@@ -10,6 +10,7 @@
     ./remote-builders.nix
     ./hardware.nix
     ./disks.nix
+    ./jellyfin.nix
   ];
 
   vic-nix = {
@@ -40,13 +41,6 @@
   programs.kdeconnect = {
     enable = true;
     package = pkgs.gnomeExtensions.gsconnect;
-  };
-
-  services = {
-    jellyfin.enable = true;
-    sonarr.enable = true;
-    radarr.enable = true;
-    bazarr.enable = true;
   };
 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
