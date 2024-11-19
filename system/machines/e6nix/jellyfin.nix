@@ -10,7 +10,7 @@
     jellyfin.enable = true;
     sonarr.enable = true;
     radarr.enable = true;
-    bazarr.enable = true;
+    bazarr.enable = false; # not needed for now tbh
     prowlarr.enable = true;
     aria2 = {
       enable = true;
