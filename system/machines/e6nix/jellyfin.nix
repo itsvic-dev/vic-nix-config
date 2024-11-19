@@ -1,9 +1,15 @@
 { config, ... }:
 {
-  sops.secrets.aria2-rpc-secret = {
-    owner = "aria2";
-    restartUnits = [ "aria2.service" ];
-    sopsFile = ../../../secrets/e6nix.yaml;
+  sops.secrets = {
+    jellyfin-tunnel = {
+      sopsFile = ../../../secrets/e6nix.yaml;
+    };
+
+    aria2-rpc-secret = {
+      owner = "aria2";
+      restartUnits = [ "aria2.service" ];
+      sopsFile = ../../../secrets/e6nix.yaml;
+    };
   };
 
   services = {
@@ -19,31 +25,16 @@
       rpcSecretFile = config.sops.secrets.aria2-rpc-secret.path;
     };
 
-    nginx = {
+    cloudflared = {
       enable = true;
-      recommendedProxySettings = true;
-      recommendedTlsSettings = true;
+      tunnels."579c94c1-7a72-4da1-a29c-1a3ae14bf555" = {
+        credentialsFile = config.sops.secrets.jellyfin-tunnel.path;
+        default = "http_status:404";
 
-      virtualHosts."jellyfin.itsvic.dev" = {
-        enableACME = true;
-        forceSSL = true;
-        locations."/" = {
-          proxyPass = "http://127.0.0.1:8096";
-          proxyWebsockets = true;
+        ingress = {
+          "jellyfin.itsvic.dev" = "http://localhost:8096";
         };
       };
-    };
-  };
-
-  networking.firewall.allowedTCPPorts = [
-    80
-    443
-  ];
-
-  security.acme = {
-    acceptTerms = true;
-    defaults = {
-      email = "contact@itsvic.dev";
     };
   };
 
