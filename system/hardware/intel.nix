@@ -12,8 +12,12 @@ in
     hardware = {
       cpu.intel.updateMicrocode = true;
       graphics.extraPackages = with pkgs; [
-        intel-compute-runtime
         intel-media-driver
+        intel-vaapi-driver
+        vaapiVdpau
+        intel-compute-runtime
+        vpl-gpu-rt
+        intel-media-sdk
       ];
     };
     environment.sessionVariables.LIBVA_DRIVER_NAME = "iHD";
