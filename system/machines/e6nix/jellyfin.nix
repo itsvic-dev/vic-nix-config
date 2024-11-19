@@ -2,6 +2,8 @@
 {
   sops.secrets = {
     jellyfin-tunnel = {
+      owner = config.services.cloudflared.user;
+      restartUnits = [ "cloudflared-tunnel-579c94c1-7a72-4da1-a29c-1a3ae14bf555.service" ];
       sopsFile = ../../../secrets/e6nix.yaml;
     };
 
