@@ -11,6 +11,7 @@
     sonarr.enable = true;
     radarr.enable = true;
     bazarr.enable = true;
+    prowlarr.enable = true;
     aria2 = {
       enable = true;
       rpcSecretFile = config.sops.secrets.aria2-rpc-secret.path;

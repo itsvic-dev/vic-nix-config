@@ -9,7 +9,7 @@
             directory = "/var/lib/aria2";
             user = "aria2";
             group = "aria2";
-            mode = "0700";
+            mode = "0740";
           }
         ];
       })

@@ -15,6 +15,7 @@
           "/var/log"
           "/var/lib/nixos"
           "/var/lib/systemd/coredump"
+          "/var/lib/private"
           "/etc/NetworkManager/system-connections"
           "/etc/ssh"
         ]
