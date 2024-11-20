@@ -24,6 +24,7 @@
 
     aria2 = {
       enable = true;
+      downloadDir = "/var/jellyfin-media/Downloads";
       rpcSecretFile = config.sops.secrets.aria2-rpc-secret.path;
     };
 
