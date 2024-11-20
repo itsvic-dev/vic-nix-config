@@ -43,6 +43,12 @@
     };
   };
 
+  # give sonarr/radarr access to aria2 group because downloads
+  users.users = {
+    sonarr.extraGroups = [ "aria2" ];
+    radarr.extraGroups = [ "aria2" ];
+  };
+
   environment.persistence."/persist".directories = [
     {
       directory = "/var/jellyfin-media";
