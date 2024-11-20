@@ -35,6 +35,8 @@
 
         ingress = {
           "jellyfin.itsvic.dev" = "http://localhost:8096";
+          "sonarr.itsvic.dev" = "http://localhost:8989";
+          "radarr.itsvic.dev" = "http://localhost:7878";
         };
       };
     };
