@@ -21,7 +21,6 @@
     radarr.enable = true;
     bazarr.enable = false; # not needed for now tbh
     prowlarr.enable = true;
-    flaresolverr.enable = true; # for prowlarr/1337x.to
 
     aria2 = {
       enable = true;
