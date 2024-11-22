@@ -24,6 +24,7 @@
         umask = 0;
         rpc-enabled = true;
       };
+      openPeerPorts = true;
       downloadDirPermissions = "777";
     };
 
