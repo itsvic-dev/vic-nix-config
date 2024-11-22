@@ -1,15 +1,9 @@
-{ config, ... }:
+{ pkgs, config, ... }:
 {
   sops.secrets = {
     jellyfin-tunnel = {
       owner = config.services.cloudflared.user;
       restartUnits = [ "cloudflared-tunnel-579c94c1-7a72-4da1-a29c-1a3ae14bf555.service" ];
-      sopsFile = ../../../secrets/e6nix.yaml;
-    };
-
-    aria2-rpc-secret = {
-      owner = "aria2";
-      restartUnits = [ "aria2.service" ];
       sopsFile = ../../../secrets/e6nix.yaml;
     };
   };
@@ -22,10 +16,15 @@
     bazarr.enable = false; # not needed for now tbh
     prowlarr.enable = true;
 
-    aria2 = {
+    transmission = {
       enable = true;
-      settings.dir = "/var/jellyfin-media/Downloads";
-      rpcSecretFile = config.sops.secrets.aria2-rpc-secret.path;
+      webHome = pkgs.flood-for-transmission;
+      settings = {
+        download-dir = "/var/jellyfin-media/Downloads";
+        umask = 0;
+        rpc-enabled = true;
+      };
+      downloadDirPermissions = "777";
     };
 
     cloudflared = {
@@ -44,10 +43,10 @@
   };
 
   # give sonarr/radarr access to aria2 group because downloads
-  users.users = {
-    sonarr.extraGroups = [ "aria2" ];
-    radarr.extraGroups = [ "aria2" ];
-  };
+  # users.users = {
+  #   sonarr.extraGroups = [ "aria2" ];
+  #   radarr.extraGroups = [ "aria2" ];
+  # };
 
   environment.persistence."/persist".directories = [
     {
