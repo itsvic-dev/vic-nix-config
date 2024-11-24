@@ -3,7 +3,8 @@
 
   inputs = {
     # --- CORE STUFF ---
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    # restore to nixos-unstable later!!
+    nixpkgs.url = "github:NixOS/nixpkgs/dd78a15b79aa3f741d16deadf209f6074938af82";
 
     home-manager = {
       url = "github:nix-community/home-manager";
