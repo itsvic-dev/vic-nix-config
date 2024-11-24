@@ -3,7 +3,9 @@
   stylix = {
     enable = config.vic-nix.desktop.enable;
     image = ../wallpaper.jpg;
+    base16Scheme = ../scheme.yaml;
     polarity = "dark";
+
     cursor = {
       package = pkgs.adwaita-icon-theme;
       name = "Adwaita";
