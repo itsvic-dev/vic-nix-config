@@ -25,7 +25,7 @@
 
     hardware = {
       intel = true;
-      nvidia = true;
+      nvidia = false; # fails AGAIN. fuck you too nvidia
       bluetooth = true;
     };
 
