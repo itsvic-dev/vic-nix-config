@@ -15,6 +15,15 @@ in
       enableUpdateCheck = false;
       mutableExtensionsDir = false; # hehe
 
+      package = pkgs.vscode.fhsWithPackages (
+        ps: with ps; [
+          rustup
+          zlib
+          openssl.dev
+          pkg-config
+        ]
+      );
+
       extensions = with pkgs.vscode-extensions; [
         # Python
         ms-python.python
