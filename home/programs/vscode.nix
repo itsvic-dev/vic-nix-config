@@ -13,6 +13,7 @@ in
     programs.vscode = {
       enable = true;
       enableUpdateCheck = false;
+      mutableExtensionsDir = false; # hehe
 
       extensions = with pkgs.vscode-extensions; [
         # Python
