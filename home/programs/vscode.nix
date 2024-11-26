@@ -34,6 +34,9 @@ in
         esbenp.prettier-vscode
         vue.volar
         bradlc.vscode-tailwindcss
+
+        # Rust
+        rust-lang.rust-analyzer
       ];
 
       userSettings =
@@ -63,6 +66,8 @@ in
           "mesonbuild.downloadLanguageServer" = false;
           "mesonbuild.languageServerPath" = "${pkgs.mesonlsp}/bin/mesonlsp";
           "cmake.cmakePath" = "${pkgs.cmake}/bin/cmake";
+
+          "rust-analyzer.check.command" = "clippy";
         }
         // fullPrettierSetup;
     };
