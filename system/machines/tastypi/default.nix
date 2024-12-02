@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }:
 {
@@ -10,6 +11,8 @@
     ./wings.nix
     ./hardware.nix
     ./plausible.nix
+
+    inputs.oxibridge.nixosModules.${pkgs.system}.default
   ];
 
   vic-nix = {
@@ -78,5 +81,19 @@
       url = "https://static1.e621.net/data/sample/fa/f2/faf2cbcd6aa88473391af7b145a79690.jpg";
       hash = "sha256-80c4ycrJIkdb18BeklOopwunWmFTAGSeEcW6GJegNkU=";
     };
+  };
+
+  sops.secrets.oxibridge-config = {
+    format = "yaml";
+    sopsFile = ../../../secrets/tastypi/oxibridge.yml;
+    key = "";
+
+    restartUnits = [ "oxibridge.service" ];
+    owner = "oxibridge";
+  };
+
+  services.oxibridge = {
+    enable = true;
+    configFile = config.sops.secrets.oxibridge-config.path;
   };
 }

@@ -3,8 +3,7 @@
 
   inputs = {
     # --- CORE STUFF ---
-    # restore to nixos-unstable later!!
-    nixpkgs.url = "github:NixOS/nixpkgs/dd78a15b79aa3f741d16deadf209f6074938af82";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -41,12 +40,6 @@
 
     # --- MACHINE-SPECIFIC SOFTWARE ---
 
-    # tastypi
-    vncpy = {
-      url = "github:itsvic-dev/vncpy";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     # it-vps
     bob = {
       url = "github:bob-discord-bot/bob/3.0.1";
@@ -56,6 +49,16 @@
     # tastypi
     bob-website = {
       url = "github:bob-discord-bot/website";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    vncpy = {
+      url = "github:itsvic-dev/vncpy";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    oxibridge = {
+      url = "github:itsvic-dev/oxibridge";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

@@ -19,7 +19,7 @@ creation_rules:
           - *admin_vic
           - *machine_e6nix
 
-  - path_regex: secrets/tastypi.yaml
+  - path_regex: secrets\/tastypi(\.yaml|\/.*)
     key_groups:
       - age:
           - *admin_vic

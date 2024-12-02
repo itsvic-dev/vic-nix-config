@@ -397,17 +397,17 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1732012989,
-        "narHash": "sha256-ehZvXwABl3rdLspF4onwwsHHvrwDA4GMQSiq9lFWIaU=",
+        "lastModified": 1733015953,
+        "narHash": "sha256-t4BBVpwG9B4hLgc6GUBuj3cjU7lP/PJfpTHuSqE+crk=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "dd78a15b79aa3f741d16deadf209f6074938af82",
+        "rev": "ac35b104800bff9028425fec3b6e8a41de2bbfff",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
+        "ref": "nixos-unstable",
         "repo": "nixpkgs",
-        "rev": "dd78a15b79aa3f741d16deadf209f6074938af82",
         "type": "github"
       }
     },
@@ -440,6 +440,26 @@
         "owner": "NixOS",
         "ref": "nixos-23.11",
         "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "oxibridge": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1733142874,
+        "narHash": "sha256-ozf9O7DN63cNVvTdudZTe76PP9OMhJN/cbi8pQRnb+A=",
+        "owner": "itsvic-dev",
+        "repo": "oxibridge",
+        "rev": "203f13a8bdc0ff4be4c14808980ec9b63344cf60",
+        "type": "github"
+      },
+      "original": {
+        "owner": "itsvic-dev",
+        "repo": "oxibridge",
         "type": "github"
       }
     },
@@ -480,6 +500,7 @@
         "lanzaboote": "lanzaboote",
         "nixpkgs": "nixpkgs",
         "nixpkgs-gimp-master": "nixpkgs-gimp-master",
+        "oxibridge": "oxibridge",
         "sops-nix": "sops-nix",
         "stylix": "stylix",
         "vncpy": "vncpy"
