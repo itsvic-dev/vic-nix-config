@@ -12,7 +12,7 @@
     ./hardware.nix
     ./plausible.nix
 
-    inputs.oxibridge.nixosModules.${pkgs.system}.default
+    inputs.oxibridge.nixosModules.aarch64-linux.default
   ];
 
   vic-nix = {
