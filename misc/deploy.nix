@@ -17,9 +17,10 @@ writeShellApplication {
     set -e
     HOST="$2"
     OPERATION="$1"
+    shift 2
 
     # build the system configuration
-    nom build -o /tmp/vic-nix-rebuild .\#nixosConfigurations."$HOST".config.system.build.toplevel
+    nom build -o /tmp/vic-nix-rebuild .\#nixosConfigurations."$HOST".config.system.build.toplevel "$@"
 
     # copy it to the target host
     DERIVATION="$(readlink /tmp/vic-nix-rebuild)"
