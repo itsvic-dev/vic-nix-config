@@ -9,7 +9,10 @@
   };
 
   services = {
-    jellyfin.enable = true;
+    jellyfin = {
+      enable = true;
+      openFirewall = true;
+    };
 
     sonarr.enable = true;
     radarr.enable = true;
