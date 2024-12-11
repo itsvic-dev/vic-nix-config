@@ -16,6 +16,8 @@ in
       mutableExtensionsDir = false; # hehe
 
       extensions = with pkgs.vscode-extensions; [
+        ms-vscode-remote.remote-ssh
+
         # Python
         ms-python.python
         ms-python.black-formatter
