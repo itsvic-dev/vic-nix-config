@@ -23,10 +23,7 @@
                 type = "luks";
                 name = "os_encrypted";
                 extraOpenArgs = [ ];
-                settings = {
-                  allowDiscards = true;
-                  crypttabExtraOpts = [ "tpm2-device=auto" ];
-                };
+                settings.allowDiscards = true;
                 passwordFile = "/tmp/secret.key";
 
                 content = {
