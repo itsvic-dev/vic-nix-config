@@ -38,11 +38,6 @@
     };
   };
 
-  security.pam.services = {
-    login.u2fAuth = true;
-    sudo.u2fAuth = true;
-  };
-
   programs.kdeconnect = {
     enable = true;
     package = pkgs.gnomeExtensions.gsconnect;
