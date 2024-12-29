@@ -34,7 +34,10 @@
       docker = true;
       via = true;
 
-      extraPackages = with pkgs; [ cider-2 ];
+      extraPackages = with pkgs; [
+        cider-2
+        android-studio
+      ];
     };
   };
 
