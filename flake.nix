@@ -71,6 +71,7 @@
         let
           pkgs = import nixpkgs { inherit system; };
           deployOn = pkgs.callPackage ./misc/deploy.nix { };
+          deployLocal = pkgs.callPackage ./misc/deploy-local.nix { };
         in
         with pkgs;
         mkShell {
@@ -78,6 +79,7 @@
             sops
             age
             deployOn
+            deployLocal
             disko.packages.${system}.disko
           ];
         };
