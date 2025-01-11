@@ -39,6 +39,4 @@ in
       ]
     )
     ++ cfg.software.extraPackages;
-
-  nixpkgs.config.allowUnfree = true;
 }
