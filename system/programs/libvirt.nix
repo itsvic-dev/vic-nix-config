@@ -13,8 +13,11 @@ in
       {
         virtualisation.libvirtd = {
           enable = true;
-          qemu.swtpm.enable = true;
-          qemu.ovmf.packages = [ pkgs.OVMFFull.fd ];
+          qemu = {
+            swtpm.enable = true;
+            ovmf.packages = [ pkgs.OVMFFull.fd ];
+            autostartDefaultNetworks = true;
+          };
         };
 
         virtualisation.spiceUSBRedirection.enable = true;
