@@ -41,6 +41,8 @@
     };
   };
 
+  boot.kernelParams = [ "nouveau.config=NvGspRm=1" ];
+
   programs.kdeconnect = {
     enable = true;
     package = pkgs.gnomeExtensions.gsconnect;
