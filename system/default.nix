@@ -21,14 +21,16 @@ let
     ./options.nix
     ../cachix.nix
     ../home
-    home-manager.nixosModules.default
-    stylix.nixosModules.stylix
-    sops-nix.nixosModules.sops
-    disko.nixosModules.disko
+
     (importAllFromFolder ./misc)
     (importAllFromFolder ./programs)
     (importAllFromFolder ./services)
     (importAllFromFolder ./hardware)
+
+    home-manager.nixosModules.default
+    stylix.nixosModules.stylix
+    sops-nix.nixosModules.sops
+    disko.nixosModules.disko
   ];
 
   # Defines a system with a given architecture and hostname.
