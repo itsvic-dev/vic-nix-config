@@ -5,11 +5,8 @@
       {
         services.ollama.user = "ollama";
         services.ollama.group = "ollama";
-        users.users.ollama = {
-          isSystemUser = true;
-          group = "ollama";
-        };
-        users.groups.ollama = { };
+        # the ollama nixos module sets DynamicUser even with the user set by us. Fucking Stupid
+        systemd.services.ollama.serviceConfig.DynamicUser = lib.mkForce false;
       }
 
       # add ollama's data dir to persistence if needed
