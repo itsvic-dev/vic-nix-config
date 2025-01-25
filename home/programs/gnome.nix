@@ -21,7 +21,7 @@ in
       }
 
       (lib.mkIf cfg.software.solaar {
-        programs.gnome-shell.extensions = [ { package = solaar-extension; } ];
+        programs.gnome-shell.extensions = with pkgs.gnomeExtensions; [ { package = solaar-extension; } ];
       })
     ]
   );
