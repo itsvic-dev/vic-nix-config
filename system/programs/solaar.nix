@@ -9,9 +9,7 @@ let
 in
 {
   config = lib.mkIf cfg.software.solaar {
-    environment.systemPackages = with pkgs; [
-      logitech-udev-rules
-      solaar
-    ];
+    environment.systemPackages = with pkgs; [ solaar ];
+    services.udev.packages = with pkgs; [ logitech-udev-rules ];
   };
 }
