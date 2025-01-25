@@ -13,10 +13,7 @@ in
       # tell nh what spec this is
       environment.etc."specialisation".text = "nvidia";
 
-      services.xserver.videoDrivers = [
-        "nvidia"
-        "intel"
-      ];
+      services.xserver.videoDrivers = [ "nvidia" ];
 
       hardware.nvidia = {
         package = config.boot.kernelPackages.nvidiaPackages.stable;
