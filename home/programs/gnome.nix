@@ -5,16 +5,24 @@
   ...
 }:
 let
-  cfg = nixosConfig.vic-nix.desktop;
+  cfg = nixosConfig.vic-nix;
 in
 {
-  config = lib.mkIf (cfg.enable && cfg.environment == "gnome") {
-    programs.gnome-shell = {
-      enable = true;
-      extensions = with pkgs.gnomeExtensions; [
-        { package = appindicator; }
-        { package = gsconnect; }
-      ];
-    };
-  };
+  config = lib.mkIf (cfg.desktop.enable && cfg.desktop.environment == "gnome") (
+    lib.mkMerge [
+      {
+        programs.gnome-shell = {
+          enable = true;
+          extensions = with pkgs.gnomeExtensions; [
+            { package = appindicator; }
+            { package = gsconnect; }
+          ];
+        };
+      }
+
+      (lib.mkIf cfg.software.solaar {
+        programs.gnome-shell.extensions = [ { package = solaar-extension; } ];
+      })
+    ]
+  );
 }

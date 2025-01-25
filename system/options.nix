@@ -29,6 +29,7 @@ with lib;
         libvirt = mkEnableOption "the libvirt module";
         docker = mkEnableOption "Docker";
         via = mkEnableOption "VIA";
+        solaar = mkEnableOption "Solaar";
 
         extraPackages = mkOption {
           type = types.listOf types.package;

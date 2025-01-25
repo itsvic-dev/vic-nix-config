@@ -33,6 +33,7 @@
       libvirt = true;
       docker = true;
       via = true;
+      solaar = true;
 
       extraPackages = with pkgs; [
         cider-2
