@@ -23,21 +23,13 @@
           prefixLength = 27;
         }
       ];
-      # ens18.ipv6.addresses = [
-      #   {
-      #     address = "2a05:4140:49:100:127::";
-      #     prefixLength = 64;
-      #   }
-      # ];
     };
+
     defaultGateway = {
       address = "185.184.221.97";
       interface = "ens19";
     };
-    # defaultGateway6 = {
-    #   address = "2a05:4140:49:100::1";
-    #   interface = "ens18";
-    # };
+
     nameservers = [
       "1.1.1.1"
       "1.0.0.1"

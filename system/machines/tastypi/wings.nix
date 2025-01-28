@@ -1,11 +1,12 @@
-{ config, ... }:
+{ config, defaultSecretsFile, ... }:
 {
   services.wings = {
     enable = true;
     port = 8443;
   };
 
-  sops.secrets.cf-creds.sopsFile = ../../../secrets/tastypi.yaml;
+  sops.secrets.cf-creds.sopsFile = defaultSecretsFile;
+
   security.acme = {
     acceptTerms = true;
     defaults = {

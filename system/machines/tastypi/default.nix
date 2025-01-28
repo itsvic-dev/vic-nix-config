@@ -3,6 +3,7 @@
   lib,
   pkgs,
   inputs,
+  secretsPath,
   ...
 }:
 {
@@ -85,7 +86,7 @@
 
   sops.secrets.oxibridge-config = {
     format = "yaml";
-    sopsFile = ../../../secrets/tastypi/oxibridge.yml;
+    sopsFile = "${secretsPath}/oxibridge.yml";
     key = "";
 
     restartUnits = [ "oxibridge.service" ];

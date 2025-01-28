@@ -1,24 +1,14 @@
-{ config, ... }:
+{ config, defaultSecretsFile, ... }:
 {
   sops.secrets = {
     "plausible/secretKeybase" = {
       restartUnits = [ "plausible.service" ];
-      sopsFile = ../../../secrets/tastypi.yaml;
-    };
-    "plausible/adminPass" = {
-      restartUnits = [ "plausible.service" ];
-      sopsFile = ../../../secrets/tastypi.yaml;
+      sopsFile = defaultSecretsFile;
     };
   };
 
   services.plausible = {
     enable = true;
-    adminUser = {
-      activate = true;
-      name = "itsvic";
-      email = "contact@itsvic.dev";
-      passwordFile = config.sops.secrets."plausible/adminPass".path;
-    };
     server = {
       baseUrl = "https://plausible.itsvic.dev";
       secretKeybaseFile = config.sops.secrets."plausible/secretKeybase".path;

@@ -1,8 +1,13 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  defaultSecretsFile,
+  ...
+}:
 {
   sops.secrets = {
-    akos-ipv6-pk.sopsFile = ../../../secrets/tastypi.yaml;
-    vic-wg-pk.sopsFile = ../../../secrets/tastypi.yaml;
+    akos-ipv6-pk.sopsFile = defaultSecretsFile;
+    vic-wg-pk.sopsFile = defaultSecretsFile;
   };
 
   networking.wireguard.interfaces = {

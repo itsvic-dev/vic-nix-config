@@ -40,6 +40,9 @@ let
       inherit system;
       specialArgs = {
         inherit inputs;
+        globalSecretsFile = ../secrets/global.yaml;
+        secretsPath = ../secrets/${hostname};
+        defaultSecretsFile = "${secretsPath}/default.yaml";
       };
 
       modules = common ++ [

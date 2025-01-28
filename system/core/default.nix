@@ -1,4 +1,9 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  globalSecretsFile,
+  ...
+}:
 {
   imports = [
     ./appimage.nix
@@ -30,7 +35,8 @@
   };
 
   sops = {
-    defaultSopsFile = ../../secrets/global.yaml;
+    defaultSopsFile = globalSecretsFile;
+
     age.sshKeyPaths = [
       (
         if config.vic-nix.tmpfsAsRoot then
