@@ -38,7 +38,7 @@ let
     system: hostname:
     nixpkgs.lib.nixosSystem {
       inherit system;
-      specialArgs = {
+      specialArgs = rec {
         inherit inputs;
         globalSecretsFile = ../secrets/global.yaml;
         secretsPath = ../secrets/${hostname};
