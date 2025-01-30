@@ -28,7 +28,7 @@ in
         obs-studio
         mission-center
       ]
-      ++ lib.optionals cfg.desktop.forGaming [ wineWowPackages.stable ]
+      ++ lib.optionals cfg.desktop.forGaming [ wineWowPackages.stagingFull ]
       ++ lib.optionals cfg.desktop.forDev [
         nodejs
         corepack
