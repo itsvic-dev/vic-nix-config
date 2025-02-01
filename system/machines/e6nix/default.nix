@@ -11,6 +11,7 @@
     ./hardware.nix
     ./disks.nix
     ./jellyfin.nix
+    ./restic.nix
   ];
 
   vic-nix = {
