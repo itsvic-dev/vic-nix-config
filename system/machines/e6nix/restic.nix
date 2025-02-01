@@ -18,14 +18,12 @@
     passwordFile = config.sops.secrets.restic-password.path;
     rcloneConfigFile = config.sops.secrets.rclone-config.path;
 
-    paths = [
-      "/home/vic"
-    ];
+    paths = [ "/home/vic" ];
 
     # might need more excludes in the future. not sure
     exclude = [
       ".git"
       "/home/vic/.cache"
-    ]
+    ];
   };
 }
