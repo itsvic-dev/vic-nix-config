@@ -27,6 +27,7 @@ in
         llvm-vs-code-extensions.vscode-clangd
         twxs.cmake
         ms-vscode.cmake-tools
+        mesonbuild.mesonbuild
 
         # Nix
         bbenoist.nix
