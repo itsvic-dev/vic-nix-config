@@ -11,6 +11,8 @@ writeShellApplication {
   name = "deploy";
   runtimeInputs = [
     nix-output-monitor
+    jq
+    nix-eval-jobs
     nix
     openssh
   ];
