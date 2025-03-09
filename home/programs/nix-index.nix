@@ -1,6 +1,6 @@
-{ inputs, ... }:
+{ nix-index-database, ... }:
 {
-  imports = [ inputs.nix-index-database.hmModules.nix-index ];
+  imports = [ nix-index-database.hmModules.nix-index ];
 
   programs = {
     nix-index = {

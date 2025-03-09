@@ -21,7 +21,7 @@ in
   home-manager.useUserPackages = true;
 
   home-manager.extraSpecialArgs = {
-    inherit inputs;
+    inherit (inputs) nix-index-database nixpkgs-gimp-master;
   };
 
   home-manager.users.vic = {

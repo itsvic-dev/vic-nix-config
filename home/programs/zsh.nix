@@ -3,9 +3,10 @@
   programs.zsh = {
     enable = true;
     enableCompletion = true;
-    initExtra = ''
-      source ${pkgs.grml-zsh-config}/etc/zsh/zshrc
-    '';
+    oh-my-zsh = {
+      enable = true;
+      theme = "nicoulaj";
+    };
   };
 
   programs.zoxide = {
@@ -15,4 +16,12 @@
       "cd"
     ];
   };
+
+  programs.eza = {
+    enable = true;
+    icons = "auto";
+    git = true;
+  };
+
+  programs.bat.enable = true;
 }

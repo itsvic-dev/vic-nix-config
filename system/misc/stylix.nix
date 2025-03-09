@@ -14,8 +14,8 @@
 
     fonts = {
       sansSerif = {
-        package = pkgs.cantarell-fonts;
-        name = "Cantarell";
+        package = pkgs.adwaita-fonts;
+        name = "Adwaita Sans";
       };
 
       serif = {
@@ -37,6 +37,7 @@
     # system-wide target settings
     targets = {
       chromium.enable = false;
+      qt.enable = false;
     };
   };
 }
