@@ -5,7 +5,7 @@
     enableCompletion = true;
     oh-my-zsh = {
       enable = true;
-      theme = "nicoulaj";
+      theme = "sorin";
     };
   };
 
