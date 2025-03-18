@@ -1,4 +1,4 @@
-{ inputs, ... }: {
+{ inputs, pkgs, ... }: {
   nix = {
     # pin system nixpkgs to the flake input
     registry = { nixpkgs.flake = inputs.nixpkgs; };
@@ -6,7 +6,8 @@
 
     settings = {
       experimental-features = [ "nix-command" "flakes" ];
-      trusted-users = [ "root" "@wheel" "@staff" ];
+      trusted-users =
+        [ "root" (if pkgs.stdenv.isLinux then "@wheel" else "@admin") ];
     };
   };
 

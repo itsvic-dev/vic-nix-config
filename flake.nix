@@ -10,6 +10,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nix-rosetta-builder = {
+      url = "github:cpick/nix-rosetta-builder";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -79,8 +84,10 @@
           deployOn = pkgs.callPackage ./misc/deploy.nix { };
         in with pkgs;
         mkShell {
-          buildInputs = [ sops age deployOn disko.packages.${system}.disko ];
+          buildInputs = [ sops age deployOn ] ++ lib.optionals (stdenv.isLinux)
+            [ disko.packages.${system}.disko ];
         };
+
     in {
       nixosConfigurations = import ./system inputs;
       darwinConfigurations = import ./darwin inputs;
@@ -88,6 +95,7 @@
       devShells = {
         x86_64-linux.default = defineShell "x86_64-linux";
         aarch64-linux.default = defineShell "aarch64-linux";
+        aarch64-darwin.default = defineShell "aarch64-darwin";
       };
     };
 }
