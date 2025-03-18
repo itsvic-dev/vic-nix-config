@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, pkgs, ... }:
 with lib; {
   # Configuation schema
   options = {
@@ -43,8 +43,8 @@ with lib; {
         enable = mkEnableOption "the desktop role";
 
         environment = mkOption {
-          type = types.enum [ "gnome" ];
-          default = "gnome";
+          type = types.enum [ "gnome" "osx" ];
+          default = if pkgs.stdenv.isLinux then "gnome" else "osx";
           description = "The desktop environment to use.";
         };
 
