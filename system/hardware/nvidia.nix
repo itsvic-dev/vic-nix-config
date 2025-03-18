@@ -1,13 +1,6 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}:
-let
-  cfg = config.vic-nix.hardware;
-in
-{
+{ config, pkgs, lib, ... }:
+let cfg = config.vic-nix.hardware;
+in {
   config = lib.mkIf cfg.nvidia {
     specialisation.nvidia.configuration = {
       # tell nh what spec this is
@@ -17,7 +10,8 @@ in
 
       hardware.nvidia = {
         package = config.boot.kernelPackages.nvidiaPackages.stable;
-        open = true; # might cause issues idk, haven't used open drivers in a while
+        open =
+          true; # might cause issues idk, haven't used open drivers in a while
         modesetting.enable = true;
         prime = {
           sync.enable = true;
@@ -26,7 +20,8 @@ in
         };
       };
 
-      hardware.nvidia-container-toolkit.enable = config.virtualisation.docker.enable;
+      hardware.nvidia-container-toolkit.enable =
+        config.virtualisation.docker.enable;
       nixpkgs.config.cudaSupport = true;
     };
   };

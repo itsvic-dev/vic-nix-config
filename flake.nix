@@ -15,9 +15,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    impermanence = {
-      url = "github:nix-community/impermanence";
-    };
+    impermanence = { url = "github:nix-community/impermanence"; };
 
     disko = {
       url = "github:nix-community/disko";
@@ -73,26 +71,17 @@
     };
   };
 
-  outputs =
-    inputs@{ nixpkgs, disko, ... }:
+  outputs = inputs@{ nixpkgs, disko, ... }:
     let
-      defineShell =
-        system:
+      defineShell = system:
         let
           pkgs = import nixpkgs { inherit system; };
           deployOn = pkgs.callPackage ./misc/deploy.nix { };
-        in
-        with pkgs;
+        in with pkgs;
         mkShell {
-          buildInputs = [
-            sops
-            age
-            deployOn
-            disko.packages.${system}.disko
-          ];
+          buildInputs = [ sops age deployOn disko.packages.${system}.disko ];
         };
-    in
-    {
+    in {
       nixosConfigurations = import ./system inputs;
       darwinConfigurations = import ./darwin inputs;
 

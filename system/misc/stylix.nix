@@ -1,5 +1,4 @@
-{ pkgs, config, ... }:
-{
+{ pkgs, config, ... }: {
   stylix = {
     enable = config.vic-nix.desktop.enable;
     image = ../wallpaper.jpg;

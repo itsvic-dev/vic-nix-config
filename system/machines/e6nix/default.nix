@@ -1,10 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
-{
+{ config, lib, pkgs, ... }: {
   imports = [
     #./ptero.nix
     ./remote-builders.nix
@@ -36,10 +30,7 @@
       via = true;
       solaar = true;
 
-      extraPackages = with pkgs; [
-        cider-2
-        android-studio
-      ];
+      extraPackages = with pkgs; [ cider-2 android-studio ];
     };
   };
 

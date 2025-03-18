@@ -1,13 +1,6 @@
-{
-  lib,
-  config,
-  pkgs,
-  ...
-}:
-let
-  enabled = config.vic-nix.software.via;
-in
-{
+{ lib, config, pkgs, ... }:
+let enabled = config.vic-nix.software.via;
+in {
   config = lib.mkIf enabled {
     environment.systemPackages = [ pkgs.via ];
 

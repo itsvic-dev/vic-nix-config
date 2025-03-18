@@ -1,15 +1,8 @@
-{
-  osConfig,
-  lib,
-  pkgs,
-  ...
-}:
-let
-  cfg = osConfig.vic-nix;
-in
-{
-  config = lib.mkIf (cfg.desktop.enable && cfg.desktop.environment == "gnome") (
-    lib.mkMerge [
+{ osConfig, lib, pkgs, ... }:
+let cfg = osConfig.vic-nix;
+in {
+  config = lib.mkIf (cfg.desktop.enable && cfg.desktop.environment == "gnome")
+    (lib.mkMerge [
       {
         programs.gnome-shell = {
           enable = true;
@@ -21,8 +14,9 @@ in
       }
 
       (lib.mkIf cfg.software.solaar {
-        programs.gnome-shell.extensions = with pkgs.gnomeExtensions; [ { package = solaar-extension; } ];
+        programs.gnome-shell.extensions = with pkgs.gnomeExtensions; [{
+          package = solaar-extension;
+        }];
       })
-    ]
-  );
+    ]);
 }

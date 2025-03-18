@@ -1,22 +1,18 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
+{ config, lib, pkgs, ... }:
 with lib;
 let
-  wingsBinarySource =
-    ({
-      "x86_64-linux" = {
-        url = "https://github.com/pterodactyl/wings/releases/download/v1.11.13/wings_linux_amd64";
-        sha256 = "1z5qjrvk3vllh3wn8y4mdfqc8p74l4f4qbjmxy9yad1ldqkcs1ib";
-      };
-      "aarch64-linux" = {
-        url = "https://github.com/pterodactyl/wings/releases/download/v1.11.13/wings_linux_arm64";
-        sha256 = "0xznav37lg9gz4v6lclclwd6m93xda0gyi5n3b7s0vs9fhzycjvj";
-      };
-    }).${pkgs.system};
+  wingsBinarySource = ({
+    "x86_64-linux" = {
+      url =
+        "https://github.com/pterodactyl/wings/releases/download/v1.11.13/wings_linux_amd64";
+      sha256 = "1z5qjrvk3vllh3wn8y4mdfqc8p74l4f4qbjmxy9yad1ldqkcs1ib";
+    };
+    "aarch64-linux" = {
+      url =
+        "https://github.com/pterodactyl/wings/releases/download/v1.11.13/wings_linux_arm64";
+      sha256 = "0xznav37lg9gz4v6lclclwd6m93xda0gyi5n3b7s0vs9fhzycjvj";
+    };
+  }).${pkgs.system};
 
   wingsBinary = pkgs.fetchurl {
     inherit (wingsBinarySource) url sha256;
@@ -24,8 +20,7 @@ let
   };
 
   cfg = config.services.wings;
-in
-{
+in {
   options = {
     services.wings = {
       enable = mkEnableOption "Wings";
@@ -49,7 +44,8 @@ in
     };
     users.groups.pterodactyl = { };
 
-    networking.firewall.allowedTCPPorts = optionals cfg.openFirewall [ cfg.port ];
+    networking.firewall.allowedTCPPorts =
+      optionals cfg.openFirewall [ cfg.port ];
 
     systemd.services."wings" = {
       wantedBy = [ "network-online.target" ];

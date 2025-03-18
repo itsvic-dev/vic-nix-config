@@ -1,10 +1,4 @@
-{
-  config,
-  pkgs,
-  globalSecretsFile,
-  ...
-}:
-{
+{ config, pkgs, globalSecretsFile, ... }: {
   imports = [
     ./appimage.nix
     ./i18n.nix
@@ -38,12 +32,10 @@
     defaultSopsFile = globalSecretsFile;
 
     age.sshKeyPaths = [
-      (
-        if config.vic-nix.tmpfsAsRoot then
-          "/persist/etc/ssh/ssh_host_ed25519_key"
-        else
-          "/etc/ssh/ssh_host_ed25519_key"
-      )
+      (if config.vic-nix.tmpfsAsRoot then
+        "/persist/etc/ssh/ssh_host_ed25519_key"
+      else
+        "/etc/ssh/ssh_host_ed25519_key")
     ];
   };
 

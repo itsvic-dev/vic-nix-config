@@ -1,10 +1,9 @@
-{ pkgs, ... }:
-{
-    nixpkgs.hostPlatform = "aarch64-darwin";
+{ pkgs, ... }: {
+  nixpkgs.hostPlatform = "aarch64-darwin";
 
-    fonts.packages = with pkgs; [ nerd-fonts.jetbrains-mono ];
+  fonts.packages = with pkgs; [ nerd-fonts.jetbrains-mono ];
 
-    environment.systemPackages = with pkgs; [ nixfmt-classic gnupg ];
+  environment.systemPackages = with pkgs; [ nixfmt-classic gnupg ];
 
-    programs.gnupg.agent.enable = true;
+  programs.gnupg.agent.enable = true;
 }

@@ -1,9 +1,4 @@
-{
-  pkgs,
-  lib,
-  config,
-  ...
-}:
+{ pkgs, lib, config, ... }:
 let
   app = "pterodactyl";
   domain = "panel.itsvic.dev";
@@ -45,15 +40,12 @@ let
       '';
     };
   };
-in
-{
+in {
   services.mysql = {
     enable = true;
     package = pkgs.mariadb;
   };
-  services.redis.servers."" = {
-    enable = true;
-  };
+  services.redis.servers."" = { enable = true; };
   services.phpfpm.pools.${app} = {
     inherit user;
     settings = {
@@ -93,9 +85,7 @@ in
       Type = "oneshot";
       User = "root";
     };
-    unitConfig = {
-      StartLimitInterval = 0;
-    };
+    unitConfig = { StartLimitInterval = 0; };
   };
 
   systemd.timers."db-restore" = {

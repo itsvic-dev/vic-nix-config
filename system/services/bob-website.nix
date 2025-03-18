@@ -1,15 +1,7 @@
-{
-  config,
-  lib,
-  pkgs,
-  inputs,
-  ...
-}:
+{ config, lib, pkgs, inputs, ... }:
 with lib;
-let
-  cfg = config.services.bob-website;
-in
-{
+let cfg = config.services.bob-website;
+in {
   options = {
     services.bob-website = {
       enable = mkEnableOption "bob website";

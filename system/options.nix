@@ -1,13 +1,13 @@
 { lib, ... }:
-with lib;
-{
+with lib; {
   # Configuation schema
   options = {
     vic-nix = {
       tmpfsAsRoot = mkOption {
         type = types.bool;
         default = false;
-        description = "Whether the machine uses a tmpfs-as-root partition style.";
+        description =
+          "Whether the machine uses a tmpfs-as-root partition style.";
       };
 
       secureBoot = mkEnableOption "UEFI Secure Boot";
@@ -20,7 +20,8 @@ with lib;
         hasEFI = mkOption {
           type = types.bool;
           default = true;
-          description = "Whether the machine has UEFI firmware. This is usually true.";
+          description =
+            "Whether the machine has UEFI firmware. This is usually true.";
         };
       };
 
@@ -50,19 +51,19 @@ with lib;
         forGaming = mkOption {
           type = types.bool;
           default = false;
-          description = "Whether the machine will be used for gaming (mainly controls Steam).";
+          description =
+            "Whether the machine will be used for gaming (mainly controls Steam).";
         };
 
         forDev = mkOption {
           type = types.bool;
           default = false;
-          description = "Whether the machine will be used as a development workspace.";
+          description =
+            "Whether the machine will be used as a development workspace.";
         };
       };
 
-      server = {
-        enable = mkEnableOption "the server role";
-      };
+      server = { enable = mkEnableOption "the server role"; };
     };
   };
 }

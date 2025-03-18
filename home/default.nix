@@ -23,7 +23,8 @@ in {
 
   home-manager.users.vic = {
     imports = common;
-    home.homeDirectory = lib.mkForce (if pkgs.stdenv.isDarwin then "/Users/vic" else "/home/vic");
+    home.homeDirectory =
+      lib.mkForce (if pkgs.stdenv.isDarwin then "/Users/vic" else "/home/vic");
     home.stateVersion = "23.11";
   };
 }

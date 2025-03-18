@@ -1,14 +1,9 @@
-{
-  pkgs,
-  config,
-  defaultSecretsFile,
-  ...
-}:
-{
+{ pkgs, config, defaultSecretsFile, ... }: {
   sops.secrets = {
     jellyfin-tunnel = {
       owner = config.services.cloudflared.user;
-      restartUnits = [ "cloudflared-tunnel-579c94c1-7a72-4da1-a29c-1a3ae14bf555.service" ];
+      restartUnits =
+        [ "cloudflared-tunnel-579c94c1-7a72-4da1-a29c-1a3ae14bf555.service" ];
       sopsFile = defaultSecretsFile;
     };
   };
@@ -50,10 +45,8 @@
     };
   };
 
-  environment.persistence."/persist".directories = [
-    {
-      directory = "/var/jellyfin-media";
-      mode = "0777";
-    }
-  ];
+  environment.persistence."/persist".directories = [{
+    directory = "/var/jellyfin-media";
+    mode = "0777";
+  }];
 }

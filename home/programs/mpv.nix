@@ -1,10 +1,4 @@
-{
-  osConfig,
-  lib,
-  pkgs,
-  ...
-}:
-{
+{ osConfig, lib, pkgs, ... }: {
   config = lib.mkIf osConfig.vic-nix.desktop.enable {
     programs.mpv = {
       enable = true;

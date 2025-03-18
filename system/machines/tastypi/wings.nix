@@ -1,5 +1,4 @@
-{ config, defaultSecretsFile, ... }:
-{
+{ config, defaultSecretsFile, ... }: {
   services.wings = {
     enable = true;
     port = 8443;

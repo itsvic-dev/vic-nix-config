@@ -1,13 +1,6 @@
-{
-  osConfig,
-  lib,
-  pkgs,
-  ...
-}:
-let
-  cfg = osConfig.vic-nix.software;
-in
-{
+{ osConfig, lib, pkgs, ... }:
+let cfg = osConfig.vic-nix.software;
+in {
   config = lib.mkIf cfg.timidity {
     programs.timidity = {
       enable = true;

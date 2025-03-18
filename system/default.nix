@@ -1,19 +1,10 @@
-inputs@{
-  nixpkgs,
-  home-manager,
-  stylix,
-  sops-nix,
-  disko,
-  ...
-}:
+inputs@{ nixpkgs, home-manager, stylix, sops-nix, disko, ... }:
 let
-  importAllFromFolder =
-    folder:
+  importAllFromFolder = folder:
     let
       toImport = name: value: folder + ("/" + name);
       imports = nixpkgs.lib.mapAttrsToList toImport (builtins.readDir folder);
-    in
-    imports;
+    in imports;
 
   # Common modules for all systems.
   common = nixpkgs.lib.lists.flatten [
@@ -34,8 +25,7 @@ let
   ];
 
   # Defines a system with a given architecture and hostname.
-  defineSystem =
-    system: hostname:
+  defineSystem = system: hostname:
     nixpkgs.lib.nixosSystem {
       inherit system;
       specialArgs = rec {
@@ -54,8 +44,7 @@ let
         }
       ];
     };
-in
-{
+in {
   "e6nix" = defineSystem "x86_64-linux" "e6nix";
   "it-vps" = defineSystem "x86_64-linux" "it-vps";
   "tastypi" = defineSystem "aarch64-linux" "tastypi";

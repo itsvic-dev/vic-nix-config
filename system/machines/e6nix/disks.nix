@@ -43,9 +43,7 @@
         lvs = {
           swap = {
             size = "24G";
-            content = {
-              type = "swap";
-            };
+            content = { type = "swap"; };
           };
 
           data = {
@@ -60,18 +58,12 @@
                 };
 
                 "/persist" = {
-                  mountOptions = [
-                    "compress=zstd"
-                    "noatime"
-                  ];
+                  mountOptions = [ "compress=zstd" "noatime" ];
                   mountpoint = "/persist";
                 };
 
                 "/nix" = {
-                  mountOptions = [
-                    "compress=zstd"
-                    "noatime"
-                  ];
+                  mountOptions = [ "compress=zstd" "noatime" ];
                   mountpoint = "/nix";
                 };
               };
@@ -83,11 +75,7 @@
 
     nodev."/" = {
       fsType = "tmpfs";
-      mountOptions = [
-        "size=25%"
-        "defaults"
-        "mode=755"
-      ];
+      mountOptions = [ "size=25%" "defaults" "mode=755" ];
     };
   };
 

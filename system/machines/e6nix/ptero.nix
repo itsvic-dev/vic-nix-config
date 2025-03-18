@@ -1,17 +1,11 @@
-{
-  pkgs,
-  lib,
-  config,
-  ...
-}:
+{ pkgs, lib, config, ... }:
 let
   app = "pterodactyl";
   domain = "panel.local";
   dataDir = "/var/www/pterodactyl/public";
   user = config.services.nginx.user;
   myPhp = pkgs.php.withExtensions ({ enabled, all }: enabled ++ [ all.bz2 ]);
-in
-{
+in {
   networking.hosts."127.0.0.1" = [ domain ];
 
   services.phpfpm.pools.${app} = {

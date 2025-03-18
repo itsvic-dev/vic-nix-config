@@ -1,7 +1,5 @@
 {
-    imports = [
-        ../../system/core/nix.nix
-    ];
+  imports = [ ../../system/core/nix.nix ];
 
-    system.stateVersion = 6;
+  system.stateVersion = 6;
 }

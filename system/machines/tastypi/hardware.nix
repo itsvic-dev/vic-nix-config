@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{ pkgs, ... }: {
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ ];
   boot.kernelPackages = pkgs.linuxPackages_rpi4;
@@ -20,12 +19,10 @@
     fsType = "vfat";
   };
 
-  swapDevices = [
-    {
-      device = "/swapfile";
-      size = 16 * 1024;
-    }
-  ];
+  swapDevices = [{
+    device = "/swapfile";
+    size = 16 * 1024;
+  }];
 
   powerManagement.cpuFreqGovernor = "ondemand";
 }

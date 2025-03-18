@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{ pkgs, ... }: {
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -11,10 +10,7 @@
 
   programs.zoxide = {
     enable = true;
-    options = [
-      "--cmd"
-      "cd"
-    ];
+    options = [ "--cmd" "cd" ];
   };
 
   programs.eza = {

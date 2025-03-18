@@ -1,28 +1,12 @@
-{
-  config,
-  lib,
-  pkgs,
-  inputs,
-  ...
-}:
-let
-  bob = inputs.bob.packages.x86_64-linux.default;
-in
-{
-  imports = [
-    ./hardware.nix
-    ./ptero.nix
-    ./staticnetwork.nix
-    ./cloudflared.nix
-  ];
+{ config, lib, pkgs, inputs, ... }:
+let bob = inputs.bob.packages.x86_64-linux.default;
+in {
+  imports =
+    [ ./hardware.nix ./ptero.nix ./staticnetwork.nix ./cloudflared.nix ];
 
   vic-nix = {
-    server = {
-      enable = true;
-    };
-    software = {
-      docker = true;
-    };
+    server = { enable = true; };
+    software = { docker = true; };
   };
 
   services.qemuGuest.enable = true;
@@ -37,7 +21,8 @@ in
     wants = [ "network-online.target" ];
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
-      ExecStart = "/home/vic/comms-tickets/venv/bin/python /home/vic/comms-tickets/main.py";
+      ExecStart =
+        "/home/vic/comms-tickets/venv/bin/python /home/vic/comms-tickets/main.py";
       User = "vic";
       Restart = "always";
       WorkingDirectory = "/home/vic/comms-tickets";

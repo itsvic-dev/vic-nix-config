@@ -1,21 +1,8 @@
-{
-  writeShellApplication,
-  nix-output-monitor,
-  nix,
-  openssh,
-  nix-eval-jobs,
-  jq,
-  ...
-}:
+{ writeShellApplication, nix-output-monitor, nix, openssh, nix-eval-jobs, jq
+, ... }:
 writeShellApplication {
   name = "deploy";
-  runtimeInputs = [
-    nix-output-monitor
-    jq
-    nix-eval-jobs
-    nix
-    openssh
-  ];
+  runtimeInputs = [ nix-output-monitor jq nix-eval-jobs nix openssh ];
 
   text = ''
     set -e

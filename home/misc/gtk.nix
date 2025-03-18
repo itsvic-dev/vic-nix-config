@@ -1,13 +1,6 @@
-{
-  osConfig,
-  lib,
-  pkgs,
-  ...
-}:
-let
-  cfg = osConfig.vic-nix.desktop;
-in
-{
+{ osConfig, lib, pkgs, ... }:
+let cfg = osConfig.vic-nix.desktop;
+in {
   config = lib.mkIf cfg.enable {
     gtk = {
       enable = true;

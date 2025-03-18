@@ -1,10 +1,4 @@
-{
-  pkgs,
-  lib,
-  config,
-  ...
-}:
-{
+{ pkgs, lib, config, ... }: {
   config = lib.mkIf config.vic-nix.desktop.enable {
     fonts = {
       packages = with pkgs; [
@@ -17,11 +11,7 @@
       ];
       fontconfig = {
         defaultFonts = {
-          serif = [
-            "Noto Serif"
-            "Noto Serif CJK JP"
-            "Noto Color Emoji"
-          ];
+          serif = [ "Noto Serif" "Noto Serif CJK JP" "Noto Color Emoji" ];
           sansSerif = [
             "Adwaita Sans"
             # "Inter Variable"

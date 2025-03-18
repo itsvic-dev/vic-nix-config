@@ -1,6 +1,1 @@
-{ config, pkgs, ... }:
-{
-  boot = {
-    loader.efi.canTouchEfiVariables = true;
-  };
-}
+{ config, pkgs, ... }: { boot = { loader.efi.canTouchEfiVariables = true; }; }

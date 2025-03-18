@@ -1,5 +1,4 @@
-{ config, pkgs, ... }:
-{
+{ config, pkgs, ... }: {
   sops.secrets.vic-password.neededForUsers = true;
 
   users = {
@@ -8,12 +7,7 @@
     users.vic = {
       isNormalUser = true;
       hashedPasswordFile = config.sops.secrets.vic-password.path;
-      extraGroups = [
-        "wheel"
-        "video"
-        "render"
-        "netdev"
-      ];
+      extraGroups = [ "wheel" "video" "render" "netdev" ];
       shell = pkgs.zsh;
 
       openssh.authorizedKeys.keys = [

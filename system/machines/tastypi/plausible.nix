@@ -1,5 +1,4 @@
-{ config, defaultSecretsFile, ... }:
-{
+{ config, defaultSecretsFile, ... }: {
   sops.secrets = {
     "plausible/secretKeybase" = {
       restartUnits = [ "plausible.service" ];
@@ -20,7 +19,8 @@
     enableACME = true;
     forceSSL = true;
     locations."/" = {
-      proxyPass = "http://127.0.0.1:${toString config.services.plausible.server.port}";
+      proxyPass =
+        "http://127.0.0.1:${toString config.services.plausible.server.port}";
       proxyWebsockets = true;
     };
   };
