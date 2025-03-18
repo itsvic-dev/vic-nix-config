@@ -6,12 +6,6 @@
       enable = true;
       theme = "sorin";
     };
-
-    # fixes shit in iTerm
-    initExtra = ''
-      bindkey "[D" backward-word
-      bindkey "[C" forward-word
-    '';
   };
 
   programs.zoxide = {
