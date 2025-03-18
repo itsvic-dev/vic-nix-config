@@ -1,11 +1,11 @@
 {
-  nixosConfig,
+  osConfig,
   lib,
   pkgs,
   ...
 }:
 let
-  cfg = nixosConfig.vic-nix.software;
+  cfg = osConfig.vic-nix.software;
 in
 {
   config = lib.mkIf cfg.timidity {

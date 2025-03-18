@@ -1,12 +1,10 @@
-{ lib, inputs, ... }:
+{ lib, inputs, pkgs, ... }:
 let
-  importAllFromFolder =
-    folder:
+  importAllFromFolder = folder:
     let
       toImport = name: value: folder + ("/" + name);
       imports = lib.mapAttrsToList toImport (builtins.readDir folder);
-    in
-    imports;
+    in imports;
 
   # Common modules for all homes.
   common = lib.lists.flatten [
@@ -15,8 +13,7 @@ let
     (importAllFromFolder ./programs)
     (importAllFromFolder ./services)
   ];
-in
-{
+in {
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
 
@@ -26,6 +23,7 @@ in
 
   home-manager.users.vic = {
     imports = common;
+    home.homeDirectory = lib.mkForce (if pkgs.stdenv.isDarwin then "/Users/vic" else "/home/vic");
     home.stateVersion = "23.11";
   };
 }

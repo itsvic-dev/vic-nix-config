@@ -1,11 +1,11 @@
 {
-  nixosConfig,
+  osConfig,
   lib,
   pkgs,
   ...
 }:
 let
-  cfg = nixosConfig.vic-nix.desktop;
+  cfg = osConfig.vic-nix.desktop;
 in
 {
   config = lib.mkIf cfg.enable {

@@ -1,12 +1,12 @@
 {
   lib,
-  nixosConfig,
+  osConfig,
   pkgs,
   nixpkgs-gimp-master,
   ...
 }:
 let
-  cfg = nixosConfig.vic-nix;
+  cfg = osConfig.vic-nix;
 in
 {
   home.packages =

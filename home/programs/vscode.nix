@@ -1,52 +1,44 @@
-{
-  nixosConfig,
-  lib,
-  pkgs,
-  ...
-}:
-let
-  cfg = nixosConfig.vic-nix.desktop;
-in
-{
-  config = lib.mkIf (cfg.enable && cfg.forDev) {
-    stylix.targets.vscode.enable = false; # the stylix theme for vscode sucks balls
-    programs.vscode = {
-      enable = true;
-      mutableExtensionsDir = false; # hehe
+{ osConfig, lib, pkgs, options, ... }:
+let cfg = osConfig.vic-nix.desktop;
+in {
+  config = lib.mkIf (cfg.enable && cfg.forDev) (lib.mkMerge [
+    {
+      programs.vscode = {
+        enable = true;
+        mutableExtensionsDir = false; # hehe
 
-      profiles.default = {
-        enableUpdateCheck = false;
-        extensions = with pkgs.vscode-extensions; [
-          ms-vscode-remote.remote-ssh
+        profiles.default = {
+          enableUpdateCheck = false;
+          extensions = with pkgs.vscode-extensions; [
+            ms-vscode-remote.remote-ssh
 
-          # Python
-          # ms-python.python
-          ms-python.black-formatter
-          ms-python.vscode-pylance
+            # Python
+            # ms-python.python
+            ms-python.black-formatter
+            ms-python.vscode-pylance
 
-          # C/C++
-          llvm-vs-code-extensions.vscode-clangd
-          twxs.cmake
-          ms-vscode.cmake-tools
-          mesonbuild.mesonbuild
+            # C/C++
+            llvm-vs-code-extensions.vscode-clangd
+            twxs.cmake
+            ms-vscode.cmake-tools
+            mesonbuild.mesonbuild
 
-          # Nix
-          bbenoist.nix
-          brettm12345.nixfmt-vscode
+            # Nix
+            bbenoist.nix
+            brettm12345.nixfmt-vscode
 
-          # Node.js/Web
-          dbaeumer.vscode-eslint
-          esbenp.prettier-vscode
-          vue.volar
-          bradlc.vscode-tailwindcss
+            # Node.js/Web
+            dbaeumer.vscode-eslint
+            esbenp.prettier-vscode
+            vue.volar
+            bradlc.vscode-tailwindcss
 
-          # Rust
-          rust-lang.rust-analyzer
-          tamasfe.even-better-toml
-        ];
+            # Rust
+            rust-lang.rust-analyzer
+            tamasfe.even-better-toml
+          ];
 
-        userSettings =
-          let
+          userSettings = let
             prettier = {
               "editor.defaultFormatter" = "esbenp.prettier-vscode";
             };
@@ -60,8 +52,7 @@ in
             ];
 
             fullPrettierSetup = lib.genAttrs things (_: prettier);
-          in
-          {
+          in {
             "editor.tabSize" = 2;
             "editor.formatOnSave" = true;
 
@@ -74,9 +65,13 @@ in
             "cmake.cmakePath" = "${pkgs.cmake}/bin/cmake";
 
             "rust-analyzer.check.command" = "clippy";
-          }
-          // fullPrettierSetup;
+          } // fullPrettierSetup;
+        };
       };
-    };
-  };
+    }
+
+    (lib.optionalAttrs (options ? stylix.targets.vscode) {
+      stylix.targets.vscode.enable = false;
+    })
+  ]);
 }

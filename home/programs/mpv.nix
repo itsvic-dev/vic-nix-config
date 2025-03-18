@@ -1,11 +1,11 @@
 {
-  nixosConfig,
+  osConfig,
   lib,
   pkgs,
   ...
 }:
 {
-  config = lib.mkIf nixosConfig.vic-nix.desktop.enable {
+  config = lib.mkIf osConfig.vic-nix.desktop.enable {
     programs.mpv = {
       enable = true;
       config = {

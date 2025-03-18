@@ -5,6 +5,11 @@
     # --- CORE STUFF ---
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
+    nix-darwin = {
+      url = "github:LnL7/nix-darwin/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -89,6 +94,7 @@
     in
     {
       nixosConfigurations = import ./system inputs;
+      darwinConfigurations = import ./darwin inputs;
 
       devShells = {
         x86_64-linux.default = defineShell "x86_64-linux";

@@ -1,11 +1,11 @@
 {
-  nixosConfig,
+  osConfig,
   lib,
   pkgs,
   ...
 }:
 let
-  cfg = nixosConfig.vic-nix;
+  cfg = osConfig.vic-nix;
 in
 {
   config = lib.mkIf (cfg.desktop.enable && cfg.desktop.environment == "gnome") (
