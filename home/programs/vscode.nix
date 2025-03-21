@@ -11,9 +11,10 @@ in {
           enableUpdateCheck = false;
           extensions = with pkgs.vscode-extensions; [
             ms-vscode-remote.remote-ssh
+            bmewburn.vscode-intelephense-client # PHP
 
             # Python
-            # ms-python.python
+            ms-python.python
             ms-python.black-formatter
             ms-python.vscode-pylance
 
