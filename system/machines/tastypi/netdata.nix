@@ -1,7 +1,6 @@
 { config, defaultSecretsFile, ... }: {
   sops.secrets = {
     cloudflared = {
-      owner = config.services.cloudflared.user;
       restartUnits =
         [ "cloudflared-tunnel-4b18018a-7a34-46f3-b3b6-2337bf1612bb.service" ];
       sopsFile = defaultSecretsFile;
