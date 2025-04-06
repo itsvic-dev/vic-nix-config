@@ -1,13 +1,11 @@
 { config, defaultSecretsFile, ... }: {
   sops.secrets = {
     "cloudflared/2e679b98-a35a-4c13-84f1-b9296bc55bb2" = {
-      owner = config.services.cloudflared.user;
       restartUnits =
         [ "cloudflared-tunnel-2e679b98-a35a-4c13-84f1-b9296bc55bb2.service" ];
       sopsFile = defaultSecretsFile;
     };
     "cloudflared/90d18543-7a60-47d1-805f-ec1ee80ea962" = {
-      owner = config.services.cloudflared.user;
       restartUnits =
         [ "cloudflared-tunnel-90d18543-7a60-47d1-805f-ec1ee80ea962.service" ];
       sopsFile = defaultSecretsFile;
