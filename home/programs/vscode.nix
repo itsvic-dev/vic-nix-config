@@ -7,6 +7,8 @@ in {
         enable = true;
         mutableExtensionsDir = false; # hehe
 
+        package = pkgs.vscode.fhsWithPackages (ps: with ps; [ rustup ]);
+
         profiles.default = {
           enableUpdateCheck = false;
           extensions = with pkgs.vscode-extensions; [
@@ -65,7 +67,7 @@ in {
             "mesonbuild.languageServerPath" = "${pkgs.mesonlsp}/bin/mesonlsp";
             "cmake.cmakePath" = "${pkgs.cmake}/bin/cmake";
 
-            "rust-analyzer.check.command" = "clippy";
+            "rust-analyzer.check.command" = "${pkgs.clippy}/bin/clippy";
           } // fullPrettierSetup;
         };
       };
