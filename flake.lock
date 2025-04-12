@@ -633,11 +633,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1744458110,
-        "narHash": "sha256-voFLkWz8kjj4Lt6BoiABanZHhyNnOP8WVqF2uL1AK68=",
+        "lastModified": 1744462406,
+        "narHash": "sha256-IGr3AwvVq/UflLAPwUdy6d8EvOv8WAoz8pWUhB6+sPg=",
         "owner": "itsvic-dev",
         "repo": "oxibridge",
-        "rev": "e28c53108ba333376d7cca3cf84c0b02fb985117",
+        "rev": "c322fffbdcafc4d8700ba2b7fe2876e1473465c9",
         "type": "github"
       },
       "original": {
