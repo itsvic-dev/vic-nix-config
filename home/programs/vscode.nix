@@ -65,10 +65,13 @@ in {
             "mesonbuild.languageServerPath" = "${pkgs.mesonlsp}/bin/mesonlsp";
             "cmake.cmakePath" = "${pkgs.cmake}/bin/cmake";
 
-            "rust-analyzer.check.command" = "${pkgs.clippy}/bin/clippy";
+            "rust-analyzer.check.command" = "clippy";
           } // fullPrettierSetup;
         };
       };
+
+      # required by rust-analyzer
+      home.packages = with pkgs; [ clippy ];
     }
 
     (lib.optionalAttrs (options ? stylix.targets.vscode) {
