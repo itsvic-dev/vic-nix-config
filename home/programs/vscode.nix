@@ -66,6 +66,7 @@ in {
             "cmake.cmakePath" = "${pkgs.cmake}/bin/cmake";
 
             "rust-analyzer.check.command" = "clippy";
+            "rust-analyzer.server.path" = "${lib.getExe pkgs.rust-analyzer}";
           } // fullPrettierSetup;
         };
       };
