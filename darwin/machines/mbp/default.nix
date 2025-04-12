@@ -10,7 +10,7 @@
 
   fonts.packages = with pkgs; [ nerd-fonts.jetbrains-mono ];
 
-  environment.systemPackages = with pkgs; [ nixfmt-classic gnupg rustup ];
+  environment.systemPackages = with pkgs; [ nixfmt-classic gnupg cargo rustc ];
 
   programs.gnupg.agent.enable = true;
 }
