@@ -7,8 +7,6 @@ in {
         enable = true;
         mutableExtensionsDir = false; # hehe
 
-        package = pkgs.vscode.fhsWithPackages (ps: with ps; [ rustup ]);
-
         profiles.default = {
           enableUpdateCheck = false;
           extensions = with pkgs.vscode-extensions; [
