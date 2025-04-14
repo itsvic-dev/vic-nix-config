@@ -1,10 +1,6 @@
 inputs@{ nixpkgs, home-manager, stylix, sops-nix, disko, ... }:
 let
-  importAllFromFolder = folder:
-    let
-      toImport = name: value: folder + ("/" + name);
-      imports = nixpkgs.lib.mapAttrsToList toImport (builtins.readDir folder);
-    in imports;
+  inherit (import ../misc/lib.nix nixpkgs.lib) importAllFromFolder;
 
   # Common modules for all systems.
   common = nixpkgs.lib.lists.flatten [

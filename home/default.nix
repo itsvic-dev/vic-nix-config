@@ -1,10 +1,6 @@
 { lib, inputs, pkgs, ... }:
 let
-  importAllFromFolder = folder:
-    let
-      toImport = name: value: folder + ("/" + name);
-      imports = lib.mapAttrsToList toImport (builtins.readDir folder);
-    in imports;
+  inherit (import ../misc/lib.nix lib) importAllFromFolder;
 
   # Common modules for all homes.
   common = lib.lists.flatten [
