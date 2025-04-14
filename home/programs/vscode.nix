@@ -12,6 +12,7 @@ in {
           extensions = with pkgs.vscode-extensions; [
             ms-vscode-remote.remote-ssh
             bmewburn.vscode-intelephense-client # PHP
+            elixir-lsp.vscode-elixir-ls
 
             # Python
             ms-python.python
@@ -66,7 +67,9 @@ in {
             "cmake.cmakePath" = "${pkgs.cmake}/bin/cmake";
 
             "rust-analyzer.check.command" = "clippy";
-            "rust-analyzer.server.path" = "${lib.getExe pkgs.rust-analyzer}";
+            "rust-analyzer.server.path" = lib.getExe pkgs.rust-analyzer;
+
+            "elixirLS.languageServerOverridePath" = lib.getExe pkgs.elixir-ls;
           } // fullPrettierSetup;
         };
       };
