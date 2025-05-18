@@ -16,9 +16,13 @@
       }];
     };
 
+    # defaultGateway = {
+    #   address = "185.184.221.97";
+    #   interface = "ens19";
+    # };
     defaultGateway = {
-      address = "185.184.221.97";
-      interface = "ens19";
+      address = "10.0.1.254";
+      interface = "ens18";
     };
 
     nameservers = [ "1.1.1.1" "1.0.0.1" ];
