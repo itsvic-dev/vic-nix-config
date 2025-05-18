@@ -10,6 +10,7 @@
       umask = "000";
       rpc-whitelist = "127.0.0.1,192.168.0.*";
       rpc-bind-address = "0.0.0.0";
+      watch-dir-enabled = true;
     };
   };
 }
