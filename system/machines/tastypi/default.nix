@@ -5,6 +5,7 @@
     ./hardware.nix
     ./plausible.nix
     ./netdata.nix
+    ./transmission.nix
 
     inputs.oxibridge.nixosModules.aarch64-linux.default
   ];
