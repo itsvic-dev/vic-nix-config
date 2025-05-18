@@ -5,7 +5,6 @@
     ./hardware.nix
     ./plausible.nix
     ./netdata.nix
-    ./torrent.nix
 
     inputs.oxibridge.nixosModules.aarch64-linux.default
   ];
