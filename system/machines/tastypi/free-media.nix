@@ -72,7 +72,7 @@
     server {
       listen 127.0.0.1:34903;
       location /RPC2 {
-        scgi_pass ${config.services.rtorrent.rpcSocket};
+        scgi_pass unix:${config.services.rtorrent.rpcSocket};
       }
     }
   '';
@@ -82,4 +82,11 @@
     "d '/var/torrents' 0777 nobody nogroup -"
     "d '/var/media' 0777 nobody nogroup -"
   ];
+
+  # let flood access the rpc socket
+  systemd.services.flood.serviceConfig.SupplementaryGroups =
+    [ config.services.rtorrent.group ];
+
+  # let nginx access the rpc socket
+  users.users.nginx.extraGroups = [ config.services.rtorrent.group ];
 }
