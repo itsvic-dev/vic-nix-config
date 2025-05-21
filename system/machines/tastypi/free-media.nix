@@ -27,8 +27,9 @@
 
       # Tracker-less torrent and UDP tracker support
       # THIS IS THE ONLY REASON WHY I HAD TO COPY PASTE THE ENTIRE CONFIG FROM NIXOS BTW
-      dht.mode.set = auto
+      dht.mode.set = on
       dht.port.set = 6881
+      dht.add_node = dht.transmissionbt.com
       protocol.pex.set = yes
       trackers.use_udp.set = yes
 
@@ -80,7 +81,10 @@
       print = (cat, "Logging to ", (cfg.logfile))
       log.open_file = "log", (cfg.logfile)
       log.add_output = "info", "log"
-      ##log.add_output = "tracker_debug", "log"
+      log.add_output = "tracker_debug", "log"
+      log.add_output = "dht_debug", "log"
+      log.add_output = "dht_router", "log"
+      log.add_output = "dht_manager", "log"
 
       # XMLRPC
       scgi_local = (cfg.rpcsock)
