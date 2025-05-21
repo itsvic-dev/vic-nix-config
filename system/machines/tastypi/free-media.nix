@@ -9,7 +9,7 @@
     enable = true;
     downloadDir = "/var/torrents";
     openFirewall = true;
-    configFile = ''
+    configText = ''
       scgi_port = 127.0.0.1:5000
     '';
   };
