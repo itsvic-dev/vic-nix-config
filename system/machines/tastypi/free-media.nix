@@ -47,6 +47,16 @@
     };
   };
 
+  virtuaalisation.oci-containers = {
+    backend = "docker";
+    containers = {
+      flaresolverr = {
+        image = "ghcr.io/flaresolverr/flaresolverr:latest";
+        ports = [ "8191:8191" ];
+      };
+    };
+  };
+
   # create folders
   systemd.tmpfiles.rules = [
     "d '/var/torrents' 0777 nobody nogroup -"
