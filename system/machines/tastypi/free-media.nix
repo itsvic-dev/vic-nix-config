@@ -28,6 +28,7 @@
       # Tracker-less torrent and UDP tracker support
       # THIS IS THE ONLY REASON WHY I HAD TO COPY PASTE THE ENTIRE CONFIG FROM NIXOS BTW
       dht.mode.set = on
+      dht.port.set = 6881
       protocol.pex.set = yes
       trackers.use_udp.set = yes
 
