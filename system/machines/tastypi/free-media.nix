@@ -13,7 +13,6 @@
 
   services.samba = {
     enable = true;
-    securityType = "user";
     openFirewall = true;
     settings = {
       global = {
@@ -45,6 +44,11 @@
         "directory mask" = "0755";
       };
     };
+  };
+
+  services.prowlarr = {
+    enable = true;
+    openFirewall = true;
   };
 
   virtualisation.oci-containers = {
