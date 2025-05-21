@@ -104,7 +104,12 @@ in {
     };
 
     users.users = mkIf (cfg.user == "qbittorrent") {
-      qbittorrent = { group = cfg.group; };
+      qbittorrent = {
+        group = cfg.group;
+        home = cfg.dataDir;
+        isSystemUser = true;
+        description = "qBittorrent daemon user";
+      };
     };
 
     users.groups = mkIf (cfg.group == "qbittorrent") { qbittorrent = { }; };
