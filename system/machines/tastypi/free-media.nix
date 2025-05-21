@@ -9,6 +9,9 @@
     enable = true;
     downloadDir = "/var/torrents";
     openFirewall = true;
+    configFile = ''
+      scgi_port = 127.0.0.1:5000
+    '';
   };
 
   services.samba = {
