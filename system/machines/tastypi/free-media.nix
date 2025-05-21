@@ -29,7 +29,7 @@
       # THIS IS THE ONLY REASON WHY I HAD TO COPY PASTE THE ENTIRE CONFIG FROM NIXOS BTW
       dht.mode.set = on
       dht.port.set = 6881
-      dht.add_node = dht.transmissionbt.com
+      schedule = dht_node, 15, 0, "dht.add_node=dht.transmissionbt.com"
       protocol.pex.set = yes
       trackers.use_udp.set = yes
 
