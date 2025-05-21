@@ -47,7 +47,7 @@
     };
   };
 
-  virtuaalisation.oci-containers = {
+  virtualisation.oci-containers = {
     backend = "docker";
     containers = {
       flaresolverr = {
