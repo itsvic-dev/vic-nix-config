@@ -1,4 +1,4 @@
-{ lib, ... }: {
+{ lib, config, ... }: {
   services.flood = {
     enable = true;
     host = "192.168.0.134";
@@ -9,9 +9,6 @@
     enable = true;
     downloadDir = "/var/torrents";
     openFirewall = true;
-    configText = ''
-      scgi_port = 127.0.0.1:5000
-    '';
   };
 
   services.samba = {
@@ -68,6 +65,17 @@
       };
     };
   };
+
+  # expose rtorrent xml-rpc on 127.0.0.1:34903/RPC2 for sonarr.
+  # NEVER EVER OPEN THIS PORT
+  services.nginx.appendHttpConfig = ''
+    server {
+      listen 127.0.0.1:34903;
+      location /RPC2 {
+        scgi_pass ${config.services.rtorrent.rpcSocket};
+      }
+    }
+  '';
 
   # create folders
   systemd.tmpfiles.rules = [
