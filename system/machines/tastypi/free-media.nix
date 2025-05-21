@@ -29,7 +29,8 @@
       # THIS IS THE ONLY REASON WHY I HAD TO COPY PASTE THE ENTIRE CONFIG FROM NIXOS BTW
       dht.mode.set = on
       dht.port.set = 6881
-      schedule = dht_node, 15, 0, "dht.add_node=dht.transmissionbt.com"
+      schedule2 = dht_node_1, 5, 0, "dht.add_node=dht.transmissionbt.com"
+      schedule2 = dht_node_2, 5, 0, "dht.add_node=dht.libtorrent.org:25401"
       protocol.pex.set = yes
       trackers.use_udp.set = yes
 
@@ -82,9 +83,10 @@
       log.open_file = "log", (cfg.logfile)
       log.add_output = "info", "log"
       log.add_output = "tracker_debug", "log"
-      log.add_output = "dht_debug", "log"
-      log.add_output = "dht_router", "log"
-      log.add_output = "dht_manager", "log"
+      log.open_file  = "dht", (cat,/tmp/rtorrent-dht.log)
+      log.add_output = "dht_debug", "dht"
+      log.add_output = "dht_router", "dht"
+      log.add_output = "dht_manager", "dht"
 
       # XMLRPC
       scgi_local = (cfg.rpcsock)
