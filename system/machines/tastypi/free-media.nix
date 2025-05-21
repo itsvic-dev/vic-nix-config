@@ -8,6 +8,7 @@
   services.rtorrent = {
     enable = true;
     downloadDir = "/var/media";
+    openFirewall = true;
   };
 
   # create /var/media folder
