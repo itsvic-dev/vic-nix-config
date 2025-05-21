@@ -8,6 +8,7 @@
   services.qbittorrent = {
     enable = true;
     port = 39403;
+    openFirewall = true;
   };
 
   services.samba = {
