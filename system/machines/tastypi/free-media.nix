@@ -1,4 +1,14 @@
-{ lib, config, ... }: {
+{ lib, config, ... }:
+let
+  proxyPass = port: {
+    enableACME = true;
+    forceSSL = true;
+    locations."/" = {
+      proxyPass = "http://127.0.0.1:${port}";
+      proxyWebsockets = true;
+    };
+  };
+in {
   services.flood = {
     enable = true;
     host = "192.168.0.134";
@@ -72,6 +82,18 @@
   services.jellyfin = {
     enable = true;
     openFirewall = true;
+  };
+
+  services.nginx.virtualHosts = {
+    "media.itsvic.dev" = proxyPass 8096;
+
+    "sonarr.media.itsvic.dev" =
+      proxyPass config.services.sonarr.settings.server.port;
+    "radarr.media.itsvic.dev" =
+      proxyPass config.services.radarr.settings.server.port;
+    "prowlarr.media.itsvic.dev" =
+      proxyPass config.services.prowlarr.settings.server.port;
+    "bazarr.media.itsvic.dev" = proxyPass config.services.bazarr.listenPort;
   };
 
   virtualisation.oci-containers = {
