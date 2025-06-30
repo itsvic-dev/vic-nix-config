@@ -69,6 +69,11 @@
     openFirewall = true;
   };
 
+  services.jellyfin = {
+    enable = true;
+    openFirewall = true;
+  };
+
   virtualisation.oci-containers = {
     backend = "docker";
     containers = {
