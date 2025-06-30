@@ -89,6 +89,10 @@ in {
     openFirewall = true;
   };
 
+  # not sure if this would cause any security issues at least in my setup
+  # but it fixes files not being properly hardlinked by sonarr/radarr
+  boot.kernel.sysctl."fs.protected_hardlinks" = false;
+
   services.nginx.virtualHosts = {
     "media.itsvic.dev" = proxyPass 8096;
     "request.media.itsvic.dev" = proxyPass config.services.jellyseerr.port;
