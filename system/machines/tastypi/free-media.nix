@@ -63,6 +63,12 @@
     openFirewall = true;
   };
 
+  # subtitles
+  services.bazarr = {
+    enable = true;
+    openFirewall = true;
+  };
+
   virtualisation.oci-containers = {
     backend = "docker";
     containers = {
