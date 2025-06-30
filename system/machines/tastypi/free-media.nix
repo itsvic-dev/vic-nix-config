@@ -105,8 +105,8 @@ in {
   virtualisation.oci-containers = {
     backend = "docker";
     containers = {
-      flaresolverr = {
-        image = "ghcr.io/flaresolverr/flaresolverr:latest";
+      byparr = {
+        image = "ghcr.io/thephaseless/byparr:latest";
         ports = [ "8191:8191" ];
       };
     };
