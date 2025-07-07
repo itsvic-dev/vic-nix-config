@@ -9,36 +9,42 @@ in {
 
         profiles.default = {
           enableUpdateCheck = false;
-          extensions = with pkgs.vscode-extensions; [
-            ms-vscode-remote.remote-ssh
-            bmewburn.vscode-intelephense-client # PHP
-            elixir-lsp.vscode-elixir-ls
+          extensions = with pkgs.vscode-extensions;
+            [
+              ms-vscode-remote.remote-ssh
+              bmewburn.vscode-intelephense-client # PHP
+              elixir-lsp.vscode-elixir-ls
 
-            # Python
-            ms-python.python
-            ms-python.black-formatter
-            ms-python.vscode-pylance
+              # Python
+              ms-python.python
+              ms-python.black-formatter
+              ms-python.vscode-pylance
 
-            # C/C++
-            llvm-vs-code-extensions.vscode-clangd
-            twxs.cmake
-            ms-vscode.cmake-tools
-            mesonbuild.mesonbuild
+              # C/C++
+              llvm-vs-code-extensions.vscode-clangd
+              twxs.cmake
+              ms-vscode.cmake-tools
+              mesonbuild.mesonbuild
 
-            # Nix
-            bbenoist.nix
-            brettm12345.nixfmt-vscode
+              # Nix
+              bbenoist.nix
+              brettm12345.nixfmt-vscode
 
-            # Node.js/Web
-            dbaeumer.vscode-eslint
-            esbenp.prettier-vscode
-            vue.volar
-            bradlc.vscode-tailwindcss
+              # Node.js/Web
+              dbaeumer.vscode-eslint
+              esbenp.prettier-vscode
+              vue.volar
+              bradlc.vscode-tailwindcss
 
-            # Rust
-            rust-lang.rust-analyzer
-            tamasfe.even-better-toml
-          ];
+              # Rust
+              rust-lang.rust-analyzer
+              tamasfe.even-better-toml
+            ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [{
+              name = "gml-support";
+              publisher = "liaronce";
+              version = "1.7.4";
+              sha256 = "sha256-eWBERwmulZ8KO/SpMjusX6WNZpU6ikwSwDsVsxvU8z0=";
+            }];
 
           userSettings = let
             prettier = {
