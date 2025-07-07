@@ -14,6 +14,7 @@ in {
               ms-vscode-remote.remote-ssh
               bmewburn.vscode-intelephense-client # PHP
               elixir-lsp.vscode-elixir-ls
+              vscode-icons-team.vscode-icons # needed by gml-support
 
               # Python
               ms-python.python
