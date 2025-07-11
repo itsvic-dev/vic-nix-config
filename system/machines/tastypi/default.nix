@@ -54,8 +54,8 @@
   };
 
   services.logrotate.settings.nginx = {
-    rotate = "daily";
-    maxage = 7;
+    frequency = "daily";
+    rotate = 7;
   };
 
   services.openssh.ports = [ 62122 ];
