@@ -39,8 +39,8 @@
       ${realIpsFromList cfipv4}
       ${realIpsFromList cfipv6}
       real_ip_header CF-Connecting-IP;
-      log_format gdpr-compliant '[$time_iso8601] $request_method "$host$uri"';
-      access_log /var/log/nginx/access.log gdpr-compliant;
+      log_format custom_log '[$time_iso8601] [$remote_addr] $request_method $host$uri';
+      access_log /var/log/nginx/access.log custom_log;
     '';
 
     virtualHosts."social.itsvic.dev" = {
