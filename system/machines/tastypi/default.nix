@@ -53,6 +53,11 @@
     };
   };
 
+  services.logrotate.settings.nginx = {
+    rotate = "daily";
+    maxage = 7;
+  };
+
   services.openssh.ports = [ 62122 ];
 
   networking.firewall.allowedTCPPorts = [ 80 443 ];
