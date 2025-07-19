@@ -15,6 +15,7 @@ in {
               bmewburn.vscode-intelephense-client # PHP
               elixir-lsp.vscode-elixir-ls
               vscode-icons-team.vscode-icons # needed by gml-support
+              github.vscode-github-actions
 
               # Python
               ms-python.python
