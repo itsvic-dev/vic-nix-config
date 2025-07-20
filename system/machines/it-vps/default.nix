@@ -17,18 +17,6 @@ in {
     defaults.email = "contact@itsvic.dev";
   };
 
-  systemd.services."comms-tickets" = {
-    wants = [ "network-online.target" ];
-    wantedBy = [ "multi-user.target" ];
-    serviceConfig = {
-      ExecStart =
-        "/home/vic/comms-tickets/venv/bin/python /home/vic/comms-tickets/main.py";
-      User = "vic";
-      Restart = "always";
-      WorkingDirectory = "/home/vic/comms-tickets";
-    };
-  };
-
   systemd.services."bob" = {
     wants = [ "network-online.target" ];
     wantedBy = [ "multi-user.target" ];
