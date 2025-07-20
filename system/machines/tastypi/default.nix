@@ -6,6 +6,7 @@
     ./plausible.nix
     ./netdata.nix
     ./free-media.nix
+    ./ticket-bot.nix
 
     inputs.oxibridge.nixosModules.aarch64-linux.default
   ];
