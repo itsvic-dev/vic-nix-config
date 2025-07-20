@@ -28,17 +28,6 @@ in {
     };
   };
 
-  systemd.services."vyltrix-bot" = {
-    wants = [ "network-online.target" ];
-    wantedBy = [ "multi-user.target" ];
-    serviceConfig = {
-      ExecStart = "/home/vic/vyltrix/bot/venv/bin/python main.py";
-      User = "vic";
-      Restart = "always";
-      WorkingDirectory = "/home/vic/vyltrix/bot";
-    };
-  };
-
   services.nginx = {
     enable = true;
     recommendedGzipSettings = true;
