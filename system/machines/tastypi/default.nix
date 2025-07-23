@@ -7,7 +7,6 @@
     ./netdata.nix
     ./free-media.nix
     ./ticket-bot.nix
-    ./mc.nix
 
     inputs.oxibridge.nixosModules.aarch64-linux.default
   ];
