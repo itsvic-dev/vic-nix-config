@@ -17,7 +17,7 @@ in {
             github.vscode-github-actions
 
             # Python
-            ms-python.python
+            # ms-python.python
             ms-python.black-formatter
             ms-python.vscode-pylance
 
@@ -47,11 +47,13 @@ in {
               version = "1.7.4";
               sha256 = "sha256-eWBERwmulZ8KO/SpMjusX6WNZpU6ikwSwDsVsxvU8z0=";
             }
+            # FIXME: set arch only when appropriate
             {
               publisher = "ms-python";
-              name = "vscode-python-envs";
-              version = "1.3.12271020";
-              sha256 = "sha256-8H/3p7mHjL8FYfATwGQKjqvC1ERwuxSZAwOVEnnBqak=";
+              name = "python";
+              version = "2025.12.0";
+              sha256 = "sha256-LWA8LqCQrmd83icDYCmUgytPJbCV3ecNobSpWV2R3MA=";
+              arch = "darwin-arm64";
             }
           ];
 
