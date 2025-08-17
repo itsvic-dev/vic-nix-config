@@ -32,12 +32,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    stylix = {
-      url = "github:danth/stylix";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "home-manager";
-    };
-
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -49,7 +43,7 @@
     };
 
     # --- EXTRA SOFTWARE ---
-    nixpkgs-gimp-master.url = "github:jtojnar/nixpkgs/gimp-meson";
+    # nixpkgs-gimp-master.url = "github:jtojnar/nixpkgs/gimp-meson";
 
     # --- MACHINE-SPECIFIC SOFTWARE ---
 

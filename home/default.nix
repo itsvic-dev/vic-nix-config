@@ -13,9 +13,7 @@ in {
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
 
-  home-manager.extraSpecialArgs = {
-    inherit (inputs) nix-index-database nixpkgs-gimp-master;
-  };
+  home-manager.extraSpecialArgs = { inherit (inputs) nix-index-database; };
 
   home-manager.users.vic = {
     imports = common;

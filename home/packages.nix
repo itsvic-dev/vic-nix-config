@@ -1,4 +1,4 @@
-{ lib, osConfig, pkgs, nixpkgs-gimp-master, ... }:
+{ lib, osConfig, pkgs, ... }:
 let cfg = osConfig.vic-nix;
 in {
   home.packages = with pkgs;
@@ -8,7 +8,7 @@ in {
       telegram-desktop
       (vesktop.override { withSystemVencord = false; })
       thunderbird
-      (nixpkgs-gimp-master.legacyPackages.${pkgs.system}.gimp)
+      # (nixpkgs-gimp-master.legacyPackages.${pkgs.system}.gimp)
       obs-studio
       mission-center
     ] ++ lib.optionals cfg.desktop.forGaming [ wineWowPackages.stagingFull ]

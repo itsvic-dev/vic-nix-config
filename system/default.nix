@@ -1,4 +1,4 @@
-inputs@{ nixpkgs, home-manager, stylix, sops-nix, disko, ... }:
+inputs@{ nixpkgs, home-manager, sops-nix, disko, ... }:
 let
   inherit (import ../misc/lib.nix nixpkgs.lib) importAllFromFolder;
 
@@ -15,7 +15,6 @@ let
     (importAllFromFolder ./hardware)
 
     home-manager.nixosModules.default
-    stylix.nixosModules.stylix
     sops-nix.nixosModules.sops
     disko.nixosModules.disko
   ];
