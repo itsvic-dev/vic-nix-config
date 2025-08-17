@@ -40,12 +40,20 @@ in {
             # Rust
             rust-lang.rust-analyzer
             tamasfe.even-better-toml
-          ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [{
-            name = "gml-support";
-            publisher = "liaronce";
-            version = "1.7.4";
-            sha256 = "sha256-eWBERwmulZ8KO/SpMjusX6WNZpU6ikwSwDsVsxvU8z0=";
-          }];
+          ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+            {
+              name = "gml-support";
+              publisher = "liaronce";
+              version = "1.7.4";
+              sha256 = "sha256-eWBERwmulZ8KO/SpMjusX6WNZpU6ikwSwDsVsxvU8z0=";
+            }
+            {
+              publisher = "ms-python";
+              name = "vscode-python-envs";
+              version = "1.3.12271020";
+              sha256 = "sha256-8H/3p7mHjL8FYfATwGQKjqvC1ERwuxSZAwOVEnnBqak=";
+            }
+          ];
 
         userSettings = let
           prettier = { "editor.defaultFormatter" = "esbenp.prettier-vscode"; };
@@ -75,6 +83,8 @@ in {
           "rust-analyzer.server.path" = lib.getExe pkgs.rust-analyzer;
 
           "elixirLS.languageServerOverridePath" = lib.getExe pkgs.elixir-ls;
+
+          "python.useEnvironmentsExtension" = true;
         } // fullPrettierSetup;
       };
     };
