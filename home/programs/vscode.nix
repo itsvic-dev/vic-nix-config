@@ -17,9 +17,9 @@ in {
             github.vscode-github-actions
 
             # Python
-            ms-python.python
+            # ms-python.python
             ms-python.black-formatter
-            ms-python.vscode-pylance
+            # ms-python.vscode-pylance
 
             # C/C++
             llvm-vs-code-extensions.vscode-clangd
@@ -40,12 +40,27 @@ in {
             # Rust
             rust-lang.rust-analyzer
             tamasfe.even-better-toml
-          ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [{
-            name = "gml-support";
-            publisher = "liaronce";
-            version = "1.7.4";
-            sha256 = "sha256-eWBERwmulZ8KO/SpMjusX6WNZpU6ikwSwDsVsxvU8z0=";
-          }];
+          ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+            {
+              name = "gml-support";
+              publisher = "liaronce";
+              version = "1.7.4";
+              sha256 = "sha256-eWBERwmulZ8KO/SpMjusX6WNZpU6ikwSwDsVsxvU8z0=";
+            }
+            # ms-python.python from nixpkgs is broken on darwin, let's download them from the marketplace directly
+            {
+              publisher = "ms-python";
+              name = "python";
+              version = "2025.13.2025081501";
+              sha256 = "sha256-S+s9ITzSIESQ1rslU92ayCMJPaCm49DHFgDCX8bznSI=";
+            }
+            {
+              publisher = "ms-python";
+              name = "vscode-pylance";
+              version = "2025.7.102";
+              sha256 = "sha256-Gd8p/XfRpURdwUHfnqlzWsimZfr7ClWDhg1Hqwlrlas=";
+            }
+          ];
 
         userSettings = let
           prettier = { "editor.defaultFormatter" = "esbenp.prettier-vscode"; };
