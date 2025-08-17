@@ -85,8 +85,6 @@ in {
           "rust-analyzer.server.path" = lib.getExe pkgs.rust-analyzer;
 
           "elixirLS.languageServerOverridePath" = lib.getExe pkgs.elixir-ls;
-
-          "python.useEnvironmentsExtension" = true;
         } // fullPrettierSetup;
       };
     };
