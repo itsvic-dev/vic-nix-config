@@ -2,6 +2,7 @@
   imports = [ ../../system/core/nix.nix ];
 
   system.stateVersion = 6;
+  system.primaryUser = "vic";
 
   system.build.applications = lib.mkForce (pkgs.buildEnv {
     name = "system-applications";
