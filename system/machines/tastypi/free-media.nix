@@ -17,8 +17,9 @@ in {
 
   services.qbittorrent = {
     enable = true;
-    port = 39403;
+    webuiPort = 39403;
     openFirewall = true;
+    profileDir = "/var/lib/qbittorrent";
   };
 
   services.samba = {
