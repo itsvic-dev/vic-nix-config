@@ -4,6 +4,7 @@
   inputs = {
     # --- CORE STUFF ---
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgsStable.url = "github:NixOS/nixpkgs/nixos-25.05";
 
     nix-darwin = {
       url = "github:LnL7/nix-darwin/master";

@@ -365,6 +365,22 @@
         "type": "github"
       }
     },
+    "nixpkgsStable": {
+      "locked": {
+        "lastModified": 1755704039,
+        "narHash": "sha256-gKlP0LbyJ3qX0KObfIWcp5nbuHSb5EHwIvU6UcNBg2A=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "9cb344e96d5b6918e94e1bca2d9f3ea1e9615545",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-25.05",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "oxibridge": {
       "inputs": {
         "nixpkgs": [
@@ -424,6 +440,7 @@
         "nix-index-database": "nix-index-database",
         "nix-rosetta-builder": "nix-rosetta-builder",
         "nixpkgs": "nixpkgs",
+        "nixpkgsStable": "nixpkgsStable",
         "oxibridge": "oxibridge",
         "sops-nix": "sops-nix",
         "vncpy": "vncpy"
