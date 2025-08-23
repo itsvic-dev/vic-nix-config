@@ -5,7 +5,7 @@ let
 
   botSrc = builtins.fetchGit {
     url = "git@github.com:itsvic-dev/comms-tickets";
-    rev = "304c247e4b2065cf385b15bbd2c998b8b4a9bd67";
+    rev = "e542df39c05b52c827e2b6e196cb44cd4be734ce";
   };
 
   python = pkgs.python3.withPackages
