@@ -20,9 +20,10 @@
           config.sops.secrets."cloudflared/2e679b98-a35a-4c13-84f1-b9296bc55bb2".path;
 
         ingress = {
-          "furrygpt.com" = "http://localhost:49361";
-          "www.furrygpt.com" = "http://localhost:49361";
           "netdata-it-vps.itsvic.dev" = "http://localhost:19999";
+          "plausible.itsvic.dev" = "http://localhost:${
+              toString config.services.plausible.server.port
+            }";
         };
         default = "http_status:404";
       };

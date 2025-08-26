@@ -1,12 +1,17 @@
 { config, lib, pkgs, inputs, ... }:
 let bob = inputs.bob.packages.x86_64-linux.default;
 in {
-  imports =
-    [ ./hardware.nix ./ptero.nix ./staticnetwork.nix ./cloudflared.nix ];
+  imports = [
+    ./hardware.nix
+    ./ptero.nix
+    ./staticnetwork.nix
+    ./cloudflared.nix
+    ./plausible.nix
+  ];
 
   vic-nix = {
-    server = { enable = true; };
-    software = { docker = true; };
+    server.enable = true;
+    software.docker = true;
   };
 
   services.qemuGuest.enable = true;
@@ -40,14 +45,5 @@ in {
                     '"$request" $status $body_bytes_sent '
                     '"$http_referer" "$http_user_agent"';
     '';
-
-    virtualHosts."birdie.itsvic.dev" = {
-      enableACME = true;
-      forceSSL = true;
-      locations."/" = {
-        proxyPass = "http://127.0.0.1:4000";
-        proxyWebsockets = true;
-      };
-    };
   };
 }

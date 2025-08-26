@@ -3,7 +3,6 @@
     ./networking.nix
     ./wings.nix
     ./hardware.nix
-    ./plausible.nix
     ./netdata.nix
     ./free-media.nix
     ./ticket-bot.nix
