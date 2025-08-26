@@ -52,7 +52,7 @@
     bob = {
       url =
         "github:bob-discord-bot/bob/38845c889339281250e6189ba69480b1ab46e9c1";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgsStable";
     };
 
     # tastypi
