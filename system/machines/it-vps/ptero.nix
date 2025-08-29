@@ -14,6 +14,7 @@ let
       client_max_body_size 100m;
       client_body_timeout 120s;
       allow 127.0.0.1;
+      allow ::1;
       deny all;
       access_log /var/log/nginx/${domain}.access.log realip_cf;
     '';
