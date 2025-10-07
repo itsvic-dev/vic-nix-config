@@ -99,14 +99,10 @@
       extraCommands = ''
         iptables -t nat -A PREROUTING -s 192.168.169.2 -d 192.168.169.1 -p udp --dport 51822 -j DNAT --to-destination 31.179.32.196:51822
         iptables -t nat -A POSTROUTING -p udp -d 31.179.32.196 --dport 51822 -j MASQUERADE
-        iptables -A FORWARD -s 192.168.169.2 -d 31.179.32.196 -p udp --dport 51822 -j ACCEPT
-        iptables -A FORWARD -d 192.168.169.2 -s 31.179.32.196 -p udp --sport 51822 -j ACCEPT
       '';
       extraStopCommands = ''
         iptables -t nat -D PREROUTING -s 192.168.169.2 -d 192.168.169.1 -p udp --dport 51822 -j DNAT --to-destination 31.179.32.196:51822
         iptables -t nat -D POSTROUTING -p udp -d 31.179.32.196 --dport 51822 -j MASQUERADE
-        iptables -D FORWARD -s 192.168.169.2 -d 31.179.32.196 -p udp --dport 51822 -j ACCEPT
-        iptables -D FORWARD -d 192.168.169.2 -s 31.179.32.196 -p udp --sport 51822 -j ACCEPT
       '';
     };
   };

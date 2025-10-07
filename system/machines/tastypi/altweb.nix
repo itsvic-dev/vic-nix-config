@@ -106,16 +106,13 @@
     firewall = {
       allowedUDPPorts = [ 51822 ];
       extraCommands = ''
+        iptables -t nat -A PREROUTING -p udp -i end0 --dport 51822 -j DNAT --to-destination 192.168.169.2:51822
         iptables -t nat -A POSTROUTING -o pi-ix -j MASQUERADE
       '';
       extraStopCommands = ''
         iptables -t nat -D POSTROUTING -o pi-ix -j MASQUERADE
+        iptables -t nat -D PREROUTING -p udp -i end0 --dport 51822 -j DNAT --to-destination 192.168.169.2:51822
       '';
     };
-    nat.forwardPorts = [{
-      destination = "192.168.169.2:51822";
-      sourcePort = 51822;
-      proto = "udp";
-    }];
   };
 }
