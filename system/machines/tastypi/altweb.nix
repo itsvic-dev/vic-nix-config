@@ -23,7 +23,12 @@
         secrets.altweb-wg-sk.sopsFile = defaultSecretsFile;
       };
 
-      environment.systemPackages = with pkgs; [ iptables tcpdump nettools ];
+      environment.systemPackages = with pkgs; [
+        iptables
+        tcpdump
+        nettools
+        inetutils
+      ];
       networking = {
         useHostResolvConf = false;
         enableIPv6 = false;

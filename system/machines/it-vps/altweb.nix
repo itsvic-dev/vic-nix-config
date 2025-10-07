@@ -27,7 +27,7 @@
         iptables
         tcpdump
         nettools
-        nmap
+        inetutils
       ];
 
       networking = {
