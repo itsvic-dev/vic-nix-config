@@ -21,9 +21,4 @@
 
   fileSystems."/mnt/hdd".device =
     "/dev/disk/by-uuid/e6211b59-6743-4931-a452-c8d5aabb6c09";
-
-  swapDevices = [{
-    device = "/swapfile";
-    size = 4 * 1024;
-  }];
 }

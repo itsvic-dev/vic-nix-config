@@ -17,6 +17,11 @@ in {
   services.qemuGuest.enable = true;
   services.netdata.enable = true;
 
+  fileSystems."/var/cache/netdata" = {
+    device = "/mnt/hdd/netdata";
+    options = [ "bind" ];
+  };
+
   security.acme = {
     acceptTerms = true;
     defaults.email = "contact@itsvic.dev";

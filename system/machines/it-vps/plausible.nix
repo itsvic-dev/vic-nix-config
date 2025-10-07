@@ -14,4 +14,9 @@
       port = 30953;
     };
   };
+
+  fileSystems."/var/lib/clickhouse" = {
+    device = "/mnt/hdd/clickhouse";
+    options = [ "bind" ];
+  };
 }
