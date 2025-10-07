@@ -13,20 +13,41 @@
       };
     };
 
+    # additionalCapabilities = [ "CAP_NET_ADMIN" "CAP_NET_BIND_SERVICE" ];
+
     extraVeths.pi-ix = {
       localAddress = "192.168.169.2";
       hostAddress = "192.168.169.1";
+      forwardPorts = [{
+        hostPort = 51822;
+        containerPort = 51822;
+        protocol = "udp";
+      }];
     };
 
     config = { config, pkgs, ... }: {
-      networking.useHostResolvConf = false;
+      imports = [ inputs.sops-nix.nixosModules.sops ];
+      sops = {
+        age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+        secrets.altweb-wg-sk.sopsFile = defaultSecretsFile;
+      };
+
+      environment.systemPackages = with pkgs; [ iptables tcpdump nettools ];
+      networking = {
+        useHostResolvConf = false;
+        enableIPv6 = false;
+        useDHCP = false;
+        firewall.enable = false;
+        useNetworkd = true;
+      };
+
       systemd.network.enable = true;
       systemd.network.networks = {
         "10-lan" = {
           matchConfig.Name = "eth0";
           networkConfig = {
             DHCP = "no";
-            Address = "20.0.0.1/16";
+            Address = "2.0.0.1/16";
           };
         };
         "20-pi-ix" = {
@@ -36,11 +57,28 @@
             Address = "192.168.169.2/32";
             Peer = "192.168.169.1/32";
           }];
-          routes = [{
-            Gateway = "192.168.169.1";
-            Destination = "192.168.170.0/24";
-            GatewayOnLink = "yes";
-          }];
+        };
+      };
+
+      networking.wireguard.interfaces.wg-aw-pl = {
+        ips = [ "192.168.170.1/24" ];
+        listenPort = 51822;
+        privateKeyFile = config.sops.secrets.altweb-wg-sk.path;
+
+        peers = [{
+          publicKey = "1EhjMgu5HobrdK1Vg1W28ze0REARZTcexNpQRoq30gY=";
+          allowedIPs = [ "192.168.170.0/24" ];
+        }];
+      };
+
+      services.nginx = {
+        enable = true;
+        recommendedGzipSettings = true;
+        recommendedBrotliSettings = true;
+
+        virtualHosts."2.0.0.1" = {
+          default = true;
+          root = ./altweb-root;
         };
       };
 
@@ -48,16 +86,20 @@
     };
   };
 
-  networking.wireguard.interfaces.wg-aw-pl = {
-    ips = [ "192.168.170.1/24" ];
-    listenPort = 51822;
-    privateKeyFile = config.sops.secrets.altweb-wg-sk.path;
-
-    peers = [{
-      publicKey = "1EhjMgu5HobrdK1Vg1W28ze0REARZTcexNpQRoq30gY=";
-      allowedIPs = [ "192.168.170.0/24" ];
+  networking = {
+    firewall = {
+      allowedUDPPorts = [ 51822 ];
+      extraCommands = ''
+        iptables -t nat -A POSTROUTING -o pi-ix -j MASQUERADE
+      '';
+      extraStopCommands = ''
+        iptables -t nat -D POSTROUTING -o pi-ix -j MASQUERADE
+      '';
+    };
+    nat.forwardPorts = [{
+      destination = "192.168.169.2:51822";
+      sourcePort = 51822;
+      proto = "udp";
     }];
   };
-
-  networking.firewall.allowedUDPPorts = [ 51822 ];
 }
