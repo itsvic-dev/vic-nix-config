@@ -7,6 +7,7 @@ in {
     ./staticnetwork.nix
     ./cloudflared.nix
     ./plausible.nix
+    ./altweb.nix
   ];
 
   vic-nix = {

@@ -1,6 +1,4 @@
 { pkgs, lib, defaultSecretsFile, config, inputs, ... }: {
-  sops.secrets.altweb-wg-sk.sopsFile = defaultSecretsFile;
-
   containers.altweb = {
     autoStart = true;
     privateNetwork = true;
@@ -73,6 +71,26 @@
           default = true;
           root = ./altweb-root;
         };
+      };
+
+      services.frr = {
+        bgpd.enable = true;
+        config = ''
+          line vty
+          service integrated-vtysh-config
+          router bgp 65001
+            np bgp egbp-requires-policy
+            neighbor 192.168.170.2 remote-as 65002
+            address-family ipv4 unicast
+              network 2.0.0.0/16
+              neighbor 192.168.170.2 soft-reconfiguration inbound
+              neighbor 192.168.170.2 distribute-list 11 in
+              neighbor 192.168.170.2 distribute-list 10 out
+            exit-address-family
+
+          access-list 10 seq 5 permit 2.0.0.0/16
+          access-list 11 seq 5 permit any
+        '';
       };
 
       system.stateVersion = "25.05";
