@@ -13,16 +13,9 @@
       };
     };
 
-    # additionalCapabilities = [ "CAP_NET_ADMIN" "CAP_NET_BIND_SERVICE" ];
-
     extraVeths.pi-ix = {
       localAddress = "192.168.169.2";
       hostAddress = "192.168.169.1";
-      forwardPorts = [{
-        hostPort = 51822;
-        containerPort = 51822;
-        protocol = "udp";
-      }];
     };
 
     config = { config, pkgs, ... }: {
