@@ -6,6 +6,7 @@
     ./netdata.nix
     ./free-media.nix
     ./ticket-bot.nix
+    ./altweb.nix
 
     inputs.oxibridge.nixosModules.aarch64-linux.default
   ];
