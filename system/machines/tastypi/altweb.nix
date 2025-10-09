@@ -12,17 +12,11 @@
     };
 
     extraVeths.pi-ix = {
-      localAddress = "192.168.169.2";
-      hostAddress = "192.168.169.1";
+      localAddress = "192.168.170.2";
+      hostAddress = "192.168.170.1";
     };
 
-    config = { config, pkgs, ... }: {
-      imports = [ inputs.sops-nix.nixosModules.sops ];
-      sops = {
-        age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
-        secrets.altweb-wg-sk.sopsFile = defaultSecretsFile;
-      };
-
+    config = { pkgs, ... }: {
       environment.systemPackages = with pkgs; [
         iptables
         tcpdump
@@ -50,27 +44,14 @@
           matchConfig.Name = "pi-ix";
           networkConfig = { DHCP = "no"; };
           addresses = [{
-            Address = "192.168.169.2/32";
-            Peer = "192.168.169.1/32";
+            Address = "192.168.170.2/32";
+            Peer = "192.168.170.1/32";
+          }];
+          routes = [{
+            Destination = "192.168.169.0/24";
+            Gateway = "192.168.170.1";
           }];
         };
-      };
-
-      networking.wireguard.interfaces.wg-aw-pl = {
-        ips = [ "192.168.170.1/24" ];
-        listenPort = 51822;
-        privateKeyFile = config.sops.secrets.altweb-wg-sk.path;
-
-        peers = [
-          {
-            publicKey = "1EhjMgu5HobrdK1Vg1W28ze0REARZTcexNpQRoq30gY=";
-            allowedIPs = [ "192.168.170.2/32" ];
-          }
-          {
-            publicKey = "NgkKFdiZK2yk0vai7JfBGQl7CBWrZYrf1LD+tzlotTw=";
-            allowedIPs = [ "192.168.170.3/32" ];
-          }
-        ];
       };
 
       services.nginx = {
@@ -91,12 +72,13 @@
           service integrated-vtysh-config
           router bgp 65001
             np bgp egbp-requires-policy
-            neighbor 192.168.170.2 remote-as 65002
+            neighbor 192.168.169.2 egbp-multihop
+            neighbor 192.168.169.2 remote-as 65002
             address-family ipv4 unicast
               network 2.0.0.0/16
-              neighbor 192.168.170.2 soft-reconfiguration inbound
-              neighbor 192.168.170.2 distribute-list 11 in
-              neighbor 192.168.170.2 distribute-list 10 out
+              neighbor 192.168.169.2 soft-reconfiguration inbound
+              neighbor 192.168.169.2 distribute-list 11 in
+              neighbor 192.168.169.2 distribute-list 10 out
             exit-address-family
 
           access-list 10 seq 5 permit 2.0.0.0/16
@@ -108,16 +90,36 @@
     };
   };
 
+  sops.secrets.altweb-wg-sk.sopsFile = defaultSecretsFile;
+  networking.wireguard.interfaces.wg-aw-pl = {
+    ips = [ "192.168.169.1/24" ];
+    listenPort = 51822;
+    privateKeyFile = config.sops.secrets.altweb-wg-sk.path;
+
+    peers = [
+      {
+        publicKey = "1EhjMgu5HobrdK1Vg1W28ze0REARZTcexNpQRoq30gY=";
+        allowedIPs = [ "192.168.169.2/32" ];
+      }
+      {
+        publicKey = "NgkKFdiZK2yk0vai7JfBGQl7CBWrZYrf1LD+tzlotTw=";
+        allowedIPs = [ "192.168.169.3/32" ];
+      }
+    ];
+  };
+
   networking = {
     firewall = {
       allowedUDPPorts = [ 51822 ];
       extraCommands = ''
-        iptables -t nat -A PREROUTING -p udp -i end0 --dport 51822 -j DNAT --to-destination 192.168.169.2:51822
-        iptables -t nat -A POSTROUTING -o pi-ix -j MASQUERADE
+        iptables -A INPUT -i wg-aw-pl -j DROP
+        iptables -A FORWARD -i wg-aw-pl -o pi-ix -j ACCEPT
+        iptables -A FORWARD -i wg-aw-pl \! -o wg-aw-pl -j DROP
       '';
       extraStopCommands = ''
-        iptables -t nat -D POSTROUTING -o pi-ix -j MASQUERADE
-        iptables -t nat -D PREROUTING -p udp -i end0 --dport 51822 -j DNAT --to-destination 192.168.169.2:51822
+        iptables -D INPUT -i wg-aw-pl -j DROP
+        iptables -D FORWARD -i wg-aw-pl -o pi-ix -j ACCEPT
+        iptables -D FORWARD -i wg-aw-pl \! -o wg-aw-pl -j DROP
       '';
     };
   };
