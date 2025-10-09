@@ -61,10 +61,16 @@
         listenPort = 51822;
         privateKeyFile = config.sops.secrets.altweb-wg-sk.path;
 
-        peers = [{
-          publicKey = "1EhjMgu5HobrdK1Vg1W28ze0REARZTcexNpQRoq30gY=";
-          allowedIPs = [ "192.168.170.0/24" ];
-        }];
+        peers = [
+          {
+            publicKey = "1EhjMgu5HobrdK1Vg1W28ze0REARZTcexNpQRoq30gY=";
+            allowedIPs = [ "192.168.170.2/32" ];
+          }
+          {
+            publicKey = "NgkKFdiZK2yk0vai7JfBGQl7CBWrZYrf1LD+tzlotTw=";
+            allowedIPs = [ "192.168.170.3/32" ];
+          }
+        ];
       };
 
       services.nginx = {
