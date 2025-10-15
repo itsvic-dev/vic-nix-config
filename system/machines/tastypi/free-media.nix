@@ -1,4 +1,4 @@
-{ lib, config, ... }:
+{ pkgs, lib, config, ... }:
 let
   proxyPass = port: {
     enableACME = true;
@@ -22,6 +22,11 @@ in {
     profileDir = "/var/lib/qbittorrent";
   };
 
+  services.samba-wsdd = {
+    enable = true;
+    openFirewall = true;
+  };
+
   services.samba = {
     enable = true;
     openFirewall = true;
@@ -35,8 +40,8 @@ in {
         "hosts deny" = "0.0.0.0/0";
         "guest account" = "nobody";
         "map to guest" = "bad user";
-        "vfs objects" = "fruit streams_xaddr";
-        "fruit:metadata" = "stream";
+        "vfs objects" = "fruit streams_xattr";
+        "fruit:aapl" = "yes";
         "fruit:model" = "MacSamba";
         "fruit:veto_appledouble" = "no";
         "fruit:nfs_aces" = "no";
