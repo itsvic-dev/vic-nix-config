@@ -1,8 +1,7 @@
-{ config, pkgs, defaultSecretsFile, ... }: {
-  sops.secrets = {
-    akos-ipv6-pk.sopsFile = defaultSecretsFile;
-    vic-wg-pk.sopsFile = defaultSecretsFile;
-  };
+{ config, defaultSecretsFile, ... }: {
+  imports = [ ./vic-net.nix ];
+
+  sops.secrets = { akos-ipv6-pk.sopsFile = defaultSecretsFile; };
 
   networking.wireguard.interfaces = {
     akos-ipv6 = {
@@ -15,35 +14,6 @@
         endpoint = "70.34.254.174:999";
         persistentKeepalive = 25;
       }];
-    };
-
-    vic-wg = {
-      ips = [ "10.200.200.1/24" ];
-      listenPort = 51820;
-      privateKeyFile = config.sops.secrets.vic-wg-pk.path;
-
-      postSetup = ''
-        ${pkgs.iptables}/bin/iptables -t nat -A POSTROUTING -s 10.200.200.0/24 -o end0 -j MASQUERADE
-      '';
-
-      postShutdown = ''
-        ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -s 10.200.200.0/24 -o end0 -j MASQUERADE
-      '';
-
-      peers = [{
-        publicKey = "Z2M4NeR3ulHlsSOOyubhKui2qsWd14wgWR9lTTWVg2E=";
-        allowedIPs = [ "10.200.200.2/32" ];
-      }];
-    };
-  };
-
-  networking = {
-    firewall.allowedUDPPorts =
-      [ config.networking.wireguard.interfaces.vic-wg.listenPort ];
-    nat = {
-      enable = true;
-      externalInterface = "end0";
-      internalInterfaces = [ "vic-wg" ];
     };
   };
 
