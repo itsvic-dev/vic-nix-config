@@ -5,31 +5,58 @@
       auth_enabled = false;
       server.http_listen_port = 3100;
 
-      common = {
-        ring = {
-          instance_addr = "127.0.0.1";
-          kvstore.store = "inmemory";
+      ingester = {
+        lifecycler = {
+          address = "127.0.0.1";
+          ring = {
+            kvstore = { store = "inmemory"; };
+            replication_factor = 1;
+          };
         };
-        replication_factor = 1;
-        path_prefix = "/var/lib/loki";
+        chunk_idle_period = "1h";
+        max_chunk_age = "1h";
+        chunk_target_size = 999999;
+        chunk_retain_period = "30s";
       };
 
-      schema_config.configs = [{
-        from = "2025-10-19";
-        store = "tsdb";
-        object_store = "filesystem";
-        schema = "v13";
-        index = {
-          prefix = "index_";
-          period = "24h";
+      schema_config = {
+        configs = [{
+          from = "2025-05-19";
+          store = "tsdb";
+          object_store = "filesystem";
+          schema = "v13";
+          index = {
+            prefix = "index_";
+            period = "24h";
+          };
+        }];
+      };
+
+      storage_config = {
+        tsdb_shipper = {
+          active_index_directory = "/var/lib/loki/tsdb-shipper-active";
+          cache_location = "/var/lib/loki/tsdb-shipper-cache";
+          cache_ttl = "24h";
         };
-      }];
 
-      storage_config.filesystem.directory = "/var/lib/loki/chunks";
+        filesystem = { directory = "/var/lib/loki/chunks"; };
+      };
 
-      limits_config.volume_enabled = true;
+      limits_config = {
+        reject_old_samples = true;
+        reject_old_samples_max_age = "168h";
+        volume_enabled = true;
+      };
+
+      table_manager = {
+        retention_deletes_enabled = false;
+        retention_period = "0s";
+      };
     };
   };
+
+  networking.firewall.interfaces.vic-net.allowedTCPPorts =
+    [ config.services.loki.configuration.server.http_listen_port ];
 
   services.promtail = {
     enable = true;
