@@ -8,7 +8,7 @@
       script = ''
         system_path=$(${pkgs.curl}/bin/curl \
           -L --H "Accept: application/json" \
-          https://hydra.vic/job/config/main/${config.networking.hostname}/latest \
+          https://hydra.vic/job/config/main/${config.networking.hostName}/latest \
           | ${pkgs.jq}.bin/jq -r .buildoutputs.out.path)
 
         nix-env -p /nix/var/nix/profiles/system --set "$system_path"
