@@ -1,5 +1,5 @@
 {
-  imports = [ ./disko.nix ];
+  imports = [ ./disko.nix ./hardware.nix ];
 
   vic-nix = {
     server.enable = true;
