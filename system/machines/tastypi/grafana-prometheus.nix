@@ -25,12 +25,15 @@
     enable = true;
     port = 9001;
 
+    globalConfig.scrape_interval = "10s";
+
     exporters = {
       node = {
         enable = true;
         enabledCollectors = [ "systemd" ];
         port = 9002;
       };
+      nginx.enable = true;
     };
 
     scrapeConfigs = [{
@@ -38,13 +41,17 @@
       static_configs = [{
         targets = [
           "127.0.0.1:${toString config.services.prometheus.exporters.node.port}"
+          "127.0.0.1:${
+            toString config.services.prometheus.exporters.nginx.port
+          }"
         ];
       }];
     }];
   };
 
-  services.nginx.virtualHosts.${config.services.grafana.settings.server.domain} =
-    {
+  services.nginx = {
+    statusPage = true;
+    virtualHosts.${config.services.grafana.settings.server.domain} = {
       forceSSL = true;
       sslCertificate = "${inputs.self}/ca/grafana.vic/cert.pem";
       sslCertificateKey = config.sops.secrets.grafana-vic-key.path;
@@ -55,4 +62,5 @@
         proxyWebsockets = true;
       };
     };
+  };
 }
