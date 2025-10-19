@@ -31,6 +31,8 @@
     ];
   };
 
+  security.pki.certificateFiles = [ ../../ca/ca-cert.pem ];
+
   # don't change this
   system.stateVersion = "23.05";
 }
