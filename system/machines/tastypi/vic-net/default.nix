@@ -54,6 +54,11 @@
     extraOptions = ''
       recursion yes;
     '';
+    extraConfig = ''
+      statistics-channels {
+        inet 127.0.0.1 port 8053 allow { 127.0.0.1 };
+      }
+    '';
 
     forwarders = [ "1.1.1.1" "1.0.0.1" ];
     forward = "only";

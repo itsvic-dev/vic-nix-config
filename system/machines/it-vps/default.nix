@@ -34,6 +34,7 @@ in {
 
   services.nginx = {
     enable = true;
+    statusPage = true;
     recommendedGzipSettings = true;
     recommendedOptimisation = true;
     recommendedProxySettings = true;
@@ -53,6 +54,10 @@ in {
       port = 9002;
       openFirewall = true;
       listenAddress = "10.21.0.2";
+    };
+    nginx = {
+      enable = true;
+      openFirewall = true;
     };
   };
 }
