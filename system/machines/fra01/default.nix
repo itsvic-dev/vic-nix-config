@@ -3,7 +3,7 @@
 
   vic-nix = {
     server.enable = true;
-    noSecrets = true;
+    hardware.intel.enable = true;
   };
 
   networking = {
