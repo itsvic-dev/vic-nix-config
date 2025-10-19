@@ -2,7 +2,7 @@
   sops.secrets.vic-net-sk.sopsFile = defaultSecretsFile;
 
   networking.wireguard.interfaces.vic-net = {
-    ips = [ "10.21.0.2/32" ];
+    ips = [ "10.21.0.3/32" ];
     listenPort = 51820;
     privateKeyFile = config.sops.secrets.vic-net-sk.path;
     peers = [{
