@@ -67,7 +67,7 @@
     statusPage = true;
     virtualHosts.${config.services.grafana.settings.server.domain} = {
       forceSSL = true;
-      sslCertificate = "${inputs.self}/ca/grafana.vic/cert.pem";
+      sslCertificate = ../../../ca/grafana.vic/cert.pem;
       sslCertificateKey = config.sops.secrets.grafana-vic-key.path;
       locations."/" = {
         proxyPass = "http://127.0.0.1:${

@@ -9,7 +9,7 @@
   };
 
   # trust ourselves
-  security.pki.certificateFiles = [ "${inputs.self}/ca/ca-cert.pem" ];
+  security.pki.certificateFiles = [ ../../../../ca/ca-cert.pem ];
 
   networking.wireguard.interfaces.vic-net = {
     ips = [ "10.21.0.1/16" ];
@@ -72,7 +72,7 @@
   services.nginx.virtualHosts."tastypi.vic" = {
     root = ./tastypi-nginx;
     forceSSL = true;
-    sslCertificate = "${inputs.self}/ca/tastypi.vic/cert.pem";
+    sslCertificate = ../../../../ca/tastypi.vic/cert.pem;
     sslCertificateKey = config.sops.secrets.tastypi-vic-key.path;
   };
 }

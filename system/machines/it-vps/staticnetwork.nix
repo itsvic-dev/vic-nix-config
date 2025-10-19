@@ -37,5 +37,5 @@
   };
 
   sops.secrets.vic-net-sk.sopsFile = defaultSecretsFile;
-  security.pki.certificateFiles = [ "${inputs.self}/ca/ca-cert.pem" ];
+  security.pki.certificateFiles = [ ../../../ca/ca-cert.pem ];
 }
