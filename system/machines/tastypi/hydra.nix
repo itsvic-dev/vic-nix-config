@@ -26,7 +26,7 @@
     buildMachines = [{
       hostName = "it-vps.vic";
       system = "x86_64-linux";
-      protocol = "ssh-ng";
+      protocol = "ssh";
       maxJobs = 2;
       speedFactor = 1;
       supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
