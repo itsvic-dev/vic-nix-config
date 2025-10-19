@@ -9,6 +9,8 @@
       trusted-users =
         [ "root" (if pkgs.stdenv.isLinux then "@wheel" else "@admin") ];
     };
+
+    optimise.automatic = true;
   };
 
   nixpkgs = {

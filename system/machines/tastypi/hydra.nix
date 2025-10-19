@@ -3,7 +3,6 @@
     enable = true;
     hydraURL = "https://hydra.vic";
     notificationSender = "hydra@localhost";
-    buildMachinesFiles = [ ];
     useSubstitutes = true;
     port = 4023;
     extraConfig = ''
@@ -20,8 +19,19 @@
     settings.allowed-uris =
       [ "github:" "git+https://github.com/" "git+ssh://github.com/" ];
     extraOptions = ''
+      builders-use-substitutes = true
       !include ${config.sops.secrets.nixAccessTokens.path}
     '';
+
+    buildMachines = [{
+      hostName = "it-vps.vic";
+      system = "x86_64-linux";
+      protocol = "ssh-ng";
+      maxJobs = 2;
+      speedFactor = 1;
+      supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+      mandatoryFeatures = [ ];
+    }];
   };
 
   sops.secrets = {
