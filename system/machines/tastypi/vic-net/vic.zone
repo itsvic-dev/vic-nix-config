@@ -6,13 +6,14 @@ tastypi.vic. IN A 10.21.0.1
 
 ; clients
 mbp.clients.vic. IN A 10.21.1.1
+iphone.clients.vic. IN A 10.21.1.2
 
 ; TLD setup
 @ IN SOA tastypi.vic. contact@itsvic.dev. (
   2025101901  ; serial
-  28800       ; refresh
-  7200        ; retry
-  864000      ; expire
+  3h          ; refresh
+  1h          ; retry
+  24h         ; expire
   60          ; min TTL
 )
 @ IN NS tastypi.vic.

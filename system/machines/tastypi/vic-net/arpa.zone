@@ -11,9 +11,9 @@ $ORIGIN 21.10.in-addr.arpa.
 )
 @ IN NS tastypi.vic.
 
-
 ; servers
 1.0 IN PTR tastypi.vic.
 
 ; clients
 1.1 IN PTR mbp.clients.vic.
+2.1 IN PTR iphone.clients.vic.
