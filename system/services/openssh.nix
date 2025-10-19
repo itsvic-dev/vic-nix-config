@@ -1,7 +1,7 @@
 { pkgs, config, lib, ... }:
 let cfg = config.vic-nix.server;
 in {
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf (cfg.enable && !config.vic-nix.noSecrets) {
     services.openssh = {
       enable = true;
       settings.PasswordAuthentication = false;
