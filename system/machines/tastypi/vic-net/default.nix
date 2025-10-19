@@ -66,6 +66,9 @@
     zones."vic" = {
       master = true;
       file = ./vic.zone;
+      extraConfig = ''
+        zone-statistics yes;
+      '';
     };
 
     zones."21.10.in-addr.arpa" = {
