@@ -99,7 +99,8 @@
         aarch64-darwin.default = defineShell "aarch64-darwin";
       };
 
-      hydraJobs = nixpkgs.lib.genAttrs [ "tastypi" "it-vps" ]
-        (name: self.nixosConfigurations.${name}.config.system.build.toplevel);
+      hydraJobs =
+        nixpkgs.lib.mapAttrs (name: value: value.config.system.build.toplevel)
+        self.nixosConfigurations;
     };
 }

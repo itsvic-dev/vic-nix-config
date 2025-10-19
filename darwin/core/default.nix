@@ -1,4 +1,4 @@
-{ pkgs, config, lib, ... }: {
+{ pkgs, config, lib, globalSecretsFile, ... }: {
   imports = [ ../../system/core/nix.nix ];
 
   system.stateVersion = 6;
@@ -16,4 +16,9 @@
 
   # install ncurses (has better clear :P)
   environment.systemPackages = with pkgs; [ ncurses ];
+
+  sops = {
+    defaultSopsFile = globalSecretsFile;
+    age.keyFile = [ "/etc/sops-age-key" ];
+  };
 }

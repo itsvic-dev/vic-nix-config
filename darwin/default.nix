@@ -1,4 +1,4 @@
-inputs@{ nixpkgs, nix-darwin, home-manager, nix-rosetta-builder, ... }:
+inputs@{ nixpkgs, nix-darwin, nix-rosetta-builder, ... }:
 let
   inherit (import ../misc/lib.nix nixpkgs.lib) importAllFromFolder;
 
@@ -9,7 +9,8 @@ let
 
     (importAllFromFolder ./programs)
 
-    home-manager.darwinModules.home-manager
+    inputs.home-manager.darwinModules.home-manager
+    inputs.sops-nix.darwinModules.sops
   ];
 in {
   "Victors-MacBook-Pro" = nix-darwin.lib.darwinSystem {
@@ -23,6 +24,11 @@ in {
 
       ./machines/mbp
     ];
-    specialArgs = { inherit inputs; };
+    specialArgs = {
+      inherit inputs;
+      # secretsPath = ../secrets/mbp;
+      # defaultSecretsFile = "${secretsPath}/default.yaml";
+      globalSecretsFile = ../secrets/global.yaml;
+    };
   };
 }

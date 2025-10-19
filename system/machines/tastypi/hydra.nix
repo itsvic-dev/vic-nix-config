@@ -58,7 +58,7 @@
     };
     nixAccessTokens = {
       group = config.users.groups.keys.name;
-      sopsFile = "${secretsPath}/nix-auth.conf";
+      sopsFile = ../../../secrets/nix-auth.conf;
       format = "binary";
       mode = "0440";
     };

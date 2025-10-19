@@ -3,6 +3,7 @@ keys:
   - &machine_e6nix age1sv5tdk96v826vx5gnkrx3m7rzypw4hjf6vtrhxy62l6kprs8zd9qyvdrvd
   - &machine_tastypi age10xf6lqcxjr0xmepfsymvyeppu3m922zrtf2x63aqkwgvqwjj7ymqs404cm
   - &machine_it_vps age108c25algyks6pa5z9asa7dzxfs4j23qwwhzfygvlty9lkverecyqpmj27g
+  - &machine_mbp age1drt97j9n749at0lpg2u7e0dw6yuu5a4cvdxwm2dgg7ujx94f6qdqsjwm7l
 
 creation_rules:
   - path_regex: secrets/global.yaml
@@ -12,6 +13,7 @@ creation_rules:
           - *machine_e6nix
           - *machine_tastypi
           - *machine_it_vps
+          - *machine_mbp
 
   - path_regex: secrets/e6nix/.*
     key_groups:
@@ -30,3 +32,10 @@ creation_rules:
       - age:
           - *admin_vic
           - *machine_it_vps
+
+  - path_regex: secrets/nix-auth.conf
+    key_groups:
+      - age:
+          - *admin_vic
+          - *machine_tastypi
+          - *machine_mbp
