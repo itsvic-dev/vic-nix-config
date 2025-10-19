@@ -26,6 +26,7 @@
       group = config.users.groups.keys.name;
       sopsFile = "${secretsPath}/nix-auth.conf";
       format = "binary";
+      mode = "0440";
     };
   };
 
