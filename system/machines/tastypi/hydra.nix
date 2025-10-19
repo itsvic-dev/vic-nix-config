@@ -5,14 +5,6 @@
     notificationSender = "hydra@localhost";
     useSubstitutes = true;
     port = 4023;
-    extraConfig = ''
-      <hydra_notify>
-        <prometheus>
-          listen_address = 127.0.0.1
-          port = 9199
-        </prometheus>
-      </hydra_notify>
-    '';
   };
 
   nix = {
@@ -23,21 +15,45 @@
       !include ${config.sops.secrets.nixAccessTokens.path}
     '';
 
-    buildMachines = [{
-      hostName = "it-vps.vic";
-      system = "x86_64-linux";
-      protocol = "ssh";
-      maxJobs = 2;
-      speedFactor = 1;
-      supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
-      mandatoryFeatures = [ ];
-    }];
+    buildMachines = [
+      {
+        hostName = "it-vps.vic";
+        system = "x86_64-linux";
+        protocol = "ssh";
+        maxJobs = 2;
+        speedFactor = 1;
+        supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+        mandatoryFeatures = [ ];
+      }
+      # hydra freaks out sometimes without this
+      {
+        hostName = "localhost";
+        system = "aarch64-linux";
+        protocol = null;
+        maxJobs = 4;
+        speedFactor = 1;
+        supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+        mandatoryFeatures = [ ];
+      }
+    ];
+
+    distributedBuilds = true;
   };
 
   sops.secrets = {
     hydra-vic-key = {
       owner = "nginx";
       sopsFile = "${secretsPath}/hydra.vic.key";
+      format = "binary";
+    };
+    cache-vic-key = {
+      owner = "nginx";
+      sopsFile = "${secretsPath}/cache.vic.key";
+      format = "binary";
+    };
+    binary-cache-key = {
+      owner = "nginx";
+      sopsFile = "${secretsPath}/binary-cache.key";
       format = "binary";
     };
     nixAccessTokens = {
@@ -54,14 +70,34 @@
   };
   users.groups.keys = { };
 
-  services.nginx.virtualHosts."hydra.vic" = {
-    forceSSL = true;
-    sslCertificate = ../../../ca/hydra.vic/cert.pem;
-    sslCertificateKey = config.sops.secrets.hydra-vic-key.path;
-    locations."/" = {
-      proxyPass = "http://localhost:${toString config.services.hydra.port}";
-      proxyWebsockets = true;
-      recommendedProxySettings = true;
+  services.nix-serve = {
+    enable = true;
+    port = 9620;
+    bindAddress = "127.0.0.1";
+    secretKeyFile = config.sops.secrets.binary-cache-key.path;
+  };
+
+  services.nginx.virtualHosts = {
+    "hydra.vic" = {
+      forceSSL = true;
+      sslCertificate = ../../../ca/hydra.vic/cert.pem;
+      sslCertificateKey = config.sops.secrets.hydra-vic-key.path;
+      locations."/" = {
+        proxyPass = "http://localhost:${toString config.services.hydra.port}";
+        proxyWebsockets = true;
+        recommendedProxySettings = true;
+      };
+    };
+    "cache.vic" = {
+      forceSSL = true;
+      sslCertificate = ../../../ca/cache.vic/cert.pem;
+      sslCertificateKey = config.sops.secrets.cache-vic-key.path;
+      locations."/" = {
+        proxyPass =
+          "http://localhost:${toString config.services.nix-serve.port}";
+        proxyWebsockets = true;
+        recommendedProxySettings = true;
+      };
     };
   };
 }

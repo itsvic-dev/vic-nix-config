@@ -63,7 +63,7 @@ in {
   };
 
   users.users.nixremote = {
-    isSystemUser = true;
+    isNormalUser = true;
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM3Y1OlIZoZwu7XhxwD7O+R6ua99raUdZi+Ftqr00//X root@tastypi"
     ];

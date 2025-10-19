@@ -8,6 +8,11 @@
       experimental-features = [ "nix-command" "flakes" ];
       trusted-users =
         [ "root" (if pkgs.stdenv.isLinux then "@wheel" else "@admin") ];
+
+      substituters = [ "https://cache.vic" ];
+
+      trusted-public-keys =
+        [ "cache.vic:CnhOE+6KqHwCPD+x6Tbv0wJsh2LmpBqxOd3Ze+3kxOk=" ];
     };
 
     optimise.automatic = true;

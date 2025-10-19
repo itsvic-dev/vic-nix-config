@@ -15,6 +15,11 @@ in {
           #!${pkgs.runtimeShell}
           JSON_TEMPLATE='{content: $content}'
 
+          # ignore special 'nixremote' user
+          if [ "$PAM_USER" == "nixremote" ]; then
+            exit
+          fi
+
           case "$PAM_TYPE" in
             open_session)
               CONTENT="➡️ \`$HOSTNAME\`: \`$PAM_USER\` logged in (\`$PAM_RHOST\`)"
