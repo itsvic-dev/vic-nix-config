@@ -2,7 +2,6 @@
   config = lib.mkIf config.vic-nix.autoUpdate {
     systemd.services."vic-nix-autoupdate" = {
       description = "Check for new system builds";
-      wantedBy = [ "multi-user.target" ];
       requires = [ "network-online.target" ];
 
       script = ''
@@ -18,7 +17,7 @@
 
     systemd.timers."vic-nix-autoupdate" = {
       description = "Check for new system builds";
-      wantedBy = [ "multi-user.target" ];
+      wantedBy = [ "timers.target" ];
       timerConfig = {
         OnCalendar = "hourly";
         Unit = "vic-nix-autoupdate.service";
