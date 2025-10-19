@@ -1,4 +1,4 @@
-{ lib, inputs, ... }: {
+{ lib, config, defaultSecretsFile, inputs, ... }: {
   networking = {
     # we use static networking here
     networkmanager.enable = lib.mkForce false;
