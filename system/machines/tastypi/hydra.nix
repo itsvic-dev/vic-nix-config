@@ -28,12 +28,10 @@
       # hydra freaks out sometimes without this
       {
         hostName = "localhost";
-        system = "aarch64-linux";
         protocol = null;
+        system = "aarch64-linux";
+        supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
         maxJobs = 4;
-        speedFactor = 1;
-        supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
-        mandatoryFeatures = [ ];
       }
     ];
 
