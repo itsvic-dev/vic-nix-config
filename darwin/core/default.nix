@@ -19,6 +19,6 @@
 
   sops = {
     defaultSopsFile = globalSecretsFile;
-    age.keyFile = [ "/etc/sops-age-key" ];
+    age.keyFile = "/etc/sops-age-key";
   };
 }
