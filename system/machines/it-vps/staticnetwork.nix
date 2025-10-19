@@ -25,7 +25,7 @@
     nameservers = [ "10.21.0.1" "1.1.1.1" "1.0.0.1" ];
 
     wireguard.interfaces.vic-net = {
-      address = [ "10.21.0.2/32" ];
+      ips = [ "10.21.0.2/32" ];
       listenPort = 51820;
       privateKeyFile = config.sops.secrets.vic-net-sk.path;
       peers = [{
