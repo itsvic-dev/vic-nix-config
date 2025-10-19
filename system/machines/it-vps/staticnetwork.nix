@@ -2,6 +2,7 @@
   networking = {
     # we use static networking here
     networkmanager.enable = lib.mkForce false;
+    useNetworkd = true;
 
     firewall.allowedTCPPorts = [ 22 80 443 ];
 
@@ -21,11 +22,10 @@
       interface = "ens18";
     };
 
-    nameservers = [ "1.1.1.1" "1.0.0.1" ];
+    nameservers = [ "10.21.0.1" "1.1.1.1" "1.0.0.1" ];
 
-    wg-quick.interfaces.vic-net = {
+    wireguard.interfaces.vic-net = {
       address = [ "10.21.0.2/32" ];
-      dns = [ "10.21.0.1" ];
       listenPort = 51820;
       privateKeyFile = config.sops.secrets.vic-net-sk.path;
       peers = [{
