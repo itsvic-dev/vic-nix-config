@@ -3,6 +3,7 @@ $ORIGIN vic.
 
 ; servers
 tastypi.vic. IN A 10.21.0.1
+it-vps.vic. IN A 10.21.0.2
 
 ; clients
 mbp.clients.vic. IN A 10.21.1.1

@@ -13,13 +13,20 @@
     listenPort = 51820;
     privateKeyFile = config.sops.secrets.vic-net-sk.path;
     peers = [
-      # mbp
+      ### servers
       {
+        name = "it-vps";
+        publicKey = "S2cSFcrvD4AzK7KuJTWpAzkYNMrdi2ojy8Owl+5VOU4=";
+        allowedIPs = [ "10.21.0.2/32" ];
+      }
+      ### clients
+      {
+        name = "mbp";
         publicKey = "fyujyTR/I56g3bO79gLtwn7YgSxxq6O/Ct4NH5nRqlk=";
         allowedIPs = [ "10.21.1.1/32" ];
       }
-      # iphone
       {
+        name = "iphone";
         publicKey = "AQqR0qBXROiHro05uJBbckiCWpuBzS8lTDsJIyhMxDI=";
         allowedIPs = [ "10.21.1.2/32" ];
       }
