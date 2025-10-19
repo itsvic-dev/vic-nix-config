@@ -43,4 +43,6 @@ in {
   "fra01" = defineSystem "x86_64-linux" "fra01";
   "it-vps" = defineSystem "x86_64-linux" "it-vps";
   "tastypi" = defineSystem "aarch64-linux" "tastypi";
+
+  "live-base" = defineSystem "x86_64-linux" "live-base";
 }

@@ -21,10 +21,5 @@
       address = "37.114.50.1";
       interface = "ens18";
     };
-
-    nameservers = lib.mkForce [ "1.1.1.1" "1.0.0.1" ];
   };
-
-  users.users.root.hashedPassword =
-    "$y$j9T$pa4EgdgP3jUPyu/c7Iue.1$x9as1wf3LkJKElWGhFIxBEsFXdiRBhe3aDT7GIVAl./";
 }

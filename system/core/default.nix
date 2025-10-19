@@ -12,11 +12,11 @@
   config = lib.mkMerge [
     {
       boot.tmp.useTmpfs = true;
-      networking.nameservers = [ "10.21.0.1" ];
-      networking.networkmanager = {
-        enable = true;
-        dns = "systemd-resolved";
-      };
+      networking.nameservers = if (config.vic-nix.noSecrets) then [
+        "1.1.1.1"
+        "1.0.0.1"
+      ] else
+        [ "10.21.0.1" ];
       services.resolved = {
         enable = true;
         fallbackDns = config.networking.nameservers;
