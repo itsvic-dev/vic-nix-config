@@ -9,7 +9,7 @@ in {
         vpl-gpu-rt
 
         intel-compute-runtime
-        intel-ocl
+        # intel-ocl  # broken
       ];
     };
     environment.sessionVariables.LIBVA_DRIVER_NAME = "iHD";
