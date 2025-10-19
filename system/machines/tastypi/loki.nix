@@ -26,6 +26,8 @@
       }];
 
       storage_config.filesystem.directory = "/var/lib/loki/chunks";
+
+      limits_config.volume_enabled = true;
     };
   };
 
