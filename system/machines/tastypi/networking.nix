@@ -1,6 +1,4 @@
 { config, defaultSecretsFile, ... }: {
-  imports = [ ./vic-net.nix ];
-
   sops.secrets = { akos-ipv6-pk.sopsFile = defaultSecretsFile; };
 
   networking.wireguard.interfaces = {

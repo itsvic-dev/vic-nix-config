@@ -1,5 +1,12 @@
-{ config, defaultSecretsFile, ... }: {
-  sops.secrets.vic-net-sk.sopsFile = defaultSecretsFile;
+{ config, defaultSecretsFile, secretsPath, inputs, ... }: {
+  sops.secrets = {
+    vic-net-sk.sopsFile = defaultSecretsFile;
+    tastypi-vic-key = {
+      owner = "nginx";
+      sopsFile = "${secretsPath}/tastypi.vic.key";
+      format = "binary";
+    };
+  };
 
   networking.wireguard.interfaces.vic-net = {
     ips = [ "10.21.0.1/16" ];
@@ -43,5 +50,12 @@
       master = true;
       file = ./arpa.zone;
     };
+  };
+
+  services.nginx.virtualHosts."tastypi.vic" = {
+    root = ./tastypi-nginx;
+    forceSSL = true;
+    sslCertificate = "${inputs.self}/ca/tastypi.vic/cert.pem";
+    sslCertificateKey = config.sops.secrets.tastypi-vic-key.path;
   };
 }

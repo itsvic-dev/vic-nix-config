@@ -6,6 +6,7 @@
     ./netdata.nix
     ./free-media.nix
     ./ticket-bot.nix
+    ./vic-net
 
     inputs.oxibridge.nixosModules.aarch64-linux.default
   ];
