@@ -10,6 +10,13 @@ with lib; {
           "Whether the machine uses a tmpfs-as-root partition style.";
       };
 
+      autoUpdate = mkOption {
+        type = types.bool;
+        default = true;
+        description =
+          "Whether the machine should auto-update based on system builds from hydra.vic.";
+      };
+
       secureBoot = mkEnableOption "UEFI Secure Boot";
 
       hardware = {
