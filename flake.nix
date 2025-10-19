@@ -72,7 +72,7 @@
     };
   };
 
-  outputs = inputs@{ nixpkgs, disko, ... }:
+  outputs = inputs@{ self, nixpkgs, disko, ... }:
     let
       defineShell = system:
         let
@@ -93,5 +93,7 @@
         aarch64-linux.default = defineShell "aarch64-linux";
         aarch64-darwin.default = defineShell "aarch64-darwin";
       };
+
+      hydraJobs = { inherit (self.nixosConfigurations) tastypi; };
     };
 }

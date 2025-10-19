@@ -1,0 +1,48 @@
+{ config, secretsPath, ... }: {
+  services.hydra = {
+    enable = true;
+    hydraURL = "https://hydra.vic";
+    notificationSender = "hydra@localhost";
+    buildMachinesFiles = [ ];
+    useSubstitutes = true;
+    port = 4023;
+  };
+
+  nix = {
+    settings.allowed-uris =
+      [ "github:" "git+https://github.com/" "git+ssh://github.com/" ];
+    extraOptions = ''
+      !include ${config.sops.secrets.nixAccessTokens.path}
+    '';
+  };
+
+  sops.secrets = {
+    hydra-vic-key = {
+      owner = "nginx";
+      sopsFile = "${secretsPath}/hydra.vic.key";
+      format = "binary";
+    };
+    nixAccessTokens = {
+      group = config.users.groups.keys.name;
+      sopsFile = "${secretsPath}/nix-auth.conf";
+      format = "binary";
+    };
+  };
+
+  users.users = {
+    hydra.extraGroups = [ config.users.groups.keys.name ];
+    vic.extraGroups = [ config.users.groups.keys.name ];
+  };
+  users.groups.keys = { };
+
+  services.nginx.virtualHosts."hydra.vic" = {
+    forceSSL = true;
+    sslCertificate = ../../../ca/hydra.vic/cert.pem;
+    sslCertificateKey = config.sops.secrets.hydra-vic-key.path;
+    locations."/" = {
+      proxyPass = "http://localhost:${toString config.services.hydra.port}";
+      proxyWebsockets = true;
+      recommendedProxySettings = true;
+    };
+  };
+}

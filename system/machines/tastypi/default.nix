@@ -8,6 +8,7 @@
     ./vic-net
     ./grafana-prometheus.nix
     ./loki.nix
+    ./hydra.nix
 
     inputs.oxibridge.nixosModules.aarch64-linux.default
   ];
