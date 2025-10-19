@@ -56,7 +56,7 @@
     '';
     extraConfig = ''
       statistics-channels {
-        inet 127.0.0.1 port 8053 allow { 127.0.0.1 };
+        inet 127.0.0.1 port 8053 allow { 127.0.0.1; };
       };
     '';
 
