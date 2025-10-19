@@ -24,7 +24,7 @@
                 format = "ext4";
                 mountpoint = "/";
               };
-            }
+            };
           };
         };
       };
