@@ -18,3 +18,7 @@ iphone.clients.vic. IN A 10.21.1.2
   60          ; min TTL
 )
 @ IN NS tastypi.vic.
+
+
+; domains
+grafana.vic. IN CNAME tastypi.vic.

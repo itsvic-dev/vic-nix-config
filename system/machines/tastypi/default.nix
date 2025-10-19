@@ -7,6 +7,7 @@
     ./free-media.nix
     ./ticket-bot.nix
     ./vic-net
+    ./grafana-prometheus.nix
 
     inputs.oxibridge.nixosModules.aarch64-linux.default
   ];

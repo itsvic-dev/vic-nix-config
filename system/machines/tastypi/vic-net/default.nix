@@ -8,6 +8,9 @@
     };
   };
 
+  # trust ourselves
+  security.pki.certificateFiles = [ "${inputs.self}/ca/ca-cert.pem" ];
+
   networking.wireguard.interfaces.vic-net = {
     ips = [ "10.21.0.1/16" ];
     listenPort = 51820;
