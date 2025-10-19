@@ -18,5 +18,4 @@ If you are bootstrapping a new system, please follow these steps:
 2. Generate new host keys with `ssh-keygen -A`.
 3. Add the new machine's public ED25519 key to `.sops.yaml` and run `sops updatekeys secrets/global.yaml`.
 4. Remove `{ vic-nix.noSecrets = true; }`, **add to vic!Intranet**, commit and push.
-5. Trigger a Hydra evaluation of [`config:main`](https://hydra.vic/jobset/config/main).
-6. After Hydra finishes building the new system, run `systemctl start vic-nix-autoupdate` to update.
+5. Run `nixos-rebuild switch --flake github:itsvic-dev/vic-nix-config` on the target machine.
