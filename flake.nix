@@ -61,6 +61,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    ticket-bot = {
+      url = "github:itsvic-dev/comms-tickets";
+      flake = false;
+    };
+
     vncpy = {
       url = "github:itsvic-dev/vncpy";
       inputs.nixpkgs.follows = "nixpkgs";

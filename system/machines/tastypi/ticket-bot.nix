@@ -1,12 +1,13 @@
-{ pkgs, lib, config, secretsPath, ... }:
+{ pkgs, lib, config, secretsPath, inputs, ... }:
 let
   pp = pkgs.python3Packages;
   deps = pkgs.callPackage ./ticket-bot-deps.nix { inherit pp; };
 
-  botSrc = builtins.fetchGit {
-    url = "https://github.com/itsvic-dev/comms-tickets.git";
-    rev = "edd0ab70453e088206ff9f2ec7723f108669e988";
-  };
+  # botSrc = builtins.fetchGit {
+  #   url = "https://github.com/itsvic-dev/comms-tickets.git";
+  #   rev = "edd0ab70453e088206ff9f2ec7723f108669e988";
+  # };
+  botSrc = inputs.ticket-bot;
 
   python = pkgs.python3.withPackages
     (ps: [ ps.discordpy ps.pyyaml deps.tortoiseORM deps.aerich ]);

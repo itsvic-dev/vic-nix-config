@@ -443,6 +443,7 @@
         "nixpkgsStable": "nixpkgsStable",
         "oxibridge": "oxibridge",
         "sops-nix": "sops-nix",
+        "ticket-bot": "ticket-bot",
         "vncpy": "vncpy"
       }
     },
@@ -529,6 +530,22 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "ticket-bot": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1760266717,
+        "narHash": "sha256-a5pdMF9A8OB0i357/XBaRU/EdCvfszJrhz/PnGzu7Ns=",
+        "owner": "itsvic-dev",
+        "repo": "comms-tickets",
+        "rev": "edd0ab70453e088206ff9f2ec7723f108669e988",
+        "type": "github"
+      },
+      "original": {
+        "owner": "itsvic-dev",
+        "repo": "comms-tickets",
         "type": "github"
       }
     },
