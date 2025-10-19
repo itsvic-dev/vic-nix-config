@@ -17,6 +17,13 @@ with lib; {
           "Whether the machine should auto-update based on system builds from hydra.vic.";
       };
 
+      noSecrets = mkOption {
+        type = types.bool;
+        default = false;
+        description =
+          "Whether sops-nix secrets should be skipped for bootstrapping.";
+      };
+
       secureBoot = mkEnableOption "UEFI Secure Boot";
 
       hardware = {
