@@ -7,6 +7,7 @@
     ./ticket-bot.nix
     ./vic-net
     ./grafana-prometheus.nix
+    ./loki.nix
 
     inputs.oxibridge.nixosModules.aarch64-linux.default
   ];
