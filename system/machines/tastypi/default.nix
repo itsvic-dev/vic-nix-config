@@ -3,7 +3,6 @@
     ./networking.nix
     ./wings.nix
     ./hardware.nix
-    ./netdata.nix
     ./free-media.nix
     ./ticket-bot.nix
     ./vic-net

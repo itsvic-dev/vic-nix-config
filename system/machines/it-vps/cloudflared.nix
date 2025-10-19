@@ -20,7 +20,6 @@
           config.sops.secrets."cloudflared/2e679b98-a35a-4c13-84f1-b9296bc55bb2".path;
 
         ingress = {
-          "netdata-it-vps.itsvic.dev" = "http://localhost:19999";
           "plausible.itsvic.dev" = "http://localhost:${
               toString config.services.plausible.server.port
             }";

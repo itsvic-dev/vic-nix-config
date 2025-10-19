@@ -15,12 +15,6 @@ in {
   };
 
   services.qemuGuest.enable = true;
-  services.netdata.enable = true;
-
-  fileSystems."/var/cache/netdata" = {
-    device = "/mnt/hdd/netdata";
-    options = [ "bind" ];
-  };
 
   security.acme = {
     acceptTerms = true;
@@ -50,5 +44,15 @@ in {
                     '"$request" $status $body_bytes_sent '
                     '"$http_referer" "$http_user_agent"';
     '';
+  };
+
+  services.prometheus.exporters = {
+    node = {
+      enable = true;
+      enabledCollectors = [ "systemd" ];
+      port = 9002;
+      openFirewall = true;
+      listenAddress = "10.21.0.2";
+    };
   };
 }

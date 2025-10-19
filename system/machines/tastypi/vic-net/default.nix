@@ -44,6 +44,8 @@
     };
   };
 
+  networking.nameservers = [ "10.21.0.1" ];
+
   services.bind = {
     enable = true;
     listenOn = [ "10.21.0.1" ];

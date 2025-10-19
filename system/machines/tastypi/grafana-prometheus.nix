@@ -36,17 +36,31 @@
       nginx.enable = true;
     };
 
-    scrapeConfigs = [{
-      job_name = "tastypi";
-      static_configs = [{
-        targets = [
-          "127.0.0.1:${toString config.services.prometheus.exporters.node.port}"
-          "127.0.0.1:${
-            toString config.services.prometheus.exporters.nginx.port
-          }"
-        ];
-      }];
-    }];
+    scrapeConfigs = [
+      {
+        job_name = "tastypi";
+        static_configs = [{
+          targets = [
+            "127.0.0.1:${
+              toString config.services.prometheus.exporters.node.port
+            }"
+            "127.0.0.1:${
+              toString config.services.prometheus.exporters.nginx.port
+            }"
+          ];
+        }];
+      }
+      {
+        job_name = "it-vps";
+        static_configs = [{
+          targets = [
+            "it-vps.vic:${
+              toString config.services.prometheus.exporters.node.port
+            }"
+          ];
+        }];
+      }
+    ];
   };
 
   services.nginx = {
