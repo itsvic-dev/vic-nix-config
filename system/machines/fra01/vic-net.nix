@@ -1,7 +1,7 @@
 { config, defaultSecretsFile, ... }: {
   sops.secrets.vic-net-sk.sopsFile = defaultSecretsFile;
 
-  wireguard.interfaces.vic-net = {
+  networking.wireguard.interfaces.vic-net = {
     ips = [ "10.21.0.2/32" ];
     listenPort = 51820;
     privateKeyFile = config.sops.secrets.vic-net-sk.path;
