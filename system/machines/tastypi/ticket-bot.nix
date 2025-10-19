@@ -4,7 +4,7 @@ let
   deps = pkgs.callPackage ./ticket-bot-deps.nix { inherit pp; };
 
   botSrc = builtins.fetchGit {
-    url = "git+https://github.com/itsvic-dev/comms-tickets.git";
+    url = "https://github.com/itsvic-dev/comms-tickets.git";
     rev = "edd0ab70453e088206ff9f2ec7723f108669e988";
   };
 
