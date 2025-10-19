@@ -7,7 +7,7 @@
 
       script = ''
         system_path=$(${pkgs.curl}/bin/curl \
-          -L --H "Accept: application/json" \
+          -L -H "Accept: application/json" \
           https://hydra.vic/job/config/main/${config.networking.hostName}/latest \
           | ${pkgs.jq}.bin/jq -r .buildoutputs.out.path)
 
