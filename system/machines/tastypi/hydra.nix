@@ -6,6 +6,14 @@
     buildMachinesFiles = [ ];
     useSubstitutes = true;
     port = 4023;
+    extraConfig = ''
+      <hydra_notify>
+        <prometheus>
+          listen_address = 127.0.0.1
+          port = 9199
+        </prometheus>
+      </hydra_notify>
+    '';
   };
 
   nix = {

@@ -94,6 +94,8 @@
         aarch64-darwin.default = defineShell "aarch64-darwin";
       };
 
-      hydraJobs = { inherit (self.nixosConfigurations) tastypi; };
+      hydraJobs = {
+        tastypi = self.nixosConfigurations.tastypi.config.system.build.toplevel;
+      };
     };
 }
