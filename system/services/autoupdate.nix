@@ -11,7 +11,7 @@
           https://hydra.vic/job/config/main/${config.networking.hostName}/latest \
           | ${pkgs.jq}/bin/jq -r .buildoutputs.out.path)
 
-        nix-env -p /nix/var/nix/profiles/system --set "$system_path"
+        ${pkgs.nix}/bin/nix-env -p /nix/var/nix/profiles/system --set "$system_path"
         /nix/var/nix/profiles/system/bin/switch-to-configuration switch
       '';
     };
