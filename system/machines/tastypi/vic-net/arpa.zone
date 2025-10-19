@@ -14,6 +14,7 @@ $ORIGIN 21.10.in-addr.arpa.
 ; servers
 1.0 IN PTR tastypi.vic.
 2.0 IN PTR it-vps.vic.
+3.0 IN PTR fra01.vic.
 
 ; clients
 1.1 IN PTR mbp.clients.vic.

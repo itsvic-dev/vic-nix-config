@@ -16,10 +16,10 @@
         "1.1.1.1"
         "1.0.0.1"
       ] else
-        [ "10.21.0.1" ];
+        [ "10.21.0.1%vic-net" ];
       services.resolved = {
         enable = true;
-        fallbackDns = config.networking.nameservers;
+        fallbackDns = [ "1.1.1.1" "1.0.0.1" ];
       };
 
       security.pki.certificateFiles = [ ../../ca/ca-cert.pem ];

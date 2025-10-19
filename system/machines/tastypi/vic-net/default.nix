@@ -19,6 +19,11 @@
         publicKey = "S2cSFcrvD4AzK7KuJTWpAzkYNMrdi2ojy8Owl+5VOU4=";
         allowedIPs = [ "10.21.0.2/32" ];
       }
+      {
+        name = "fra01";
+        publicKey = "DGNfHXE4BWJJcDAxZRxBB5PIiCiSMFw2q7zNBQLEWBw=";
+        allowedIPs = [ "10.21.0.3/32" ];
+      }
       ### clients
       {
         name = "mbp";

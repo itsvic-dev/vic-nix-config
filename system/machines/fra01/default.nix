@@ -1,9 +1,9 @@
 { lib, ... }: {
-  imports = [ ./disko.nix ./hardware.nix ];
+  imports = [ ./disko.nix ./hardware.nix ./vic-net.nix ];
 
   vic-nix = {
     server.enable = true;
-    hardware.intel.enable = true;
+    hardware.intel = true;
   };
 
   networking = {
