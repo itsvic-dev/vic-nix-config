@@ -11,7 +11,7 @@
           | ${pkgs.jq}/bin/jq -r .buildoutputs.out.path)
 
         ${pkgs.nix}/bin/nix-env -p /nix/var/nix/profiles/system --set "$system_path"
-        /nix/var/nix/profiles/system/bin/switch-to-configuration switch
+        /nix/var/nix/profiles/system/bin/switch-to-configuration switch &
       '';
     };
 
