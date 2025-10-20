@@ -4,7 +4,7 @@ in {
   config = lib.mkIf (cfg.enable && cfg.forDev) {
     programs.vscode = {
       enable = true;
-      mutableExtensionsDir = false; # hehe
+      mutableExtensionsDir = true;
 
       profiles.default = {
         enableUpdateCheck = false;
@@ -69,23 +69,28 @@ in {
           ];
 
           fullPrettierSetup = lib.genAttrs things (_: prettier);
-        in {
-          "editor.tabSize" = 2;
-          "editor.formatOnSave" = true;
+        in lib.mkMerge [
+          {
+            "editor.tabSize" = 2;
+            "editor.formatOnSave" = true;
 
-          "git.confirmSync" = false;
-          "git.enableSmartCommit" = true;
+            "git.confirmSync" = false;
+            "git.enableSmartCommit" = true;
 
-          "php.validate.executablePath" = "${pkgs.php}/bin/php";
-          "mesonbuild.downloadLanguageServer" = false;
-          "mesonbuild.languageServerPath" = "${pkgs.mesonlsp}/bin/mesonlsp";
-          "cmake.cmakePath" = "${pkgs.cmake}/bin/cmake";
+            "php.validate.executablePath" = "${pkgs.php}/bin/php";
+            "cmake.cmakePath" = "${pkgs.cmake}/bin/cmake";
 
-          "rust-analyzer.check.command" = "clippy";
-          "rust-analyzer.server.path" = lib.getExe pkgs.rust-analyzer;
+            "rust-analyzer.check.command" = "clippy";
+            "rust-analyzer.server.path" = lib.getExe pkgs.rust-analyzer;
 
-          "elixirLS.languageServerOverridePath" = lib.getExe pkgs.elixir-ls;
-        } // fullPrettierSetup;
+            "elixirLS.languageServerOverridePath" = lib.getExe pkgs.elixir-ls;
+          }
+          fullPrettierSetup
+          (lib.mkIf (pkgs.stdenv.isLinux) {
+            "mesonbuild.downloadLanguageServer" = false;
+            "mesonbuild.languageServerPath" = "${pkgs.mesonlsp}/bin/mesonlsp";
+          })
+        ];
       };
     };
 
