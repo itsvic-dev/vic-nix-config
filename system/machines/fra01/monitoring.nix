@@ -7,7 +7,13 @@
       openFirewall = true;
       listenAddress = "10.21.0.3";
     };
+    nginx = {
+      enable = true;
+      openFirewall = true;
+    };
   };
+
+  services.nginx.statusPage = true;
 
   services.promtail = {
     enable = true;

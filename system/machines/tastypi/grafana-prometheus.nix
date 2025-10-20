@@ -74,6 +74,9 @@
             "fra01.vic:${
               toString config.services.prometheus.exporters.node.port
             }"
+            "fra01.vic:${
+              toString config.services.prometheus.exporters.nginx.port
+            }"
           ];
         }];
       }
