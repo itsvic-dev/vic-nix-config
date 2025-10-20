@@ -4,7 +4,7 @@
     enableCompletion = true;
     oh-my-zsh = {
       enable = true;
-      theme = "sorin";
+      theme = "intheloop";
     };
   };
 
