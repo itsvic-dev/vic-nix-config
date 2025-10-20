@@ -25,6 +25,15 @@
         supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
         mandatoryFeatures = [ ];
       }
+      {
+        hostName = "fra01.vic";
+        system = "x86_64-linux";
+        protocol = "ssh";
+        maxJobs = 2;
+        speedFactor = 2;
+        supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+        mandatoryFeatures = [ ];
+      }
       # hydra freaks out sometimes without this
       {
         hostName = "localhost";
