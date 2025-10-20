@@ -1,5 +1,5 @@
 { lib, ... }: {
-  imports = [ ./disko.nix ./hardware.nix ./vic-net.nix ];
+  imports = [ ./disko.nix ./hardware.nix ./vic-net.nix ./monitoring.nix ];
 
   vic-nix = {
     server.enable = true;

@@ -67,6 +67,16 @@
           ];
         }];
       }
+      {
+        job_name = "fra01";
+        static_configs = [{
+          targets = [
+            "fra01.vic:${
+              toString config.services.prometheus.exporters.node.port
+            }"
+          ];
+        }];
+      }
     ];
   };
 
