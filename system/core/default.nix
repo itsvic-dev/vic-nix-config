@@ -15,8 +15,8 @@ in {
     {
       boot.tmp.useTmpfs = true;
       networking = {
-        useNetworkd = !useNM;
-        networkmanager.enable = useNM;
+        useNetworkd = !config.networking.networkmanager.enable;
+        networkmanager.enable = lib.mkDefault useNM;
         nameservers = if (config.vic-nix.noSecrets) then [
           "1.1.1.1"
           "1.0.0.1"
