@@ -9,7 +9,7 @@
     ./grafana-prometheus.nix
     ./loki.nix
 
-    inputs.oxibridge.nixosModules.aarch64-linux.default
+    inputs.oxibridge.nixosModules.default
   ];
 
   vic-nix = {
