@@ -17,7 +17,7 @@
         fi
 
         ${pkgs.nix}/bin/nix-env -p /nix/var/nix/profiles/system --set "$system_path"
-        /nix/var/nix/profiles/system/bin/switch-to-configuration switch & disown
+        /nix/var/nix/profiles/system/bin/switch-to-configuration switch > /tmp/vic-update.log 2>&1 & disown
       '';
     };
 
