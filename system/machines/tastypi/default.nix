@@ -65,11 +65,6 @@
 
   networking.firewall.allowedTCPPorts = [ 80 443 ];
 
-  services.bob-website = {
-    enable = true;
-    domain = "bob.itsvic.dev";
-  };
-
   services.vncpy = {
     enable = true;
     image = pkgs.fetchurl {
