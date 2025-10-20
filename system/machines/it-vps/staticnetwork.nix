@@ -23,7 +23,7 @@
       listenPort = 51820;
       privateKeyFile = config.sops.secrets.vic-net-sk.path;
       peers = [{
-        endpoint = "home.itsvic.dev:51820";
+        endpoint = "37.114.50.122:51820";
         publicKey = "7yrI5RW+I6yZC5K1+7ErKUWC5h42aMYkjiP6/siOlzk=";
         allowedIPs = [ "10.21.0.0/16" ];
       }];

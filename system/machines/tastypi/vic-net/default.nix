@@ -14,11 +14,7 @@
     privateKeyFile = config.sops.secrets.vic-net-sk.path;
     peers = [
       ### servers
-      {
-        name = "it-vps";
-        publicKey = "S2cSFcrvD4AzK7KuJTWpAzkYNMrdi2ojy8Owl+5VOU4=";
-        allowedIPs = [ "10.21.0.2/32" ];
-      }
+      # it-vps connects to fra01
       {
         name = "fra01";
         publicKey = "DGNfHXE4BWJJcDAxZRxBB5PIiCiSMFw2q7zNBQLEWBw=";
