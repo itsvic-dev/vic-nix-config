@@ -1,10 +1,7 @@
-{ pkgs, inputs, ... }: {
+{ pkgs, ... }: {
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ ];
-  # 6.12 kernel is horribly broken on rpi5
-  # use older 6.6 kernel from nixos 25.05 instead :^)
-  boot.kernelPackages =
-    inputs.nixpkgsStable.legacyPackages.${pkgs.system}.linuxPackages_rpi4;
+  boot.kernelPackages = pkgs.linuxPackages_rpi4;
   boot.extraModulePackages = [ ];
 
   fileSystems."/" = {

@@ -4,7 +4,6 @@
   inputs = {
     # --- CORE STUFF ---
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgsStable.url = "github:NixOS/nixpkgs/nixos-25.05";
 
     nix-darwin = {
       url = "github:LnL7/nix-darwin/master";
@@ -50,9 +49,8 @@
 
     # it-vps
     bob = {
-      url =
-        "github:bob-discord-bot/bob/38845c889339281250e6189ba69480b1ab46e9c1";
-      inputs.nixpkgs.follows = "nixpkgsStable";
+      url = "github:bob-discord-bot/bob";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # tastypi

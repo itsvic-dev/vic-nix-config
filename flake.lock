@@ -4,7 +4,7 @@
       "inputs": {
         "flake-utils": "flake-utils",
         "nixpkgs": [
-          "nixpkgsStable"
+          "nixpkgs"
         ]
       },
       "locked": {
@@ -18,7 +18,6 @@
       "original": {
         "owner": "bob-discord-bot",
         "repo": "bob",
-        "rev": "38845c889339281250e6189ba69480b1ab46e9c1",
         "type": "github"
       }
     },
@@ -365,22 +364,6 @@
         "type": "github"
       }
     },
-    "nixpkgsStable": {
-      "locked": {
-        "lastModified": 1760862643,
-        "narHash": "sha256-PXwG0TM7Ek87DNx4LbGWuD93PbFeKAJs4FfALtp7Wo0=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "33c6dca0c0cb31d6addcd34e90a63ad61826b28c",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixos-25.05",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "oxibridge": {
       "inputs": {
         "nixpkgs": [
@@ -440,7 +423,6 @@
         "nix-index-database": "nix-index-database",
         "nix-rosetta-builder": "nix-rosetta-builder",
         "nixpkgs": "nixpkgs",
-        "nixpkgsStable": "nixpkgsStable",
         "oxibridge": "oxibridge",
         "sops-nix": "sops-nix",
         "ticket-bot": "ticket-bot",
