@@ -10,6 +10,12 @@
           https://hydra.vic/job/config/main/${config.networking.hostName}/latest \
           | ${pkgs.jq}/bin/jq -r .buildoutputs.out.path)
 
+        echo "new system: $system_path"
+        if [ "$system_path" == "$(readlink /run/current-system)" ]; then
+          echo "new system is the same as current system, assuming no change"
+          exit
+        fi
+
         ${pkgs.nix}/bin/nix-env -p /nix/var/nix/profiles/system --set "$system_path"
         /nix/var/nix/profiles/system/bin/switch-to-configuration switch & disown
       '';
