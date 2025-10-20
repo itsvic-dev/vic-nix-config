@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, config, ... }: {
   # hardware.enableAllFirmware = true;
 
   hardware.graphics = {
