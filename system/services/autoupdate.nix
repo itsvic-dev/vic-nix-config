@@ -3,6 +3,7 @@
     systemd.services."vic-nix-autoupdate" = {
       description = "Check for new system builds";
       requires = [ "network-online.target" ];
+      serviceConfig.Type = "oneshot";
 
       script = ''
         system_path=$(${pkgs.curl}/bin/curl \
@@ -17,7 +18,7 @@
         fi
 
         ${pkgs.nix}/bin/nix-env -p /nix/var/nix/profiles/system --set "$system_path"
-        /nix/var/nix/profiles/system/bin/switch-to-configuration switch > /tmp/vic-update.log 2>&1 & disown
+        /nix/var/nix/profiles/system/bin/switch-to-configuration switch
       '';
     };
 
