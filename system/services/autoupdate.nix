@@ -1,5 +1,5 @@
 { pkgs, config, lib, ... }: {
-  config = lib.mkIf config.vic-nix.autoUpdate {
+  config = lib.mkIf (config.vic-nix.autoUpdate && !config.vic-nix.noSecrets) {
     systemd.services."vic-nix-autoupdate" = {
       description = "Check for new system builds";
       requires = [ "network-online.target" ];
