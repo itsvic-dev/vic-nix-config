@@ -17,6 +17,13 @@
           exit
         fi
 
+        JSON_TEMPLATE='{content: $content}'
+        CONTENT="⚠️ \`${config.networking.hostName}\`: updating to \`$system_path\`"
+        JSON_DATA="$(
+          ${pkgs.jq}/bin/jq -n --arg content "$CONTENT" "$JSON_TEMPLATE"
+        )"
+        ${pkgs.curl}/bin/curl -X POST "$(cat ${config.sops.secrets.pamWebhook.path})" -H "Content-Type: application/json" --data "$JSON_DATA" & disown
+
         ${pkgs.nix}/bin/nix-env -p /nix/var/nix/profiles/system --set "$system_path"
         /nix/var/nix/profiles/system/bin/switch-to-configuration switch
       '';
@@ -26,7 +33,7 @@
       description = "Check for new system builds";
       wantedBy = [ "timers.target" ];
       timerConfig = {
-        OnCalendar = "hourly";
+        OnCalendar = "daily";
         Unit = "vic-nix-autoupdate.service";
       };
     };

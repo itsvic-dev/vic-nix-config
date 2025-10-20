@@ -18,7 +18,7 @@ writeShellApplication {
 
     # copy it to the target host
     OUTPUT="$(readlink /tmp/vic-nix-rebuild)"
-    nix-copy-closure -s --to "$HOST" "$OUTPUT"
+    nix-copy-closure --to "$HOST" "$OUTPUT"
     rm /tmp/vic-nix-rebuild
 
     # and finally, deploy it on the host
