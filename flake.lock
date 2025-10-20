@@ -8,11 +8,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1760981629,
-        "narHash": "sha256-aHYMpPPzSOg0u+RZK5KwRMfVKPZvporWKT/CQ8rSW3s=",
+        "lastModified": 1760981926,
+        "narHash": "sha256-gqD6OlYCflOi4hVupxkqpHpoksuj9Ds7MRzJjEnPCd8=",
         "owner": "bob-discord-bot",
         "repo": "bob",
-        "rev": "0a6efe8b8e932f939721f5a5b6308fe0adbb8c2b",
+        "rev": "ada41f6cf6818ae53a02741848dbc25c60814066",
         "type": "github"
       },
       "original": {
