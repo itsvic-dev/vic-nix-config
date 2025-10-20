@@ -14,11 +14,8 @@
   ];
 
   vic-nix = {
-    server = { enable = true; };
-    software = {
-      libvirt = true;
-      docker = true;
-    };
+    server.enable = true;
+    software.docker = true;
     hardware.bluetooth = true;
   };
 
