@@ -60,9 +60,7 @@
     format = "yaml";
     sopsFile = "${secretsPath}/oxibridge.yml";
     key = "";
-
     restartUnits = [ "oxibridge.service" ];
-    owner = "oxibridge";
   };
 
   services.oxibridge = {
