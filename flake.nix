@@ -99,13 +99,9 @@
         aarch64-darwin.default = defineShell "aarch64-darwin";
       };
 
-      packages = {
-        x86_64-linux.live =
-          self.nixosConfigurations.live-base.config.system.build.isoImage;
-      };
-
-      hydraJobs =
-        nixpkgs.lib.mapAttrs (name: value: value.config.system.build.toplevel)
-        self.nixosConfigurations;
+      hydraJobs = nixpkgs.lib.mapAttrs (name: value:
+        value.config.system.build.${
+          if (name == "live-rescue") then "isoImage" else "toplevel"
+        }) self.nixosConfigurations;
     };
 }
