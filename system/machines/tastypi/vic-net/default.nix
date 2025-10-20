@@ -12,26 +12,11 @@
     ips = [ "10.21.0.1/16" ];
     listenPort = 51820;
     privateKeyFile = config.sops.secrets.vic-net-sk.path;
-    peers = [
-      ### servers
-      # it-vps connects to fra01
-      {
-        name = "fra01";
-        publicKey = "DGNfHXE4BWJJcDAxZRxBB5PIiCiSMFw2q7zNBQLEWBw=";
-        allowedIPs = [ "10.21.0.3/32" ];
-      }
-      ### clients
-      {
-        name = "mbp";
-        publicKey = "fyujyTR/I56g3bO79gLtwn7YgSxxq6O/Ct4NH5nRqlk=";
-        allowedIPs = [ "10.21.1.1/32" ];
-      }
-      {
-        name = "iphone";
-        publicKey = "AQqR0qBXROiHro05uJBbckiCWpuBzS8lTDsJIyhMxDI=";
-        allowedIPs = [ "10.21.1.2/32" ];
-      }
-    ];
+    peers = [{
+      endpoint = "37.114.50.122:51820";
+      publicKey = "DGNfHXE4BWJJcDAxZRxBB5PIiCiSMFw2q7zNBQLEWBw=";
+      allowedIPs = [ "10.21.0.0/16" ];
+    }];
   };
 
   networking.firewall = {
