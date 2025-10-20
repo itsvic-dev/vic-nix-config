@@ -16,7 +16,7 @@
         "1.1.1.1"
         "1.0.0.1"
       ] else
-        [ "10.21.0.1%vic-net" ];
+        [ "10.21.0.1" ];
       services.resolved = {
         enable = true;
         fallbackDns = [ "1.1.1.1" "1.0.0.1" ];
