@@ -38,7 +38,7 @@
       {
         hostName = "localhost";
         protocol = null;
-        system = "aarch64-linux";
+        system = "x86_64-linux";
         supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
         maxJobs = 4;
       }
