@@ -33,7 +33,7 @@
       description = "Check for new system builds";
       wantedBy = [ "timers.target" ];
       timerConfig = {
-        OnCalendar = "daily";
+        OnCalendar = "hourly";
         Unit = "vic-nix-autoupdate.service";
       };
     };
