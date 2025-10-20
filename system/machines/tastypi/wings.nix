@@ -1,10 +1,10 @@
-{ config, defaultSecretsFile, ... }: {
+{ config, ... }: {
   services.wings = {
     enable = true;
     port = 8443;
   };
 
-  sops.secrets.cf-creds.sopsFile = defaultSecretsFile;
+  sops.secrets.cf-creds = { };
 
   security.acme = {
     acceptTerms = true;

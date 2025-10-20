@@ -1,5 +1,5 @@
-{ config, defaultSecretsFile, ... }: {
-  sops.secrets.vic-net-sk.sopsFile = defaultSecretsFile;
+{ config, ... }: {
+  sops.secrets.vic-net-sk = { };
 
   networking.wireguard.interfaces.vic-net = {
     ips = [ "10.21.0.3/32" ];

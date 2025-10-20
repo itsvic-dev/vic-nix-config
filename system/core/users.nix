@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }: {
+{ config, lib, pkgs, globalSecretsFile, ... }: {
 
   config = lib.mkMerge [
     {
@@ -19,7 +19,10 @@
     }
 
     (lib.mkIf (!config.vic-nix.noSecrets) {
-      sops.secrets.vic-password.neededForUsers = true;
+      sops.secrets.vic-password = {
+        neededForUsers = true;
+        sopsFile = globalSecretsFile;
+      };
 
       users.users.vic.hashedPasswordFile =
         config.sops.secrets.vic-password.path;

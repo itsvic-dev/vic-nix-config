@@ -1,4 +1,4 @@
-{ config, pkgs, lib, globalSecretsFile, ... }: {
+{ config, pkgs, lib, defaultSecretsFile, ... }: {
   imports = [
     ./appimage.nix
     ./i18n.nix
@@ -30,7 +30,7 @@
 
     (lib.mkIf (!config.vic-nix.noSecrets) {
       sops = {
-        defaultSopsFile = globalSecretsFile;
+        defaultSopsFile = defaultSecretsFile;
 
         age.sshKeyPaths = [
           (if config.vic-nix.tmpfsAsRoot then

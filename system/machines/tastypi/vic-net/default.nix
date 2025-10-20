@@ -1,6 +1,6 @@
-{ config, defaultSecretsFile, secretsPath, inputs, ... }: {
+{ config, secretsPath, inputs, ... }: {
   sops.secrets = {
-    vic-net-sk.sopsFile = defaultSecretsFile;
+    vic-net-sk = { };
     tastypi-vic-key = {
       owner = "nginx";
       sopsFile = "${secretsPath}/tastypi.vic.key";

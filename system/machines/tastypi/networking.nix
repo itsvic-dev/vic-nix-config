@@ -1,5 +1,5 @@
-{ config, defaultSecretsFile, ... }: {
-  sops.secrets = { akos-ipv6-pk.sopsFile = defaultSecretsFile; };
+{ config, ... }: {
+  sops.secrets.akos-ipv6-pk = { };
 
   networking.wireguard.interfaces = {
     akos-ipv6 = {

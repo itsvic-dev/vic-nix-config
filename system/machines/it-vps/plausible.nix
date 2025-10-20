@@ -1,10 +1,5 @@
-{ config, defaultSecretsFile, ... }: {
-  sops.secrets = {
-    "plausible/secretKeybase" = {
-      restartUnits = [ "plausible.service" ];
-      sopsFile = defaultSecretsFile;
-    };
-  };
+{ config, ... }: {
+  sops.secrets."plausible/secretKeybase".restartUnits = [ "plausible.service" ];
 
   services.plausible = {
     enable = true;

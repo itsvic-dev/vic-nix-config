@@ -1,4 +1,4 @@
-{ pkgs, config, lib, ... }:
+{ pkgs, config, lib, globalSecretsFile, ... }:
 let cfg = config.vic-nix.server;
 in {
   config = lib.mkIf (cfg.enable && !config.vic-nix.noSecrets) {
@@ -7,7 +7,7 @@ in {
       settings.PasswordAuthentication = false;
     };
 
-    sops.secrets.pamWebhook = { };
+    sops.secrets.pamWebhook.sopsFile = globalSecretsFile;
 
     security.pam.services.sshd.rules.session.vic-webhook = let
       webhookTrigger = with pkgs;

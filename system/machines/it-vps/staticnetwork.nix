@@ -1,4 +1,4 @@
-{ lib, config, defaultSecretsFile, inputs, ... }: {
+{ lib, config, inputs, ... }: {
   networking = {
     # we use static networking here
     networkmanager.enable = lib.mkForce false;
@@ -34,5 +34,5 @@
     };
   };
 
-  sops.secrets.vic-net-sk.sopsFile = defaultSecretsFile;
+  sops.secrets.vic-net-sk = { };
 }
