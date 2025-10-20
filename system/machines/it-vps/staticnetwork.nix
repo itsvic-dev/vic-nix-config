@@ -19,7 +19,7 @@
       listenPort = 51820;
       privateKeyFile = config.sops.secrets.vic-net-sk.path;
       peers = [{
-        endpoint = "fra01.itsvic.dev:51820";
+        endpoint = "37.114.50.122:51820";
         publicKey = "DGNfHXE4BWJJcDAxZRxBB5PIiCiSMFw2q7zNBQLEWBw=";
         allowedIPs = [ "10.21.0.0/16" ];
       }];
