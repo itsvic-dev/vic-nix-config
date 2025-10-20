@@ -30,7 +30,7 @@
         system = "x86_64-linux";
         protocol = "ssh";
         maxJobs = 2;
-        speedFactor = 2;
+        speedFactor = 5;
         supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
         mandatoryFeatures = [ ];
       }
