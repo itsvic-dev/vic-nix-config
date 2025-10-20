@@ -7,10 +7,6 @@
         address = "10.0.1.4";
         prefixLength = 24;
       }];
-      ens19.ipv4.addresses = [{
-        address = "185.184.221.104";
-        prefixLength = 27;
-      }];
     };
 
     defaultGateway = {
