@@ -8,7 +8,6 @@
     ./vic-net
     ./grafana-prometheus.nix
     ./loki.nix
-    ./hydra.nix
 
     inputs.oxibridge.nixosModules.aarch64-linux.default
   ];
@@ -84,4 +83,15 @@
     enable = true;
     configFile = config.sops.secrets.oxibridge-config.path;
   };
+
+  users.users.nixremote = {
+    isNormalUser = true;
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM3Y1OlIZoZwu7XhxwD7O+R6ua99raUdZi+Ftqr00//X root@tastypi"
+    ];
+    group = "nixremote";
+  };
+  users.groups.nixremote = { };
+
+  nix.settings.trusted-users = [ "nixremote" ];
 }

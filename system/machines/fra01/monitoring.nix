@@ -22,7 +22,7 @@
         job_name = "journal";
         journal = {
           max_age = "12h";
-          labels = { host = "it-vps"; };
+          labels = { host = "tastypi"; };
         };
         relabel_configs = [{
           source_labels = [ "__journal__systemd_unit" ];

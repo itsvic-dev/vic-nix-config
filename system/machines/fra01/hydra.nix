@@ -26,11 +26,11 @@
         mandatoryFeatures = [ ];
       }
       {
-        hostName = "fra01.vic";
-        system = "x86_64-linux";
+        hostName = "tastypi.vic";
+        system = "aarch64-linux";
         protocol = "ssh";
         maxJobs = 2;
-        speedFactor = 5;
+        speedFactor = 1;
         supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
         mandatoryFeatures = [ ];
       }

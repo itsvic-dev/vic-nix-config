@@ -23,6 +23,6 @@ iphone.clients.vic. IN A 10.21.1.2
 
 ; domains
 grafana.vic. IN CNAME tastypi.vic.
-hydra.vic. IN CNAME tastypi.vic.
 
-cache.vic. IN CNAME tastypi.vic.
+hydra.vic. IN CNAME fra01.vic.
+cache.vic. IN CNAME fra01.vic.

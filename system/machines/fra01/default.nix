@@ -1,5 +1,6 @@
 { lib, ... }: {
-  imports = [ ./disko.nix ./hardware.nix ./vic-net.nix ./monitoring.nix ];
+  imports =
+    [ ./disko.nix ./hardware.nix ./vic-net.nix ./monitoring.nix ./hydra.nix ];
 
   vic-nix = {
     server.enable = true;
@@ -18,16 +19,13 @@
       address = "37.114.50.1";
       interface = "ens18";
     };
+
+    firewall.allowedTCPPorts = [ 80 443 ];
   };
 
-  users.users.nixremote = {
-    isNormalUser = true;
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM3Y1OlIZoZwu7XhxwD7O+R6ua99raUdZi+Ftqr00//X root@tastypi"
-    ];
-    group = "nixremote";
+  services.nginx = {
+    enable = true;
+    recommendedProxySettings = true;
+    recommendedTlsSettings = true;
   };
-  users.groups.nixremote = { };
-
-  nix.settings.trusted-users = [ "nixremote" ];
 }
