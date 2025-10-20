@@ -7,9 +7,6 @@
   };
 
   networking = {
-    useNetworkd = true;
-    networkmanager.enable = lib.mkForce false;
-
     interfaces = {
       ens18.ipv4.addresses = [{
         address = "37.114.50.122";

@@ -1,9 +1,5 @@
 { lib, config, inputs, ... }: {
   networking = {
-    # we use static networking here
-    networkmanager.enable = lib.mkForce false;
-    useNetworkd = true;
-
     firewall.allowedTCPPorts = [ 22 80 443 ];
 
     interfaces = {

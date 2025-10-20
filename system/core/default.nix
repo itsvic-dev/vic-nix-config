@@ -1,4 +1,6 @@
-{ config, pkgs, lib, defaultSecretsFile, ... }: {
+{ config, pkgs, lib, defaultSecretsFile, ... }:
+let useNM = config.vic-nix.desktop.enable;
+in {
   imports = [
     ./appimage.nix
     ./i18n.nix
@@ -12,11 +14,15 @@
   config = lib.mkMerge [
     {
       boot.tmp.useTmpfs = true;
-      networking.nameservers = if (config.vic-nix.noSecrets) then [
-        "1.1.1.1"
-        "1.0.0.1"
-      ] else
-        [ "10.21.0.1" ];
+      networking = {
+        useNetworkd = !useNM;
+        networkmanager.enable = useNM;
+        nameservers = if (config.vic-nix.noSecrets) then [
+          "1.1.1.1"
+          "1.0.0.1"
+        ] else
+          [ "10.21.0.1" ];
+      };
       services.resolved = {
         enable = true;
         fallbackDns = [ "1.1.1.1" "1.0.0.1" ];
