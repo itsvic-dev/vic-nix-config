@@ -36,8 +36,6 @@ in {
         "server string" = "tastypi";
         "netbios name" = "tastypi";
         security = "user";
-        "hosts allow" = "192.168.0. 127.0.0.1 localhost";
-        "hosts deny" = "0.0.0.0/0";
         "guest account" = "nobody";
         "map to guest" = "bad user";
         "vfs objects" = "fruit streams_xattr";
