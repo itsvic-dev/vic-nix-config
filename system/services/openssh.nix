@@ -20,12 +20,14 @@ in {
             exit
           fi
 
+          PAM_RDNS_HOST="$(${pkgs.dig}/bin/dig +short -x "$PAM_RHOST")"
+
           case "$PAM_TYPE" in
             open_session)
-              CONTENT="➡️ \`$HOSTNAME\`: \`$PAM_USER\` logged in (\`$PAM_RHOST\`)"
+              CONTENT="➡️ \`$HOSTNAME\`: \`$PAM_USER\` logged in (\`$PAM_RHOST\`, \`$PAM_RDNS_HOST\`)"
               ;;
             close_session)
-              CONTENT="⬅️ \`$HOSTNAME\`: \`$PAM_USER\` logged out (\`$PAM_RHOST\`)"
+              CONTENT="⬅️ \`$HOSTNAME\`: \`$PAM_USER\` logged out (\`$PAM_RHOST\`, \`$PAM_RDNS_HOST\`)"
               ;;
           esac
 
