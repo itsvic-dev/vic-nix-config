@@ -1,4 +1,4 @@
-{ config, secretsPath, ... }: {
+{ config, secretsPath, intranet, ... }: {
   services.hydra = {
     enable = true;
     hydraURL = "https://hydra.vic";
@@ -50,12 +50,12 @@
   sops.secrets = {
     hydra-vic-key = {
       owner = "nginx";
-      sopsFile = "${secretsPath}/hydra.vic.key";
+      sopsFile = intranet.getKey "fra01" "hydra.vic";
       format = "binary";
     };
     cache-vic-key = {
       owner = "nginx";
-      sopsFile = "${secretsPath}/cache.vic.key";
+      sopsFile = intranet.getKey "fra01" "cache.vic";
       format = "binary";
     };
     binary-cache-key = {
@@ -87,7 +87,7 @@
   services.nginx.virtualHosts = {
     "hydra.vic" = {
       forceSSL = true;
-      sslCertificate = ../../../ca/hydra.vic/cert.pem;
+      sslCertificate = intranet.getCert "fra01" "hydra.vic";
       sslCertificateKey = config.sops.secrets.hydra-vic-key.path;
       locations."/" = {
         proxyPass = "http://localhost:${toString config.services.hydra.port}";
@@ -97,7 +97,7 @@
     };
     "cache.vic" = {
       forceSSL = true;
-      sslCertificate = ../../../ca/cache.vic/cert.pem;
+      sslCertificate = intranet.getCert "fra01" "cache.vic";
       sslCertificateKey = config.sops.secrets.cache-vic-key.path;
       locations."/" = {
         proxyPass =

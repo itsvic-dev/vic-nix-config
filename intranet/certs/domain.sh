@@ -8,21 +8,21 @@ MACHINE="$2"
 mkdir "$FQDN" -p
 
 openssl req -new -newkey rsa:4096 \
-  -keyout "../secrets/$MACHINE/$FQDN.key" \
-  -out "$FQDN/cert.csr" \
+  -keyout "certs/$MACHINE/$FQDN/key.pem" \
+  -out "certs/$MACHINE/$FQDN/cert.csr" \
   -nodes \
   -subj "/C=PL/CN=$FQDN" \
   -addext "keyUsage = critical,digitalSignature,keyEncipherment" \
   -addext "extendedKeyUsage = serverAuth,clientAuth" \
   -addext "subjectAltName=DNS:$FQDN,DNS:*.$FQDN"
 
-openssl x509 -req -in "$FQDN/cert.csr" \
+openssl x509 -req -in "certs/$MACHINE/$FQDN/cert.csr" \
   -CA ca-cert.pem \
   -CAkey ca-key.pem \
-  -out "$FQDN/cert.pem" \
+  -out "certs/$MACHINE/$FQDN/cert.pem" \
   -days 365 -sha256 \
   -copy_extensions copy
 
-sops encrypt -i "../secrets/$MACHINE/$FQDN.key"
+sops encrypt -i "certs/$MACHINE/$FQDN/key.pem"
 
-# rm "$FQDN/cert.csr"
+rm "certs/$MACHINE/$FQDN/cert.csr"

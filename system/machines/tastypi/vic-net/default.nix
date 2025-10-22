@@ -1,30 +1,14 @@
-{ config, secretsPath, inputs, ... }: {
-  sops.secrets = {
-    vic-net-sk = { };
-    tastypi-vic-key = {
-      owner = "nginx";
-      sopsFile = "${secretsPath}/tastypi.vic.key";
-      format = "binary";
-    };
+{ config, pkgs, secretsPath, inputs, intranet, ... }: {
+  imports = [ (intranet.getWireguardConfig "tastypi") ];
+
+  sops.secrets.tastypi-vic-key = {
+    owner = "nginx";
+    sopsFile = intranet.getKey "tastypi" "tastypi.vic";
+    format = "binary";
   };
 
-  networking.wireguard.interfaces.vic-net = {
-    ips = [ "10.21.0.1/32" ];
-    listenPort = 51820;
-    privateKeyFile = config.sops.secrets.vic-net-sk.path;
-    peers = [{
-      endpoint = "37.114.50.122:51820";
-      publicKey = "DGNfHXE4BWJJcDAxZRxBB5PIiCiSMFw2q7zNBQLEWBw=";
-      allowedIPs = [ "10.21.0.0/16" ];
-    }];
-  };
-
-  networking.firewall = {
-    allowedUDPPorts = [ 51820 ];
-
-    interfaces.vic-net = {
-      allowedUDPPorts = [ 53 ]; # BIND
-    };
+  networking.firewall.interfaces.vic-net = {
+    allowedUDPPorts = [ 53 ]; # BIND
   };
 
   networking.nameservers = [ "10.21.0.1" ];
@@ -48,7 +32,11 @@
 
     zones."vic" = {
       master = true;
-      file = ./vic.zone;
+      file = pkgs.writeText "vic.zone"
+        (builtins.replaceStrings [ "[IPS]" "[CNAMES]" ] [
+          (intranet.ipsAsDNS)
+          (intranet.cnamesAsDNS)
+        ] (builtins.readFile ./vic.zone));
       extraConfig = ''
         zone-statistics yes;
       '';
@@ -63,7 +51,7 @@
   services.nginx.virtualHosts."tastypi.vic" = {
     root = ./tastypi-nginx;
     forceSSL = true;
-    sslCertificate = ../../../../ca/tastypi.vic/cert.pem;
+    sslCertificate = intranet.getCert "tastypi" "tastypi.vic";
     sslCertificateKey = config.sops.secrets.tastypi-vic-key.path;
   };
 }

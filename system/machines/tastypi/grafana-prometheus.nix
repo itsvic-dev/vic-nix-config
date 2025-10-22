@@ -1,8 +1,8 @@
-{ config, pkgs, inputs, secretsPath, ... }: {
+{ config, pkgs, inputs, secretsPath, intranet, ... }: {
   sops.secrets = {
     grafana-vic-key = {
       owner = "nginx";
-      sopsFile = "${secretsPath}/grafana.vic.key";
+      sopsFile = intranet.getKey "tastypi" "grafana.vic";
       format = "binary";
     };
   };
@@ -87,7 +87,7 @@
     statusPage = true;
     virtualHosts.${config.services.grafana.settings.server.domain} = {
       forceSSL = true;
-      sslCertificate = ../../../ca/grafana.vic/cert.pem;
+      sslCertificate = intranet.getCert "tastypi" "grafana.vic";
       sslCertificateKey = config.sops.secrets.grafana-vic-key.path;
       locations."/" = {
         proxyPass = "http://127.0.0.1:${

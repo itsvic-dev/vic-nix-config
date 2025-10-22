@@ -1,15 +1,6 @@
 $TTL 60
 $ORIGIN vic.
 
-; servers
-tastypi.vic. IN A 10.21.0.1
-it-vps.vic. IN A 10.21.0.2
-fra01.vic. IN A 10.21.0.3
-
-; clients
-mbp.clients.vic. IN A 10.21.1.1
-iphone.clients.vic. IN A 10.21.1.2
-
 ; TLD setup
 @ IN SOA tastypi.vic. contact@itsvic.dev. (
   2025101901  ; serial
@@ -20,9 +11,5 @@ iphone.clients.vic. IN A 10.21.1.2
 )
 @ IN NS tastypi.vic.
 
-
-; domains
-grafana.vic. IN CNAME tastypi.vic.
-
-hydra.vic. IN CNAME fra01.vic.
-cache.vic. IN CNAME fra01.vic.
+[IPS]
+[CNAMES]

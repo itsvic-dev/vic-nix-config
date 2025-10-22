@@ -1,4 +1,4 @@
-{ config, lib, pkgs, inputs, ... }:
+{ config, lib, pkgs, inputs, intranet, ... }:
 let bob = inputs.bob.packages.x86_64-linux.default;
 in {
   imports = [
@@ -8,6 +8,8 @@ in {
     ./cloudflared.nix
     ./plausible.nix
     ./loki.nix
+
+    (intranet.getWireguardConfig "it-vps")
   ];
 
   vic-nix = {

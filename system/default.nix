@@ -28,6 +28,7 @@ let
         globalSecretsFile = ../secrets/global.yaml;
         secretsPath = ../secrets/${hostname};
         defaultSecretsFile = "${secretsPath}/default.yaml";
+        intranet = import ../intranet { inherit (nixpkgs) lib; };
       };
 
       modules = common ++ [

@@ -1,4 +1,4 @@
-{ config, pkgs, lib, defaultSecretsFile, ... }:
+{ config, pkgs, lib, defaultSecretsFile, intranet, ... }:
 let useNM = config.vic-nix.desktop.enable;
 in {
   imports = [
@@ -28,7 +28,7 @@ in {
         fallbackDns = [ "1.1.1.1" "1.0.0.1" ];
       };
 
-      security.pki.certificateFiles = [ ../../ca/ca-cert.pem ];
+      security.pki.certificateFiles = [ (intranet.caCert) ];
 
       # don't change this
       system.stateVersion = "23.05";
