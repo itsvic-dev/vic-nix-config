@@ -1,4 +1,4 @@
-{ lib, config, intranet, ... }: {
+{ pkgs, lib, config, intranet, ... }: {
   sops.secrets.vic-net-sk = { };
 
   networking.wireguard.interfaces.vic-net = {
