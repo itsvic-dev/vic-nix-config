@@ -6,6 +6,7 @@
       serviceConfig.Type = "oneshot";
 
       script = ''
+        set -euo pipefail
         system_path=$(${pkgs.curl}/bin/curl \
           -s -L -H "Accept: application/json" \
           https://hydra.vic/job/config/main/${config.networking.hostName}/latest \
