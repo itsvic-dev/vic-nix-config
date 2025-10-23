@@ -44,7 +44,9 @@
 
     zones."21.10.in-addr.arpa" = {
       master = true;
-      file = ./arpa.zone;
+      file = pkgs.writeText "arpa.zone"
+        (builtins.replaceStrings [ "[IPS]" ] [ (intranet.ipsAsRDNS) ]
+          (builtins.readFile ./arpa.zone));
     };
   };
 

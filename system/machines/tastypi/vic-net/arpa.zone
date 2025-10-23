@@ -3,7 +3,7 @@ $ORIGIN 21.10.in-addr.arpa.
 
 ; zone setup
 @ IN SOA tastypi.vic. contact@itsvic.dev. (
-  2025101902  ; serial
+  2025102301  ; serial
   3h          ; refresh
   1h          ; retry
   24h         ; expire
@@ -11,11 +11,4 @@ $ORIGIN 21.10.in-addr.arpa.
 )
 @ IN NS tastypi.vic.
 
-; servers
-1.0 IN PTR tastypi.vic.
-2.0 IN PTR it-vps.vic.
-3.0 IN PTR fra01.vic.
-
-; clients
-1.1 IN PTR mbp.clients.vic.
-2.1 IN PTR iphone.clients.vic.
+[IPS]

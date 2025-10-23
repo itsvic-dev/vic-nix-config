@@ -33,6 +33,13 @@
     (lib.mapAttrsToList (name: target: "${name}.vic. IN CNAME ${target}.vic.")
       cnames);
 
+  ipsAsRDNS = builtins.concatStringsSep "\n" (lib.mapAttrsToList (name: ip:
+    let
+      octets = lib.splitString "." ip;
+      reversed =
+        lib.concatStringsSep "." (lib.sublist 0 2 (lib.reverseList octets));
+    in "${reversed} IN PTR ${name}.vic.") ips);
+
   # returns the wireguard config for a given host (not applicable to the main peer)
   getWireguardConfig = host:
     { config, ... }: {

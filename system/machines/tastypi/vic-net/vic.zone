@@ -3,7 +3,7 @@ $ORIGIN vic.
 
 ; TLD setup
 @ IN SOA tastypi.vic. contact@itsvic.dev. (
-  2025101901  ; serial
+  2025102301  ; serial
   3h          ; refresh
   1h          ; retry
   24h         ; expire
