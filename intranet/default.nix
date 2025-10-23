@@ -1,5 +1,6 @@
 { lib }: rec {
   caCert = ./certs/ca-cert.pem;
+  nameserver = "10.21.0.1";
 
   wireguardPeers = {
     tastypi = { publicKey = "7yrI5RW+I6yZC5K1+7ErKUWC5h42aMYkjiP6/siOlzk="; };
@@ -11,9 +12,9 @@
   mainPeer = wireguardPeers.fra01 // { endpoint = "37.114.50.122:51820"; };
 
   ips = {
-    tastypi = "10.21.0.1";
-    it-vps = "10.21.0.2";
-    fra01 = "10.21.0.3";
+    fra01 = "10.21.0.1";
+    tastypi = "10.21.0.2";
+    it-vps = "10.21.0.3";
 
     mbp = "10.21.1.1";
     iphone = "10.21.1.2";

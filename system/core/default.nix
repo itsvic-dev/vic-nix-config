@@ -21,7 +21,7 @@ in {
           "1.1.1.1"
           "1.0.0.1"
         ] else
-          [ "10.21.0.1" ];
+          [ intranet.nameserver ];
       };
       services.resolved = {
         enable = true;
