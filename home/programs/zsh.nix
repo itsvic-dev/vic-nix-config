@@ -6,6 +6,7 @@
       enable = true;
       theme = "intheloop";
     };
+    shellAliases = { cat = "bat"; };
   };
 
   programs.zoxide = {
