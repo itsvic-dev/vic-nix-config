@@ -34,7 +34,6 @@
         port = 9002;
       };
       nginx.enable = true;
-      bind.enable = true;
     };
 
     scrapeConfigs = [
@@ -47,9 +46,6 @@
             }"
             "127.0.0.1:${
               toString config.services.prometheus.exporters.nginx.port
-            }"
-            "127.0.0.1:${
-              toString config.services.prometheus.exporters.bind.port
             }"
           ];
         }];
@@ -76,6 +72,9 @@
             }"
             "fra01.vic:${
               toString config.services.prometheus.exporters.nginx.port
+            }"
+            "fra01.vic:${
+              toString config.services.prometheus.exporters.bind.port
             }"
           ];
         }];

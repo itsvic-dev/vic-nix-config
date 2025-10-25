@@ -11,6 +11,10 @@
       enable = true;
       openFirewall = true;
     };
+    bind = {
+      enable = true;
+      openFirewall = true;
+    };
   };
 
   services.nginx.statusPage = true;

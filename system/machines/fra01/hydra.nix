@@ -20,7 +20,7 @@
         hostName = "it-vps.vic";
         systems = [ "x86_64-linux" "i686-linux" ];
         protocol = "ssh";
-        maxJobs = 2;
+        maxJobs = 4;
         speedFactor = 1;
         supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
         mandatoryFeatures = [ ];
@@ -29,7 +29,7 @@
         hostName = "tastypi.vic";
         system = "aarch64-linux";
         protocol = "ssh";
-        maxJobs = 2;
+        maxJobs = 4;
         speedFactor = 1;
         supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
         mandatoryFeatures = [ ];
@@ -41,6 +41,7 @@
         systems = [ "x86_64-linux" "i686-linux" ];
         supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
         maxJobs = 4;
+        speedFactor = 2;
       }
     ];
 
