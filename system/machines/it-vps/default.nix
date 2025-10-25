@@ -56,7 +56,7 @@ in {
       enabledCollectors = [ "systemd" ];
       port = 9002;
       openFirewall = true;
-      listenAddress = "10.21.0.2";
+      listenAddress = intranet.ips.${config.networking.hostName};
     };
     nginx = {
       enable = true;

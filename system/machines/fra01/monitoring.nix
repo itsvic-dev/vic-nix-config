@@ -1,11 +1,11 @@
-{
+{ intranet, config, ... }: {
   services.prometheus.exporters = {
     node = {
       enable = true;
       enabledCollectors = [ "systemd" ];
       port = 9002;
       openFirewall = true;
-      listenAddress = "10.21.0.3";
+      listenAddress = intranet.ips.${config.networking.hostName};
     };
     nginx = {
       enable = true;
