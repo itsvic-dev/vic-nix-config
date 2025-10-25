@@ -18,7 +18,7 @@
     buildMachines = [
       {
         hostName = "it-vps.vic";
-        system = "x86_64-linux";
+        systems = [ "x86_64-linux" "i686-linux" ];
         protocol = "ssh";
         maxJobs = 2;
         speedFactor = 1;
@@ -38,7 +38,7 @@
       {
         hostName = "localhost";
         protocol = null;
-        system = "x86_64-linux";
+        systems = [ "x86_64-linux" "i686-linux" ];
         supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
         maxJobs = 4;
       }
