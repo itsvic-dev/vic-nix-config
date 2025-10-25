@@ -15,6 +15,8 @@
   networking.firewall.allowedUDPPorts = [ 51820 ];
   networking.firewall.interfaces.vic-net.allowedUDPPorts = [ 53 ]; # BIND
 
+  boot.kernel.sysctl."net.ipv4.ip_forward" = 1;
+
   services.bind = {
     enable = true;
     listenOn = [ "10.21.0.1" ];
