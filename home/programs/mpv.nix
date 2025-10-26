@@ -1,8 +1,8 @@
 { osConfig, lib, pkgs, ... }: {
-  config = lib.mkIf osConfig.vic-nix.desktop.enable {
+  config = lib.mkIf (osConfig.vic-nix.desktop.enable && pkgs.stdenv.isLinux) {
     programs.mpv = {
       enable = true;
-      package = if (pkgs.stdenv.isDarwin) then pkgs.mpv-unwrapped else pkgs.mpv;
+      package = pkgs.mpv;
       config = {
         hwdec = "auto-safe";
         vo = "gpu";
