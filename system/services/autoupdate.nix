@@ -4,6 +4,8 @@
       description = "Check for new system builds";
       requires = [ "network-online.target" ];
       serviceConfig.Type = "oneshot";
+      restartIfChanged = false;
+      stopIfChanged = false;
 
       script = ''
         set -euo pipefail
