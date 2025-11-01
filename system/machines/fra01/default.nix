@@ -5,6 +5,7 @@
   vic-nix = {
     server.enable = true;
     hardware.intel = true;
+    software.libvirt = true;
   };
 
   networking = {
