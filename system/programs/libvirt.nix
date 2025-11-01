@@ -6,7 +6,6 @@ in {
       virtualisation.libvirtd = {
         enable = true;
         qemu.swtpm.enable = true;
-        qemu.ovmf.packages = [ pkgs.OVMFFull.fd ];
       };
 
       virtualisation.spiceUSBRedirection.enable = true;
