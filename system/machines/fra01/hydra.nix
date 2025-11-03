@@ -5,6 +5,9 @@
     notificationSender = "hydra@localhost";
     useSubstitutes = true;
     port = 4023;
+    extraConfig = ''
+      max_output_size ${5 * 1024 * 1024 * 1024}
+    '';
   };
 
   nix = {
