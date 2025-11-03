@@ -1,4 +1,4 @@
-{ config, secretsPath, intranet, ... }: {
+{ config, secretsPath, intranet, pkgs, ... }: {
   services.hydra = {
     enable = true;
     hydraURL = "https://hydra.vic";
@@ -80,6 +80,7 @@
 
   services.nix-serve = {
     enable = true;
+    package = pkgs.nix-serve-ng;
     port = 9620;
     bindAddress = "127.0.0.1";
     secretKeyFile = config.sops.secrets.binary-cache-key.path;
