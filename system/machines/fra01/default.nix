@@ -1,6 +1,12 @@
 { lib, ... }: {
-  imports =
-    [ ./disko.nix ./hardware.nix ./vic-net.nix ./monitoring.nix ./hydra.nix ];
+  imports = [
+    ./disko.nix
+    ./hardware.nix
+    ./vic-net.nix
+    ./monitoring.nix
+    ./hydra.nix
+    ./ticket-bot.nix
+  ];
 
   vic-nix = {
     server.enable = true;

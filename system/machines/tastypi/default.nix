@@ -4,7 +4,6 @@
     ./wings.nix
     ./hardware.nix
     ./free-media.nix
-    ./ticket-bot.nix
     ./vic-net
     ./grafana-prometheus.nix
     ./loki.nix

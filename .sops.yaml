@@ -10,7 +10,6 @@ creation_rules:
     key_groups:
       - age:
           - *admin_vic
-          - *machine_e6nix
           - *machine_tastypi
           - *machine_it_vps
           - *machine_mbp
