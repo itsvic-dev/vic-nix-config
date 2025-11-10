@@ -6,7 +6,7 @@
     useSubstitutes = true;
     port = 4023;
     extraConfig = ''
-      max_output_size ${5 * 1024 * 1024 * 1024}
+      max_output_size ${toString 5 * 1024 * 1024 * 1024}
     '';
   };
 
