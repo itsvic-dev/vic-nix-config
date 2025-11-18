@@ -1,4 +1,11 @@
-{ config, lib, pkgs, inputs, secretsPath, ... }: {
+{
+  config,
+  pkgs,
+  inputs,
+  secretsPath,
+  ...
+}:
+{
   imports = [
     ./networking.nix
     ./wings.nix
@@ -26,15 +33,6 @@
       log_format custom_log '[$time_iso8601] [$remote_addr] $request_method $host$uri';
       access_log /var/log/nginx/access.log custom_log;
     '';
-
-    virtualHosts."social.itsvic.dev" = {
-      enableACME = true;
-      forceSSL = true;
-      locations."/" = {
-        proxyPass = "http://127.0.0.1:5254";
-        proxyWebsockets = true;
-      };
-    };
   };
 
   services.logrotate.settings.nginx = {
@@ -44,13 +42,15 @@
 
   services.openssh.ports = [ 62122 ];
 
-  networking.firewall.allowedTCPPorts = [ 80 443 ];
+  networking.firewall.allowedTCPPorts = [
+    80
+    443
+  ];
 
   services.vncpy = {
     enable = true;
     image = pkgs.fetchurl {
-      url =
-        "https://static1.e621.net/data/sample/fa/f2/faf2cbcd6aa88473391af7b145a79690.jpg";
+      url = "https://static1.e621.net/data/sample/fa/f2/faf2cbcd6aa88473391af7b145a79690.jpg";
       hash = "sha256-80c4ycrJIkdb18BeklOopwunWmFTAGSeEcW6GJegNkU=";
     };
   };
