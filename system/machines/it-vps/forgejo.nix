@@ -5,10 +5,15 @@
     enable = true;
     stateDir = "/mnt/hdd/forgejo";
     settings = {
+      DEFAULT.APP_NAME = "vic!Git";
       server = {
         DOMAIN = "git.vic";
         ROOT_URL = "https://git.vic/";
         PROTOCOL = "http+unix";
+      };
+      repository = {
+        DEFAULT_BRANCH = "trunk";
+        USE_COMPAT_SSH_URI = false;
       };
     };
   };
