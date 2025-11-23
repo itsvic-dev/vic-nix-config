@@ -5,7 +5,7 @@ set -eu
 
 FQDN="$1"
 MACHINE="$2"
-mkdir "$FQDN" -p
+mkdir "certs/$MACHINE/$FQDN" -pv
 
 openssl req -new -newkey rsa:4096 \
   -keyout "certs/$MACHINE/$FQDN/key.pem" \
@@ -17,8 +17,8 @@ openssl req -new -newkey rsa:4096 \
   -addext "subjectAltName=DNS:$FQDN,DNS:*.$FQDN"
 
 openssl x509 -req -in "certs/$MACHINE/$FQDN/cert.csr" \
-  -CA ca-cert.pem \
-  -CAkey ca-key.pem \
+  -CA certs/ca-cert.pem \
+  -CAkey certs/ca-key.pem \
   -out "certs/$MACHINE/$FQDN/cert.pem" \
   -days 365 -sha256 \
   -copy_extensions copy

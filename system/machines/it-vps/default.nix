@@ -8,6 +8,7 @@ in {
     ./cloudflared.nix
     ./plausible.nix
     ./loki.nix
+    ./forgejo.nix
 
     (intranet.getWireguardConfig "it-vps")
   ];

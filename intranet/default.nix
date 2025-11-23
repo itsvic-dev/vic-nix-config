@@ -25,6 +25,8 @@
 
     "hydra" = "fra01";
     "cache" = "fra01";
+
+    "git" = "it-vps";
   };
 
   ipsAsDNS = builtins.concatStringsSep "\n"
@@ -55,4 +57,17 @@
 
   getCert = host: domain: ./certs/${host}/${domain}/cert.pem;
   getKey = host: domain: ./certs/${host}/${domain}/key.pem;
+
+  nginxCertFor = host: domain:
+    { config, ... }: {
+      sops.secrets."${domain}.key" = {
+        owner = config.services.nginx.user;
+        sopsFile = getKey host domain;
+        format = "binary";
+      };
+      services.nginx.virtualHosts."${domain}" = {
+        sslCertificate = getCert host domain;
+        sslCertificateKey = config.sops.secrets."${domain}.key".path;
+      };
+    };
 }
