@@ -12,7 +12,7 @@
       }
 
       (lib.mkIf (!config.vic-nix.noSecrets) {
-        substituters = [ "https://cache.vic" ];
+        substituters = lib.mkAfter [ "https://cache.vic" ];
 
         trusted-public-keys =
           [ "cache.vic:CnhOE+6KqHwCPD+x6Tbv0wJsh2LmpBqxOd3Ze+3kxOk=" ];
