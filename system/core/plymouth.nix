@@ -1,8 +1,8 @@
-{ config, lib, ... }: {
+{ config, lib, ... }:
+{
   config = lib.mkIf config.vic-nix.desktop.enable {
     boot = {
       plymouth.enable = true;
-      initrd.systemd.enable = true;
 
       consoleLogLevel = 0;
       initrd.verbose = false;
