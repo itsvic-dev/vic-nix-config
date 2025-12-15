@@ -46,6 +46,7 @@ in
       extraConfig = ''
         autoindex on;
         fancyindex on;
+        fancyindex_exact_size off;
       '';
     };
 
@@ -61,6 +62,7 @@ in
       extraConfig = ''
         autoindex on;
         fancyindex on;
+        fancyindex_exact_size off;
       '';
     };
   };
