@@ -51,7 +51,12 @@ in
 
     # LAN-facing page
     virtualHosts."torrents-home" = {
-      listen = [ "192.168.0.134:5605" ];
+      listen = [
+        {
+          addr = "192.168.0.134";
+          port = 5605;
+        }
+      ];
       root = "/var/torrents";
       extraConfig = ''
         autoindex on;
