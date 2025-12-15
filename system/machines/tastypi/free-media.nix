@@ -65,6 +65,8 @@ in
     };
   };
 
+  networking.firewall.allowedTCPPorts = [ 5605 ];
+
   services.samba = {
     enable = true;
     openFirewall = true;
