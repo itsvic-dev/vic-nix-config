@@ -93,8 +93,10 @@ in
       torrents = {
         path = "/var/torrents";
         browseable = "yes";
-        "read only" = "yes";
+        writeable = "yes";
+        # allow read-only guest access
         "guest ok" = "yes";
+        "read list" = "guest nobody";
         "create mask" = "0644";
         "directory mask" = "0755";
       };
