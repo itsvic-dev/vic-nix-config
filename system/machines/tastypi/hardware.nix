@@ -5,6 +5,9 @@
   boot.kernelPackages = inputs.nixpkgs-old.legacyPackages.aarch64-linux.linuxPackages_rpi4;
   boot.extraModulePackages = [ ];
 
+  # Okay.
+  boot.initrd.systemd.enableTpm2 = false;
+
   fileSystems."/" = {
     device = "/dev/nvme0n1p2";
     fsType = "ext4";
