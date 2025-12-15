@@ -6,7 +6,7 @@
   boot.extraModulePackages = [ ];
 
   # Okay.
-  boot.initrd.systemd.enableTpm2 = false;
+  boot.initrd.systemd.tpm2.enable = false;
 
   fileSystems."/" = {
     device = "/dev/nvme0n1p2";
