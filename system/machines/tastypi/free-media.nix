@@ -1,4 +1,9 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  config,
+  intranet,
+  ...
+}:
 let
   proxyPass = port: {
     enableACME = true;
@@ -8,7 +13,10 @@ let
       proxyWebsockets = true;
     };
   };
-in {
+in
+{
+  imports = [ (intranet.nginxCertFor "tastypi" "torrents.vic") ];
+
   services.flood = {
     enable = true;
     host = "192.168.0.134";
@@ -25,6 +33,31 @@ in {
   services.samba-wsdd = {
     enable = true;
     openFirewall = true;
+  };
+
+  services.nginx = {
+    additionalModules = [ pkgs.nginxModules.fancyindex ];
+
+    # intranet-facing page
+    virtualHosts."torrents.vic" = {
+      listenAddresses = [ (intranet.ips.${config.networking.hostName}) ];
+      forceSSL = true;
+      root = "/var/torrents";
+      extraConfig = ''
+        autoindex on;
+        fancyindex on;
+      '';
+    };
+
+    # LAN-facing page
+    virtualHosts."torrents-home" = {
+      listen = [ "192.168.0.134:5605" ];
+      root = "/var/torrents";
+      extraConfig = ''
+        autoindex on;
+        fancyindex on;
+      '';
+    };
   };
 
   services.samba = {
@@ -109,12 +142,9 @@ in {
     "media.itsvic.dev" = proxyPass 8096;
     "request.media.itsvic.dev" = proxyPass config.services.jellyseerr.port;
 
-    "sonarr.media.itsvic.dev" =
-      proxyPass config.services.sonarr.settings.server.port;
-    "radarr.media.itsvic.dev" =
-      proxyPass config.services.radarr.settings.server.port;
-    "prowlarr.media.itsvic.dev" =
-      proxyPass config.services.prowlarr.settings.server.port;
+    "sonarr.media.itsvic.dev" = proxyPass config.services.sonarr.settings.server.port;
+    "radarr.media.itsvic.dev" = proxyPass config.services.radarr.settings.server.port;
+    "prowlarr.media.itsvic.dev" = proxyPass config.services.prowlarr.settings.server.port;
     "bazarr.media.itsvic.dev" = proxyPass config.services.bazarr.listenPort;
   };
 
