@@ -20,7 +20,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    impermanence = { url = "github:nix-community/impermanence"; };
+    impermanence = {
+      url = "github:nix-community/impermanence";
+    };
 
     disko = {
       url = "github:nix-community/disko";
@@ -54,6 +56,8 @@
     };
 
     # tastypi
+    nixpkgs-old.url = "github:NixOS/nixpkgs/5e2a59a5b1a82f89f2c7e598302a9cacebb72a67";
+
     bob-website = {
       url = "github:bob-discord-bot/website";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -75,19 +79,32 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, disko, ... }:
+  outputs =
+    inputs@{
+      self,
+      nixpkgs,
+      disko,
+      ...
+    }:
     let
-      defineShell = system:
+      defineShell =
+        system:
         let
           pkgs = import nixpkgs { inherit system; };
           deployOn = pkgs.callPackage ./misc/deploy.nix { };
-        in with pkgs;
+        in
+        with pkgs;
         mkShell {
-          buildInputs = [ sops age deployOn ] ++ lib.optionals (stdenv.isLinux)
-            [ disko.packages.${system}.disko ];
+          buildInputs = [
+            sops
+            age
+            deployOn
+          ]
+          ++ lib.optionals (stdenv.isLinux) [ disko.packages.${system}.disko ];
         };
 
-    in {
+    in
+    {
       nixosConfigurations = import ./system inputs;
       darwinConfigurations = import ./darwin inputs;
 
@@ -97,9 +114,8 @@
         aarch64-darwin.default = defineShell "aarch64-darwin";
       };
 
-      hydraJobs = nixpkgs.lib.mapAttrs (name: value:
-        value.config.system.build.${
-          if (name == "live-rescue") then "isoImage" else "toplevel"
-        }) self.nixosConfigurations;
+      hydraJobs = nixpkgs.lib.mapAttrs (
+        name: value: value.config.system.build.${if (name == "live-rescue") then "isoImage" else "toplevel"}
+      ) self.nixosConfigurations;
     };
 }

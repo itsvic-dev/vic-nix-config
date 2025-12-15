@@ -1,8 +1,16 @@
-{ config, lib, pkgs, inputs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
 let
-  vncpy = inputs.vncpy.packages.${pkgs.system}.default;
+  vncpy = inputs.vncpy.packages.${pkgs.stdenv.hostPlatform.system}.default;
   cfg = config.services.vncpy;
-in with lib; {
+in
+with lib;
+{
   options = {
     services.vncpy = {
       enable = mkEnableOption "vncpy";
