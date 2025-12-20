@@ -1,6 +1,14 @@
-{ pkgs, config, lib, globalSecretsFile, ... }:
-let cfg = config.vic-nix.server;
-in {
+{
+  pkgs,
+  config,
+  lib,
+  globalSecretsFile,
+  ...
+}:
+let
+  cfg = config.vic-nix.server;
+in
+{
   config = lib.mkIf (cfg.enable && !config.vic-nix.noSecrets) {
     services.openssh = {
       enable = true;
@@ -9,40 +17,43 @@ in {
 
     sops.secrets.pamWebhook.sopsFile = globalSecretsFile;
 
-    security.pam.services.sshd.rules.session.vic-webhook = let
-      webhookTrigger = with pkgs;
-        writeScript "sshd-webhook-trigger" ''
-          #!${pkgs.runtimeShell}
-          JSON_TEMPLATE='{content: $content}'
+    security.pam.services.sshd.rules.session.vic-webhook =
+      let
+        webhookTrigger =
+          with pkgs;
+          writeScript "sshd-webhook-trigger" ''
+            #!${pkgs.runtimeShell}
+            JSON_TEMPLATE='{content: $content}'
 
-          # ignore special 'nixremote' user
-          if [ "$PAM_USER" == "nixremote" ]; then
-            exit
-          fi
+            # ignore special users
+            if [ "$PAM_USER" == "nixremote" ] || [ "$PAM_USER" == "forgejo" ]; then
+              exit
+            fi
 
-          PAM_RDNS_HOST="$(${pkgs.dig}/bin/dig +short -x "$PAM_RHOST")"
+            PAM_RDNS_HOST="$(${pkgs.dig}/bin/dig +short -x "$PAM_RHOST")"
 
-          case "$PAM_TYPE" in
-            open_session)
-              CONTENT="➡️ \`$HOSTNAME\`: \`$PAM_USER\` logged in (\`$PAM_RHOST\`, \`$PAM_RDNS_HOST\`)"
-              ;;
-            close_session)
-              CONTENT="⬅️ \`$HOSTNAME\`: \`$PAM_USER\` logged out (\`$PAM_RHOST\`, \`$PAM_RDNS_HOST\`)"
-              ;;
-          esac
+            case "$PAM_TYPE" in
+              open_session)
+                CONTENT="➡️ \`$HOSTNAME\`: \`$PAM_USER\` logged in (\`$PAM_RHOST\`, \`$PAM_RDNS_HOST\`)"
+                ;;
+              close_session)
+                CONTENT="⬅️ \`$HOSTNAME\`: \`$PAM_USER\` logged out (\`$PAM_RHOST\`, \`$PAM_RDNS_HOST\`)"
+                ;;
+            esac
 
-          if [ -n "$CONTENT" ]; then
-            JSON_DATA="$(
-              ${pkgs.jq}/bin/jq -n --arg content "$CONTENT" "$JSON_TEMPLATE"
-            )"
-            ${pkgs.curl}/bin/curl -X POST "$(cat ${config.sops.secrets.pamWebhook.path})" -H "Content-Type: application/json" --data "$JSON_DATA" & disown
-          fi
-        '';
-    in {
-      control = "optional";
-      modulePath = "pam_exec.so";
-      args = [ (toString webhookTrigger) ];
-      order = 999999;
-    };
+            if [ -n "$CONTENT" ]; then
+              JSON_DATA="$(
+                ${pkgs.jq}/bin/jq -n --arg content "$CONTENT" "$JSON_TEMPLATE"
+              )"
+              ${pkgs.curl}/bin/curl -X POST "$(cat ${config.sops.secrets.pamWebhook.path})" -H "Content-Type: application/json" --data "$JSON_DATA" & disown
+            fi
+          '';
+      in
+      {
+        control = "optional";
+        modulePath = "pam_exec.so";
+        args = [ (toString webhookTrigger) ];
+        order = 999999;
+      };
   };
 }
