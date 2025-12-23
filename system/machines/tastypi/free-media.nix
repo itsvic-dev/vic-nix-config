@@ -43,7 +43,7 @@ in
       listenAddresses = [ (intranet.ips.tastypi) ];
       forceSSL = true;
       locations."/" = {
-        proxyPass = "http://127.0.0.1:${config.services.flood.port}";
+        proxyPass = "http://127.0.0.1:${toString config.services.flood.port}";
         proxyWebsockets = true;
       };
     };
