@@ -1,22 +1,16 @@
 {
-  config,
   intranet,
   ...
 }:
 {
-  imports = [ (intranet.getWireguardConfig "tastypi") ];
-
-  sops.secrets.tastypi-vic-key = {
-    owner = "nginx";
-    sopsFile = intranet.getKey "tastypi" "tastypi.vic";
-    format = "binary";
-  };
+  imports = [
+    intranet.wireguardConfig
+    (intranet.nginxCertFor "tastypi.vic")
+  ];
 
   services.nginx.virtualHosts."tastypi.vic" = {
     root = ./tastypi-nginx;
     listenAddresses = [ (intranet.ips.tastypi) ];
     forceSSL = true;
-    sslCertificate = intranet.getCert "tastypi" "tastypi.vic";
-    sslCertificateKey = config.sops.secrets.tastypi-vic-key.path;
   };
 }

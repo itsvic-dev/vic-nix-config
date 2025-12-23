@@ -36,6 +36,7 @@ rec {
   cnames = {
     "grafana" = "tastypi";
     "torrents" = "tastypi";
+    "flood" = "tastypi";
 
     "hydra" = "fra01";
     "cache" = "fra01";
@@ -62,10 +63,12 @@ rec {
     ) ips
   );
 
-  # returns the wireguard config for a given host (not applicable to the main peer)
-  getWireguardConfig =
-    host:
+  # returns a NixOS module wireguard config for this host (not applicable to the main peer)
+  wireguardConfig =
     { config, ... }:
+    let
+      host = config.networking.hostName;
+    in
     {
       sops.secrets.vic-net-sk = { };
       networking.wireguard.interfaces.vic-net = {
@@ -80,8 +83,11 @@ rec {
   getKey = host: domain: ./certs/${host}/${domain}/key.pem;
 
   nginxCertFor =
-    host: domain:
+    domain:
     { config, ... }:
+    let
+      host = config.networking.hostName;
+    in
     {
       sops.secrets."${domain}.key" = {
         owner = config.services.nginx.user;

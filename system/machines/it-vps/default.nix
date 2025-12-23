@@ -1,6 +1,15 @@
-{ config, lib, pkgs, inputs, intranet, ... }:
-let bob = inputs.bob.packages.x86_64-linux.default;
-in {
+{
+  config,
+  lib,
+  pkgs,
+  inputs,
+  intranet,
+  ...
+}:
+let
+  bob = inputs.bob.packages.x86_64-linux.default;
+in
+{
   imports = [
     ./hardware.nix
     ./ptero.nix
@@ -10,7 +19,7 @@ in {
     ./loki.nix
     ./forgejo.nix
 
-    (intranet.getWireguardConfig "it-vps")
+    intranet.wireguardConfig
   ];
 
   vic-nix = {

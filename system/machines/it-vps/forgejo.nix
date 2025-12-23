@@ -1,5 +1,6 @@
-{ config, intranet, ... }: {
-  imports = [ (intranet.nginxCertFor "it-vps" "git.vic") ];
+{ config, intranet, ... }:
+{
+  imports = [ (intranet.nginxCertFor "git.vic") ];
 
   services.forgejo = {
     enable = true;

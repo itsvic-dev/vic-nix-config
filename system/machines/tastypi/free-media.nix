@@ -15,12 +15,13 @@ let
   };
 in
 {
-  imports = [ (intranet.nginxCertFor "tastypi" "torrents.vic") ];
+  imports = [
+    (intranet.nginxCertFor "torrents.vic")
+    (intranet.nginxCertFor "flood.vic")
+  ];
 
   services.flood = {
     enable = true;
-    host = "192.168.0.134";
-    openFirewall = true;
   };
 
   services.qbittorrent = {
@@ -38,9 +39,18 @@ in
   services.nginx = {
     additionalModules = [ pkgs.nginxModules.fancyindex ];
 
+    virtualHosts."flood.vic" = {
+      listenAddresses = [ (intranet.ips.tastypi) ];
+      forceSSL = true;
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:${config.services.flood.port}";
+        proxyWebsockets = true;
+      };
+    };
+
     # intranet-facing page
     virtualHosts."torrents.vic" = {
-      listenAddresses = [ (intranet.ips.${config.networking.hostName}) ];
+      listenAddresses = [ (intranet.ips.tastypi) ];
       forceSSL = true;
       root = "/var/torrents";
       extraConfig = ''
