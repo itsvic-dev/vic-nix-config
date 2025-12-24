@@ -23,6 +23,16 @@
     fsType = "vfat";
   };
 
+  fileSystems."/mnt/ssd" = {
+    device = "/dev/disk/by-uuid/6c67eb27-a188-4cd8-9540-8982eb2bfeb6";
+    fsType = "btrfs";
+    options = [
+      "compress=zstd"
+      "nofail"
+      "noatime"
+    ];
+  };
+
   swapDevices = [
     {
       device = "/swapfile";

@@ -52,7 +52,7 @@ in
     virtualHosts."torrents.vic" = {
       listenAddresses = [ (intranet.ips.tastypi) ];
       forceSSL = true;
-      root = "/var/torrents";
+      root = "/mnt/ssd/torrents";
       extraConfig = ''
         autoindex on;
         fancyindex on;
@@ -68,7 +68,7 @@ in
           port = 5605;
         }
       ];
-      root = "/var/torrents";
+      root = "/mnt/ssd/torrents";
       extraConfig = ''
         autoindex on;
         fancyindex on;
@@ -101,7 +101,7 @@ in
       };
 
       torrents = {
-        path = "/var/torrents";
+        path = "/mnt/ssd/torrents";
         browseable = "yes";
         writeable = "yes";
         # allow read-only guest access
@@ -112,7 +112,7 @@ in
       };
 
       media = {
-        path = "/var/media";
+        path = "/mnt/ssd/media";
         browseable = "yes";
         writeable = "yes";
         # allow read-only guest access
@@ -181,7 +181,7 @@ in
 
   # create folders
   systemd.tmpfiles.rules = [
-    "d '/var/torrents' 0777 nobody nogroup -"
-    "d '/var/media' 0777 nobody nogroup -"
+    "d '/mnt/ssd/torrents' 0777 nobody nogroup -"
+    "d '/mnt/ssd/media' 0777 nobody nogroup -"
   ];
 }
