@@ -427,6 +427,22 @@
         "type": "github"
       }
     },
+    "ps4-pkg-db": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1766727112,
+        "narHash": "sha256-WlDlJaGT5FekNFe1iuBq+7J2qBg20KU5qWcU83c1iMc=",
+        "owner": "itsvic-dev",
+        "repo": "ps4-pkg-db",
+        "rev": "1a7bd700e218fa62efde1b127c993243cb0b33c2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "itsvic-dev",
+        "repo": "ps4-pkg-db",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "bob": "bob",
@@ -441,6 +457,7 @@
         "nixpkgs": "nixpkgs",
         "nixpkgs-old": "nixpkgs-old",
         "oxibridge": "oxibridge",
+        "ps4-pkg-db": "ps4-pkg-db",
         "sops-nix": "sops-nix",
         "ticket-bot": "ticket-bot",
         "vncpy": "vncpy"
