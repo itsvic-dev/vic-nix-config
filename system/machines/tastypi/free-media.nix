@@ -1,5 +1,7 @@
 {
   pkgs,
+  lib,
+  inputs,
   config,
   intranet,
   ...
@@ -184,4 +186,25 @@ in
     "d '/mnt/ssd/torrents' 0777 nobody nogroup -"
     "d '/mnt/ssd/media' 0777 nobody nogroup -"
   ];
+
+  systemd.services.pkg-db-refresh = {
+    serviceConfig = {
+      Type = "oneshot";
+      WorkingDirectory = "/mnt/ssd/torrents";
+      User = "root";
+    };
+
+    script = ''
+      exec ${lib.getExe pkgs.python3} ${inputs.ps4-pkg-db}/main.py http://192.168.0.134:5605
+    '';
+  };
+
+  systemd.timers.pkg-db-refresh = {
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnBootSec = "15m";
+      OnUnitActiveSec = "15m";
+      Unit = "pkg-db-refresh.service";
+    };
+  };
 }

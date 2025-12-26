@@ -77,6 +77,11 @@
       url = "github:itsvic-dev/oxibridge";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    ps4-pkg-db = {
+      url = "github:itsvic-dev/ps4-pkg-db";
+      flake = false;
+    };
   };
 
   outputs =
