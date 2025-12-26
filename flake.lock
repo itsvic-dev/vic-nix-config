@@ -430,11 +430,11 @@
     "ps4-pkg-db": {
       "flake": false,
       "locked": {
-        "lastModified": 1766727112,
-        "narHash": "sha256-WlDlJaGT5FekNFe1iuBq+7J2qBg20KU5qWcU83c1iMc=",
+        "lastModified": 1766762214,
+        "narHash": "sha256-q5oP+8NJKEfJz8iAD0Dyn50cLlkD5ERPivYYXrvCsEU=",
         "owner": "itsvic-dev",
         "repo": "ps4-pkg-db",
-        "rev": "1a7bd700e218fa62efde1b127c993243cb0b33c2",
+        "rev": "3c11ca5d5b53ada99f347578d4071f3fdb596105",
         "type": "github"
       },
       "original": {
