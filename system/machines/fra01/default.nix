@@ -22,10 +22,21 @@
           prefixLength = 24;
         }
       ];
+      ens18.ipv6.addresses = [
+        {
+          address = "2a0e:97c0:3e3:6a5::1";
+          prefixLength = 64;
+        }
+      ];
     };
 
     defaultGateway = {
       address = "37.114.50.1";
+      interface = "ens18";
+    };
+
+    defaultGateway6 = {
+      address = "fe80::1";
       interface = "ens18";
     };
 
