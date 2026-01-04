@@ -1,6 +1,7 @@
 { lib, ... }:
 {
   system.stateVersion = "25.11";
+  imports = [ ./nginx.nix ];
 
   networking = {
     firewall = {
@@ -51,12 +52,4 @@
     80
     443
   ];
-  services.nginx = {
-    enable = true;
-    virtualHosts = {
-      "intraweb.com" = {
-        root = ./www/intraweb.com;
-      };
-    };
-  };
 }
