@@ -6,12 +6,14 @@
     ./monitoring.nix
     ./hydra.nix
     ./ticket-bot.nix
+    ./intraweb
   ];
 
   vic-nix = {
     server.enable = true;
     hardware.intel = true;
     software.docker = true;
+    autoUpdate = false;
   };
 
   networking = {

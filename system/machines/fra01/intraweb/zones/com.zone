@@ -1,0 +1,18 @@
+$TTL 60
+$ORIGIN com.
+
+@ IN SOA fra01.iw-backbone.com. vic@intramail.com. (
+  2026010401  ; serial
+  3h          ; refresh
+  1h          ; retry
+  24h         ; expire
+  60          ; min TTL
+)
+
+@ IN NS fra01.iw-backbone.com.
+
+fra01.iw-backbone.com. IN A 10.0.0.1
+tastypi.iw-backbone.com. IN A 10.10.0.1
+
+intraweb.com. IN A 10.0.0.1
+time.intraweb.com. IN A 10.100.0.2
