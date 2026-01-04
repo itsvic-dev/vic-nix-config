@@ -18,6 +18,11 @@
       "www.msftncsi.com" = {
         root = ./www/msftncsi.com;
       };
+
+      # modern equivalent
+      "www.msftconnecttest.com" = {
+        root = ./www/msftncsi.com;
+      };
     };
   };
 }
