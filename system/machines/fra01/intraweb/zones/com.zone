@@ -19,4 +19,5 @@ www.intraweb.com.   IN CNAME fra01.iw-backbone.com.
 time.intraweb.com.  IN CNAME fra01.iw-backbone.com.
 
 ; used by windows for network check
-www.msftncsi.com.   IN A 10.0.0.1
+www.msftncsi.com.         IN A 10.0.0.1
+www.msftconnecttest.com.  IN A 10.0.0.1
