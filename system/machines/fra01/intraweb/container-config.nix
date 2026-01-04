@@ -38,16 +38,6 @@
     };
   };
 
-  services.openntpd = {
-    enable = true;
-    servers = lib.mkForce [
-      "10.100.0.1"
-    ];
-    extraConfig = ''
-      listen on 10.100.0.2
-    '';
-  };
-
   networking.firewall.allowedTCPPorts = [
     80
     443
