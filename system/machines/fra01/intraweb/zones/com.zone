@@ -10,4 +10,3 @@ $ORIGIN com.
 )
 
 intraweb.com.             IN NS fra01.backbone.iw.
-fra01.backbone.iw.        IN A 10.0.0.1
