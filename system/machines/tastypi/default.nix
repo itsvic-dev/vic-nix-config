@@ -22,7 +22,7 @@
     server.enable = true;
     software.docker = true;
     hardware.bluetooth = true;
-    autoUpdate = false;
+
   };
 
   networking.wireless.iwd.enable = true;
