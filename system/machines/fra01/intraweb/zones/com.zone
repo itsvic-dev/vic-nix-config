@@ -9,4 +9,5 @@ $ORIGIN com.
   60          ; min TTL
 )
 
-intraweb.com.             IN NS fra01.backbone.iw.
+@                   IN NS fra01.backbone.iw.
+intraweb.com.       IN NS fra01.backbone.iw.

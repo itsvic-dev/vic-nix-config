@@ -9,5 +9,6 @@ $ORIGIN intraweb.com.
   60          ; min TTL
 )
 
-@       IN A 10.0.0.1
-www     IN CNAME @
+@         IN NS fra01.backbone.iw.
+@         IN CNAME fra01.backbone.iw.
+www       IN CNAME fra01.backbone.iw.
