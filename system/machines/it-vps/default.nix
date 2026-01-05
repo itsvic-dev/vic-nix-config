@@ -1,6 +1,5 @@
 {
   config,
-  lib,
   pkgs,
   inputs,
   intranet,
@@ -18,6 +17,7 @@ in
     ./plausible.nix
     ./loki.nix
     ./forgejo.nix
+    ./intraweb
 
     intranet.wireguardConfig
   ];
