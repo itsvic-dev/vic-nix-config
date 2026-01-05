@@ -10,5 +10,6 @@ $ORIGIN backbone.iw.
 )
 
 @         IN NS fra01.backbone.iw.
+
 fra01     IN A 10.0.0.1
 tastypi   IN A 10.10.0.1
