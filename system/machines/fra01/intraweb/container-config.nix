@@ -27,6 +27,21 @@
       file = ./zones/com.zone;
     };
 
+    zones."iw" = {
+      master = true;
+      file = ./zones/iw.zone;
+    };
+
+    zones."intraweb.com" = {
+      master = true;
+      file = ./zones/com/intraweb.db;
+    };
+
+    zones."backbone.iw" = {
+      master = true;
+      file = ./zones/iw/backbone.db;
+    };
+
     zones."10.in-addr.arpa" = {
       master = true;
       file = ./zones/arpa.zone;

@@ -207,6 +207,26 @@
         "type": "github"
       }
     },
+    "intraweb": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1767551807,
+        "narHash": "sha256-A4IPOaIsTD2p1vanvrKZERHa2PLP9s1EO2nbU+9nkr4=",
+        "ref": "refs/heads/trunk",
+        "rev": "91d592cb422e7f65bc422d68bf7cdd15525337d7",
+        "revCount": 28,
+        "type": "git",
+        "url": "https://git.vic/itsvicdev/intraweb-py.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://git.vic/itsvicdev/intraweb-py.git"
+      }
+    },
     "lanzaboote": {
       "inputs": {
         "crane": "crane",
@@ -450,6 +470,7 @@
         "disko": "disko",
         "home-manager": "home-manager",
         "impermanence": "impermanence",
+        "intraweb": "intraweb",
         "lanzaboote": "lanzaboote",
         "nix-darwin": "nix-darwin",
         "nix-index-database": "nix-index-database",

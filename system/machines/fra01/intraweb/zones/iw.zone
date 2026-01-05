@@ -1,5 +1,5 @@
 $TTL 60
-$ORIGIN com.
+$ORIGIN iw.
 
 @ IN SOA fra01.backbone.iw. vic@intramail.com. (
   2026010501  ; serial
@@ -9,5 +9,5 @@ $ORIGIN com.
   60          ; min TTL
 )
 
-intraweb.com.             IN NS fra01.backbone.iw.
-fra01.backbone.iw.        IN A 10.0.0.1
+backbone.iw.        IN NS fra01.backbone.iw.
+fra01.backbone.iw.  IN A 10.0.0.1

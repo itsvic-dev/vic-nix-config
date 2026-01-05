@@ -1,13 +1,41 @@
-{ pkgs, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  secretsPath,
+  ...
+}:
 let
   ip = "${pkgs.iproute2}/bin/ip";
 in
 {
+  imports = [
+    inputs.intraweb.nixosModules.default
+  ];
+
+  sops.secrets.iw-backend-config = {
+    format = "yaml";
+    sopsFile = "${secretsPath}/intraweb-backend.yml";
+    key = "";
+    restartUnits = [ "intraweb-backend.service" ];
+  };
+
+  networking.firewall.allowedUDPPorts = [ 59808 ];
+
+  services.intraweb-backend = {
+    enable = true;
+    openFirewall = true;
+    configFile = config.sops.secrets.iw-backend-config.path;
+  };
+
   systemd.services."intraweb-netns" = {
     restartIfChanged = false;
     stopIfChanged = false;
     wantedBy = [ "multi-user.target" ];
-    requiredBy = [ "container@intraweb.service" ];
+    requiredBy = [
+      "container@intraweb.service"
+      "intraweb-backend.service"
+    ];
 
     serviceConfig = {
       Type = "oneshot";

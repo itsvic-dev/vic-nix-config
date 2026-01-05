@@ -13,16 +13,6 @@
       "www.intraweb.com" = {
         root = ./www/intraweb.com;
       };
-
-      # used by windows's network check
-      "www.msftncsi.com" = {
-        root = ./www/msftncsi.com;
-      };
-
-      # modern equivalent
-      "www.msftconnecttest.com" = {
-        root = ./www/msftncsi.com;
-      };
     };
   };
 }
