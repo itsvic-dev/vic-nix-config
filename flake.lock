@@ -214,11 +214,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1767551807,
-        "narHash": "sha256-A4IPOaIsTD2p1vanvrKZERHa2PLP9s1EO2nbU+9nkr4=",
+        "lastModified": 1767588173,
+        "narHash": "sha256-pyWuLo8rF/yi8F+WmQBnmVih9TVmQO6j71zejIecqiQ=",
         "ref": "refs/heads/trunk",
-        "rev": "91d592cb422e7f65bc422d68bf7cdd15525337d7",
-        "revCount": 28,
+        "rev": "d349d692e5861ae0b53c3d16c97ff871e1a19f93",
+        "revCount": 33,
         "type": "git",
         "url": "https://git.vic/itsvicdev/intraweb-py.git"
       },
