@@ -1,7 +1,7 @@
 $TTL 60
 $ORIGIN intraweb.com.
 
-@ IN SOA fra01.backbone.iw. vic@intramail.com. (
+@ IN SOA de-fra01.backbone.iw. vic@intramail.com. (
   2026010501  ; serial
   3h          ; refresh
   1h          ; retry
@@ -9,7 +9,7 @@ $ORIGIN intraweb.com.
   60          ; min TTL
 )
 
-@         IN NS fra01.backbone.iw.
+@         IN NS de-fra01.backbone.iw.
 
 @         IN A 10.0.0.1
 www       IN CNAME @

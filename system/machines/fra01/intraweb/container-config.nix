@@ -16,7 +16,6 @@
     listenOn = [ "10.0.0.1" ];
     cacheNetworks = [ "10.0.0.0/8" ];
     ipv4Only = true;
-    forward = "only";
 
     extraOptions = ''
       recursion yes;
@@ -34,12 +33,12 @@
 
     zones."intraweb.com" = {
       master = true;
-      file = ./zones/com/intraweb.db;
+      file = ./zones/intraweb.com.db;
     };
 
     zones."backbone.iw" = {
       master = true;
-      file = ./zones/iw/backbone.db;
+      file = ./zones/iw/backbone.iw.db;
     };
 
     zones."10.in-addr.arpa" = {
