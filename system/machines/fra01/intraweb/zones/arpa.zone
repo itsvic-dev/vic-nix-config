@@ -2,7 +2,7 @@ $TTL 60
 $ORIGIN 10.in-addr.arpa.
 
 @ IN SOA de-fra01.backbone.iw. vic@intramail.com. (
-  2026010601  ; serial
+  2026010602  ; serial
   3h          ; refresh
   1h          ; retry
   24h         ; expire
@@ -13,5 +13,6 @@ $ORIGIN 10.in-addr.arpa.
 
 1.0.0   IN PTR de-fra01.backbone.iw.
 1.0.72  IN PTR it-mil01.backbone.iw.
+1.0.10  IN PTR pl-waw01.backbone.iw.
 
-1.0.10  IN PTR tastypi.backbone.iw.
+1.128.10  IN PTR tastypi.backbone.iw.

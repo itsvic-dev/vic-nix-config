@@ -2,7 +2,7 @@ $TTL 60
 $ORIGIN backbone.iw.
 
 @ IN SOA de-fra01.backbone.iw. vic@intramail.com. (
-  2026010601  ; serial
+  2026010602  ; serial
   3h          ; refresh
   1h          ; retry
   24h         ; expire
@@ -13,5 +13,6 @@ $ORIGIN backbone.iw.
 
 de-fra01  IN A 10.0.0.1
 it-mil01  IN A 10.72.0.1
+pl-waw01  IN A 10.10.0.1
 
-tastypi   IN A 10.10.0.1
+tastypi   IN A 10.10.128.1
