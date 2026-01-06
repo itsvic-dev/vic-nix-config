@@ -38,7 +38,7 @@
 
     zones."backbone.iw" = {
       master = true;
-      file = ./zones/iw/backbone.iw.db;
+      file = ./zones/backbone.iw.db;
     };
 
     zones."10.in-addr.arpa" = {
