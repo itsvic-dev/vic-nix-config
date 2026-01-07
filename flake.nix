@@ -60,7 +60,7 @@
     };
 
     # tastypi
-    nixpkgs-old.url = "github:NixOS/nixpkgs/5e2a59a5b1a82f89f2c7e598302a9cacebb72a67";
+    nixos-raspberrypi.url = "github:nvmd/nixos-raspberrypi/develop";
 
     bob-website = {
       url = "github:bob-discord-bot/website";

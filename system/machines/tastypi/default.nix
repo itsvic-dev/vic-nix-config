@@ -23,6 +23,7 @@
     server.enable = true;
     software.docker = true;
     hardware.bluetooth = true;
+    hardware.hasEFI = false;
   };
 
   networking.wireless.iwd.enable = true;

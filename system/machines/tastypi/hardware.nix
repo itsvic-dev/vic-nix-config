@@ -1,9 +1,11 @@
 { inputs, ... }:
 {
-  boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ ];
-  boot.kernelPackages = inputs.nixpkgs-old.legacyPackages.aarch64-linux.linuxPackages_rpi4;
-  boot.extraModulePackages = [ ];
+  imports = with inputs.nixos-raspberrypi.nixosModules; [
+    inputs.nixos-raspberrypi.lib.inject-overlays
+    raspberry-pi-5.base
+  ];
+
+  boot.loader.raspberryPi.bootloader = "kernel";
 
   # Okay.
   boot.initrd.systemd.tpm2.enable = false;

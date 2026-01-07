@@ -1,4 +1,9 @@
-{ lib, inputs, pkgs, ... }:
+{
+  lib,
+  inputs,
+  pkgs,
+  ...
+}:
 let
   inherit (import ../misc/lib.nix lib) importAllFromFolder;
 
@@ -9,7 +14,8 @@ let
     (importAllFromFolder ./programs)
     (importAllFromFolder ./services)
   ];
-in {
+in
+{
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
 
@@ -17,8 +23,7 @@ in {
 
   home-manager.users.vic = {
     imports = common;
-    home.homeDirectory =
-      lib.mkForce (if pkgs.stdenv.isDarwin then "/Users/vic" else "/home/vic");
+    home.homeDirectory = lib.mkForce (if pkgs.stdenv.isDarwin then "/Users/vic" else "/home/vic");
     home.stateVersion = "23.11";
   };
 }

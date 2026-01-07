@@ -1,6 +1,13 @@
-{ config, inputs, ... }:
-let isDesktop = config.vic-nix.desktop.enable;
-in {
+{
+  config,
+  inputs,
+  pkgs,
+  ...
+}:
+let
+  isDesktop = config.vic-nix.desktop.enable;
+in
+{
   imports = [ inputs.lanzaboote.nixosModules.lanzaboote ];
 
   boot.loader.systemd-boot = {
@@ -11,11 +18,10 @@ in {
 
   boot.lanzaboote = {
     enable = config.vic-nix.secureBoot;
-    pkiBundle = if config.vic-nix.tmpfsAsRoot then
-      "/persist/etc/secureboot"
-    else
-      "/etc/secureboot";
+    pkiBundle = if config.vic-nix.tmpfsAsRoot then "/persist/etc/secureboot" else "/etc/secureboot";
   };
 
-  boot.loader.grub = { enable = !config.vic-nix.hardware.hasEFI; };
+  boot.loader.grub = {
+    enable = !config.vic-nix.hardware.hasEFI && pkgs.stdenv.hostPlatform.isx86;
+  };
 }

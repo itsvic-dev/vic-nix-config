@@ -1,4 +1,10 @@
-inputs@{ nixpkgs, home-manager, sops-nix, disko, ... }:
+inputs@{
+  nixpkgs,
+  home-manager,
+  sops-nix,
+  disko,
+  ...
+}:
 let
   inherit (import ../misc/lib.nix nixpkgs.lib) importAllFromFolder;
 
@@ -20,7 +26,8 @@ let
   ];
 
   # Defines a system with a given architecture and hostname.
-  defineSystem = system: hostname:
+  defineSystem' =
+    extraModules: system: hostname:
     nixpkgs.lib.nixosSystem {
       inherit system;
       specialArgs = rec {
@@ -31,19 +38,43 @@ let
         intranet = import ../intranet { inherit (nixpkgs) lib; };
       };
 
-      modules = common ++ [
-        ./core/boot-${system}.nix
-        ./machines/${hostname}
-        {
-          # define the machine's hostname
-          networking.hostName = hostname;
-        }
-      ];
+      modules =
+        common
+        ++ [
+          ./core/boot-${system}.nix
+          ./machines/${hostname}
+          {
+            # define the machine's hostname
+            networking.hostName = hostname;
+          }
+        ]
+        ++ extraModules;
     };
-in {
+
+  defineSystem = defineSystem' [ ];
+
+  uglyHack = (
+    { lib, ... }:
+    let
+      renamePath = nixpkgs.outPath + "/nixos/modules/rename.nix";
+      renameModule = import renamePath { inherit lib; };
+      moduleFilter =
+        module:
+        lib.attrByPath [ "options" "boot" "loader" "raspberryPi" ] null (module {
+          config = null;
+          options = null;
+        }) == null;
+    in
+    {
+      disabledModules = [ renamePath ];
+      imports = builtins.filter moduleFilter renameModule.imports;
+    }
+  );
+in
+{
   "fra01" = defineSystem "x86_64-linux" "fra01";
   "it-vps" = defineSystem "x86_64-linux" "it-vps";
-  "tastypi" = defineSystem "aarch64-linux" "tastypi";
+  "tastypi" = defineSystem' [ uglyHack ] "aarch64-linux" "tastypi";
 
   "live-rescue" = defineSystem "x86_64-linux" "live-rescue";
 }
