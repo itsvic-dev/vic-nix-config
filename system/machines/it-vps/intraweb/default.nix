@@ -1,8 +1,6 @@
 {
-  config,
-  pkgs,
   inputs,
-  secretsPath,
+  pkgs,
   ...
 }:
 let
@@ -10,44 +8,32 @@ let
 in
 {
   imports = [
-    inputs.intraweb.nixosModules.default
+    "${inputs.self}/misc/intraweb"
   ];
 
-  sops.secrets.iw-backend-config = {
-    format = "yaml";
-    sopsFile = "${secretsPath}/intraweb-backend.yml";
-    key = "";
-    restartUnits = [ "intraweb-backend.service" ];
-  };
+  iw.networking.namespaces = [ "intraweb" ];
 
-  services.intraweb-backend = {
-    enable = true;
-    openFirewall = true;
-    configFile = config.sops.secrets.iw-backend-config.path;
-  };
+  networking.firewall.allowedUDPPorts = [ 52901 ];
 
-  networking.firewall.allowedUDPPorts = [ 59808 ];
+  systemd.services."wireguard-iw-ix-tastypi".requires = [ "netns-intraweb.service" ];
 
-  systemd.services."intraweb-netns" = {
-    restartIfChanged = false;
-    stopIfChanged = false;
-    wantedBy = [ "multi-user.target" ];
-    requiredBy = [
-      "intraweb-backend.service"
-    ];
+  networking.wireguard.useNetworkd = false;
+  networking.wireguard.interfaces = {
+    # interconnect to tastypi
+    "iw-ix-tastypi" = {
+      listenPort = 52901;
+      privateKey = "SEKyTmkasXfyQzOlBgDDx4XbLqWlmgW1QYbPZcp8sHw="; # REPLACE WITH FILE PLEASE
+      interfaceNamespace = "intraweb";
+      allowedIPsAsRoutes = false;
+      postSetup = "${ip} -n intraweb addr add dev iw-ix-tastypi 172.16.32.1/32 peer 172.16.32.0/32";
 
-    serviceConfig = {
-      Type = "oneshot";
-      User = "root";
-      RemainAfterExit = true;
-      ExecStop = "${ip} netns del intraweb";
+      peers = [
+        {
+          name = "tastypi";
+          publicKey = "nSmx0OTq6K+2QvqJ2vwoEopsqifbwdRK9lPPNEHP3gQ=";
+          allowedIPs = [ "0.0.0.0/0" ];
+        }
+      ];
     };
-
-    script = ''
-      if [ ! -f /run/netns/intraweb ]; then
-        ${ip} netns add intraweb
-      fi
-      ${ip} -n intraweb link set dev lo up
-    '';
   };
 }

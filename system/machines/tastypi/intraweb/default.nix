@@ -1,8 +1,6 @@
 {
-  config,
-  pkgs,
   inputs,
-  secretsPath,
+  pkgs,
   ...
 }:
 let
@@ -10,45 +8,30 @@ let
 in
 {
   imports = [
-    inputs.intraweb.nixosModules.default
-    ./ftp.nix
+    "${inputs.self}/misc/intraweb"
   ];
+  iw.networking.namespaces = [ "intraweb" ];
 
-  sops.secrets.iw-backend-config = {
-    format = "yaml";
-    sopsFile = "${secretsPath}/intraweb-backend.yml";
-    key = "";
-    restartUnits = [ "intraweb-backend.service" ];
-  };
+  systemd.services."wireguard-iw-ix-mil01".requires = [ "netns-intraweb.service" ];
 
-  services.intraweb-backend = {
-    enable = true;
-    openFirewall = true;
-    configFile = config.sops.secrets.iw-backend-config.path;
-  };
+  networking.wireguard.useNetworkd = false;
+  networking.wireguard.interfaces = {
+    # interconnect to mil01
+    "iw-ix-mil01" = {
+      listenPort = 52901;
+      privateKey = "oHLI2s/anH/OiRIdxUwbp7vSCrvpZMXXCtLD19ifam0="; # REPLACE WITH FILE PLEASE
+      interfaceNamespace = "intraweb";
+      allowedIPsAsRoutes = false;
+      postSetup = "${ip} -n intraweb addr add dev iw-ix-mil01 172.16.32.0/32 peer 172.16.32.1/32";
 
-  networking.firewall.allowedUDPPorts = [ 59808 ];
-
-  systemd.services."intraweb-netns" = {
-    restartIfChanged = false;
-    stopIfChanged = false;
-    wantedBy = [ "multi-user.target" ];
-    requiredBy = [
-      "intraweb-backend.service"
-    ];
-
-    serviceConfig = {
-      Type = "oneshot";
-      User = "root";
-      RemainAfterExit = true;
-      ExecStop = "${ip} netns del intraweb";
+      peers = [
+        {
+          name = "mil01";
+          publicKey = "lKV6lAfnneY+dt2Pz9qAeWeTm2a7qnQNo22XFxFzjgE=";
+          endpoint = "it-mil01.itsvic.dev:52901";
+          allowedIPs = [ "0.0.0.0/0" ];
+        }
+      ];
     };
-
-    script = ''
-      if [ ! -f /run/netns/intraweb ]; then
-        ${ip} netns add intraweb
-      fi
-      ${ip} -n intraweb link set dev lo up
-    '';
   };
 }
