@@ -1,8 +1,6 @@
 {
-  config,
-  pkgs,
   inputs,
-  secretsPath,
+  pkgs,
   ...
 }:
 let
@@ -10,51 +8,71 @@ let
 in
 {
   imports = [
-    inputs.intraweb.nixosModules.default
+    "${inputs.self}/misc/intraweb"
   ];
+  iw.networking.namespaces = [ "intraweb" ];
 
-  sops.secrets.iw-backend-config = {
-    format = "yaml";
-    sopsFile = "${secretsPath}/intraweb-backend.yml";
-    key = "";
-    restartUnits = [ "intraweb-backend.service" ];
-  };
+  systemd.services."wireguard-iw-ix-mil01".requires = [ "netns-intraweb.service" ];
 
-  networking.firewall.allowedUDPPorts = [ 59808 ];
+  networking.wireguard.useNetworkd = false;
+  networking.wireguard.interfaces = {
+    # interconnect to mil01
+    "iw-ix-mil01" = {
+      listenPort = 52901;
+      privateKey = "qL88CTQXNn5WXLmCYt5JoHzC0CvMXpZRTmecN9WhWk0="; # REPLACE WITH FILE PLEASE
+      interfaceNamespace = "intraweb";
+      allowedIPsAsRoutes = false;
+      postSetup = [
+        "${ip} -n intraweb addr add dev iw-ix-mil01 172.16.32.2/32 peer 172.16.32.3/32"
+        "${ip} -n intraweb link add dev br0 type bridge" # TODO: move to separate unit
+        "${ip} -n intraweb addr add dev br0 10.0.0.1/16"
+        "${ip} -n intraweb link set dev br0 up"
+      ];
+      preShutdown = [
+        "${ip} -n intraweb link del dev br0"
+      ];
 
-  services.intraweb-backend = {
-    enable = true;
-    openFirewall = true;
-    configFile = config.sops.secrets.iw-backend-config.path;
-  };
-
-  systemd.services."intraweb-netns" = {
-    restartIfChanged = false;
-    stopIfChanged = false;
-    wantedBy = [ "multi-user.target" ];
-    requiredBy = [
-      "container@intraweb.service"
-      "intraweb-backend.service"
-    ];
-
-    serviceConfig = {
-      Type = "oneshot";
-      User = "root";
-      RemainAfterExit = true;
-      ExecStop = "${ip} netns del intraweb";
+      peers = [
+        {
+          name = "mil01";
+          publicKey = "7uoJDoK2qWft/3Cb39yUIDRP3jql7Sv0zqAzlVVjxWc=";
+          endpoint = "it-mil01.itsvic.dev:52902";
+          allowedIPs = [ "0.0.0.0/0" ];
+        }
+      ];
     };
-
-    script = ''
-      if [ ! -f /run/netns/intraweb ]; then
-        ${ip} netns add intraweb
-      fi
-      ${ip} -n intraweb link set dev lo up
-    '';
   };
 
-  containers.intraweb = {
-    autoStart = true;
-    networkNamespace = "/run/netns/intraweb";
-    config = import ./container-config.nix;
+  systemd.services.frr = {
+    requires = [ "netns-intraweb.service" ];
+    serviceConfig.NetworkNamespacePath = "/run/netns/intraweb";
+  };
+  services.frr = {
+    bgpd.enable = true;
+    config = ''
+      router bgp 65003
+        bgp log-neighbor-changes
+        no bgp ebgp-requires-policy
+        no bgp suppress-duplicates
+        no bgp hard-administrative-reset
+        no bgp default ipv4-unicast
+        no bgp graceful-restart notification
+        bgp graceful-restart
+        no bgp network import-check
+        !
+        neighbor 172.16.32.3 remote-as 65002
+        neighbor 172.16.32.3 description BACKBONE-IT-MIL01
+        !
+        bgp fast-convergence
+        !
+        address-family ipv4 unicast
+          network 10.0.0.0/16
+          network 172.16.32.2/31
+          redistribute static
+          neighbor 172.16.32.3 activate
+          neighbor 172.16.32.3 addpath-tx-all-paths
+        exit-address-family
+      exit
+    '';
   };
 }
