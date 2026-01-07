@@ -11,6 +11,7 @@ in
 {
   imports = [
     inputs.intraweb.nixosModules.default
+    ./ftp.nix
   ];
 
   sops.secrets.iw-backend-config = {
