@@ -25,7 +25,6 @@ in
   vic-nix = {
     server.enable = true;
     software.docker = true;
-    autoUpdate = false;
   };
 
   services.qemuGuest.enable = true;

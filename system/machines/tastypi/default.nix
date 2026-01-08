@@ -24,7 +24,6 @@
     software.docker = true;
     hardware.bluetooth = true;
     hardware.hasEFI = false;
-    autoUpdate = false;
   };
 
   networking.wireless.iwd.enable = true;

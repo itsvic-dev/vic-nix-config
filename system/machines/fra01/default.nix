@@ -13,7 +13,6 @@
     server.enable = true;
     hardware.intel = true;
     software.docker = true;
-    autoUpdate = false;
   };
 
   networking = {
