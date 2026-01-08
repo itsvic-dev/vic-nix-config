@@ -33,7 +33,7 @@
       }
 
       protocol bgp de_fra01 from iwpeers {
-        neighbor 172.16.32.2 as 4204200001;
+        neighbor 172.16.32.2 as OWNAS;
       }
     '';
   };

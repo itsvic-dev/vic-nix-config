@@ -11,7 +11,7 @@
   ];
   iw.networking.namespaces."intraweb".ipAddress = "10.0.0.1/24";
 
-  systemd.services.frr = {
+  systemd.services.bird = {
     requires = [ "netns-intraweb.service" ];
     serviceConfig.NetworkNamespacePath = "/run/netns/intraweb";
   };
@@ -28,7 +28,7 @@
       ${config.iw.birdSharedConfig}
 
       protocol bgp it_mil01 from iwpeers {
-        neighbor 172.16.32.3 as 4204200001;
+        neighbor 172.16.32.3 as OWNAS;
       }
     '';
   };
