@@ -32,7 +32,7 @@
         neighbor 172.21.32.0 as 4204200002;
       }
 
-      protocol ospf fra01-internal {
+      protocol ospf fra01_internal {
         ipv4 {
           import filter {
             if is_valid_network() && !is_self_net() then accept;

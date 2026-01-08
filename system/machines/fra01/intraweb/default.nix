@@ -27,7 +27,7 @@
 
       ${config.iw.birdSharedConfig}
 
-      protocol ospf mil01-internal {
+      protocol ospf mil01_internal {
         ipv4 {
           import filter {
             if is_valid_network() && !is_self_net() then accept;
