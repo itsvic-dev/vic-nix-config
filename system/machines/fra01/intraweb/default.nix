@@ -50,6 +50,12 @@ in
   services.frr = {
     bgpd.enable = true;
     config = ''
+      ip prefix-list ANY permit 0.0.0.0/0 le 32
+      route-map intraweb permit 5
+        match ip address prefix-list ANY
+        set src 10.0.0.1
+      exit
+      !
       router bgp 65003
         bgp log-neighbor-changes
         no bgp ebgp-requires-policy
@@ -63,14 +69,11 @@ in
         neighbor 172.16.32.3 remote-as 65002
         neighbor 172.16.32.3 description BACKBONE-IT-MIL01
         !
-        bgp fast-convergence
-        !
         address-family ipv4 unicast
           network 10.0.0.0/16
-          network 172.16.32.2/31
-          redistribute static
           neighbor 172.16.32.3 activate
-          neighbor 172.16.32.3 addpath-tx-all-paths
+          neighbor 172.16.32.3 route-map intraweb in
+          neighbor 172.16.32.3 route-map intraweb out
         exit-address-family
       exit
     '';

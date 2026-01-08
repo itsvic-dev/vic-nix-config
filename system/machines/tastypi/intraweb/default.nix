@@ -43,36 +43,59 @@ in
     };
   };
 
-  systemd.services.frr = {
+  systemd.services.bird = {
     requires = [ "netns-intraweb.service" ];
     serviceConfig.NetworkNamespacePath = "/run/netns/intraweb";
   };
-  services.frr = {
-    bgpd.enable = true;
+
+  services.bird = {
+    package = pkgs.bird2;
+    enable = true;
     config = ''
-      router bgp 65001
-        bgp log-neighbor-changes
-        no bgp ebgp-requires-policy
-        no bgp suppress-duplicates
-        no bgp hard-administrative-reset
-        no bgp default ipv4-unicast
-        no bgp graceful-restart notification
-        bgp graceful-restart
-        no bgp network import-check
-        !
-        neighbor 172.16.32.1 remote-as 65002
-        neighbor 172.16.32.1 description BACKBONE-IT-MIL01
-        !
-        bgp fast-convergence
-        !
-        address-family ipv4 unicast
-          network 10.21.0.0/16
-          network 172.16.32.0/31
-          redistribute static
-          neighbor 172.16.32.1 activate
-          neighbor 172.16.32.1 addpath-tx-all-paths
-        exit-address-family
-      exit
+      define OWNIP = 10.21.0.1;
+      define OWNNET = 10.21.0.0/16;
+      define OWNAS = 65001;
+      router id OWNIP;
+
+      function is_net() -> bool {
+         return net ~ OWNNET;
+      }
+
+      protocol device {
+         scan time 60;
+      }
+
+      protocol kernel {
+        scan time 20;
+
+        ipv4 {
+          import all;
+          export filter {
+            if source = RTS_STATIC then reject;
+            krt_prefsrc = OWNIP;
+            accept;
+          };
+        };
+      }
+
+      protocol static {
+        route OWNNET reject;
+
+        ipv4 {
+          import all;
+          export none;
+        };
+      }
+
+      protocol bgp BACKBONE_IT_MIL01 {
+        local 172.16.32.0 as OWNAS;
+        neighbor 172.16.32.1 as 65002;
+
+        ipv4 {
+          import filter { if !is_net() then accept; else reject; };
+          export filter { if is_net() then accept; else reject; };
+        };
+      }
     '';
   };
 }
