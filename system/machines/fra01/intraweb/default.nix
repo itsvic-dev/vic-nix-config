@@ -27,8 +27,32 @@
 
       ${config.iw.birdSharedConfig}
 
-      protocol bgp it_mil01 from iwpeers {
-        neighbor 172.16.32.3 as OWNAS;
+      protocol ospf mil01-internal {
+        ipv4 {
+          import filter {
+            if is_valid_network() && !is_self_net() then accept;
+            else reject;
+          };
+
+          export filter {
+            if is_valid_network() then accept;
+            else reject;
+          };
+        };
+        area 42069 {
+          networks {
+            OWNNET;
+          };
+          interface "iw-ix-mil01" {
+            cost 1;
+            hello 1;
+            priority 100;
+            authentication none;
+            neighbors {
+              172.21.32.3 eligible;
+            };
+          };
+        };
       }
     '';
   };

@@ -14,7 +14,7 @@
       scan time 20;
 
       ipv4 {
-        import none;
+        import all;
         export filter {
           if source = RTS_STATIC then reject;
           krt_prefsrc = OWNIP;
@@ -48,7 +48,7 @@
         };
 
         export filter {
-          if is_valid_network() && source ~ [RTS_STATIC, RTS_BGP] then accept;
+          if is_valid_network() then accept;
           else reject;
         };
         import limit 9000 action block;

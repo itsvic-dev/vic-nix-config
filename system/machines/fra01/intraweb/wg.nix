@@ -11,7 +11,7 @@
       interfaceNamespace = "intraweb";
       allowedIPsAsRoutes = false;
       postSetup = [
-        "ip -n intraweb addr add dev iw-ix-mil01 172.16.32.2/32 peer 172.16.32.3/32"
+        "ip -n intraweb addr add dev iw-ix-mil01 172.21.32.2/32 peer 172.21.32.3/32"
       ];
 
       peers = [

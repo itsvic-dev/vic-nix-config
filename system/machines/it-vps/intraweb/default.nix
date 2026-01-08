@@ -29,11 +29,35 @@
       ${config.iw.birdSharedConfig}
 
       protocol bgp tastypi from iwpeers {
-        neighbor 172.16.32.0 as 4204200002;
+        neighbor 172.21.32.0 as 4204200002;
       }
 
-      protocol bgp de_fra01 from iwpeers {
-        neighbor 172.16.32.2 as OWNAS;
+      protocol ospf fra01-internal {
+        ipv4 {
+          import filter {
+            if is_valid_network() && !is_self_net() then accept;
+            else reject;
+          };
+
+          export filter {
+            if is_valid_network() then accept;
+            else reject;
+          };
+        };
+        area 42069 {
+          networks {
+            OWNNET;
+          };
+          interface "iw-ix-fra01" {
+            cost 1;
+            hello 1;
+            priority 100;
+            authentication none;
+            neighbors {
+              172.21.32.2 eligible;
+            };
+          };
+        };
       }
     '';
   };

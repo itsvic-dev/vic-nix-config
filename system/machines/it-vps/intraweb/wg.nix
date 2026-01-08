@@ -10,7 +10,7 @@
       interfaceNamespace = "intraweb";
       allowedIPsAsRoutes = false;
       postSetup = [
-        "ip -n intraweb addr add dev iw-ix-tastypi 172.16.32.1/32 peer 172.16.32.0/32"
+        "ip -n intraweb addr add dev iw-ix-tastypi 172.21.32.1/32 peer 172.21.32.0/32"
       ];
 
       peers = [
@@ -28,7 +28,7 @@
       interfaceNamespace = "intraweb";
       allowedIPsAsRoutes = false;
       postSetup = [
-        "ip -n intraweb addr add dev iw-ix-fra01 172.16.32.3/32 peer 172.16.32.2/32"
+        "ip -n intraweb addr add dev iw-ix-fra01 172.21.32.3/32 peer 172.21.32.2/32"
       ];
 
       peers = [

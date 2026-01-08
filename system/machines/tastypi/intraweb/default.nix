@@ -28,7 +28,7 @@
       ${config.iw.birdSharedConfig}
 
       protocol bgp it_mil01 from iwpeers {
-        neighbor 172.16.32.1 as 4204200001;
+        neighbor 172.21.32.1 as 4204200001;
       }
     '';
   };
