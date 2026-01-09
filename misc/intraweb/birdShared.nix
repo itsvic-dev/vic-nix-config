@@ -7,11 +7,11 @@
     }
 
     protocol device {
-       scan time 60;
+       scan time 10;
     }
 
     protocol kernel {
-      scan time 20;
+      scan time 10;
 
       ipv4 {
         import all;
@@ -36,6 +36,13 @@
       return net ~ [
         10.0.0.0/8{24,32}
       ];
+    }
+
+    protocol direct {
+      ipv4 {
+        import all;
+        export none;
+      };
     }
 
     template bgp iwpeers {

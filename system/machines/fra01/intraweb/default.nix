@@ -9,6 +9,7 @@
     "${inputs.self}/misc/intraweb"
     ./wg.nix
   ];
+
   iw.networking.namespaces."intraweb".ipAddress = "10.0.0.1/24";
 
   systemd.services.bird = {
@@ -27,31 +28,12 @@
 
       ${config.iw.birdSharedConfig}
 
-      protocol ospf mil01_internal {
-        ipv4 {
-          import filter {
-            if is_valid_network() && !is_self_net() then accept;
-            else reject;
-          };
+      protocol bgp mil01 from iwpeers {
+        multihop;
+        neighbor 172.21.32.3 as OWNAS;
 
-          export filter {
-            if is_valid_network() then accept;
-            else reject;
-          };
-        };
-        area 42069 {
-          networks {
-            OWNNET;
-          };
-          interface "iw-ix-mil01" {
-            cost 1;
-            hello 1;
-            priority 100;
-            authentication none;
-            neighbors {
-              172.21.32.3 eligible;
-            };
-          };
+        ipv4 {
+          next hop self;
         };
       }
     '';

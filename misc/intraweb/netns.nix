@@ -7,12 +7,17 @@
 with lib;
 let
   cfg = config.iw.networking.namespaces;
-  ip = "${pkgs.iproute2}/bin/ip";
 
   namespaceOpts =
     { ... }:
     {
       options = {
+        dummy = mkOption {
+          description = "Whether to enable the dummy interface.";
+          default = true;
+          type = types.bool;
+        };
+
         ipAddress = mkOption {
           description = "The IP address to use for the dummy interface of this namespace.";
           example = "10.10.0.0/16";
@@ -53,17 +58,21 @@ in
           Type = "oneshot";
           User = "root";
           RemainAfterExit = true;
-          ExecStop = "${ip} netns del ${escapedName}";
+          ExecStop = "${pkgs.iproute2}/bin/ip netns del ${escapedName}";
         };
+
+        path = [ pkgs.iproute2 ];
 
         script = ''
           if [ ! -f /run/netns/${escapedName} ]; then
-            ${ip} netns add ${escapedName}
+            ip netns add ${escapedName}
           fi
-          ${ip} -n ${escapedName} link set dev lo up
-          ${ip} -n ${escapedName} link add dev ${escapeShellArg values.ifname} type dummy
-          ${ip} -n ${escapedName} addr add ${escapeShellArg values.ipAddress} dev ${escapeShellArg values.ifname}
-          ${ip} -n ${escapedName} link set up dev ${escapeShellArg values.ifname}
+          ip -n ${escapedName} link set dev lo up
+          ${optionalString values.dummy ''
+            ip -n ${escapedName} link add dev ${escapeShellArg values.ifname} type dummy
+            ip -n ${escapedName} addr add ${escapeShellArg values.ipAddress} dev ${escapeShellArg values.ifname}
+            ip -n ${escapedName} link set up dev ${escapeShellArg values.ifname}
+          ''}
         '';
       }
     ) cfg;
