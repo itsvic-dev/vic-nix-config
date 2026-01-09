@@ -7,6 +7,7 @@
 }:
 let
   useNM = config.vic-nix.desktop.enable;
+  setDomain = config.vic-nix.server.enable;
 in
 {
   imports = [
@@ -29,6 +30,7 @@ in
       networking = {
         useNetworkd = !config.networking.networkmanager.enable;
         networkmanager.enable = lib.mkDefault useNM;
+        domain = if setDomain then "itsvic.dev" else null;
         nameservers =
           if (config.vic-nix.noSecrets) then
             [

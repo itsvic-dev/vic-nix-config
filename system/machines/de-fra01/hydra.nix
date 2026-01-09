@@ -1,4 +1,11 @@
-{ config, secretsPath, intranet, pkgs, ... }: {
+{
+  config,
+  secretsPath,
+  intranet,
+  pkgs,
+  ...
+}:
+{
   services.hydra = {
     enable = true;
     hydraURL = "https://hydra.vic";
@@ -11,8 +18,11 @@
   };
 
   nix = {
-    settings.allowed-uris =
-      [ "github:" "git+https://github.com/" "git+ssh://github.com/" ];
+    settings.allowed-uris = [
+      "github:"
+      "git+https://github.com/"
+      "git+ssh://github.com/"
+    ];
     extraOptions = ''
       builders-use-substitutes = true
       !include ${config.sops.secrets.nixAccessTokens.path}
@@ -20,12 +30,20 @@
 
     buildMachines = [
       {
-        hostName = "it-vps.vic";
-        systems = [ "x86_64-linux" "i686-linux" ];
+        hostName = "it-mil01.vic";
+        systems = [
+          "x86_64-linux"
+          "i686-linux"
+        ];
         protocol = "ssh";
         maxJobs = 4;
         speedFactor = 1;
-        supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+        supportedFeatures = [
+          "nixos-test"
+          "benchmark"
+          "big-parallel"
+          "kvm"
+        ];
         mandatoryFeatures = [ ];
       }
       {
@@ -34,15 +52,28 @@
         protocol = "ssh";
         maxJobs = 4;
         speedFactor = 1;
-        supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+        supportedFeatures = [
+          "nixos-test"
+          "benchmark"
+          "big-parallel"
+          "kvm"
+        ];
         mandatoryFeatures = [ ];
       }
       # hydra freaks out sometimes without this
       {
         hostName = "localhost";
         protocol = null;
-        systems = [ "x86_64-linux" "i686-linux" ];
-        supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
+        systems = [
+          "x86_64-linux"
+          "i686-linux"
+        ];
+        supportedFeatures = [
+          "kvm"
+          "nixos-test"
+          "big-parallel"
+          "benchmark"
+        ];
         maxJobs = 4;
         speedFactor = 2;
       }
@@ -54,12 +85,12 @@
   sops.secrets = {
     hydra-vic-key = {
       owner = "nginx";
-      sopsFile = intranet.getKey "fra01" "hydra.vic";
+      sopsFile = intranet.getKey "de-fra01" "hydra.vic";
       format = "binary";
     };
     cache-vic-key = {
       owner = "nginx";
-      sopsFile = intranet.getKey "fra01" "cache.vic";
+      sopsFile = intranet.getKey "de-fra01" "cache.vic";
       format = "binary";
     };
     binary-cache-key = {
@@ -92,7 +123,7 @@
   services.nginx.virtualHosts = {
     "hydra.vic" = {
       forceSSL = true;
-      sslCertificate = intranet.getCert "fra01" "hydra.vic";
+      sslCertificate = intranet.getCert "de-fra01" "hydra.vic";
       sslCertificateKey = config.sops.secrets.hydra-vic-key.path;
       locations."/" = {
         proxyPass = "http://localhost:${toString config.services.hydra.port}";
@@ -102,11 +133,10 @@
     };
     "cache.vic" = {
       forceSSL = true;
-      sslCertificate = intranet.getCert "fra01" "cache.vic";
+      sslCertificate = intranet.getCert "de-fra01" "cache.vic";
       sslCertificateKey = config.sops.secrets.cache-vic-key.path;
       locations."/" = {
-        proxyPass =
-          "http://localhost:${toString config.services.nix-serve.port}";
+        proxyPass = "http://localhost:${toString config.services.nix-serve.port}";
         proxyWebsockets = true;
         recommendedProxySettings = true;
       };

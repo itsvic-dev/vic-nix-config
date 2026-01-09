@@ -7,10 +7,10 @@ rec {
     tastypi = {
       publicKey = "7yrI5RW+I6yZC5K1+7ErKUWC5h42aMYkjiP6/siOlzk=";
     };
-    it-vps = {
+    it-mil01 = {
       publicKey = "S2cSFcrvD4AzK7KuJTWpAzkYNMrdi2ojy8Owl+5VOU4=";
     };
-    fra01 = {
+    de-fra01 = {
       publicKey = "DGNfHXE4BWJJcDAxZRxBB5PIiCiSMFw2q7zNBQLEWBw=";
     };
     mbp = {
@@ -20,14 +20,14 @@ rec {
       publicKey = "AQqR0qBXROiHro05uJBbckiCWpuBzS8lTDsJIyhMxDI=";
     };
   };
-  mainPeer = wireguardPeers.fra01 // {
+  mainPeer = wireguardPeers.de-fra01 // {
     endpoint = "37.114.50.122:51820";
   };
 
   ips = {
-    fra01 = "10.21.0.1";
+    de-fra01 = "10.21.0.1";
     tastypi = "10.21.0.2";
-    it-vps = "10.21.0.3";
+    it-mil01 = "10.21.0.3";
 
     mbp = "10.21.1.1";
     iphone = "10.21.1.2";
@@ -38,10 +38,10 @@ rec {
     "torrents" = "tastypi";
     "flood" = "tastypi";
 
-    "hydra" = "fra01";
-    "cache" = "fra01";
+    "hydra" = "de-fra01";
+    "cache" = "de-fra01";
 
-    "git" = "it-vps";
+    "git" = "it-mil01";
   };
 
   ipsAsDNS = builtins.concatStringsSep "\n" (

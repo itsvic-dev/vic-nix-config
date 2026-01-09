@@ -53,7 +53,7 @@
 
     # --- MACHINE-SPECIFIC SOFTWARE ---
 
-    # it-vps
+    # it-mil01
     bob = {
       url = "github:bob-discord-bot/bob";
       inputs.nixpkgs.follows = "nixpkgs";

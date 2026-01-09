@@ -72,8 +72,9 @@ let
   );
 in
 {
-  "fra01" = defineSystem "x86_64-linux" "fra01";
-  "it-vps" = defineSystem "x86_64-linux" "it-vps";
+  # stage 1 of tree-wide hostname change
+  "fra01" = defineSystem "x86_64-linux" "de-fra01";
+  "it-vps" = defineSystem "x86_64-linux" "it-mil01";
   "tastypi" = defineSystem' [ uglyHack ] "aarch64-linux" "tastypi";
 
   "live-rescue" = defineSystem "x86_64-linux" "live-rescue";

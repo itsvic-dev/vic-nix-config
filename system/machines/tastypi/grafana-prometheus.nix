@@ -54,24 +54,24 @@
         ];
       }
       {
-        job_name = "it-vps";
+        job_name = "it-mil01";
         static_configs = [
           {
             targets = [
-              "it-vps.vic:${toString config.services.prometheus.exporters.node.port}"
-              "it-vps.vic:${toString config.services.prometheus.exporters.nginx.port}"
+              "it-mil01.vic:${toString config.services.prometheus.exporters.node.port}"
+              "it-mil01.vic:${toString config.services.prometheus.exporters.nginx.port}"
             ];
           }
         ];
       }
       {
-        job_name = "fra01";
+        job_name = "de-fra01";
         static_configs = [
           {
             targets = [
-              "fra01.vic:${toString config.services.prometheus.exporters.node.port}"
-              "fra01.vic:${toString config.services.prometheus.exporters.nginx.port}"
-              "fra01.vic:${toString config.services.prometheus.exporters.bind.port}"
+              "de-fra01.vic:${toString config.services.prometheus.exporters.node.port}"
+              "de-fra01.vic:${toString config.services.prometheus.exporters.nginx.port}"
+              "de-fra01.vic:${toString config.services.prometheus.exporters.bind.port}"
             ];
           }
         ];

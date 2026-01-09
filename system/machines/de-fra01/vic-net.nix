@@ -1,15 +1,25 @@
-{ pkgs, lib, config, intranet, ... }: {
+{
+  pkgs,
+  lib,
+  config,
+  intranet,
+  ...
+}:
+{
   sops.secrets.vic-net-sk = { };
 
   networking.wireguard.interfaces.vic-net = {
-    ips = [ "${intranet.ips.fra01}/32" ];
+    ips = [ "${intranet.ips.de-fra01}/32" ];
     listenPort = 51820;
     privateKeyFile = config.sops.secrets.vic-net-sk.path;
-    peers = lib.mapAttrsToList (name: peer:
-      peer // {
+    peers = lib.mapAttrsToList (
+      name: peer:
+      peer
+      // {
         inherit name;
         allowedIPs = [ "${intranet.ips.${name}}/32" ];
-      }) (lib.removeAttrs intranet.wireguardPeers [ "fra01" ]);
+      }
+    ) (lib.removeAttrs intranet.wireguardPeers [ "de-fra01" ]);
   };
 
   networking.firewall.allowedUDPPorts = [ 51820 ];
@@ -31,16 +41,23 @@
       };
     '';
 
-    forwarders = [ "1.1.1.1" "1.0.0.1" ];
+    forwarders = [
+      "1.1.1.1"
+      "1.0.0.1"
+    ];
     forward = "only";
 
     zones."vic" = {
       master = true;
-      file = pkgs.writeText "vic.zone"
-        (builtins.replaceStrings [ "[IPS]" "[CNAMES]" ] [
-          (intranet.ipsAsDNS)
-          (intranet.cnamesAsDNS)
-        ] (builtins.readFile ./vic.zone));
+      file = pkgs.writeText "vic.zone" (
+        builtins.replaceStrings
+          [ "[IPS]" "[CNAMES]" ]
+          [
+            (intranet.ipsAsDNS)
+            (intranet.cnamesAsDNS)
+          ]
+          (builtins.readFile ./vic.zone)
+      );
       extraConfig = ''
         zone-statistics yes;
       '';
@@ -48,9 +65,9 @@
 
     zones."21.10.in-addr.arpa" = {
       master = true;
-      file = pkgs.writeText "arpa.zone"
-        (builtins.replaceStrings [ "[IPS]" ] [ (intranet.ipsAsRDNS) ]
-          (builtins.readFile ./arpa.zone));
+      file = pkgs.writeText "arpa.zone" (
+        builtins.replaceStrings [ "[IPS]" ] [ (intranet.ipsAsRDNS) ] (builtins.readFile ./arpa.zone)
+      );
     };
   };
 }

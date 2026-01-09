@@ -22,18 +22,18 @@
       ];
     };
 
-    "iw-ix-fra01" = {
+    "iw-ix-de-fra01" = {
       listenPort = 52902;
       privateKeyFile = config.sops.secrets.iw-wg-peer-sk.path;
       interfaceNamespace = "intraweb";
       allowedIPsAsRoutes = false;
       postSetup = [
-        "ip -n intraweb addr add dev iw-ix-fra01 172.21.32.3/32 peer 172.21.32.2/32"
+        "ip -n intraweb addr add dev iw-ix-de-fra01 172.21.32.3/32 peer 172.21.32.2/32"
       ];
 
       peers = [
         {
-          name = "fra01";
+          name = "de-fra01";
           publicKey = "LmXg87zKYIeLxiOqG5vzu3Xo50MUoqkfQ2PBII+vkWM=";
           allowedIPs = [ "0.0.0.0/0" ];
         }
