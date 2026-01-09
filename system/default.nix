@@ -74,6 +74,7 @@ in
 {
   "de-fra01" = defineSystem "x86_64-linux" "de-fra01";
   "it-mil01" = defineSystem "x86_64-linux" "it-mil01";
+  "pl-waw01" = defineSystem "x86_64-linux" "pl-waw01";
   "tastypi" = defineSystem' [ uglyHack ] "aarch64-linux" "tastypi";
 
   "live-rescue" = defineSystem "x86_64-linux" "live-rescue";
