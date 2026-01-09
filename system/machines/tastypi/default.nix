@@ -14,7 +14,6 @@
     ./vic-net
     ./grafana-prometheus.nix
     ./loki.nix
-    ./intraweb
 
     inputs.oxibridge.nixosModules.default
   ];

@@ -1,17 +1,26 @@
-{ intranet, ... }:
 {
   imports = [
     ./hardware.nix
     ./disko.nix
     ./hydra.nix
-    intranet.wireguardConfig
+    ./vic-net
   ];
 
   vic-nix = {
     server.enable = true;
   };
+  services.qemuGuest.enable = true;
+
+  services.nginx = {
+    enable = true;
+  };
 
   networking = {
+    firewall.allowedTCPPorts = [
+      80
+      443
+    ];
+
     interfaces.ens18.ipv4.addresses = [
       {
         address = "109.122.28.203";

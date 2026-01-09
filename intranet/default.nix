@@ -104,4 +104,6 @@ rec {
         sslCertificateKey = config.sops.secrets."${domain}.key".path;
       };
     };
+
+  birdShared = ./bird-shared.conf;
 }
