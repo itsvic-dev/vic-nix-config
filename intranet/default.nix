@@ -13,6 +13,10 @@ rec {
     de-fra01 = {
       publicKey = "DGNfHXE4BWJJcDAxZRxBB5PIiCiSMFw2q7zNBQLEWBw=";
     };
+    de-fra01 = {
+      publicKey = "7x8Xgdmb1thUqhl/22/s3aHNPOuzWt30UQo412EsSkE=";
+    };
+
     mbp = {
       publicKey = "fyujyTR/I56g3bO79gLtwn7YgSxxq6O/Ct4NH5nRqlk=";
     };
