@@ -18,9 +18,7 @@ in
     ./loki.nix
     ./forgejo.nix
     ./mail.nix
-    ./intraweb
-
-    intranet.wireguardConfig
+    ./vic-net
   ];
 
   vic-nix = {

@@ -17,47 +17,28 @@
     };
     networks.vn-dummy = {
       matchConfig.Name = "vn-dummy";
-      networkConfig.Address = intranet.ips.pl-waw01 + "/32";
+      networkConfig.Address = intranet.ips.${config.networking.hostName} + "/32";
     };
   };
 
   sops.secrets.vic-net-sk = { };
   networking.wireguard.interfaces = {
-    "vn-xfr-tastypi" = {
+    "vn-xfr-pl-waw01" = {
       listenPort = 52900;
       privateKeyFile = config.sops.secrets.vic-net-sk.path;
       allowedIPsAsRoutes = false;
-      ips = [ "172.21.123.0/31" ];
+      ips = [ "172.21.123.3/31" ];
 
       peers = [
         {
-          name = "tastypi";
-          publicKey = intranet.wireguardPeers.tastypi.publicKey;
+          name = "pl-waw01";
+          publicKey = intranet.wireguardPeers.pl-waw01.publicKey;
           allowedIPs = [ "0.0.0.0/0" ];
-        }
-      ];
-    };
-
-    "vn-xfr-it-mil01" = {
-      listenPort = 52901;
-      privateKeyFile = config.sops.secrets.vic-net-sk.path;
-      allowedIPsAsRoutes = false;
-      ips = [ "172.21.123.2/31" ];
-
-      peers = [
-        {
-          name = "it-mil01";
-          publicKey = intranet.wireguardPeers.it-mil01.publicKey;
-          allowedIPs = [ "0.0.0.0/0" ];
+          endpoint = "109.122.28.203:52901";
         }
       ];
     };
   };
-
-  networking.firewall.allowedUDPPorts = [
-    52900
-    52901
-  ];
 
   # TEMP until we get fra01 on the network
   networking.nameservers = lib.mkForce [
