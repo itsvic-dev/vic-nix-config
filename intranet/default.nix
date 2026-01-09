@@ -13,7 +13,7 @@ rec {
     de-fra01 = {
       publicKey = "DGNfHXE4BWJJcDAxZRxBB5PIiCiSMFw2q7zNBQLEWBw=";
     };
-    de-fra01 = {
+    pl-waw01 = {
       publicKey = "7x8Xgdmb1thUqhl/22/s3aHNPOuzWt30UQo412EsSkE=";
     };
 
@@ -32,6 +32,7 @@ rec {
     de-fra01 = "10.21.0.1";
     tastypi = "10.21.0.2";
     it-mil01 = "10.21.0.3";
+    pl-waw01 = "10.21.0.4";
 
     mbp = "10.21.1.1";
     iphone = "10.21.1.2";
