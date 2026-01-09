@@ -8,6 +8,7 @@
   imports = [
     "${inputs.self}/misc/intraweb"
     ./wg.nix
+    ./container-config.nix
   ];
 
   iw.networking.namespaces."intraweb".ipAddress = "10.0.0.1/24";

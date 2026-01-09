@@ -1,7 +1,6 @@
 { lib, ... }:
 {
   system.stateVersion = "25.11";
-  imports = [ ./nginx.nix ];
 
   networking = {
     firewall = {
@@ -21,19 +20,9 @@
       recursion yes;
     '';
 
-    zones."com" = {
-      master = true;
-      file = ./zones/com.zone;
-    };
-
     zones."iw" = {
       master = true;
       file = ./zones/iw.zone;
-    };
-
-    zones."intraweb.com" = {
-      master = true;
-      file = ./zones/intraweb.com.db;
     };
 
     zones."backbone.iw" = {
@@ -51,9 +40,4 @@
       file = ./zones/root.zone;
     };
   };
-
-  networking.firewall.allowedTCPPorts = [
-    80
-    443
-  ];
 }

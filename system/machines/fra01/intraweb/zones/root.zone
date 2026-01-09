@@ -1,7 +1,7 @@
 $TTL 60
 $ORIGIN .
 
-@ IN SOA de-fra01.backbone.iw. vic@intramail.com. (
+@ IN SOA de-fra01.backbone.iw. vic.mail.iw. (
   2026010501  ; serial
   3h          ; refresh
   1h          ; retry
@@ -10,7 +10,6 @@ $ORIGIN .
 )
 
 .     IN NS de-fra01.backbone.iw.
-com.  IN NS de-fra01.backbone.iw.
 iw.   IN NS de-fra01.backbone.iw.
 
 de-fra01.backbone.iw.  IN A 10.0.0.1
