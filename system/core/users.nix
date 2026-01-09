@@ -1,13 +1,23 @@
-{ config, lib, pkgs, globalSecretsFile, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  globalSecretsFile,
+  ...
+}:
+{
 
   config = lib.mkMerge [
     {
       users = {
-        mutableUsers = false;
-
         users.vic = {
           isNormalUser = true;
-          extraGroups = [ "wheel" "video" "render" "netdev" ];
+          extraGroups = [
+            "wheel"
+            "video"
+            "render"
+            "netdev"
+          ];
           shell = pkgs.zsh;
 
           openssh.authorizedKeys.keys = [
@@ -19,13 +29,14 @@
     }
 
     (lib.mkIf (!config.vic-nix.noSecrets) {
+      users.mutableUsers = false;
+
       sops.secrets.vic-password = {
         neededForUsers = true;
         sopsFile = globalSecretsFile;
       };
 
-      users.users.vic.hashedPasswordFile =
-        config.sops.secrets.vic-password.path;
+      users.users.vic.hashedPasswordFile = config.sops.secrets.vic-password.path;
     })
   ];
 }
