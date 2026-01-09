@@ -4,6 +4,7 @@ keys:
   - &machine_it_mil01 age108c25algyks6pa5z9asa7dzxfs4j23qwwhzfygvlty9lkverecyqpmj27g
   - &machine_mbp age1drt97j9n749at0lpg2u7e0dw6yuu5a4cvdxwm2dgg7ujx94f6qdqsjwm7l
   - &machine_de_fra01 age12x9pzkvjh3re8laaq52a3ms297n9n87zf0lshrujrr83jnqclepq6xhqkl
+  - &machine_pl_waw01 age1nay99fvluh7fg2xgw7p0ks6fupg0p63uysvscua9uhsa46zqu43shuh0sk
 
 creation_rules:
   - path_regex: secrets/global.yaml
@@ -14,6 +15,7 @@ creation_rules:
           - *machine_it_mil01
           - *machine_mbp
           - *machine_de_fra01
+          - *machine_pl_waw01
 
   - path_regex: secrets/tastypi/.*|intranet/certs/tastypi/.*/key.pem
     key_groups:
@@ -32,6 +34,12 @@ creation_rules:
       - age:
           - *admin_vic
           - *machine_de_fra01
+
+  - path_regex: secrets/pl-waw01/.*|intranet/certs/pl-waw01/.*/key.pem
+    key_groups:
+      - age:
+          - *admin_vic
+          - *machine_pl_waw01
 
   - path_regex: secrets/nix-auth.conf
     key_groups:

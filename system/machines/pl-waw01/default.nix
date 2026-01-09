@@ -6,7 +6,6 @@
 
   vic-nix = {
     server.enable = true;
-    noSecrets = true;
   };
 
   networking = {
