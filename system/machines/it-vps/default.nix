@@ -17,6 +17,7 @@ in
     ./plausible.nix
     ./loki.nix
     ./forgejo.nix
+    ./mail.nix
     ./intraweb
 
     intranet.wireguardConfig
@@ -59,6 +60,10 @@ in
                     '"$http_referer" "$http_user_agent"';
     '';
   };
+  networking.firewall.allowedTCPPorts = [
+    80
+    443
+  ];
 
   services.prometheus.exporters = {
     node = {

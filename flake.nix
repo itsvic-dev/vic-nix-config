@@ -59,8 +59,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nixos-mailserver.url = "gitlab:simple-nixos-mailserver/nixos-mailserver/master";
+
     # tastypi
-    nixos-raspberrypi.url = "github:nvmd/nixos-raspberrypi/develop";
+    nixos-raspberrypi = {
+      url = "github:nvmd/nixos-raspberrypi/develop";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     bob-website = {
       url = "github:bob-discord-bot/website";
