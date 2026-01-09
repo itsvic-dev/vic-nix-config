@@ -3,6 +3,7 @@
   imports = [
     ./hardware.nix
     ./disko.nix
+    ./hydra.nix
     intranet.wireguardConfig
   ];
 

@@ -43,8 +43,8 @@ rec {
     "torrents" = "tastypi";
     "flood" = "tastypi";
 
-    "hydra" = "de-fra01";
-    "cache" = "de-fra01";
+    "hydra" = "pl-waw01";
+    "cache" = "pl-waw01";
 
     "git" = "it-mil01";
   };

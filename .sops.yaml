@@ -45,5 +45,5 @@ creation_rules:
     key_groups:
       - age:
           - *admin_vic
-          - *machine_de_fra01
+          - *machine_pl_waw01
           - *machine_mbp

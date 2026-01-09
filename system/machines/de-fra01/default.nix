@@ -4,7 +4,6 @@
     ./hardware.nix
     ./vic-net.nix
     ./monitoring.nix
-    ./hydra.nix
     ./ticket-bot.nix
     ./intraweb
   ];
@@ -66,4 +65,16 @@
     acceptTerms = true;
     defaults.email = "contact@itsvic.dev";
   };
+
+  # hydra's nixremote user
+  users.users.nixremote = {
+    isNormalUser = true;
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM3Y1OlIZoZwu7XhxwD7O+R6ua99raUdZi+Ftqr00//X root@tastypi"
+    ];
+    group = "nixremote";
+  };
+  users.groups.nixremote = { };
+
+  nix.settings.trusted-users = [ "nixremote" ];
 }

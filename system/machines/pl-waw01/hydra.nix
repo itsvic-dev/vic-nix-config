@@ -47,6 +47,23 @@
         mandatoryFeatures = [ ];
       }
       {
+        hostName = "de-fra01.vic";
+        systems = [
+          "x86_64-linux"
+          "i686-linux"
+        ];
+        protocol = "ssh";
+        maxJobs = 4;
+        speedFactor = 1;
+        supportedFeatures = [
+          "nixos-test"
+          "benchmark"
+          "big-parallel"
+          "kvm"
+        ];
+        mandatoryFeatures = [ ];
+      }
+      {
         hostName = "tastypi.vic";
         system = "aarch64-linux";
         protocol = "ssh";
@@ -74,8 +91,8 @@
           "big-parallel"
           "benchmark"
         ];
-        maxJobs = 4;
-        speedFactor = 2;
+        maxJobs = 6;
+        speedFactor = 4;
       }
     ];
 
@@ -85,12 +102,12 @@
   sops.secrets = {
     hydra-vic-key = {
       owner = "nginx";
-      sopsFile = intranet.getKey "de-fra01" "hydra.vic";
+      sopsFile = intranet.getKey "pl-waw01" "hydra.vic";
       format = "binary";
     };
     cache-vic-key = {
       owner = "nginx";
-      sopsFile = intranet.getKey "de-fra01" "cache.vic";
+      sopsFile = intranet.getKey "pl-waw01" "cache.vic";
       format = "binary";
     };
     binary-cache-key = {
@@ -123,7 +140,7 @@
   services.nginx.virtualHosts = {
     "hydra.vic" = {
       forceSSL = true;
-      sslCertificate = intranet.getCert "de-fra01" "hydra.vic";
+      sslCertificate = intranet.getCert "pl-waw01" "hydra.vic";
       sslCertificateKey = config.sops.secrets.hydra-vic-key.path;
       locations."/" = {
         proxyPass = "http://localhost:${toString config.services.hydra.port}";
@@ -133,7 +150,7 @@
     };
     "cache.vic" = {
       forceSSL = true;
-      sslCertificate = intranet.getCert "de-fra01" "cache.vic";
+      sslCertificate = intranet.getCert "pl-waw01" "cache.vic";
       sslCertificateKey = config.sops.secrets.cache-vic-key.path;
       locations."/" = {
         proxyPass = "http://localhost:${toString config.services.nix-serve.port}";
