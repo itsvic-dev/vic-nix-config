@@ -1,7 +1,9 @@
+{ intranet, ... }:
 {
   imports = [
     ./hardware.nix
     ./disko.nix
+    intranet.wireguardConfig
   ];
 
   vic-nix = {
