@@ -29,9 +29,13 @@
     loginAccounts = {
       "contact@itsvic.dev" = {
         hashedPasswordFile = config.sops.secrets.vic-email-pw.path;
-        aliases = [ "postmaster@itsvic.dev" ];
+        aliases = [
+          "postmaster@itsvic.dev"
+          "abuse@itsvic.dev"
+        ];
       };
     };
+    dmarcReporting.enable = true;
   };
 
   services.roundcube = {
