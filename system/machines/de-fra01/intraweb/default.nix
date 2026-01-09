@@ -8,7 +8,6 @@
   imports = [
     "${inputs.self}/misc/intraweb"
     ./wg.nix
-    ./container-config.nix
   ];
 
   iw.networking.namespaces."intraweb".ipAddress = "10.0.0.1/24";
@@ -38,5 +37,11 @@
         };
       }
     '';
+  };
+
+  systemd.services."container@intraweb".requires = [ "netns-intraweb.service" ];
+  containers.intraweb = {
+    networkNamespace = "/run/netns/intraweb";
+    config = import ./container-config.nix;
   };
 }
