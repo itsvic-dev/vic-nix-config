@@ -3,6 +3,7 @@
     ./hardware.nix
     ./disko.nix
     ./hydra.nix
+    ./monitoring.nix
     ./vic-net
   ];
 

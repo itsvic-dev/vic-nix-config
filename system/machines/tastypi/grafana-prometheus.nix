@@ -76,6 +76,16 @@
           }
         ];
       }
+      {
+        job_name = "pl-waw01";
+        static_configs = [
+          {
+            targets = [
+              "pl-waw01.vic:${toString config.services.prometheus.exporters.node.port}"
+            ];
+          }
+        ];
+      }
     ];
   };
 
