@@ -13,6 +13,7 @@
       define OWNIP = ${intranet.ips.${config.networking.hostName}};
       define OWNNET = ${intranet.ips.${config.networking.hostName}}/32;
       router id OWNIP;
+
       include "${intranet.birdShared}";
 
       protocol bgp waw01 from vnxfr {
