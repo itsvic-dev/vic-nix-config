@@ -1,11 +1,8 @@
-{ config, ... }:
 {
-  sops.secrets.iw-wg-peer-sk = { };
-
   networking.wireguard.interfaces = {
     "iw-ix-mil01" = {
       listenPort = 51900;
-      privateKeyFile = config.sops.secrets.iw-wg-peer-sk.path;
+      privateKeyFile = "/run/secrets/iw-wg-peer-sk";
       allowedIPsAsRoutes = false;
       ips = [ "172.21.32.0/31" ];
 
