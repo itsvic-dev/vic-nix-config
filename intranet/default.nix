@@ -3,37 +3,52 @@ rec {
   caCert = ./certs/ca-cert.pem;
   nameserver = "10.21.0.1";
 
-  wireguardPeers = {
-    tastypi = {
-      publicKey = "7yrI5RW+I6yZC5K1+7ErKUWC5h42aMYkjiP6/siOlzk=";
-    };
-    it-mil01 = {
-      publicKey = "S2cSFcrvD4AzK7KuJTWpAzkYNMrdi2ojy8Owl+5VOU4=";
-    };
+  peers = {
     de-fra01 = {
       publicKey = "DGNfHXE4BWJJcDAxZRxBB5PIiCiSMFw2q7zNBQLEWBw=";
-    };
-    pl-waw01 = {
-      publicKey = "7x8Xgdmb1thUqhl/22/s3aHNPOuzWt30UQo412EsSkE=";
+      ip = "10.21.0.1";
     };
 
+    tastypi = {
+      publicKey = "7yrI5RW+I6yZC5K1+7ErKUWC5h42aMYkjiP6/siOlzk=";
+      ip = "10.21.0.2";
+    };
+
+    it-mil01 = {
+      publicKey = "S2cSFcrvD4AzK7KuJTWpAzkYNMrdi2ojy8Owl+5VOU4=";
+      ip = "10.21.0.3";
+      clearnetIP = "5.231.80.191";
+    };
+
+    pl-waw01 = {
+      publicKey = "7x8Xgdmb1thUqhl/22/s3aHNPOuzWt30UQo412EsSkE=";
+      ip = "10.21.0.4";
+    };
+
+    # clients -- configuration purposefully minimal
     mbp = {
       publicKey = "fyujyTR/I56g3bO79gLtwn7YgSxxq6O/Ct4NH5nRqlk=";
+      ip = "10.21.0.254";
     };
     iphone = {
       publicKey = "AQqR0qBXROiHro05uJBbckiCWpuBzS8lTDsJIyhMxDI=";
+      ip = "10.21.0.253";
     };
   };
+  wireguardPeers = peers;
 
-  ips = {
-    de-fra01 = "10.21.0.1";
-    tastypi = "10.21.0.2";
-    it-mil01 = "10.21.0.3";
-    pl-waw01 = "10.21.0.4";
+  # the actual transfer networks
+  # IPs derived from the 'id' field
+  wires = [
+    {
+      from = "it-mil01";
+      to = "tastypi";
+      listenPort = 51900;
+      id = 1;
+    }
+  ];
 
-    mbp = "10.21.1.1";
-    iphone = "10.21.1.2";
-  };
+  ips = lib.mapAttrs (name: peer: peer.ip) peers;
 
   cnames = {
     "grafana" = "tastypi";
@@ -45,6 +60,8 @@ rec {
 
     "git" = "it-mil01";
   };
+
+  # ----------------------------- MACHINERY BELOW -----------------------------
 
   ipsAsDNS = builtins.concatStringsSep "\n" (
     lib.mapAttrsToList (name: ip: "${name}.vic. IN A ${ip}") ips
@@ -65,57 +82,151 @@ rec {
     ) ips
   );
 
-  getCert = host: domain: ./certs/${host}/${domain}/cert.pem;
-  getKey = host: domain: ./certs/${host}/${domain}/key.pem;
-
-  wgXfrFor =
-    {
-      host,
-      ip,
-      listenPort ? 52900,
-      endpoint ? null,
-    }:
-    { config, lib, ... }:
-    {
-      networking.wireguard.interfaces."vn-xfr-${host}" = {
-        inherit listenPort;
+  getWireguardTransfersFrom =
+    config:
+    let
+      name = config.networking.hostName;
+    in
+    lib.genAttrs' (builtins.filter (wire: wire.from == name) wires) (
+      wire:
+      lib.nameValuePair "vn-wg-${wire.to}" {
+        inherit (wire) listenPort;
         privateKeyFile = config.sops.secrets.vic-net-sk.path;
         allowedIPsAsRoutes = false;
-        ips = [ ip ];
+        ips = [ "fd21:f01f:ca75:${toString wire.id}::1/64" ];
 
         peers = [
           {
-            name = host;
-            publicKey = wireguardPeers.${host}.publicKey;
-            allowedIPs = [ "0.0.0.0/0" ];
-            inherit endpoint;
+            name = wire.to;
+            allowedIPs = [ "::/0" ];
+            inherit (peers.${wire.to}) publicKey;
           }
         ];
+      }
+    );
+
+  getWireguardTransfersTo =
+    config:
+    let
+      name = config.networking.hostName;
+    in
+    lib.genAttrs' (builtins.filter (wire: wire.to == name) wires) (
+      wire:
+      lib.nameValuePair "vn-wg-${wire.from}" {
+        inherit (wire) listenPort;
+        privateKeyFile = config.sops.secrets.vic-net-sk.path;
+        allowedIPsAsRoutes = false;
+        ips = [ "fd21:f01f:ca75:${toString wire.id}::2/64" ];
+
+        peers = [
+          {
+            name = wire.from;
+            allowedIPs = [ "::/0" ];
+            inherit (peers.${wire.from}) publicKey;
+            endpoint = "${peers.${wire.from}.clearnetIP}:${toString wire.listenPort}";
+          }
+        ];
+      }
+    );
+
+  getGRENetdev =
+    name: wire:
+    let
+      isFrom = wire.from == name;
+      tunnelName = if isFrom then "vn-gre-${wire.to}" else "vn-gre-${wire.from}";
+      remoteIP =
+        if isFrom then "fd21:f01f:ca75:${toString wire.id}::2" else "fd21:f01f:ca75:${toString wire.id}::1";
+      localIP =
+        if isFrom then "fd21:f01f:ca75:${toString wire.id}::1" else "fd21:f01f:ca75:${toString wire.id}::2";
+    in
+    lib.nameValuePair "99-${tunnelName}" {
+      netdevConfig = {
+        Name = tunnelName;
+        Kind = "gre";
       };
-      networking.firewall.allowedUDPPorts = lib.optional (endpoint == null) listenPort;
+
+      tunnelConfig = {
+        Remote = remoteIP;
+        Local = localIP;
+      };
     };
 
-  wgClientNet =
-    {
-      hosts,
-      ip,
-      listenPort ? 52900,
-    }:
+  getGRENetwork =
+    name: wire:
+    let
+      isFrom = wire.from == name;
+      tunnelName = if isFrom then "vn-gre-${wire.to}" else "vn-gre-${wire.from}";
+      ip =
+        if isFrom then
+          "fd21:f01f:d4a6:${toString wire.id}::1/64"
+        else
+          "fd21:f01f:d4a6:${toString wire.id}::2/64";
+    in
+    lib.nameValuePair "99-${tunnelName}" {
+      matchConfig.Name = tunnelName;
+      networkConfig.Address = ip;
+    };
+
+  getGRETunnelOverride =
+    name: wire:
+    let
+      isFrom = wire.from == name;
+      ifname = if isFrom then wire.to else wire.from;
+    in
+    lib.nameValuePair "40-vn-wg-${ifname}" {
+      networkConfig.Tunnel = "vn-gre-${ifname}";
+    };
+
+  getThingFrom =
+    getThing: config:
+    let
+      name = config.networking.hostName;
+    in
+    lib.genAttrs' (builtins.filter (wire: wire.from == name) wires) (wire: getThing name wire);
+
+  getThingTo =
+    getThing: config:
+    let
+      name = config.networking.hostName;
+    in
+    lib.genAttrs' (builtins.filter (wire: wire.to == name) wires) (wire: getThing name wire);
+
+  transfers =
     { config, ... }:
     {
-      networking.wireguard.interfaces."vn-client-net" = {
-        inherit listenPort;
-        privateKeyFile = config.sops.secrets.vic-net-sk.path;
-        ips = [ ip ];
+      networking.wireguard.interfaces =
+        (getWireguardTransfersFrom config) // (getWireguardTransfersTo config);
 
-        peers = map (host: {
-          name = host;
-          publicKey = wireguardPeers.${host}.publicKey;
-          allowedIPs = [ "${ips.${host}}/32" ];
-        }) hosts;
-      };
-      networking.firewall.allowedUDPPorts = [ listenPort ];
+      systemd.network.netdevs = (getThingFrom getGRENetdev config) // (getThingTo getGRENetdev config);
+      systemd.network.networks =
+        (getThingFrom getGRENetwork config)
+        // (getThingTo getGRENetwork config)
+        // (getThingFrom getGRETunnelOverride config)
+        // (getThingTo getGRETunnelOverride config);
+
+      networking.firewall.allowedUDPPorts = map (wire: wire.listenPort) (
+        builtins.filter (wire: wire.from == config.networking.hostName) wires
+      );
     };
+
+  dummy =
+    { config, ... }:
+    {
+      systemd.network = {
+        netdevs.vn-dummy.netdevConfig = {
+          Kind = "dummy";
+          Name = "vn-dummy";
+        };
+
+        networks.vn-dummy = {
+          matchConfig.Name = "vn-dummy";
+          networkConfig.Address = peers.${config.networking.hostName}.ip + "/32";
+        };
+      };
+    };
+
+  getCert = host: domain: ./certs/${host}/${domain}/cert.pem;
+  getKey = host: domain: ./certs/${host}/${domain}/key.pem;
 
   nginxCertFor =
     domain:
