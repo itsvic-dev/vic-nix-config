@@ -1,6 +1,5 @@
 {
   intranet,
-  lib,
   ...
 }:
 {
