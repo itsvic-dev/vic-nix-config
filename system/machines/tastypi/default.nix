@@ -11,9 +11,10 @@
     ./wings.nix
     ./hardware.nix
     ./free-media.nix
-    ./vic-net
     ./grafana-prometheus.nix
     ./loki.nix
+    ./vic-net
+    ./intraweb
 
     inputs.oxibridge.nixosModules.default
   ];

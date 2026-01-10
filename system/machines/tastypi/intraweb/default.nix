@@ -1,35 +1,43 @@
 {
-  config,
   inputs,
-  pkgs,
   ...
 }:
 {
-  imports = [
-    "${inputs.self}/misc/intraweb"
-    ./wg.nix
-  ];
-  iw.networking.namespaces."intraweb".ipAddress = "10.21.0.1/24";
+  sops.secrets.iw-wg-peer-sk = { };
 
-  systemd.services.bird = {
-    requires = [ "netns-intraweb.service" ];
-    serviceConfig.NetworkNamespacePath = "/run/netns/intraweb";
-  };
+  containers.intraweb = {
+    specialArgs = { inherit (inputs) self; };
 
-  services.bird = {
-    package = pkgs.bird2;
-    enable = true;
-    config = ''
-      define OWNIP = 10.21.0.1;
-      define OWNNET = 10.21.0.0/24;
-      define OWNAS = 4204200002;
-      router id OWNIP;
+    config = {
+      imports = [
+        "${inputs.self}/misc/intraweb"
+        ./wg.nix
+        ./bird.nix
+      ];
 
-      ${config.iw.birdSharedConfig}
+      systemd.network = {
+        netdevs.iw-dummy = {
+          netdevConfig = {
+            Name = "iw-dummy";
+            Kind = "dummy";
+          };
+        };
+        networks.iw-dummy = {
+          matchConfig.Name = "iw-dummy";
+          networkConfig.Address = "10.21.0.1/24";
+        };
+      };
 
-      protocol bgp it_mil01 from iwpeers {
-        neighbor 172.21.32.1 as 4204200001;
-      }
-    '';
+      networking.useNetworkd = true;
+      networking.useHostResolvConf = false;
+      system.stateVersion = "26.05";
+    };
+
+    bindMounts."/run/secrets/iw-wg-peer-sk" = { };
+
+    autoStart = true;
+    privateNetwork = true;
+    hostAddress = "172.32.136.1";
+    localAddress = "172.32.136.2";
   };
 }

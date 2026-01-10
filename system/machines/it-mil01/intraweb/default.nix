@@ -35,6 +35,11 @@
 
     bindMounts."/run/secrets/iw-wg-peer-sk" = { };
 
+    autoStart = true;
+    privateNetwork = true;
+    hostAddress = "172.32.136.1";
+    localAddress = "172.32.136.2";
+
     forwardPorts = [
       {
         hostPort = 51900;
