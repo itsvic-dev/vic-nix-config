@@ -1,32 +1,5 @@
+{ pkgs, intranet, ... }:
 {
-  pkgs,
-  lib,
-  config,
-  intranet,
-  ...
-}:
-{
-  sops.secrets.vic-net-sk = { };
-
-  networking.wireguard.interfaces.vic-net = {
-    ips = [ "${intranet.ips.de-fra01}/32" ];
-    listenPort = 51820;
-    privateKeyFile = config.sops.secrets.vic-net-sk.path;
-    peers = lib.mapAttrsToList (
-      name: peer:
-      peer
-      // {
-        inherit name;
-        allowedIPs = [ "${intranet.ips.${name}}/32" ];
-      }
-    ) (lib.removeAttrs intranet.wireguardPeers [ "de-fra01" ]);
-  };
-
-  networking.firewall.allowedUDPPorts = [ 51820 ];
-  networking.firewall.interfaces.vic-net.allowedUDPPorts = [ 53 ]; # BIND
-
-  boot.kernel.sysctl."net.ipv4.ip_forward" = 1;
-
   services.bind = {
     enable = true;
     listenOn = [ "10.21.0.1" ];

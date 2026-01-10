@@ -1,4 +1,5 @@
 {
+  config,
   intranet,
   lib,
   ...
@@ -6,10 +7,26 @@
 {
   imports = [
     ./bird.nix
+    ./bind
+
     (intranet.wgXfrFor {
       host = "pl-waw01";
-      ip = "172.21.123.1/31";
-      endpoint = "109.122.28.203:52900";
+      ip = "172.21.123.5/31";
+      endpoint = "109.122.28.203:52902";
+    })
+    (intranet.wgXfrFor {
+      host = "it-mil01";
+      ip = "172.21.123.6/31";
+      listenPort = 52901;
+    })
+
+    (intranet.wgClientNet {
+      hosts = [
+        "mbp"
+        "iphone"
+      ];
+      ip = "10.21.1.6/29";
+      listenPort = 51820;
     })
   ];
 
@@ -24,7 +41,7 @@
     };
     networks.vn-dummy = {
       matchConfig.Name = "vn-dummy";
-      networkConfig.Address = intranet.ips.tastypi + "/32";
+      networkConfig.Address = intranet.ips.${config.networking.hostName} + "/32";
     };
   };
 

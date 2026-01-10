@@ -19,6 +19,11 @@
         neighbor 172.21.123.3 as 64514;
         ipv4 { cost 50; };
       }
+
+      protocol bgp fra01 from vnxfr {
+        neighbor 172.21.123.5 as 64515;
+        ipv4 { cost 44; };
+      }
     '';
   };
 

@@ -5,7 +5,22 @@
   ...
 }:
 {
-  imports = [ ./bird.nix ];
+  imports = [
+    ./bird.nix
+
+    (intranet.wgXfrFor {
+      host = "pl-waw01";
+      ip = "172.21.123.3/31";
+      endpoint = "109.122.28.203:52901";
+    })
+    (intranet.wgXfrFor {
+      host = "de-fra01";
+      ip = "172.21.123.7/31";
+      endpoint = "de-fra01.itsvic.dev:52901";
+      listenPort = 52901;
+    })
+  ];
+
   boot.kernel.sysctl."net.ipv4.ip_forward" = 1;
   # dummy device with intranet ip
   systemd.network = {
@@ -22,23 +37,6 @@
   };
 
   sops.secrets.vic-net-sk = { };
-  networking.wireguard.interfaces = {
-    "vn-xfr-pl-waw01" = {
-      listenPort = 52900;
-      privateKeyFile = config.sops.secrets.vic-net-sk.path;
-      allowedIPsAsRoutes = false;
-      ips = [ "172.21.123.3/31" ];
-
-      peers = [
-        {
-          name = "pl-waw01";
-          publicKey = intranet.wireguardPeers.pl-waw01.publicKey;
-          allowedIPs = [ "0.0.0.0/0" ];
-          endpoint = "109.122.28.203:52901";
-        }
-      ];
-    };
-  };
 
   # TEMP until we get fra01 on the network
   networking.nameservers = lib.mkForce [

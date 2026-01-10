@@ -1,11 +1,28 @@
 {
-  config,
   intranet,
   lib,
   ...
 }:
 {
-  imports = [ ./bird.nix ];
+  imports = [
+    ./bird.nix
+    (intranet.wgXfrFor {
+      host = "tastypi";
+      ip = "172.21.123.0/31";
+      listenPort = 52900;
+    })
+    (intranet.wgXfrFor {
+      host = "it-mil01";
+      ip = "172.21.123.2/31";
+      listenPort = 52901;
+    })
+    (intranet.wgXfrFor {
+      host = "de-fra01";
+      ip = "172.21.123.4/31";
+      listenPort = 52902;
+    })
+  ];
+
   boot.kernel.sysctl."net.ipv4.ip_forward" = 1;
   # dummy device with intranet ip
   systemd.network = {
@@ -22,42 +39,6 @@
   };
 
   sops.secrets.vic-net-sk = { };
-  networking.wireguard.interfaces = {
-    "vn-xfr-tastypi" = {
-      listenPort = 52900;
-      privateKeyFile = config.sops.secrets.vic-net-sk.path;
-      allowedIPsAsRoutes = false;
-      ips = [ "172.21.123.0/31" ];
-
-      peers = [
-        {
-          name = "tastypi";
-          publicKey = intranet.wireguardPeers.tastypi.publicKey;
-          allowedIPs = [ "0.0.0.0/0" ];
-        }
-      ];
-    };
-
-    "vn-xfr-it-mil01" = {
-      listenPort = 52901;
-      privateKeyFile = config.sops.secrets.vic-net-sk.path;
-      allowedIPsAsRoutes = false;
-      ips = [ "172.21.123.2/31" ];
-
-      peers = [
-        {
-          name = "it-mil01";
-          publicKey = intranet.wireguardPeers.it-mil01.publicKey;
-          allowedIPs = [ "0.0.0.0/0" ];
-        }
-      ];
-    };
-  };
-
-  networking.firewall.allowedUDPPorts = [
-    52900
-    52901
-  ];
 
   # TEMP until we get fra01 on the network
   networking.nameservers = lib.mkForce [

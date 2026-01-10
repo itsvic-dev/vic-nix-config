@@ -1,7 +1,7 @@
 {
+  config,
   pkgs,
   intranet,
-  config,
   ...
 }:
 {
@@ -10,19 +10,18 @@
     package = pkgs.bird2;
 
     config = ''
-      define OWNAS = 64514;
+      define OWNAS = 64515;
       define OWNIP = ${intranet.ips.${config.networking.hostName}};
       router id OWNIP;
-
       include "${intranet.birdShared}";
 
       protocol bgp waw01 from vnxfr {
-        neighbor 172.21.123.2 as 64512;
-        ipv4 { cost 50; };
+        neighbor 172.21.123.4 as 64512;
+        ipv4 { cost 44; };
       }
 
-      protocol bgp fra01 from vnxfr {
-        neighbor 172.21.123.6 as 64515;
+      protocol bgp mil01 from vnxfr {
+        neighbor 172.21.123.7 as 64514;
         ipv4 { cost 18; };
       }
     '';

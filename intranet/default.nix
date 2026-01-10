@@ -24,9 +24,6 @@ rec {
       publicKey = "AQqR0qBXROiHro05uJBbckiCWpuBzS8lTDsJIyhMxDI=";
     };
   };
-  mainPeer = wireguardPeers.de-fra01 // {
-    endpoint = "37.114.50.122:51820";
-  };
 
   ips = {
     de-fra01 = "10.21.0.1";
@@ -68,24 +65,57 @@ rec {
     ) ips
   );
 
-  # returns a NixOS module wireguard config for this host (not applicable to the main peer)
-  wireguardConfig =
-    { config, ... }:
-    let
-      host = config.networking.hostName;
-    in
-    {
-      sops.secrets.vic-net-sk = { };
-      networking.wireguard.interfaces.vic-net = {
-        ips = [ "${ips.${host}}/32" ];
-        listenPort = 51820;
-        privateKeyFile = config.sops.secrets.vic-net-sk.path;
-        peers = [ (mainPeer // { allowedIPs = [ "10.21.0.0/16" ]; }) ];
-      };
-    };
-
   getCert = host: domain: ./certs/${host}/${domain}/cert.pem;
   getKey = host: domain: ./certs/${host}/${domain}/key.pem;
+
+  wgXfrFor =
+    {
+      host,
+      ip,
+      listenPort ? 52900,
+      endpoint ? null,
+    }:
+    { config, lib, ... }:
+    {
+      networking.wireguard.interfaces."vn-xfr-${host}" = {
+        inherit listenPort;
+        privateKeyFile = config.sops.secrets.vic-net-sk.path;
+        allowedIPsAsRoutes = false;
+        ips = [ ip ];
+
+        peers = [
+          {
+            name = host;
+            publicKey = wireguardPeers.${host}.publicKey;
+            allowedIPs = [ "0.0.0.0/0" ];
+            inherit endpoint;
+          }
+        ];
+      };
+      networking.firewall.allowedUDPPorts = lib.optional (endpoint == null) listenPort;
+    };
+
+  wgClientNet =
+    {
+      hosts,
+      ip,
+      listenPort ? 52900,
+    }:
+    { config, lib, ... }:
+    {
+      networking.wireguard.interfaces."vn-client-net" = {
+        inherit listenPort;
+        privateKeyFile = config.sops.secrets.vic-net-sk.path;
+        ips = [ ip ];
+
+        peers = map (host: {
+          name = host;
+          publicKey = wireguardPeers.${host}.publicKey;
+          allowedIPs = [ "${ips.${host}}/32" ];
+        }) hosts;
+      };
+      networking.firewall.allowedUDPPorts = [ listenPort ];
+    };
 
   nginxCertFor =
     domain:

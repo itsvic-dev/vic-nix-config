@@ -2,10 +2,9 @@
   imports = [
     ./disko.nix
     ./hardware.nix
-    ./vic-net.nix
+    ./vic-net
     ./monitoring.nix
     ./ticket-bot.nix
-    ./intraweb
   ];
 
   vic-nix = {
