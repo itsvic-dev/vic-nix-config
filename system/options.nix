@@ -12,7 +12,7 @@ with lib;
 
       autoUpdate = mkOption {
         type = types.bool;
-        default = false; # FIXME
+        default = true;
         description = "Whether the machine should auto-update based on system builds from hydra.vic.";
       };
 
