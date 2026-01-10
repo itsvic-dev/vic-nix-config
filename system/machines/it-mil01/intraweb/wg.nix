@@ -1,17 +1,10 @@
-{ config, ... }:
 {
-  sops.secrets.iw-wg-peer-sk = { };
-
-  networking.wireguard.useNetworkd = false;
   networking.wireguard.interfaces = {
     "iw-ix-tastypi" = {
-      listenPort = 52901;
-      privateKeyFile = config.sops.secrets.iw-wg-peer-sk.path;
-      interfaceNamespace = "intraweb";
+      listenPort = 51900;
+      privateKeyFile = "/run/secrets/iw-wg-peer-sk";
       allowedIPsAsRoutes = false;
-      postSetup = [
-        "ip -n intraweb addr add dev iw-ix-tastypi 172.21.32.1/32 peer 172.21.32.0/32"
-      ];
+      ips = [ "172.21.32.1/31" ];
 
       peers = [
         {
@@ -23,13 +16,10 @@
     };
 
     "iw-ix-de-fra01" = {
-      listenPort = 52902;
-      privateKeyFile = config.sops.secrets.iw-wg-peer-sk.path;
-      interfaceNamespace = "intraweb";
+      listenPort = 51901;
+      privateKeyFile = "/run/secrets/iw-wg-peer-sk";
       allowedIPsAsRoutes = false;
-      postSetup = [
-        "ip -n intraweb addr add dev iw-ix-de-fra01 172.21.32.3/32 peer 172.21.32.2/32"
-      ];
+      ips = [ "172.21.32.3/31" ];
 
       peers = [
         {
@@ -41,11 +31,8 @@
     };
   };
 
-  systemd.services."wireguard-iw-ix-tastypi".requires = [ "netns-intraweb.service" ];
-  systemd.services."wireguard-iw-ix-fra01".requires = [ "netns-intraweb.service" ];
-
   networking.firewall.allowedUDPPorts = [
-    52901
-    52902
+    51900
+    51901
   ];
 }
