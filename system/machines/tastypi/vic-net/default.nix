@@ -14,6 +14,7 @@
       host = "de-fra01";
       ip = "172.21.123.9/31";
       endpoint = "de-fra01.itsvic.dev:52902";
+      listenPort = 52901;
     })
   ];
 
