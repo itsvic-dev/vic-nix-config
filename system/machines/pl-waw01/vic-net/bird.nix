@@ -1,12 +1,17 @@
-{ pkgs, intranet, ... }:
+{
+  config,
+  pkgs,
+  intranet,
+  ...
+}:
 {
   services.bird = {
     enable = true;
     package = pkgs.bird2;
 
     config = ''
-      define OWNAS = 64512;
-      define OWNIP = ${intranet.ips.pl-waw01};
+      define OWNIP = ${intranet.ips.${config.networking.hostName}};
+      define OWNNET = ${intranet.ips.${config.networking.hostName}}/32;
       router id OWNIP;
       include "${intranet.birdShared}";
 

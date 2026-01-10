@@ -11,6 +11,7 @@
 
     config = ''
       define OWNIP = ${intranet.ips.${config.networking.hostName}};
+      define OWNNET = ${intranet.ips.${config.networking.hostName}}/32;
       router id OWNIP;
 
       include "${intranet.birdShared}";
