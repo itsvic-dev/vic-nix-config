@@ -2,7 +2,6 @@
 {
   imports = [
     ./netns.nix
-    ./birdShared.nix
   ];
 
   config = {
