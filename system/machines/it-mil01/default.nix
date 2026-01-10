@@ -19,7 +19,6 @@ in
     ./forgejo.nix
     ./mail.nix
     ./vic-net
-    ./intraweb
   ];
 
   vic-nix = {
