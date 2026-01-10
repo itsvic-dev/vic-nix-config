@@ -1,7 +1,6 @@
 {
   config,
   intranet,
-  lib,
   ...
 }:
 {
@@ -46,10 +45,4 @@
   };
 
   sops.secrets.vic-net-sk = { };
-
-  # TEMP until we get fra01 on the network
-  networking.nameservers = lib.mkForce [
-    "1.1.1.1"
-    "1.0.0.1"
-  ];
 }

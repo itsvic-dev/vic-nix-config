@@ -1,5 +1,6 @@
 { pkgs, intranet, ... }:
 {
+  networking.firewall.allowedUDPPorts = [ 53 ];
   services.bind = {
     enable = true;
     listenOn = [ "10.21.0.1" ];
