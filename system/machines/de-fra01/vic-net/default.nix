@@ -8,11 +8,12 @@
     ./bird.nix
     ./bind
 
-    (intranet.wgXfrFor {
-      host = "pl-waw01";
-      ip = "172.21.123.5/31";
-      endpoint = "109.122.28.203:52902";
-    })
+    # broken!
+    # (intranet.wgXfrFor {
+    #   host = "pl-waw01";
+    #   ip = "172.21.123.5/31";
+    #   endpoint = "109.122.28.203:52902";
+    # })
     (intranet.wgXfrFor {
       host = "it-mil01";
       ip = "172.21.123.6/31";
