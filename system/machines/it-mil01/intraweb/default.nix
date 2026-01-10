@@ -29,6 +29,7 @@
       };
 
       networking.useNetworkd = true;
+      networking.useHostResolvConf = false;
       system.stateVersion = "26.05";
     };
 
