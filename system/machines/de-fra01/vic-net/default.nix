@@ -7,6 +7,7 @@
   imports = [
     ./bird.nix
     ./bind
+    intranet.sysctls
 
     # broken!
     # (intranet.wgXfrFor {
@@ -36,7 +37,6 @@
     })
   ];
 
-  boot.kernel.sysctl."net.ipv4.ip_forward" = 1;
   # dummy device with intranet ip
   systemd.network = {
     netdevs.vn-dummy = {

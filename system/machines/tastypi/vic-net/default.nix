@@ -5,6 +5,8 @@
 {
   imports = [
     ./bird.nix
+    intranet.sysctls
+
     (intranet.wgXfrFor {
       host = "pl-waw01";
       ip = "172.21.123.1/31";

@@ -12,7 +12,7 @@
 
       protocol bgp tastypi from vnxfr {
         neighbor 172.21.123.1 as 64513;
-        ipv4 { cost 32; };
+        ipv4 { cost 132; };
       }
 
       protocol bgp mil01 from vnxfr {

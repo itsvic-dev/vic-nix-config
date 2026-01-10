@@ -5,6 +5,8 @@
 {
   imports = [
     ./bird.nix
+    intranet.sysctls
+
     (intranet.wgXfrFor {
       host = "tastypi";
       ip = "172.21.123.0/31";
