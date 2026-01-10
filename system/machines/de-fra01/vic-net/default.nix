@@ -20,6 +20,12 @@
       listenPort = 52901;
     })
 
+    (intranet.wgXfrFor {
+      host = "tastypi";
+      ip = "172.21.123.8/31";
+      listenPort = 52902;
+    })
+
     (intranet.wgClientNet {
       hosts = [
         "mbp"

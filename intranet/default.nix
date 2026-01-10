@@ -101,7 +101,7 @@ rec {
       ip,
       listenPort ? 52900,
     }:
-    { config, lib, ... }:
+    { config, ... }:
     {
       networking.wireguard.interfaces."vn-client-net" = {
         inherit listenPort;

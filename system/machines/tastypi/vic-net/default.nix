@@ -10,6 +10,11 @@
       ip = "172.21.123.1/31";
       endpoint = "109.122.28.203:52900";
     })
+    (intranet.wgXfrFor {
+      host = "de-fra01";
+      ip = "172.21.123.9/31";
+      endpoint = "de-fra01.itsvic.dev:52902";
+    })
   ];
 
   boot.kernel.sysctl."net.ipv4.ip_forward" = 1;
