@@ -128,14 +128,26 @@
         aarch64-darwin.default = defineShell "aarch64-darwin";
       };
 
-      packages.aarch64-darwin.intranet-svg =
+      packages =
         let
+          systems = [
+            "aarch64-darwin"
+            "x86_64-linux"
+          ];
           intranet = import ./intranet { inherit (nixpkgs) lib; };
         in
-        nixpkgs.legacyPackages.aarch64-darwin.callPackage ./misc/intranet-graph.nix { inherit intranet; };
+        nixpkgs.lib.genAttrs systems (system: {
+          intraweb-svg = nixpkgs.legacyPackages.${system}.callPackage ./misc/intranet-graph.nix {
+            inherit intranet;
+          };
+        });
 
-      hydraJobs = nixpkgs.lib.mapAttrs (
-        name: value: value.config.system.build.${if (name == "live-rescue") then "isoImage" else "toplevel"}
-      ) self.nixosConfigurations;
+      hydraJobs =
+        (nixpkgs.lib.mapAttrs (
+          name: value: value.config.system.build.${if (name == "live-rescue") then "isoImage" else "toplevel"}
+        ) self.nixosConfigurations)
+        // {
+          intraweb-svg = self.packages.x86_64-linux.intraweb-svg;
+        };
     };
 }
