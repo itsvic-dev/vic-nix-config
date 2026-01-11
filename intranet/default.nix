@@ -127,6 +127,7 @@ rec {
             name = wire.to;
             allowedIPs = [ "::/0" ];
             inherit (peers.${wire.to}) publicKey;
+            persistentKeepalive = 60;
           }
         ];
       }
