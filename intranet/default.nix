@@ -7,6 +7,7 @@ rec {
     de-fra01 = {
       publicKey = "DGNfHXE4BWJJcDAxZRxBB5PIiCiSMFw2q7zNBQLEWBw=";
       ip = "10.21.0.1";
+      clearnetIP = "37.114.50.122";
     };
 
     tastypi = {
@@ -36,7 +37,7 @@ rec {
       ip = "10.21.0.253";
     };
   };
-  wireguardPeers = peers;
+  wireguardPeers = peers; # legacy alias
 
   # the actual transfer networks
   # IPs derived from the 'id' field
@@ -51,6 +52,12 @@ rec {
       from = "pl-waw01";
       to = "it-mil01";
       id = 2;
+    }
+
+    {
+      from = "de-fra01";
+      to = "it-mil01";
+      id = 3;
     }
   ];
 
@@ -228,6 +235,28 @@ rec {
           networkConfig.Address = peers.${config.networking.hostName}.ip + "/32";
         };
       };
+    };
+
+  wgClientNet =
+    {
+      hosts,
+      ip,
+      listenPort ? 52900,
+    }:
+    { config, ... }:
+    {
+      networking.wireguard.interfaces."vn-client-net" = {
+        inherit listenPort;
+        privateKeyFile = config.sops.secrets.vic-net-sk.path;
+        ips = [ ip ];
+
+        peers = map (host: {
+          name = host;
+          publicKey = wireguardPeers.${host}.publicKey;
+          allowedIPs = [ "${ips.${host}}/32" ];
+        }) hosts;
+      };
+      networking.firewall.allowedUDPPorts = [ listenPort ];
     };
 
   getCert = host: domain: ./certs/${host}/${domain}/cert.pem;
