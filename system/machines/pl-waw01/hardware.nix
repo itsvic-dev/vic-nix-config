@@ -21,6 +21,15 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
+  fileSystems."/mnt/data" = {
+    device = "/dev/vda1";
+    fsType = "btrfs";
+    options = [
+      "compress=zstd"
+      "noatime"
+    ];
+  };
+
   swapDevices = [
     {
       device = "/swapfile";

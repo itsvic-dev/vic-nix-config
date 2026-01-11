@@ -4,6 +4,7 @@
     ./disko.nix
     ./hydra.nix
     ./monitoring.nix
+    ./free-media.nix
     ./vic-net
   ];
 
