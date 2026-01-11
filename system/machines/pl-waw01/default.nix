@@ -15,6 +15,9 @@
 
   services.nginx = {
     enable = true;
+    recommendedProxySettings = true;
+    recommendedGzipSettings = true;
+    recommendedBrotliSettings = true;
   };
 
   networking = {

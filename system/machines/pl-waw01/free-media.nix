@@ -93,10 +93,14 @@
 
   services.nginx.virtualHosts = {
     "media.vic" = {
+      listenAddresses = [ (intranet.ips.pl-waw01) ];
       forceSSL = true;
       locations."/" = {
         proxyPass = "http://127.0.0.1:${toString 8096}";
         proxyWebsockets = true;
+        extraConfig = ''
+          proxy_buffering off;
+        '';
       };
     };
   };
