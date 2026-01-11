@@ -103,9 +103,9 @@ rec {
       name: ip:
       let
         octets = lib.splitString "." ip;
-        reversed = lib.concatStringsSep "." (lib.sublist 0 2 (lib.reverseList octets));
+        reversed = lib.concatStringsSep "." (lib.reverseList octets);
       in
-      "${reversed} IN PTR ${name}.vic."
+      "${reversed}.in-addr.arpa. IN PTR ${name}.vic."
     ) ips
   );
 
@@ -215,26 +215,24 @@ rec {
     lib.genAttrs' (builtins.filter (wire: wire.to == name) wires) (wire: getThing name wire);
 
   getIBGP =
-    name: wire:
+    name: target:
     let
-      isFrom = wire.from == name;
-      target = if isFrom then wire.to else wire.from;
-      protocolName = builtins.replaceStrings [ "-" ] [ "_" ] target;
+      protocolName = builtins.replaceStrings [ "-" ] [ "_" ] name;
     in
-    lib.nameValuePair target ''
+    ''
       protocol bgp ${protocolName} from internalpeers {
-        neighbor ${peers.${target}.ip} as OWNAS;
+        neighbor ${target.ip} as OWNAS;
       }
     '';
 
   getAllIBGP =
     config:
     let
-      ibgpFrom = getThingFrom getIBGP config;
-      ibgpTo = getThingTo getIBGP config;
-      ibgpAll = ibgpFrom // ibgpTo;
+      allPeers = lib.filterAttrs (
+        name: value: !(value ? isClient) && name != config.networking.hostName
+      ) peers;
     in
-    builtins.concatStringsSep "\n" (builtins.attrValues ibgpAll);
+    builtins.concatStringsSep "\n" (builtins.attrValues (builtins.mapAttrs getIBGP allPeers));
 
   transfers =
     { config, ... }:

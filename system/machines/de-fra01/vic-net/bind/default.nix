@@ -1,25 +1,36 @@
-{ pkgs, intranet, ... }:
+{
+  pkgs,
+  intranet,
+  lib,
+  ...
+}:
 {
   networking.firewall.allowedUDPPorts = [ 53 ];
   services.bind = {
     enable = true;
     listenOn = [ "10.21.0.1" ];
-    cacheNetworks = [ "10.21.0.0/16" ];
-    ipv4Only = true;
+    cacheNetworks = [ "10.0.0.0/8" ];
     extraOptions = ''
       recursion yes;
     '';
+    forwarders = lib.mkForce [ ];
+
     extraConfig = ''
       statistics-channels {
         inet 127.0.0.1 port 8053 allow { 127.0.0.1; };
       };
+
+      zone "akos" IN {
+        type forward;
+        forward only;
+        forwarders { 10.42.69.2; };
+      };
     '';
 
-    forwarders = [
-      "1.1.1.1"
-      "1.0.0.1"
-    ];
-    forward = "only";
+    zones."." = {
+      master = true;
+      file = ./root.zone;
+    };
 
     zones."vic" = {
       master = true;

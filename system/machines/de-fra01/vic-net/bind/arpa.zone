@@ -1,5 +1,5 @@
 $TTL 60
-$ORIGIN 21.10.in-addr.arpa.
+$ORIGIN 10.in-addr.arpa.
 
 ; zone setup
 @ IN SOA tastypi.vic. contact@itsvic.dev. (
@@ -10,5 +10,7 @@ $ORIGIN 21.10.in-addr.arpa.
   60          ; min TTL
 )
 @ IN NS tastypi.vic.
+
+69.42.10.in-addr.arpa.  IN NS sex420.akos.
 
 [IPS]
