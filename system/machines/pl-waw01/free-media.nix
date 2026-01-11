@@ -43,4 +43,40 @@
       };
     };
   };
+
+  services.nfs.server = {
+    enable = true;
+    exports = ''
+      /mnt/data     10.21.0.0/24(rw,insecure)
+    '';
+    hostName = "10.21.0.4";
+    lockdPort = 4001;
+    mountdPort = 4002;
+    statdPort = 4000;
+  };
+
+  networking.firewall = {
+    allowedTCPPorts = [
+      111
+      2049
+      4000
+      4001
+      4002
+      20048
+    ];
+    allowedUDPPorts = [
+      111
+      2049
+      4000
+      4001
+      4002
+      20048
+    ];
+  };
+
+  # create folders
+  systemd.tmpfiles.rules = [
+    "d '/mnt/data/torrents' 0777 nobody nogroup -"
+    "d '/mnt/data/media' 0777 nobody nogroup -"
+  ];
 }

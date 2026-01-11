@@ -22,6 +22,18 @@ in
     (intranet.nginxCertFor "flood.vic")
   ];
 
+  fileSystems."/mnt/data" = {
+    device = "10.21.0.4:/mnt/data";
+    options = [
+      "nfsvers=4.2"
+      "x-systemd.automount"
+      "noauto"
+      "noatime"
+    ];
+  };
+
+  boot.supportedFilesystems = [ "nfs" ];
+
   services.flood = {
     enable = true;
   };
@@ -54,7 +66,7 @@ in
     virtualHosts."torrents.vic" = {
       listenAddresses = [ (intranet.ips.tastypi) ];
       forceSSL = true;
-      root = "/mnt/ssd/torrents";
+      root = "/mnt/data/torrents";
       extraConfig = ''
         autoindex on;
         fancyindex on;
@@ -70,7 +82,7 @@ in
           port = 5605;
         }
       ];
-      root = "/mnt/ssd/torrents";
+      root = "/mnt/data/torrents";
       extraConfig = ''
         autoindex on;
         fancyindex on;
@@ -136,16 +148,10 @@ in
     };
   };
 
-  # create folders
-  systemd.tmpfiles.rules = [
-    "d '/mnt/ssd/torrents' 0777 nobody nogroup -"
-    "d '/mnt/ssd/media' 0777 nobody nogroup -"
-  ];
-
   systemd.services.pkg-db-refresh = {
     serviceConfig = {
       Type = "oneshot";
-      WorkingDirectory = "/mnt/ssd/torrents";
+      WorkingDirectory = "/mnt/data/torrents";
       User = "root";
     };
 
