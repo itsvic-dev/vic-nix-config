@@ -78,4 +78,5 @@ in
   "tastypi" = defineSystem' [ uglyHack ] "aarch64-linux" "tastypi";
 
   "live-rescue" = defineSystem "x86_64-linux" "live-rescue";
+  # "live-rescue-rpi" = defineSystem' [ uglyHack ] "aarch64-linux" "live-rescue-rpi";
 }

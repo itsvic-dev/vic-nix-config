@@ -169,7 +169,7 @@ rec {
     lib.nameValuePair "99-${tunnelName}" {
       netdevConfig = {
         Name = tunnelName;
-        Kind = "ip6gre";
+        Kind = "ip6gretap";
       };
 
       tunnelConfig = {
@@ -178,7 +178,6 @@ rec {
       };
     };
 
-  # just a stub so networkd brings up the interfaces
   getGRENetwork =
     name: wire:
     let
@@ -187,6 +186,8 @@ rec {
     in
     lib.nameValuePair "99-${tunnelName}" {
       matchConfig.Name = tunnelName;
+      # 80 for wg, 66 for gre
+      linkConfig.MTUBytes = 1500 - 80 - 66;
     };
 
   getGRETunnelOverride =

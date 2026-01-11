@@ -28,7 +28,7 @@ in
       };
 
       networking = {
-        useNetworkd = !config.networking.networkmanager.enable;
+        useNetworkd = lib.mkDefault (!config.networking.networkmanager.enable);
         networkmanager.enable = lib.mkDefault useNM;
         domain = if setDomain then "itsvic.dev" else null;
         nameservers =
@@ -52,7 +52,7 @@ in
       security.pki.certificateFiles = [ (intranet.caCert) ];
 
       # don't change this
-      system.stateVersion = "23.05";
+      system.stateVersion = lib.mkForce "23.05";
     }
 
     (lib.mkIf (!config.vic-nix.noSecrets) {
