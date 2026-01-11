@@ -14,6 +14,8 @@
       router id OWNIP;
 
       include "${intranet.birdShared}";
+
+      ${intranet.getAllIBGP config}
     '';
   };
 

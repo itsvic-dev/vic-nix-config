@@ -214,6 +214,28 @@ rec {
     in
     lib.genAttrs' (builtins.filter (wire: wire.to == name) wires) (wire: getThing name wire);
 
+  getIBGP =
+    name: wire:
+    let
+      isFrom = wire.from == name;
+      target = if isFrom then wire.to else wire.from;
+      protocolName = builtins.replaceStrings [ "-" ] [ "_" ] target;
+    in
+    ''
+      protocol bgp ${protocolName} from internalpeers {
+        neighbor ${peers.${target}.ip} as OWNAS;
+      }
+    '';
+
+  getAllIBGP =
+    config:
+    let
+      ibgpFrom = getThingFrom getIBGP config;
+      ibgpTo = getThingTo getIBGP config;
+      ibgpAll = ibgpFrom // ibgpTo;
+    in
+    builtins.concatStringsSep "\n" (builtins.attrValues ibgpAll);
+
   transfers =
     { config, ... }:
     {

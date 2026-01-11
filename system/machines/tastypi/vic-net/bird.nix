@@ -14,6 +14,12 @@
       router id OWNIP;
 
       include "${intranet.birdShared}";
+
+      protocol bgp waw01 from internalpeers {
+        neighbor ${intranet.peers.pl-waw01.ip} as OWNAS;
+      }
+
+      ${intranet.getAllIBGP config}
     '';
   };
 
