@@ -61,6 +61,18 @@ rec {
       to = "it-mil01";
       id = 3;
     }
+
+    {
+      from = "pl-waw01";
+      to = "tastypi";
+      id = 4;
+    }
+
+    {
+      from = "de-fra01";
+      to = "tastypi";
+      id = 5;
+    }
   ];
 
   cnames = {

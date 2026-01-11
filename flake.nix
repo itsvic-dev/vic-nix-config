@@ -128,6 +128,12 @@
         aarch64-darwin.default = defineShell "aarch64-darwin";
       };
 
+      packages.aarch64-darwin.intranet-svg =
+        let
+          intranet = import ./intranet { inherit (nixpkgs) lib; };
+        in
+        nixpkgs.legacyPackages.aarch64-darwin.callPackage ./misc/intranet-graph.nix { inherit intranet; };
+
       hydraJobs = nixpkgs.lib.mapAttrs (
         name: value: value.config.system.build.${if (name == "live-rescue") then "isoImage" else "toplevel"}
       ) self.nixosConfigurations;
