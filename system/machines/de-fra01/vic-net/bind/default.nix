@@ -48,7 +48,7 @@
       '';
     };
 
-    zones."21.10.in-addr.arpa" = {
+    zones."10.in-addr.arpa" = {
       master = true;
       file = pkgs.writeText "arpa.zone" (
         builtins.replaceStrings [ "[IPS]" ] [ (intranet.ipsAsRDNS) ] (builtins.readFile ./arpa.zone)
