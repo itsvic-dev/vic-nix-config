@@ -114,11 +114,6 @@ in
     openFirewall = true;
   };
 
-  services.jellyfin = {
-    enable = true;
-    openFirewall = true;
-  };
-
   services.jellyseerr = {
     enable = true;
     openFirewall = true;
@@ -129,7 +124,6 @@ in
   boot.kernel.sysctl."fs.protected_hardlinks" = false;
 
   services.nginx.virtualHosts = {
-    "media.itsvic.dev" = proxyPass 8096;
     "request.media.itsvic.dev" = proxyPass config.services.jellyseerr.port;
 
     "sonarr.media.itsvic.dev" = proxyPass config.services.sonarr.settings.server.port;

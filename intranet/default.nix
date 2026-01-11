@@ -82,6 +82,7 @@ rec {
 
     "hydra" = "pl-waw01";
     "cache" = "pl-waw01";
+    "media" = "pl-waw01";
 
     "git" = "it-mil01";
   };

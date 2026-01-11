@@ -3,8 +3,8 @@
 
 set -eu
 
-FQDN="$1"
-MACHINE="$2"
+FQDN="$2"
+MACHINE="$1"
 mkdir "certs/$MACHINE/$FQDN" -pv
 
 openssl req -new -newkey rsa:4096 \

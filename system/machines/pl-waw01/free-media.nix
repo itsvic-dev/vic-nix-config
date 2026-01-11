@@ -1,4 +1,7 @@
+{ intranet, config, ... }:
 {
+  imports = [ (intranet.nginxCertFor "media.vic") ];
+
   services.samba = {
     enable = true;
     openFirewall = true;
@@ -79,4 +82,22 @@
     "d '/mnt/data/torrents' 0777 nobody nogroup -"
     "d '/mnt/data/media' 0777 nobody nogroup -"
   ];
+
+  # not sure if this would cause any security issues at least in my setup
+  # but it fixes files not being properly hardlinked by sonarr/radarr
+  boot.kernel.sysctl."fs.protected_hardlinks" = false;
+
+  services.jellyfin = {
+    enable = true;
+  };
+
+  services.nginx.virtualHosts = {
+    "media.vic" = {
+      forceSSL = true;
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:${toString 8096}";
+        proxyWebsockets = true;
+      };
+    };
+  };
 }
