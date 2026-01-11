@@ -31,10 +31,12 @@ rec {
     mbp = {
       publicKey = "fyujyTR/I56g3bO79gLtwn7YgSxxq6O/Ct4NH5nRqlk=";
       ip = "10.21.0.254";
+      isClient = true;
     };
     iphone = {
       publicKey = "AQqR0qBXROiHro05uJBbckiCWpuBzS8lTDsJIyhMxDI=";
       ip = "10.21.0.253";
+      isClient = true;
     };
   };
   wireguardPeers = peers; # legacy alias
