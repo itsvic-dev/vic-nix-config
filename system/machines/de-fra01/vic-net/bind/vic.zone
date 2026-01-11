@@ -2,14 +2,14 @@ $TTL 60
 $ORIGIN vic.
 
 ; TLD setup
-@ IN SOA tastypi.vic. contact@itsvic.dev. (
-  2025102301  ; serial
+@ IN SOA de-fra01.vic. contact@itsvic.dev. (
+  2026011101  ; serial
   3h          ; refresh
   1h          ; retry
   24h         ; expire
   60          ; min TTL
 )
-@ IN NS tastypi.vic.
+@ IN NS de-fra01.vic.
 
 [IPS]
 [CNAMES]
