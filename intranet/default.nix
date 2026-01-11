@@ -221,7 +221,7 @@ rec {
       target = if isFrom then wire.to else wire.from;
       protocolName = builtins.replaceStrings [ "-" ] [ "_" ] target;
     in
-    ''
+    lib.nameValuePair target ''
       protocol bgp ${protocolName} from internalpeers {
         neighbor ${peers.${target}.ip} as OWNAS;
       }
