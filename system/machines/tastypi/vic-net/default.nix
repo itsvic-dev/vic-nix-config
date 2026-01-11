@@ -11,4 +11,5 @@
   ];
 
   sops.secrets.vic-net-sk = { };
+  networking.firewall.allowedUDPPorts = [ 6696 ];
 }
