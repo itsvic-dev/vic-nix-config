@@ -9,15 +9,6 @@
     intranet.sysctls
     intranet.transfers
     intranet.dummy
-
-    (intranet.wgClientNet {
-      hosts = [
-        "mbp"
-        "iphone"
-      ];
-      ip = "10.21.0.241/28";
-      listenPort = 51820;
-    })
   ];
 
   sops.secrets.vic-net-sk = { };
