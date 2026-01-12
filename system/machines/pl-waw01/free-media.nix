@@ -1,4 +1,4 @@
-{ intranet, config, ... }:
+{ intranet, ... }:
 {
   imports = [ (intranet.nginxCertFor "media.vic") ];
 

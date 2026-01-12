@@ -139,6 +139,7 @@
 
   services.nginx.virtualHosts = {
     "hydra.vic" = {
+      listenAddresses = [ (intranet.ips.pl-waw01) ];
       forceSSL = true;
       sslCertificate = intranet.getCert "pl-waw01" "hydra.vic";
       sslCertificateKey = config.sops.secrets.hydra-vic-key.path;
@@ -149,6 +150,7 @@
       };
     };
     "cache.vic" = {
+      listenAddresses = [ (intranet.ips.pl-waw01) ];
       forceSSL = true;
       sslCertificate = intranet.getCert "pl-waw01" "cache.vic";
       sslCertificateKey = config.sops.secrets.cache-vic-key.path;
