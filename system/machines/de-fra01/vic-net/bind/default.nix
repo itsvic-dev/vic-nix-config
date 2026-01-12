@@ -12,25 +12,28 @@
     cacheNetworks = [ "10.0.0.0/8" ];
     extraOptions = ''
       recursion yes;
+      empty-zones-enable no;
+
+      validate-except {
+        "vic";
+        "akos";
+        "10.in-addr.arpa";
+      };
     '';
-    forwarders = lib.mkForce [ ];
+
+    forwarders = lib.mkForce [
+      "1.1.1.1"
+      "1.0.0.1"
+    ];
+    forward = "only";
 
     extraConfig = ''
-      statistics-channels {
-        inet 127.0.0.1 port 8053 allow { 127.0.0.1; };
-      };
-
       zone "akos" IN {
         type forward;
         forward only;
         forwarders { 10.42.69.2; };
       };
     '';
-
-    zones."." = {
-      master = true;
-      file = ./root.zone;
-    };
 
     zones."vic" = {
       master = true;
