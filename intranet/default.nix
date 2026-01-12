@@ -73,6 +73,12 @@ rec {
       to = "tastypi";
       id = 5;
     }
+
+    {
+      from = "de-fra01";
+      to = "pl-waw01";
+      id = 6;
+    }
   ];
 
   cnames = {
