@@ -30,8 +30,9 @@
     };
   };
 
-  services.nginx.virtualHosts."home-assistant.local" = {
-    listenAddresses = [ "192.168.0.134" ];
+  services.nginx.virtualHosts."ha.itsvic.dev" = {
+    enableACME = true;
+    forceSSL = true;
     locations."/" = {
       proxyPass = "http://localhost:${toString config.services.home-assistant.config.http.server_port}";
       proxyWebsockets = true;
