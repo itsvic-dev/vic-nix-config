@@ -13,6 +13,7 @@
     ./free-media.nix
     ./grafana-prometheus.nix
     ./loki.nix
+    ./home-assistant.nix
     ./vic-net
 
     inputs.oxibridge.nixosModules.default
