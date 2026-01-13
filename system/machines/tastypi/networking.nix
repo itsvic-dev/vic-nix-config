@@ -18,6 +18,23 @@
     };
   };
 
+  systemd.network.networks."50-end0" = {
+    matchConfig.name = "end0";
+    linkConfig.RequiredForOnline = "routable";
+    networkConfig = {
+      DHCP = true;
+      Address = "2a0e:97c0:7c5:1::1/64";
+    };
+  };
+
+  networking.firewall.extraCommands = ''
+    ip6tables -P FORWARD ACCEPT
+  '';
+
+  networking.firewall.extraStopCommands = ''
+    ip6tables -P FORWARD REJECT
+  '';
+
   environment.etc."gai.conf".text = ''
     label  ::1/128       0
     label  ::/0          1

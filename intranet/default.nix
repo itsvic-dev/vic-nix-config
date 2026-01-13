@@ -256,6 +256,10 @@ rec {
       networking.firewall.extraCommands = ''
         ip6tables -A INPUT -p 47 -j ACCEPT
       '';
+
+      networking.firewall.extraStopCommands = ''
+        ip6tables -D INPUT -p 47 -j ACCEPT
+      '';
     };
 
   dummy =
