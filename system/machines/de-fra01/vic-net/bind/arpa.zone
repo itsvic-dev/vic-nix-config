@@ -11,6 +11,4 @@ $ORIGIN 10.in-addr.arpa.
 )
 @ IN NS de-fra01.vic.
 
-69.42.10.in-addr.arpa.  IN NS sex420.akos.
-
 [IPS]

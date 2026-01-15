@@ -16,7 +16,7 @@
 
       validate-except {
         "vic";
-        "akos";
+        "iw";
         "10.in-addr.arpa";
       };
     '';
@@ -26,14 +26,6 @@
       "1.0.0.1"
     ];
     forward = "only";
-
-    extraConfig = ''
-      zone "akos" IN {
-        type forward;
-        forward only;
-        forwarders { 10.42.69.2; };
-      };
-    '';
 
     zones."vic" = {
       master = true;
@@ -49,6 +41,11 @@
       extraConfig = ''
         zone-statistics yes;
       '';
+    };
+
+    zones."iw" = {
+      master = true;
+      file = "/opt/registry/iw.db";
     };
 
     zones."10.in-addr.arpa" = {

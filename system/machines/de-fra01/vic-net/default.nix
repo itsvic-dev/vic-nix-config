@@ -6,6 +6,7 @@
   imports = [
     ./bird.nix
     ./bind
+    ./registry.nix
     intranet.sysctls
     intranet.transfers
     intranet.dummy

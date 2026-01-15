@@ -44,13 +44,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # --- EXTRA SOFTWARE ---
-    # nixpkgs-gimp-master.url = "github:jtojnar/nixpkgs/gimp-meson";
-    intraweb = {
-      url = "git+https://git.vic/itsvicdev/intraweb-py.git";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     # --- MACHINE-SPECIFIC SOFTWARE ---
 
     # it-mil01
