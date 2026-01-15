@@ -97,10 +97,6 @@ in
     "d '/mnt/data/media' 0777 nobody nogroup -"
   ];
 
-  # not sure if this would cause any security issues at least in my setup
-  # but it fixes files not being properly hardlinked by sonarr/radarr
-  boot.kernel.sysctl."fs.protected_hardlinks" = false;
-
   services.jellyfin = {
     enable = true;
   };
