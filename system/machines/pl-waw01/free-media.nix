@@ -89,9 +89,7 @@ in
 
   systemd.network.networks."50-ens20" = {
     matchConfig.name = "ens20";
-    networkConfig = {
-      Address = "192.168.254.1/30";
-    };
+    networkConfig.Address = "192.168.254.1/30";
   };
 
   fileSystems."/mnt/torrents" = {
