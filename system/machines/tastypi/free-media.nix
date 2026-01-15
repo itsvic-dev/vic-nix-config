@@ -93,16 +93,6 @@ in
 
   networking.firewall.allowedTCPPorts = [ 5605 ];
 
-  services.sonarr = {
-    enable = true;
-    openFirewall = true;
-  };
-
-  services.radarr = {
-    enable = true;
-    openFirewall = true;
-  };
-
   services.prowlarr = {
     enable = true;
     openFirewall = true;
@@ -126,8 +116,6 @@ in
   services.nginx.virtualHosts = {
     "request.media.itsvic.dev" = proxyPass config.services.jellyseerr.port;
 
-    "sonarr.media.itsvic.dev" = proxyPass config.services.sonarr.settings.server.port;
-    "radarr.media.itsvic.dev" = proxyPass config.services.radarr.settings.server.port;
     "prowlarr.media.itsvic.dev" = proxyPass config.services.prowlarr.settings.server.port;
     "bazarr.media.itsvic.dev" = proxyPass config.services.bazarr.listenPort;
   };

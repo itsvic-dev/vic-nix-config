@@ -1,6 +1,20 @@
-{ intranet, ... }:
+{ config, intranet, ... }:
+let
+  proxyPass = port: {
+    listenAddresses = [ (intranet.ips.pl-waw01) ];
+    forceSSL = true;
+    locations."/" = {
+      proxyPass = "http://127.0.0.1:${toString port}";
+      proxyWebsockets = true;
+    };
+  };
+in
 {
-  imports = [ (intranet.nginxCertFor "media.vic") ];
+  imports = [
+    (intranet.nginxCertFor "media.vic")
+    (intranet.nginxCertFor "sonarr.vic")
+    (intranet.nginxCertFor "radarr.vic")
+  ];
 
   services.samba = {
     enable = true;
@@ -24,7 +38,7 @@
       };
 
       torrents = {
-        path = "/mnt/data/torrents";
+        path = "/mnt/torrents";
         browseable = "yes";
         writeable = "yes";
         # allow read-only guest access
@@ -91,17 +105,38 @@
     enable = true;
   };
 
+  services.sonarr = {
+    enable = true;
+    openFirewall = true;
+  };
+
+  services.radarr = {
+    enable = true;
+    openFirewall = true;
+  };
+
   services.nginx.virtualHosts = {
-    "media.vic" = {
-      listenAddresses = [ (intranet.ips.pl-waw01) ];
-      forceSSL = true;
-      locations."/" = {
-        proxyPass = "http://127.0.0.1:${toString 8096}";
-        proxyWebsockets = true;
-        extraConfig = ''
-          proxy_buffering off;
-        '';
-      };
+    "media.vic" = proxyPass 8096;
+    "sonarr.vic" = proxyPass config.services.sonarr.settings.server.port;
+    "radarr.vic" = proxyPass config.services.radarr.settings.server.port;
+  };
+
+  systemd.network.networks."50-ens20" = {
+    matchConfig.name = "ens20";
+    networkConfig = {
+      Address = "192.168.254.1/30";
     };
   };
+
+  fileSystems."/mnt/torrents" = {
+    device = "192.168.254.2:/srv/vic/Downloads";
+    options = [
+      "nfsvers=4.2"
+      "x-systemd.automount"
+      "noauto"
+      "noatime"
+    ];
+  };
+
+  boot.supportedFilesystems = [ "nfs" ];
 }
