@@ -61,36 +61,6 @@ in
     };
   };
 
-  services.nfs.server = {
-    enable = true;
-    exports = ''
-      /mnt/data     10.21.0.0/24(rw,insecure)
-    '';
-    hostName = "10.21.0.4";
-    lockdPort = 4001;
-    mountdPort = 4002;
-    statdPort = 4000;
-  };
-
-  networking.firewall = {
-    allowedTCPPorts = [
-      111
-      2049
-      4000
-      4001
-      4002
-      20048
-    ];
-    allowedUDPPorts = [
-      111
-      2049
-      4000
-      4001
-      4002
-      20048
-    ];
-  };
-
   # create folders
   systemd.tmpfiles.rules = [
     "d '/mnt/data/torrents' 0777 nobody nogroup -"
@@ -124,15 +94,15 @@ in
     };
   };
 
-  fileSystems."/mnt/torrents" = {
-    device = "192.168.254.2:/srv/vic/Downloads";
-    options = [
-      "nfsvers=4.2"
-      "x-systemd.automount"
-      "noauto"
-      "noatime"
-    ];
-  };
+  # fileSystems."/mnt/torrents" = {
+  #   device = "192.168.254.2:/srv/vic/Downloads";
+  #   options = [
+  #     "nfsvers=4.2"
+  #     "x-systemd.automount"
+  #     "noauto"
+  #     "noatime"
+  #   ];
+  # };
 
-  boot.supportedFilesystems = [ "nfs" ];
+  # boot.supportedFilesystems = [ "nfs" ];
 }
