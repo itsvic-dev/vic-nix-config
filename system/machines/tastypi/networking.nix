@@ -32,7 +32,7 @@
   '';
 
   networking.firewall.extraStopCommands = ''
-    ip6tables -P FORWARD REJECT
+    ip6tables -P FORWARD DROP
   '';
 
   environment.etc."gai.conf".text = ''
