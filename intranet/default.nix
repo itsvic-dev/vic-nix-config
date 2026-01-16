@@ -68,11 +68,12 @@ rec {
       id = 4;
     }
 
-    {
-      from = "de-fra01";
-      to = "tastypi";
-      id = 5;
-    }
+    # sever for now... very shoddy connection anyways
+    # {
+    #   from = "de-fra01";
+    #   to = "tastypi";
+    #   id = 5;
+    # }
   ];
 
   cnames = {
