@@ -53,6 +53,16 @@
     "f '/opt/registry/iw.db' 0755 iwreg iwreg - ''"
   ];
 
+  systemd.services."intraweb-whois" = {
+    wantedBy = [ "network.target" ];
+    serviceConfig = {
+      ExecStart = "${pkgs.python3}/bin/python3 utils/whois.py -H 10.21.0.1";
+      WorkingDirectory = "/opt/registry";
+    };
+  };
+
+  networking.firewall.allowedTCPPorts = [ 45 ];
+
   users.users."iwreg" = {
     group = "iwreg";
     isSystemUser = true;
