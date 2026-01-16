@@ -28,5 +28,14 @@
     networkConfig.Address = "192.168.255.1/30";
   };
 
-  networking.firewall.allowedTCPPorts = [ 179 ];
+  services.bird-lg.proxy = {
+    enable = true;
+    allowedIPs = [ "10.0.0.0/8" ];
+    listenAddresses = "10.21.0.1:60134";
+  };
+
+  networking.firewall.allowedTCPPorts = [
+    179
+    60134
+  ];
 }
