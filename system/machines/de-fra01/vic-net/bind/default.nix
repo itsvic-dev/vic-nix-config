@@ -43,11 +43,6 @@
       '';
     };
 
-    zones."iw" = {
-      master = true;
-      file = "/opt/registry/iw.db";
-    };
-
     zones."vic.iw" = {
       master = true;
       file = ./vic.iw.db;
@@ -58,6 +53,12 @@
       file = pkgs.writeText "arpa.zone" (
         builtins.replaceStrings [ "[IPS]" ] [ (intranet.ipsAsRDNS) ] (builtins.readFile ./arpa.zone)
       );
+    };
+
+    # intraweb zones
+    zones."iw" = {
+      master = true;
+      file = "/opt/registry/iw.db";
     };
   };
 }
