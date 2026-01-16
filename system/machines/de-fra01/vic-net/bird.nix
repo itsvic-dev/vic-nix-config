@@ -22,7 +22,7 @@
   services.bird-lg.proxy = {
     enable = true;
     allowedIPs = [ "10.0.0.0/8" ];
-    listenAddresses = "10.21.0.1:60134";
+    listenAddresses = "${intranet.ips.${config.networking.hostName}}:60134";
   };
 
   services.bird-lg.frontend = {
