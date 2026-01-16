@@ -48,6 +48,11 @@
       file = "/opt/registry/iw.db";
     };
 
+    zones."vic.iw" = {
+      master = true;
+      file = ./vic.iw.db;
+    };
+
     zones."10.in-addr.arpa" = {
       master = true;
       file = pkgs.writeText "arpa.zone" (
