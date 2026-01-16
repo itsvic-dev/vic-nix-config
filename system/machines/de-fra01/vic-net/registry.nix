@@ -15,7 +15,6 @@
     ];
 
     script = ''
-      rm iw.db
       if [ ! -d .git ]; then
         git clone https://git.vic/itsvicdev/intraweb-registry.git .
       else
