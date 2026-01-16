@@ -32,6 +32,7 @@
         aliases = [
           "postmaster@itsvic.dev"
           "abuse@itsvic.dev"
+          "iw-peering@itsvic.dev"
         ];
       };
     };
