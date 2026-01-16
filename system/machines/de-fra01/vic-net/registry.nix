@@ -53,7 +53,7 @@
   ];
 
   systemd.services."intraweb-whois" = {
-    wantedBy = [ "network.target" ];
+    wantedBy = [ "multi-user.target" ];
     serviceConfig = {
       ExecStart = "${pkgs.python3}/bin/python3 utils/whois.py -H 10.21.0.1";
       WorkingDirectory = "/opt/registry";
