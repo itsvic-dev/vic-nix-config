@@ -60,7 +60,7 @@
     };
   };
 
-  networking.firewall.allowedTCPPorts = [ 45 ];
+  networking.firewall.allowedTCPPorts = [ 43 ];
 
   users.users."iwreg" = {
     group = "iwreg";
