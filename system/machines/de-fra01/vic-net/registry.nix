@@ -16,7 +16,7 @@
 
     script = ''
       if [ ! -d .git ]; then
-        git clone https://git.vic/itsvicdev/intraweb-registry.git .
+        git clone https://github.com/itsvic-dev/intraweb-registry.git .
       else
         git pull
       fi
