@@ -10,24 +10,14 @@
     enable = true;
     listenOn = [ "10.21.0.1" ];
     cacheNetworks = [ "10.0.0.0/8" ];
+    forwarders = lib.mkForce [ ];
     extraOptions = ''
       recursion yes;
-      empty-zones-enable no;
-
-      validate-except {
-        "vic";
-        "iw";
-        "10.in-addr.arpa";
-      };
+      dnssec-validation no;
     '';
 
-    forwarders = lib.mkForce [
-      "1.1.1.1"
-      "1.0.0.1"
-    ];
-    forward = "only";
-
-    zones."vic" = {
+    # LEGACY - MOVE OUT ASAP!
+    zones."vic." = {
       master = true;
       file = pkgs.writeText "vic.zone" (
         builtins.replaceStrings
@@ -43,12 +33,13 @@
       '';
     };
 
-    zones."vic.iw" = {
+    zones."vic.iw." = {
       master = true;
       file = ./vic.iw.db;
     };
 
-    zones."10.in-addr.arpa" = {
+    # TODO: generate from intraweb-registry and move ours to 0.21.10.in-addr.arpa.
+    zones."10.in-addr.arpa." = {
       master = true;
       file = pkgs.writeText "arpa.zone" (
         builtins.replaceStrings [ "[IPS]" ] [ (intranet.ipsAsRDNS) ] (builtins.readFile ./arpa.zone)
@@ -56,7 +47,12 @@
     };
 
     # intraweb zones
-    zones."iw" = {
+    zones."." = {
+      master = true;
+      file = "/opt/registry/root.db";
+    };
+
+    zones."iw." = {
       master = true;
       file = "/opt/registry/iw.db";
     };
