@@ -11,7 +11,7 @@
       locations."/" = {
         proxyPass = "http://localhost:4356";
       };
-      locations."/ca.pem" = {
+      locations."= /ca.pem" = {
         alias = intranet.intrawebCaCert;
       };
     };
