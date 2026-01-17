@@ -7,6 +7,7 @@
     ./bird.nix
     ./bind
     ./registry.nix
+    ./acme.nix
     intranet.sysctls
     intranet.transfers
     intranet.dummy
@@ -21,6 +22,7 @@
   };
 
   services.nginx.virtualHosts."www.vic.iw" = {
+    acmeRoot = "";
     listenAddresses = [ "10.21.0.1" ];
     root = ./vic-iw;
   };

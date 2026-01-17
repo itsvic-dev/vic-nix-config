@@ -49,7 +49,10 @@ in
         ];
       };
 
-      security.pki.certificateFiles = [ (intranet.caCert) ];
+      security.pki.certificateFiles = [
+        (intranet.caCert)
+        (intranet.intrawebCaCert)
+      ];
 
       # don't change this
       system.stateVersion = lib.mkForce "23.05";

@@ -1,6 +1,7 @@
 { lib }:
 rec {
   caCert = ./certs/ca-cert.pem;
+  intrawebCaCert = ./certs/intraweb-ca-cert.pem;
   nameserver = "10.21.0.1";
 
   peers = {

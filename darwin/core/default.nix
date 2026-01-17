@@ -25,7 +25,10 @@
   # install ncurses (has better clear :P)
   environment.systemPackages = with pkgs; [ ncurses ];
 
-  security.pki.certificateFiles = [ ../../intranet/certs/ca-cert.pem ];
+  security.pki.certificateFiles = [
+    ../../intranet/certs/ca-cert.pem
+    ../../intranet/certs/intraweb-ca-cert.pem
+  ];
 
   sops = {
     defaultSopsFile = globalSecretsFile;
