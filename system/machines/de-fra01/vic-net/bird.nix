@@ -27,7 +27,7 @@
 
   services.bird-lg.frontend = {
     enable = true;
-    listenAddresses = "10.21.0.1:60130";
+    listenAddresses = "127.0.0.1:60130";
     whois = "10.21.0.1";
     domain = "vic";
     proxyPort = 60134;
@@ -40,9 +40,17 @@
     ];
   };
 
+  services.nginx.virtualHosts."lg.vic.iw" = {
+    listenAddresses = [ "10.21.0.1" ];
+    enableACME = true;
+    forceSSL = true;
+    locations."/" = {
+      proxyPass = "http://127.0.0.1:60130";
+    };
+  };
+
   networking.firewall.allowedTCPPorts = [
     179
-    60130
     60134
   ];
 }

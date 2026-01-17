@@ -9,7 +9,8 @@ $TTL 1h
   60          ; min TTL
 )
 @     IN  NS  ns1.vic.iw.
+ns1   IN  A   10.21.0.1
 
 @     IN  A   10.21.0.1
 www   IN  A   10.21.0.1
-ns1   IN  A   10.21.0.1
+lg    IN  A   10.21.0.1

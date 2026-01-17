@@ -34,4 +34,8 @@
     server = "https://acme.iw/acme/directory";
     extraDomainNames = [ "www.vic.iw" ];
   };
+
+  security.acme.certs."lg.vic.iw" = {
+    server = "https://acme.iw/acme/directory";
+  };
 }
