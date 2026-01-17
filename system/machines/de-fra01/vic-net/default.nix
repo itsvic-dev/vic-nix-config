@@ -17,13 +17,21 @@
   networking.firewall.allowedUDPPorts = [ 6696 ];
 
   services.nginx.virtualHosts."vic.iw" = {
+    enableACME = true;
+    forceSSL = true;
     listenAddresses = [ "10.21.0.1" ];
     globalRedirect = "www.vic.iw";
   };
 
   services.nginx.virtualHosts."www.vic.iw" = {
-    acmeRoot = "";
+    useACMEHost = "vic.iw";
+    forceSSL = true;
     listenAddresses = [ "10.21.0.1" ];
     root = ./vic-iw;
+  };
+
+  security.acme.certs."vic.iw" = {
+    server = "https://acme.iw/acme/directory";
+    extraDomainNames = [ "www.vic.iw" ];
   };
 }
