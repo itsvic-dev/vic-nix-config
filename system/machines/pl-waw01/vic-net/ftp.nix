@@ -27,6 +27,7 @@
       extraConfig = ''
         autoindex on;
         fancyindex on;
+        fancyindex_exact_size off;
       '';
     };
   };
