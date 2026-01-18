@@ -38,4 +38,7 @@
       interface = "ens18";
     };
   };
+
+  security.acme.defaults.email = "contact@itsvic.dev";
+  security.acme.acceptTerms = true;
 }
