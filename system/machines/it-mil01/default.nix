@@ -1,13 +1,9 @@
 {
   config,
   pkgs,
-  inputs,
   intranet,
   ...
 }:
-let
-  bob = inputs.bob.packages.x86_64-linux.default;
-in
 {
   imports = [
     ./hardware.nix
@@ -31,17 +27,6 @@ in
   security.acme = {
     acceptTerms = true;
     defaults.email = "contact@itsvic.dev";
-  };
-
-  systemd.services."bob" = {
-    wants = [ "network-online.target" ];
-    wantedBy = [ "multi-user.target" ];
-    serviceConfig = {
-      ExecStart = "${bob}/bin/bob";
-      User = "vic";
-      Restart = "always";
-      WorkingDirectory = "/mnt/hdd/bob";
-    };
   };
 
   services.nginx = {
