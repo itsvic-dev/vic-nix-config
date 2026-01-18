@@ -5,6 +5,7 @@
 {
   imports = [
     ./bird.nix
+    ./ftp.nix
     intranet.sysctls
     intranet.transfers
     intranet.dummy
