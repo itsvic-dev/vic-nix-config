@@ -16,6 +16,7 @@
     stateDir = "/opt/iw-wiki";
     no-edit = true;
     h1-title = true;
+    branch = "trunk";
   };
 
   systemd.services."intraweb-wiki-update" = {
