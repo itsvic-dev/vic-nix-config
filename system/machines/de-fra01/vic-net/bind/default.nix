@@ -43,6 +43,11 @@
       file = ./acme.iw.db;
     };
 
+    zones."wiki.iw." = {
+      master = true;
+      file = ./wiki.iw.db;
+    };
+
     # TODO: generate from intraweb-registry and move ours to 0.21.10.in-addr.arpa.
     zones."10.in-addr.arpa." = {
       master = true;
