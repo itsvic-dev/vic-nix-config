@@ -1,4 +1,4 @@
-{ intranet, ... }:
+{ intranet, pkgs, ... }:
 {
   services.vsftpd = {
     enable = true;
@@ -22,8 +22,15 @@
     listenAddresses = [ (intranet.ips.pl-waw01) ];
     forceSSL = true;
     enableACME = true;
-    root = "/mnt/data/intraweb-ftp";
+    locations."/" = {
+      root = "/mnt/data/intraweb-ftp";
+      extraConfig = ''
+        autoindex on;
+        fancyindex on;
+      '';
+    };
   };
+  services.nginx.additionalModules = [ pkgs.nginxModules.fancyindex ];
 
   security.acme.certs."ftp.vic.iw".server = "https://acme.iw/acme/directory";
 }
