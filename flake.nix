@@ -47,11 +47,6 @@
     # --- MACHINE-SPECIFIC SOFTWARE ---
 
     # it-mil01
-    bob = {
-      url = "github:bob-discord-bot/bob";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     nixos-mailserver.url = "gitlab:simple-nixos-mailserver/nixos-mailserver/master";
 
     searchiw = {
