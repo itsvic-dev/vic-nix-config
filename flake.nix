@@ -54,6 +54,11 @@
 
     nixos-mailserver.url = "gitlab:simple-nixos-mailserver/nixos-mailserver/master";
 
+    searchiw = {
+      url = "git+https://git.vic/itsvicdev/searchiw.git";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # tastypi
     nixos-raspberrypi = {
       url = "github:nvmd/nixos-raspberrypi/develop";
