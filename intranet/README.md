@@ -1,6 +1,10 @@
 # Intranet overview
 
-vic!Intranet now lives within the Intraweb (other name TBD) as AS4266660001.
+vic!Intranet now lives within the Intraweb as AS4266660001.
+
+## About the `vic` TLD
+
+This TLD will be phased out in favor of the `vic.iw` domain on the Intraweb. The vic!Intranet root CA will be phased out as we shift to Intraweb ACME.
 
 ## IP ranges used
 

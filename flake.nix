@@ -130,7 +130,7 @@
           intranet = import ./intranet { inherit (nixpkgs) lib; };
         in
         nixpkgs.lib.genAttrs systems (system: {
-          intraweb-svg = nixpkgs.legacyPackages.${system}.callPackage ./misc/intranet-graph.nix {
+          intranet-svg = nixpkgs.legacyPackages.${system}.callPackage ./misc/intranet-graph.nix {
             inherit intranet;
           };
         });
@@ -140,7 +140,7 @@
           name: value: value.config.system.build.${if (name == "live-rescue") then "isoImage" else "toplevel"}
         ) self.nixosConfigurations)
         // {
-          intraweb-svg = self.packages.x86_64-linux.intraweb-svg;
+          intranet-svg = self.packages.x86_64-linux.intranet-svg;
         };
     };
 }

@@ -1,5 +1,7 @@
 {
   intranet,
+  inputs,
+  pkgs,
   ...
 }:
 {
@@ -8,6 +10,7 @@
     ./bind
     ./registry.nix
     ./acme.nix
+    ./wiki.nix
     intranet.sysctls
     intranet.transfers
     intranet.dummy
@@ -28,6 +31,9 @@
     forceSSL = true;
     listenAddresses = [ "10.21.0.1" ];
     root = ./vic-iw;
+    locations."= /intranet.svg" = {
+      alias = toString inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.intranet-svg;
+    };
   };
 
   security.acme.certs."vic.iw" = {
