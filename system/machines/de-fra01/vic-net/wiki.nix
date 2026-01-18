@@ -8,6 +8,13 @@
       locations."/" = {
         proxyPass = "http://localhost:4567";
       };
+
+      locations."= /robots.txt" = {
+        alias = builtins.toFile "robots.txt" ''
+          User-Agent: *
+          Disallow: /gollum/*
+        '';
+      };
     };
   };
 
