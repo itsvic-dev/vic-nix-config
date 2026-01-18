@@ -46,6 +46,10 @@
 
     # --- MACHINE-SPECIFIC SOFTWARE ---
 
+    # pl-waw01
+    hydra.url = "github:NixOS/hydra";
+    hydra.inputs.nixpkgs.follows = "nixpkgs";
+
     # it-mil01
     nixos-mailserver.url = "gitlab:simple-nixos-mailserver/nixos-mailserver/master";
 

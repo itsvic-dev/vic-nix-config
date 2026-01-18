@@ -285,6 +285,28 @@
         "type": "github"
       }
     },
+    "hydra": {
+      "inputs": {
+        "nix": "nix",
+        "nix-eval-jobs": "nix-eval-jobs",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1768396302,
+        "narHash": "sha256-P83O7scGSQUQtkvS59oNgh6/VS3ef7AHupApuqTHKiQ=",
+        "owner": "NixOS",
+        "repo": "hydra",
+        "rev": "9df4b65c672f0b123235d3123e84679048cd5df3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "hydra",
+        "type": "github"
+      }
+    },
     "impermanence": {
       "inputs": {
         "home-manager": "home-manager_2",
@@ -330,6 +352,23 @@
         "type": "github"
       }
     },
+    "nix": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1768160359,
+        "narHash": "sha256-XDCQIrHNJKMYoL8hcUgzEbBHzINofkcsLRDr7tYa7Ac=",
+        "owner": "NixOS",
+        "repo": "nix",
+        "rev": "b601b44de51f8d46530a99659f889027e1e7d670",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "2.32-maintenance",
+        "repo": "nix",
+        "type": "github"
+      }
+    },
     "nix-darwin": {
       "inputs": {
         "nixpkgs": [
@@ -348,6 +387,23 @@
         "owner": "LnL7",
         "ref": "master",
         "repo": "nix-darwin",
+        "type": "github"
+      }
+    },
+    "nix-eval-jobs": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1760478325,
+        "narHash": "sha256-hA+NOH8KDcsuvH7vJqSwk74PyZP3MtvI/l+CggZcnTc=",
+        "owner": "nix-community",
+        "repo": "nix-eval-jobs",
+        "rev": "daa42f9e9c84aeff1e325dd50fda321f53dfd02c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "ref": "v2.32.1",
+        "repo": "nix-eval-jobs",
         "type": "github"
       }
     },
@@ -633,6 +689,7 @@
         "bob-website": "bob-website",
         "disko": "disko",
         "home-manager": "home-manager",
+        "hydra": "hydra",
         "impermanence": "impermanence",
         "lanzaboote": "lanzaboote",
         "nix-darwin": "nix-darwin",

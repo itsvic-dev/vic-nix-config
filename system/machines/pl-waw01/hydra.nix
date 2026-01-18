@@ -3,10 +3,12 @@
   secretsPath,
   intranet,
   pkgs,
+  inputs,
   ...
 }:
 {
   services.hydra = {
+    package = inputs.hydra.packages.x86_64-linux.default;
     enable = true;
     hydraURL = "https://hydra.vic";
     notificationSender = "hydra@localhost";
