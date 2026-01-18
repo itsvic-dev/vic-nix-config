@@ -23,7 +23,6 @@
   };
 
   services.nginx.virtualHosts."search.iw" = {
-    listenAddresses = [ (intranet.ips.it-mil01) ];
     enableACME = true;
     forceSSL = true;
     locations."/" = {
