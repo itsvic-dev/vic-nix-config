@@ -48,10 +48,10 @@ let
   };
 in
 {
-  # services.mysql = {
-  #   enable = true;
-  #   package = pkgs.mariadb;
-  # };
+  services.mysql = {
+    enable = true;
+    package = pkgs.mariadb;
+  };
   services.redis.servers."" = {
     enable = true;
   };

@@ -6,6 +6,7 @@
   imports = [
     ./bird.nix
     ./ftp.nix
+    ./search.nix
     intranet.sysctls
     intranet.transfers
     intranet.dummy
