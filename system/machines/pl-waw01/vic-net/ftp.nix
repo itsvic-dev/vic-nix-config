@@ -17,7 +17,7 @@
       ftp_data_port=20
       pasv_enable=YES
       pasv_min_port=64000
-      pasv_min_port=64321
+      pasv_max_port=64321
       port_enable=YES
     '';
   };
