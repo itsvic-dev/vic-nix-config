@@ -1,5 +1,5 @@
 $TTL 60
-$ORIGIN 10.in-addr.arpa.
+$ORIGIN 0.21.10.in-addr.arpa.
 
 ; zone setup
 @ IN SOA de-fra01.vic. contact@itsvic.dev. (

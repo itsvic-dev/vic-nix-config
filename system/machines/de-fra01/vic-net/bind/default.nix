@@ -4,6 +4,9 @@
   lib,
   ...
 }:
+let
+  wawRDNS = import ./wawRDNS.nix;
+in
 {
   networking.firewall.allowedUDPPorts = [ 53 ];
   services.bind = {
@@ -53,12 +56,17 @@
       file = ./search.iw.db;
     };
 
-    # TODO: generate from intraweb-registry and move ours to 0.21.10.in-addr.arpa.
-    zones."10.in-addr.arpa." = {
+    zones."0.21.10.in-addr.arpa." = {
       master = true;
       file = pkgs.writeText "arpa.zone" (
         builtins.replaceStrings [ "[IPS]" ] [ (intranet.ipsAsRDNS) ] (builtins.readFile ./arpa.zone)
       );
+    };
+
+    # ISP (WAW) RDNS zone, will be dynamically generated with Nix
+    zones."0.32.10.in-addr.arpa." = {
+      master = true;
+      file = pkgs.writeText "waw-rdns.db" wawRDNS;
     };
 
     # intraweb zones
@@ -70,6 +78,11 @@
     zones."iw." = {
       master = true;
       file = "/opt/registry/iw.db";
+    };
+
+    zones."10.in-addr.arpa." = {
+      master = true;
+      file = "/opt/registry/rdns.db";
     };
   };
 }
