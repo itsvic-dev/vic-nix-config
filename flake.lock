@@ -748,11 +748,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1769300820,
-        "narHash": "sha256-zM5DV6WcLnkWieWcc9DIIuKhoupkRJPb4dugehjxqbk=",
+        "lastModified": 1769305547,
+        "narHash": "sha256-AHFhONsQNL7RndT+z4uayibNNPrTW8TY5nBwHZDUBVk=",
         "ref": "refs/heads/trunk",
-        "rev": "1ca20dee57653c0b68b66c449a3a9cac391c709b",
-        "revCount": 16,
+        "rev": "2c4266a08d964df19cc8b409cf43ffc103b270a1",
+        "revCount": 17,
         "type": "git",
         "url": "https://git.vic/itsvicdev/searchiw.git"
       },
