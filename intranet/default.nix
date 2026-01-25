@@ -124,7 +124,7 @@ rec {
         octets = lib.splitString "." ip;
         reversed = lib.concatStringsSep "." (lib.reverseList octets);
       in
-      "${reversed}.in-addr.arpa. IN PTR ${name}.vic."
+      "${reversed}.in-addr.arpa. IN PTR ${name}.infra.vic.iw."
     ) ips
   );
 
