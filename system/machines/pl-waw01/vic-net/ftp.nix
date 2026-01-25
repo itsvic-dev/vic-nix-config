@@ -19,8 +19,6 @@
       pasv_min_port=64000
       pasv_min_port=64321
       port_enable=YES
-      pasv_address=10.21.0.4
-      pasv_addr_resolve=YES
     '';
   };
 
