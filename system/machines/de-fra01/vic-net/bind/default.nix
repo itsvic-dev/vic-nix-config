@@ -38,7 +38,14 @@ in
 
     zones."vic.iw." = {
       master = true;
-      file = ./vic.iw.db;
+      file = pkgs.writeText pkgs.writeText "vic.iw.db" (
+        builtins.replaceStrings
+          [ "[CNAMES]" ]
+          [
+            (intranet.cnamesAsIWDNS)
+          ]
+          (builtins.readFile ./vic.iw.db)
+      );
     };
 
     zones."acme.iw." = {

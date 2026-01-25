@@ -1,7 +1,5 @@
-{ config, intranet, ... }:
+{ config, ... }:
 {
-  imports = [ (intranet.nginxCertFor "git.vic") ];
-
   services.forgejo = {
     enable = true;
     stateDir = "/mnt/hdd/forgejo";
@@ -9,7 +7,7 @@
       DEFAULT.APP_NAME = "vic!Git";
       server = {
         DOMAIN = "git.vic";
-        ROOT_URL = "https://git.vic/";
+        ROOT_URL = "https://git.vic.iw/";
         PROTOCOL = "http+unix";
       };
       repository = {
@@ -20,7 +18,8 @@
   };
 
   services.nginx = {
-    virtualHosts."git.vic" = {
+    virtualHosts."git.vic.iw" = {
+      enableACME = true;
       forceSSL = true;
       locations."/" = {
         proxyPass = "http://forgejo";
@@ -34,4 +33,6 @@
       };
     };
   };
+
+  security.acme.certs."git.vic.iw".server = "https://acme.iw/acme/directory";
 }

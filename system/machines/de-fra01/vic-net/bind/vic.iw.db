@@ -13,5 +13,5 @@ ns1   IN  A   10.21.0.1
 
 @     IN  A   10.21.0.1
 www   IN  A   10.21.0.1
-lg    IN  A   10.21.0.1
-ftp   IN  A   10.21.0.4
+
+[CNAMES]

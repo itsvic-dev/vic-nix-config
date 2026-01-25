@@ -77,6 +77,7 @@ rec {
     # }
   ];
 
+  # to be removed ASAP
   cnames = {
     "grafana" = "tastypi";
     "torrents" = "tastypi";
@@ -87,6 +88,12 @@ rec {
     "media" = "pl-waw01";
     "sonarr" = "pl-waw01";
     "radarr" = "pl-waw01";
+  };
+
+  iwSubdomains = {
+    "lg" = "de-fra01";
+
+    "ftp" = "pl-waw01";
 
     "git" = "it-mil01";
   };
@@ -101,6 +108,11 @@ rec {
 
   cnamesAsDNS = builtins.concatStringsSep "\n" (
     lib.mapAttrsToList (name: target: "${name}.vic. IN CNAME ${target}.vic.") cnames
+  );
+
+  # move to "${target}.infra.vic.iw." later
+  cnamesAsIWDNS = builtins.concatStringsSep "\n" (
+    lib.mapAttrsToList (name: target: "${name}.vic.iw. IN CNAME ${target}.vic.") iwSubdomains
   );
 
   ipsAsRDNS = builtins.concatStringsSep "\n" (
