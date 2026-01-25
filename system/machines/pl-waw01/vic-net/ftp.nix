@@ -13,10 +13,27 @@
       ftpd_banner=Welcome to Intraweb FTP! Please read README file first.
       anon_other_write_enable=YES
       listen_address=10.21.0.4
+
+      ftp_data_port=20
+      pasv_enable=YES
+      pasv_min_port=64000
+      pasv_min_port=64321
+      port_enable=YES
+      pasv_address=10.21.0.4
+      pasv_addr_resolve=YES
     '';
   };
 
-  networking.firewall.allowedTCPPorts = [ 21 ];
+  networking.firewall.allowedTCPPorts = [
+    20
+    21
+  ];
+  networking.firewall.allowedTCPPortRanges = [
+    {
+      from = 64000;
+      to = 64321;
+    }
+  ];
 
   services.nginx.virtualHosts."ftp.vic.iw" = {
     listenAddresses = [ (intranet.ips.pl-waw01) ];
