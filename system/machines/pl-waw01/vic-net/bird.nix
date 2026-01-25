@@ -22,6 +22,7 @@
       protocol bgp isp_xfr from iwpeers {
         neighbor fe80::be24:11ff:febf:6dda%ens19 as 4266660003;
         enable extended messages on;
+        next hop self; # same iface, but unwanted behavior
 
         ipv4 {
           extended next hop on;
