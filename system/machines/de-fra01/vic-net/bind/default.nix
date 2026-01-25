@@ -38,7 +38,7 @@ in
 
     zones."vic.iw." = {
       master = true;
-      file = pkgs.writeText pkgs.writeText "vic.iw.db" (
+      file = pkgs.writeText "vic.iw.db" (
         builtins.replaceStrings
           [ "[CNAMES]" ]
           [
