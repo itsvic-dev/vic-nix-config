@@ -69,6 +69,12 @@ rec {
       id = 4;
     }
 
+    {
+      from = "pl-waw01";
+      to = "de-fra01";
+      id = 5;
+    }
+
     # sever for now... very shoddy connection anyways
     # {
     #   from = "de-fra01";
