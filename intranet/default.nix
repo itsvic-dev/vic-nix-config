@@ -70,17 +70,10 @@ rec {
     }
 
     {
-      from = "pl-waw01";
-      to = "de-fra01";
+      from = "de-fra01";
+      to = "tastypi";
       id = 5;
     }
-
-    # sever for now... very shoddy connection anyways
-    # {
-    #   from = "de-fra01";
-    #   to = "tastypi";
-    #   id = 5;
-    # }
   ];
 
   # to be removed ASAP
