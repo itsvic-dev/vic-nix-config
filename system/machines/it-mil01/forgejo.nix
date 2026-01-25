@@ -1,5 +1,7 @@
-{ config, ... }:
+{ config, intranet, ... }:
 {
+  imports = [ (intranet.nginxCertFor "git.vic") ];
+
   services.forgejo = {
     enable = true;
     stateDir = "/mnt/hdd/forgejo";
@@ -25,6 +27,11 @@
         proxyPass = "http://forgejo";
         proxyWebsockets = true;
       };
+    };
+
+    virtualHosts."git.vic" = {
+      addSSL = true;
+      globalRedirect = "git.vic.iw";
     };
 
     upstreams.forgejo = {

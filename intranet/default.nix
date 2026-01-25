@@ -88,6 +88,8 @@ rec {
     "media" = "pl-waw01";
     "sonarr" = "pl-waw01";
     "radarr" = "pl-waw01";
+
+    "git" = "it-mil01";
   };
 
   iwSubdomains = {
