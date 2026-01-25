@@ -19,6 +19,15 @@
         neighbor 192.168.255.2 as 4266660002;
       }
 
+      protocol bgp isp_xfr from iwpeers {
+        neighbor fe80::be24:11ff:febf:6dda%ens19 as 4266660003;
+        enable extended messages on;
+
+        ipv4 {
+          extended next hop on;
+        };
+      }
+
       ${intranet.getAllIBGP config}
     '';
   };
