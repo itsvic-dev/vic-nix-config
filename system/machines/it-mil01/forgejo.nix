@@ -1,9 +1,15 @@
-{ config, intranet, ... }:
+{
+  pkgs,
+  config,
+  intranet,
+  ...
+}:
 {
   imports = [ (intranet.nginxCertFor "git.vic") ];
 
   services.forgejo = {
     enable = true;
+    package = pkgs.forgejo;
     stateDir = "/mnt/hdd/forgejo";
     settings = {
       DEFAULT.APP_NAME = "vic!Git";

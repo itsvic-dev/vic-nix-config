@@ -6,6 +6,7 @@
     ./monitoring.nix
     ./free-media.nix
     ./vic-net
+    ./forgejo-runner.nix
   ];
 
   vic-nix = {
