@@ -10,7 +10,7 @@
       url = "https://git.vic.iw";
       labels = [
         "debian-latest:docker://node:25-trixie"
-        # "steamrt-sniper:docker://registry.gitlab.steamos.cloud/steamrt/sniper/sdk"
+        "steamrt-sniper:docker://registry.gitlab.steamos.cloud/steamrt/sniper/sdk"
       ];
       tokenFile = config.sops.secrets.forgejo-runner-token.path;
 
