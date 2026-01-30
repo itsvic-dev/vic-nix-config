@@ -6,6 +6,7 @@
     package = pkgs.forgejo-runner;
     instances.default = {
       enable = true;
+      name = "pl-waw01";
       url = "https://git.vic.iw";
       labels = [
         "debian-latest:docker://node:25-bullseye"
