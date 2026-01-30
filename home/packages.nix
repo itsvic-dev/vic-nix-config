@@ -15,6 +15,7 @@ in
       _7zz
       nix-output-monitor
       wget
+      mtr
     ]
     ++ lib.optionals cfg.desktop.enable (
       [ qbittorrent ]
