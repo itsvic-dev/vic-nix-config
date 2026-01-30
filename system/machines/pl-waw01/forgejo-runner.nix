@@ -13,6 +13,10 @@
         "steamrt-sniper:docker://registry.gitlab.steamos.cloud/steamrt/sniper/sdk"
       ];
       tokenFile = config.sops.secrets.forgejo-runner-token.path;
+
+      settings = {
+        cache.enabled = true;
+      };
     };
   };
 
