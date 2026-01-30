@@ -5,7 +5,10 @@
   ...
 }:
 {
-  imports = [ (intranet.nginxCertFor "git.vic") ];
+  imports = [
+    (intranet.nginxCertFor "git.vic")
+    ./forgejo-runner.nix
+  ];
 
   services.forgejo = {
     enable = true;
