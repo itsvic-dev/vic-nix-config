@@ -87,11 +87,6 @@ in
     "radarr.vic" = proxyPass config.services.radarr.settings.server.port;
   };
 
-  systemd.network.networks."50-ens20" = {
-    matchConfig.name = "ens20";
-    networkConfig.Address = "192.168.254.1/30";
-  };
-
   fileSystems."/mnt/torrents" = {
     device = "192.168.254.2:/srv/vic/Downloads";
     options = [

@@ -34,6 +34,13 @@
       }
     ];
 
+    interfaces.ens20.ipv4.addresses = [
+      {
+        address = "192.168.254.1";
+        prefixLength = 30;
+      }
+    ];
+
     defaultGateway = {
       address = "109.122.28.1";
       interface = "ens18";
