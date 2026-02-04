@@ -30,8 +30,8 @@ in
       ]
       ++ lib.optionals cfg.desktop.forGaming [ wineWowPackages.stagingFull ]
       ++ lib.optionals cfg.desktop.forDev [
-        nodejs_latest
-        (corepack.override { nodejs = nodejs_latest; })
+        nodejs
+        (lib.hiPrio corepack)
         gcc
         clang-tools
         python3
