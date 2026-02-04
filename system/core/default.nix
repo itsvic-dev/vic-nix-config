@@ -38,7 +38,7 @@ in
               "1.0.0.1"
             ]
           else
-            [ intranet.nameserver ];
+            intranet.nameservers;
       };
 
       services.resolved = {
