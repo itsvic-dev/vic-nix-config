@@ -89,9 +89,9 @@ in
 
   fileSystems."/mnt/torrents" = {
     device = "192.168.254.2:/srv/vic/Downloads";
+    fsType = "nfs";
     options = [
       "nfsvers=4.2"
-      "x-systemd.automount"
       "noauto"
       "noatime"
     ];
