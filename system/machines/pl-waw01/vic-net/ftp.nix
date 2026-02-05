@@ -22,16 +22,18 @@
     '';
   };
 
-  networking.firewall.allowedTCPPorts = [
-    20
-    21
-  ];
-  networking.firewall.allowedTCPPortRanges = [
-    {
-      from = 64000;
-      to = 64321;
-    }
-  ];
+  networking.firewall.interfaces.vn-dummy = {
+    allowedTCPPorts = [
+      20
+      21
+    ];
+    allowedTCPPortRanges = [
+      {
+        from = 64000;
+        to = 64321;
+      }
+    ];
+  };
 
   services.nginx.virtualHosts."ftp.vic.iw" = {
     listenAddresses = [ (intranet.ips.pl-waw01) ];
