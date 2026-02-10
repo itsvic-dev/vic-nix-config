@@ -7,6 +7,7 @@
     ./free-media.nix
     ./vic-net
     ./forgejo-runner.nix
+    ./lambda.nix
   ];
 
   vic-nix = {
