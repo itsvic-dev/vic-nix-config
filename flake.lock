@@ -776,11 +776,11 @@
     "ticket-bot": {
       "flake": false,
       "locked": {
-        "lastModified": 1760266717,
-        "narHash": "sha256-a5pdMF9A8OB0i357/XBaRU/EdCvfszJrhz/PnGzu7Ns=",
+        "lastModified": 1770737117,
+        "narHash": "sha256-GzNLnE4E4VjPgTeB5+WotAqFMHsDJm8F4F6GMLpZYDI=",
         "owner": "itsvic-dev",
         "repo": "comms-tickets",
-        "rev": "edd0ab70453e088206ff9f2ec7723f108669e988",
+        "rev": "e15c62656e6d1968e25a2a8bee961dd82dc8cdbe",
         "type": "github"
       },
       "original": {

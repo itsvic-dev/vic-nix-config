@@ -1,4 +1,9 @@
-inputs@{ nixpkgs, nix-darwin, nix-rosetta-builder, ... }:
+inputs@{
+  nixpkgs,
+  nix-darwin,
+  nix-rosetta-builder,
+  ...
+}:
 let
   inherit (import ../misc/lib.nix nixpkgs.lib) importAllFromFolder;
 
@@ -12,7 +17,8 @@ let
     inputs.home-manager.darwinModules.home-manager
     inputs.sops-nix.darwinModules.sops
   ];
-in {
+in
+{
   "Victors-MacBook-Pro" = nix-darwin.lib.darwinSystem {
     modules = common ++ [
       nix-rosetta-builder.darwinModules.default
