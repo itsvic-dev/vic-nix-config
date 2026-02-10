@@ -48,23 +48,24 @@
         ];
         mandatoryFeatures = [ ];
       }
-      {
-        hostName = "de-fra01.vic";
-        systems = [
-          "x86_64-linux"
-          "i686-linux"
-        ];
-        protocol = "ssh";
-        maxJobs = 4;
-        speedFactor = 1;
-        supportedFeatures = [
-          "nixos-test"
-          "benchmark"
-          "big-parallel"
-          "kvm"
-        ];
-        mandatoryFeatures = [ ];
-      }
+      # doesn't work well for some reason
+      # {
+      #   hostName = "de-fra01.vic";
+      #   systems = [
+      #     "x86_64-linux"
+      #     "i686-linux"
+      #   ];
+      #   protocol = "ssh";
+      #   maxJobs = 4;
+      #   speedFactor = 1;
+      #   supportedFeatures = [
+      #     "nixos-test"
+      #     "benchmark"
+      #     "big-parallel"
+      #     "kvm"
+      #   ];
+      #   mandatoryFeatures = [ ];
+      # }
       {
         hostName = "tastypi.vic";
         system = "aarch64-linux";
