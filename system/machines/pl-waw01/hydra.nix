@@ -31,23 +31,25 @@
     '';
 
     buildMachines = [
-      {
-        hostName = "it-mil01.vic";
-        systems = [
-          "x86_64-linux"
-          "i686-linux"
-        ];
-        protocol = "ssh";
-        maxJobs = 4;
-        speedFactor = 1;
-        supportedFeatures = [
-          "nixos-test"
-          "benchmark"
-          "big-parallel"
-          "kvm"
-        ];
-        mandatoryFeatures = [ ];
-      }
+      # it-mil01 has very low disk resources as-is
+      # {
+      #   hostName = "it-mil01.vic";
+      #   systems = [
+      #     "x86_64-linux"
+      #     "i686-linux"
+      #   ];
+      #   protocol = "ssh";
+      #   maxJobs = 4;
+      #   speedFactor = 1;
+      #   supportedFeatures = [
+      #     "nixos-test"
+      #     "benchmark"
+      #     "big-parallel"
+      #     "kvm"
+      #   ];
+      #   mandatoryFeatures = [ ];
+      # }
+
       # doesn't work well for some reason
       # {
       #   hostName = "de-fra01.vic";
