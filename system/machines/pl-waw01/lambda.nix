@@ -1,8 +1,8 @@
 { pkgs, lib, ... }:
 let
   variants = [
-    "core"
     "gnome"
+    "kde"
     "installer"
   ];
 in
