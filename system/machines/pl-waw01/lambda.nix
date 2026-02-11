@@ -32,7 +32,8 @@ in
             exit
           fi
 
-          ln -sf "$path" ${variant}
+          rm -f ${variant}
+          ln -s "$path" ${variant}
         '';
       }
     ) variants
