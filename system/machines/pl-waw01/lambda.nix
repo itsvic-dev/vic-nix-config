@@ -45,7 +45,7 @@ in
       lib.nameValuePair "lambda-update-${variant}" {
         wantedBy = [ "timers.target" ];
         timerConfig = {
-          OnUnitActiveSec = "30m";
+          OnCalendar = "*-*-* *:00,30:00";
           Unit = "lambda-update-${variant}.service";
         };
       }
