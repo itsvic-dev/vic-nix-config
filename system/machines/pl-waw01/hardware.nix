@@ -27,6 +27,7 @@
     options = [
       "compress=zstd"
       "noatime"
+      "autodefrag"
     ];
   };
 }

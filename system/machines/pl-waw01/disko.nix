@@ -26,6 +26,7 @@
                 mountOptions = [
                   "compress=zstd"
                   "noatime"
+                  "autodefrag"
                 ];
               };
             };
