@@ -25,6 +25,7 @@
       "git+https://github.com/"
       "git+ssh://github.com/"
     ];
+    settings.max-jobs = 1; # only build 1 job at a time (hydra)
     extraOptions = ''
       builders-use-substitutes = true
       !include ${config.sops.secrets.nixAccessTokens.path}
@@ -72,7 +73,7 @@
         hostName = "tastypi.vic";
         system = "aarch64-linux";
         protocol = "ssh";
-        maxJobs = 4;
+        maxJobs = 2;
         speedFactor = 1;
         supportedFeatures = [
           "nixos-test"
@@ -96,7 +97,7 @@
           "big-parallel"
           "benchmark"
         ];
-        maxJobs = 6;
+        maxJobs = 1;
         speedFactor = 4;
       }
     ];
