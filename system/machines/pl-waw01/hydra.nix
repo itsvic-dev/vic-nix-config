@@ -25,7 +25,7 @@
       "git+https://github.com/"
       "git+ssh://github.com/"
     ];
-    settings.max-jobs = 1; # only build 1 job at a time (hydra)
+    settings.max-jobs = 2;
     extraOptions = ''
       builders-use-substitutes = true
       !include ${config.sops.secrets.nixAccessTokens.path}
@@ -97,7 +97,7 @@
           "big-parallel"
           "benchmark"
         ];
-        maxJobs = 1;
+        maxJobs = 2;
         speedFactor = 4;
       }
     ];
