@@ -35,6 +35,16 @@ in
         "fruit:wipe_intentionally_left_blank_rfork" = "yes";
         "fruit:delete_empty_adfiles" = "yes";
         "fruit:posix_rename" = "yes";
+        "fruit:metadata" = "stream";
+      };
+
+      storage = {
+        path = "/mnt/data/storage";
+        browseable = "yes";
+        writeable = "yes";
+        "guest ok" = "no";
+        "valid users" = "vic";
+        "fruit:time machine" = "yes";
       };
 
       torrents = {
@@ -63,6 +73,7 @@ in
 
   # create folders
   systemd.tmpfiles.rules = [
+    "d '/mnt/data/storage' 0755 vic users -"
     "d '/mnt/data/torrents' 0777 nobody nogroup -"
     "d '/mnt/data/media' 0777 nobody nogroup -"
   ];
