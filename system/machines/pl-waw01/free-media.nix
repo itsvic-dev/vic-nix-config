@@ -38,6 +38,16 @@ in
         "fruit:posix_rename" = "yes";
         "fruit:resource" = "xattr";
         "fruit:encoding" = "native";
+
+        # some stuff i stole from reddit
+        "read raw" = "yes";
+        "write raw" = "yes";
+        "min receivefile size" = "16384";
+        "use sendfile" = "true";
+        "aio read size" = "16384";
+        "aio write size" = "16384";
+        "strict sync" = "no";
+        "sync always" = "no";
       };
 
       storage = {
