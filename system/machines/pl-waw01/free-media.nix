@@ -79,6 +79,7 @@ in
   # create folders
   systemd.tmpfiles.rules = [
     "d '/mnt/data/storage' 0755 vic users -"
+    "d '/mnt/data/storage/public' 0755 vic users -"
     "d '/mnt/data/torrents' 0777 nobody nogroup -"
     "d '/mnt/data/media' 0777 nobody nogroup -"
   ];
@@ -101,6 +102,15 @@ in
     "media.vic" = proxyPass 8096;
     "sonarr.vic" = proxyPass config.services.sonarr.settings.server.port;
     "radarr.vic" = proxyPass config.services.radarr.settings.server.port;
+
+    "files.itsvic.dev" = {
+      forceSSL = true;
+      enableACME = true;
+      root = "/mnt/data/storage/public";
+      extraConfig = ''
+        autoindex on;
+      '';
+    };
   };
 
   fileSystems."/mnt/torrents" = {
